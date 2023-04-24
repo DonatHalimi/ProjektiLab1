@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { MenuData } from "./MenuData";
+import "./NavbarStyle.css";
 
 class Navbar extends Component {
     render() {
@@ -8,11 +10,15 @@ class Navbar extends Component {
                     Ruby <i className="fab fa-react"></i>
                 </h1>
                 <ul>
-                    <li>
-                        <a>
-                            <i className="fa-solid fa-house"></i>Home
-                        </a>
-                    </li>
+                    {MenuData.map((item, index) => {
+                        return (
+                            <li key={index}>
+                                <a href={item.url} className={item.cName}>
+                                    <i className={item.icon}></i>{item.title}
+                                </a>
+                            </li>
+                        )
+                    })}
                 </ul>
             </nav>
         );
