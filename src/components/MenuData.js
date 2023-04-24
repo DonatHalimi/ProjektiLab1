@@ -10,7 +10,7 @@ export const MenuData = [
         url: "#",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
-    },    
+    },
     {
         title: "Service",
         url: "#",
@@ -22,11 +22,11 @@ export const MenuData = [
         url: "#",
         cName: "nav-links",
         icon: "fa-solid fa-address-book",
-    }, 
+    },
     {
         title: "Sign Up",
-        url: "/login",
-        cName: "nav-links-mobile",
+        url: "#",
+        cName: "nav-links",
         icon: "fas fa-user",
     },
 ];
