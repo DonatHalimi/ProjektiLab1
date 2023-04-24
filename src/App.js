@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <>
+      {/* <>
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
@@ -17,7 +17,7 @@ function App() {
             
           </Routes>
         </BrowserRouter>
-      </>
+      </> */}
     </div>
   )
 }
