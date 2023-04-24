@@ -1,12 +1,15 @@
 import { Component } from "react";
 import { MenuData } from "./MenuData";
+import { Link } from 'react-router-dom';
 import "./NavbarStyle.css";
 
 class Navbar extends Component {
+    
     state = { clicked: false };
     handleClick = () => {
         this.setState({ clicked: !this.state.clicked })
     }
+
     render() {
         return (
             <nav className="NavbarItems">

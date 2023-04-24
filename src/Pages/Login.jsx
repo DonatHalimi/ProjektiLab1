@@ -10,9 +10,6 @@ export const Login = () => {
     <input type="password" placeholder="Shtypni password-in" id="password" name="password"></input>
     <button>Log in </button>
 
-
-
-
    </form>
   );
 };

@@ -25,8 +25,8 @@ export const MenuData = [
     }, 
     {
         title: "Sign Up",
-        url: "#",
+        url: "/login",
         cName: "nav-links-mobile",
         icon: "fas fa-user",
-    }, 
+    },
 ];
