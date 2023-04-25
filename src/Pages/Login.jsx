@@ -17,11 +17,11 @@ export const Login = () => {
     <p>Log in</p>
     <form>
       <div class="user-box">
-      <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Shtypni e-mail" id="email" name="email"></input>
+      <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Type e-mail" id="email" name="email"></input>
         <label for='email'>Email</label>
       </div>
       <div class="user-box">
-      <input value={pass} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="Shtypni password-in" id="password" name="password"></input>
+      <input value={pass} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="Type password" id="password" name="password"></input>
         <label for="password">Password</label>
       </div>
       <button class="btn" type="submit">Log in </button>
