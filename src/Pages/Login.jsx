@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import "./Login.css";
+import "./LoginStyle.css";
 
 
 export const Login = () => {
@@ -26,7 +26,7 @@ export const Login = () => {
       </div>
       <button class="btn" type="submit">Log in </button>
     </form>
-    <p>Don't have an account? <a href="" class="a2">Sign up!</a></p>
+    <p>Don't have an account? <a href="/register" class="a2">Sign up!</a></p>
   </div>
   );
 };
