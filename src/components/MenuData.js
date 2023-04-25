@@ -6,22 +6,28 @@ export const MenuData = [
         icon: "fa-solid fa-house",
     },
     {
-        title: "Cart",
+        title: "Categories",
         url: "#",
         cName: "nav-links",
-        icon: "fa-solid fa-shopping-cart",
+        icon: "fa-solid fa-tshirt",
     },
     {
-        title: "Contact",
+        title: "Wishlist",
         url: "#",
         cName: "nav-links",
-        icon: "fa-solid fa-address-book",
+        icon: "fa-solid fa-heart",
     },
     {
         title: "About Us",
         url: "#",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
+    },
+    {
+        title: "Cart",
+        url: "#",
+        cName: "nav-links",
+        icon: "fa-solid fa-shopping-cart",
     },
     {
         title: "Log In",
