@@ -6,16 +6,10 @@ export const MenuData = [
         icon: "fa-solid fa-house",
     },
     {
-        title: "About Us",
+        title: "Cart",
         url: "#",
         cName: "nav-links",
-        icon: "fa-solid fa-circle-info",
-    },
-    {
-        title: "Service",
-        url: "#",
-        cName: "nav-links",
-        icon: "fa-solid fa-briefcase",
+        icon: "fa-solid fa-shopping-cart",
     },
     {
         title: "Contact",
@@ -24,8 +18,14 @@ export const MenuData = [
         icon: "fa-solid fa-address-book",
     },
     {
-        title: "Sign Up",
+        title: "About Us",
         url: "#",
+        cName: "nav-links",
+        icon: "fa-solid fa-circle-info",
+    },
+    {
+        title: "Log In",
+        url: "/login",
         cName: "nav-links",
         icon: "fas fa-user",
     },

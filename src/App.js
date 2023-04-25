@@ -7,20 +7,16 @@ import { Register } from "./Pages/Register";
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <Home/>
-      {/* <>
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            
-          </Routes>
-        </BrowserRouter>
-      </> */}
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
 export default App;
