@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
-import "./HomeStyle.css";
+import "./ToTopStyle.css";
 
-function Home() {
+function ToTop() {
     const [showButton, setShowButton] = useState(false);
 
     const handleScroll = () => {
@@ -29,4 +29,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default ToTop;
