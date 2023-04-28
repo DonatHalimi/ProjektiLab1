@@ -243,6 +243,6 @@
   }
 
   .visibility-btn:hover {
-    background: transparent;
+    background-color: transparent;
     color: inherit;
   }
