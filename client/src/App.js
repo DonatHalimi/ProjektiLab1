@@ -15,19 +15,20 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-       <Admin/>
+        <Navbar />
         <Routes>
         <Route path="/Home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<ToTop />} />
           <Route path="/Admin" element={<Admin />} />
-          
+          <Route path="/" element={<ToTop />} />
         </Routes>
-       
+        <ToTop />
       </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
+
