@@ -25,10 +25,10 @@ app.get("/api/get", cors(), (req, res) => {
     });
 });
 
-app.post("/api/post",(req,res)=>{
-    const{Name, Surname, Email, Password, Role}=req.body;
-    const sqlInsert= "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
-    db.query(sqlInsert,[Name, Surname, Email, Password, Role],(error,result)=>{
+app.post("/api/post", (req, res) => {
+    const { Name, Surname, Email, Password, Role } = req.body;
+    const sqlInsert = "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
+    db.query(sqlInsert, [Name, Surname, Email, Password, Role], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error inserting data into database" });
@@ -37,17 +37,12 @@ app.post("/api/post",(req,res)=>{
             res.sendStatus(200);
         }
     });
-
-
-
-
-
-
 });
-app.delete("/api/remove/:id",(req,res)=>{
+
+app.delete("/api/remove/:id", (req, res) => {
     const id = req.params.id;
-    const sqlRemove= "DELETE FROM userat WHERE id=?";
-    db.query(sqlRemove,id,(error,result)=>{
+    const sqlRemove = "DELETE FROM userat WHERE id=?";
+    db.query(sqlRemove, id, (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error deleting data from userat" });
@@ -57,14 +52,6 @@ app.delete("/api/remove/:id",(req,res)=>{
         }
     });
 });
-
-    
-
-
-
-
-
-
 
 const PORT = 6001;
 app.listen(PORT, () => {
