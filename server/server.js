@@ -1,34 +1,31 @@
+const bodyParser = require("body-parser");
 const express = require("express");
-const app=express();
-const mysql=require('mysql');
-
+const app = express();
+const mysql = require('mysql');
+const cors = require("cors");
 
 const db = mysql.createPool({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'projektilab1'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'projektilab1'
 })
 
+app.use(cors());
 
-
-
-app.get("/", (req, res) => {
-     
-    const sqlInsert = "INSERT INTO userat (Name, Surname, `E-mail`, Password, Role) VALUES ('Mal', 'Mikullovci', 'alibungu@gmail.com', 'HamdiHamdi123', 1)";
-    db.query(sqlInsert,(err,result)=>{
-        if (err) {
-            console.log(err); 
-            res.send("Error occurred: " + err.message); 
-          } else {
-            console.log(result); 
-            res.send("Insert successful"); 
-            res.send("hello wor");
-        }  
+app.get("/api/get", cors(), (req, res) => {
+    const sqlGet = "SELECT * FROM userat";
+    db.query(sqlGet, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
     });
-    
 });
 
-app.listen(6001,()=>{
-    console.log("running on port 6001")
+const PORT = 6001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
 });
