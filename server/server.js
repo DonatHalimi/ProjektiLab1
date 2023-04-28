@@ -1,4 +1,3 @@
-const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const mysql = require('mysql');
@@ -12,6 +11,7 @@ const db = mysql.createPool({
 })
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/api/get", cors(), (req, res) => {
     const sqlGet = "SELECT * FROM userat";
@@ -29,13 +29,42 @@ app.post("/api/post",(req,res)=>{
     const{Name, Surname, Email, Password, Role}=req.body;
     const sqlInsert= "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
     db.query(sqlInsert,[Name, Surname, Email, Password, Role],(error,result)=>{
-        if(error){
+        if (error) {
             console.log(error);
+            res.status(500).send({ error: "Error inserting data into database" });
+        } else {
+            console.log(result);
+            res.sendStatus(200);
         }
     });
 
 
+
+
+
+
 });
+app.delete("/api/remove/:id",(req,res)=>{
+    const id = req.params.id;
+    const sqlRemove= "DELETE FROM userat WHERE id=?";
+    db.query(sqlRemove,id,(error,result)=>{
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error deleting data from userat" });
+        } else {
+            console.log(result);
+            res.sendStatus(200);
+        }
+    });
+});
+
+    
+
+
+
+
+
+
 
 const PORT = 6001;
 app.listen(PORT, () => {

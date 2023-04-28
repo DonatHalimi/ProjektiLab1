@@ -8,6 +8,9 @@ import { Register } from "./Pages/Register";
 import Slider from "./components/Slider";
 import  Admin  from "./Pages/Admin";
 import AddEdit from "./Pages/AddEdit";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (

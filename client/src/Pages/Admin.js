@@ -29,7 +29,15 @@ function App(){
     },[]);
 
     console.log(data);
-
+    const deleteUser = (id)=>{
+      if(
+        window.confirm("Are you sure that you wanted to delete that user ? ")
+      ){
+        axios.delete(`http://localhost:6001/api/remove/${id}`);
+        toast.success("User deleted successfully");
+        setTimeout(()=>loadData(),500)
+      }
+    }
     
     return(
       <div style={{marginTop:"150px"}}>
@@ -67,7 +75,7 @@ function App(){
                           <button className="btn btn-edit">Edit</button>
                         </Link>
                         <Link>
-                          <button className="btn btn-delete">Delete</button>
+                          <button className="btn btn-delete" onClick={()=>deleteUser(item.id)}>Delete</button>
                         </Link>
                         <Link to={`/view/${item.id}`}>
                           <button className="btn btn-view">View</button>
