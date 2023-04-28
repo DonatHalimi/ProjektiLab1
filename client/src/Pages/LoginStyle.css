@@ -177,6 +177,7 @@
     color: #aaa;
     border-radius: 5px;
   }
+  
   .btn {
     width: 6.5em;
     height: 2.3em;
@@ -215,7 +216,33 @@
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
    }
+
    #error{
     color:red;
     padding-bottom: 10px;
    }
+
+  .login-box .user-box {
+    position: relative;
+  }
+  
+  .login-box .user-box button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }  
+
+  .login-box .user-box button:hover {
+    background: transparent;
+  }
+
+  .visibility-btn:hover {
+    background: transparent;
+    color: inherit;
+  }

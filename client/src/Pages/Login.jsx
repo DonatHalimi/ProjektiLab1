@@ -1,14 +1,13 @@
 import {useState,useEffect} from "react";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./LoginStyle.css";
-
-
 
 export const Login = () => {
   const initialValues={email:"",password:""};
   const [formValues,setFormValues]=useState(initialValues);
   const [formErrors,setFormErrors]=useState({});
   const [isSubmit,setIsSubmit]=useState(false);
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
   
   const handleChange =(e) => {
     const{ name , value } =e.target;
@@ -44,8 +43,11 @@ export const Login = () => {
       errors.password="This is not a valid password"
     }
     return errors;
-
   }
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  }  
 
   return (
     <div class="login-box">
@@ -59,8 +61,11 @@ export const Login = () => {
       </div>
       
       <div class="user-box">
-      <input value={formValues.password} onChange={handleChange} type="password" placeholder="Type password" id="password" name="password"></input>
+      <input value={formValues.password} onChange={handleChange} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="password"></input>
         <label htmlFor="password">Password</label>
+        <button type="button" class ="visibility-btn" onClick={togglePasswordVisibility}>
+       {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+      </button>
         <p id="error">{formErrors.password}</p>
       </div>
       
@@ -69,5 +74,4 @@ export const Login = () => {
     <p>Don't have an account? <a href="/register" class="a2">Sign up!</a></p>
   </div>
   );
-  
 };

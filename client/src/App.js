@@ -10,7 +10,11 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+<<<<<<< Updated upstream
           
+=======
+          <Route path="/" element={<ToTop />} />
+>>>>>>> Stashed changes
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
