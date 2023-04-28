@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/addUser" element={<AddEdit/>}/>
+          <Route path="/update/:id" element={<AddEdit/>}/>
+          
+
+
         </Routes>
         <ToTop />
       </BrowserRouter>

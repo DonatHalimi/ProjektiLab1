@@ -53,6 +53,34 @@ app.delete("/api/remove/:id", (req, res) => {
     });
 });
 
+app.get("/api/get/:id", cors(), (req, res) => {
+    const {id}=req.params;
+    const sqlGet = "SELECT * FROM userat where id=?";
+    db.query(sqlGet, id,(error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+app.put("/api/update/:id", cors(), (req, res) => {
+    const { id }=req.params;
+    const {Name, Surname, Email, Password, Role}=req.body;
+    const sqlUpdate = "UPDATE userat SET Name=?, Surname=?, Email=?, Password=?, Role=? WHERE id=?";
+    db.query(sqlUpdate, [Name, Surname, Email, Password, Role,id],(error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+
 const PORT = 6001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);

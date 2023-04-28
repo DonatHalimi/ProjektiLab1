@@ -40,9 +40,7 @@ function App() {
 
       <h1>Admin Page</h1>
 
-      <Link to={"/addUser"}>
-        <button className="btn btn-User">Add User</button>
-      </Link>
+    
       <table className='styled-table'>
         <thead>
           <tr>
@@ -74,9 +72,8 @@ function App() {
                     <Link>
                       <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>Delete</button>
                     </Link>
-
-                    <Link to={`/view/${item.id}`}>
-                      <button className="btn btn-view">View</button>
+                    <Link to={"/addUser"}>
+                    <button className="btn btn-User">Add User</button>
                     </Link>
                   </td>
                 </tr>
