@@ -1,10 +1,14 @@
-import React, { useState, useEffect  } from "react";
+// import React from "react";
+// import Slider from "./Slider";
+// import "./NavbarStyle.css";
+
+import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
 import "./SliderStyle.css";
 
-function Slider() {
+function Home() {
     const slides = [
         {
             src: require("../img/slider-1.jpg")
@@ -41,14 +45,6 @@ function Slider() {
         setCurrentIndex(slideIndex);
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextSlide();
-        }, 4000); //Koha e ndryshimit te slide-it (ms)
-
-        return () => clearInterval(interval);
-    }, [currentIndex]);
-
     return (
         <div className="slider">
             <div
@@ -82,4 +78,14 @@ function Slider() {
     )
 }
 
-export default Slider;
+export default Home;
+
+// function Home() {
+
+//     return (
+
+
+//     );
+// }
+
+// export default Home;

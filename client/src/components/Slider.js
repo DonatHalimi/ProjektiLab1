@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
@@ -40,14 +40,6 @@ function Slider() {
     const goToSlide = (slideIndex) => {
         setCurrentIndex(slideIndex);
     };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextSlide();
-        }, 4000); //Koha e ndryshimit te slide-it (ms)
-
-        return () => clearInterval(interval);
-    }, [currentIndex]);
 
     return (
         <div className="slider">
