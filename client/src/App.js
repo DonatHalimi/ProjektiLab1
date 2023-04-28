@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import { Login } from "./Pages/Login";
 import { Register } from "./Pages/Register";
 import Slider from "./components/Slider";
+import  Admin  from "./Pages/Admin";
+import AddEdit from "./Pages/AddEdit";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/" element={<Slider />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/Admin" element={<Admin />} />
+          <Route path="/addUser" element={<AddEdit/>}/>
         </Routes>
         <ToTop />
       </BrowserRouter>

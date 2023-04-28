@@ -25,6 +25,18 @@ app.get("/api/get", cors(), (req, res) => {
     });
 });
 
+app.post("/api/post",(req,res)=>{
+    const{Name, Surname, Email, Password, Role}=req.body;
+    const sqlInsert= "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
+    db.query(sqlInsert,[Name, Surname, Email, Password, Role],(error,result)=>{
+        if(error){
+            console.log(error);
+        }
+    });
+
+
+});
+
 const PORT = 6001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);

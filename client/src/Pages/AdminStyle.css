@@ -1,3 +1,6 @@
+body{
+    text-align: center;
+}
 .styled-table{
     border-collapse: collapse;
     margin:auto;
@@ -8,7 +11,7 @@
 }
 
 .styled-table thead tr{
-    background-color: aquamarine;
+    background-color: #222;
     color: #ffffff;
     text-align: left;
 }
@@ -23,7 +26,7 @@
     background-color: #f3f3f3;
 }
 .styled-table tbody tr:last-of-type{
-    border-bottom: 2px solid aquamarine;
+    border-bottom: 2px solid #222;
 }
 .btn{
     border:none;
@@ -44,5 +47,8 @@
     background-color: #f44336;
 }
 .btn-view{
-    background-color: #e7e7e7;
+    background-color:orange;
+}
+.btn.btn-User{
+    background-color: green;
 }

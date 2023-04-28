@@ -32,8 +32,13 @@ function App(){
 
     
     return(
-      <div>
+      <div style={{marginTop:"150px"}}>
+       
         <h1>Admin Page</h1>
+      
+        <Link to={"/addUser"}>
+        <button className="btn btn-User">Add User</button>
+        </Link>
         <table className='styled-table'>
           <thead>
             <tr>
