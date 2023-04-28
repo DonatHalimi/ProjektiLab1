@@ -18,11 +18,11 @@ app.get("/", (req, res) => {
     const sqlInsert = "INSERT INTO userat (Name, Surname, `E-mail`, Password, Role) VALUES ('Mal', 'Mikullovci', 'alibungu@gmail.com', 'HamdiHamdi123', 1)";
     db.query(sqlInsert,(err,result)=>{
         if (err) {
-            console.log(err); // log the error to the console
-            res.send("Error occurred: " + err.message); // return an error message to the client
+            console.log(err); 
+            res.send("Error occurred: " + err.message); 
           } else {
-            console.log(result); // log the result to the console
-            res.send("Insert successful"); // return a success message to the client
+            console.log(result); 
+            res.send("Insert successful"); 
             res.send("hello wor");
         }  
     });
