@@ -20,7 +20,7 @@ export const MenuData = [
     },
     {
         title: "About Us",
-        url: "#",
+        url: "/aboutUs",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
     },
