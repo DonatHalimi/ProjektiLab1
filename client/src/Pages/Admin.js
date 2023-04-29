@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import "./AdminStyle.css"
 import { toast } from "react-toastify";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function App() {
+  // Shtojme dy variabla per te mbajtur te dhenat e user-ave dhe produkteve
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
 
+  // Funksioni per te marre te dhenat e user-ave nga API
   const loadData = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/user/get');
@@ -21,6 +24,7 @@ function App() {
     }
   };
 
+  // Funksioni per te marre te dhenat e produkteve nga API
   const loadDataProduct = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/product/get');
@@ -34,14 +38,15 @@ function App() {
     }
   };
 
+  // UseEffect hook per te marre te dhenat e user-ave dhe produkteve
   useEffect(() => {
     loadData();
     loadDataProduct();
   }, []);
 
-
   console.log(data);
 
+  // Funksioni per te fshire user-in nga API
   const deleteUser = (id) => {
     if (window.confirm("Are you sure that you want to delete that user?")) {
       axios.delete(`http://localhost:6001/api/user/remove/${id}`);
@@ -51,6 +56,7 @@ function App() {
     }
   }
 
+  // Funksioni per te fshire produktin nga API
   const deleteProduct = (id) => {
     if (window.confirm("Are you sure that you want to delete this product?")) {
       axios.delete(`http://localhost:6001/api/product/remove/${id}`);
@@ -60,152 +66,151 @@ function App() {
     }
   }
 
+// Renderimi i HTML formes per faqen e Adminit
   return (
-    <div style={{ marginTop: "50px" }}>
+    <>
+      <Navbar />
 
-      <h1>Admin Page</h1>
-      <br></br>
-      <br></br>
-      <br></br>
+      <div style={{ marginTop: "50px" }}>
 
-      { /*Tabela per ndryshime ne user-a*/}
-      <table className='styled-table'>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>E-mail</th>
-            <th>Password</th>
-            <th>Role</th>
-            <th>Insert</th>
-            <th>Edit</th>
-            <th>Delete</th>
-            <th className='shto-user'><Link to={"/addUser"}>
-              <button className="btn btn-User">
-                <i class="fa-solid fa-user-plus"></i>
-              </button>
-            </Link></th>
-          </tr>
-        </thead>
-        <tbody>
+        <h1>Admin Page</h1>
+        <br></br>
+        <br></br>
+        <br></br>
 
-          {data.map((item, index) => {
-            return (
-              <Fragment key={item.id}>
-                <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{item.Name}</td>
-                  <td>{item.Surname}</td>
-                  <td>{item.Email}</td>
-                  <td>{item.Password}</td>
-                  <td>{item.Role}</td>
+        { /*Tabela per ndryshime ne user-a*/}
+        <table className='styled-table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>E-mail</th>
+              <th>Password</th>
+              <th>Role</th>
+              <th>Insert</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
 
-                  <div className='button-edit-user'>
-                    <td>
-                      <Link to={"/addUser"}>
-                        <button className="btn btn-User">
-                          <i class="fa-solid fa-user-plus"></i>
-                        </button>
-                      </Link>
-                    </td>
+            {data.map((item, index) => {
+              return (
+                <Fragment key={item.id}>
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{item.Name}</td>
+                    <td>{item.Surname}</td>
+                    <td>{item.Email}</td>
+                    <td>{item.Password}</td>
+                    <td>{item.Role}</td>
 
-                    <td>
-                      <Link to={`/update/${item.id}`}>
-                        <button className="btn btn-edit">
-                          <i className="fa-solid fa-user-pen"></i>
-                        </button>
-                      </Link>
-                    </td>
+                    <div className='button-edit-user'>
+                      <td>
+                        <Link to={"/addUser"}>
+                          <button className="btn btn-User">
+                            <i class="fa-solid fa-user-plus"></i>
+                          </button>
+                        </Link>
+                      </td>
 
-                    <td>
-                      <Link>
-                        <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
-                          <i class="fa-solid fa-user-minus"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </div>
-                </tr>
-              </Fragment>
-            );
-          })}
-        </tbody>
-      </table>
+                      <td>
+                        <Link to={`/update/${item.id}`}>
+                          <button className="btn btn-edit">
+                            <i className="fa-solid fa-user-pen"></i>
+                          </button>
+                        </Link>
+                      </td>
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <hr></hr>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+                      <td>
+                        <Link>
+                          <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
+                            <i class="fa-solid fa-user-minus"></i>
+                          </button>
+                        </Link>
+                      </td>
+                    </div>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
 
-      { /*Tabela per ndryshime ne produkte*/}
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <hr></hr>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
 
-      <table className='styled-table'>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Emri</th>
-            <th>Detajet</th>
-            <th>FotoSource</th>
-            <th>Insert</th>
-            <th>Edit</th>
-            <th>Delete</th>
+        { /*Tabela per ndryshime ne produkte*/}
+        <table className='styled-table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Emri</th>
+              <th>Detajet</th>
+              <th>FotoSource</th>
+              <th>Insert</th>
+              <th>Edit</th>
+              <th>Delete</th>
 
-          </tr>
-        </thead>
-        <tbody>
+            </tr>
+          </thead>
+          <tbody>
 
-          {productData.map((product, indexproduct) => {
-            return (
-              <Fragment key={product.idproduct}>
+            {productData.map((product, indexproduct) => {
+              return (
+                <Fragment key={product.idproduct}>
 
-                <tr>
-                  <th scope="row">{indexproduct + 1}</th>
-                  <td>{product.Emri}</td>
-                  <td>{product.Detajet}</td>
-                  <td>{product.FotoSource}</td>
+                  <tr>
+                    <th scope="row">{indexproduct + 1}</th>
+                    <td>{product.Emri}</td>
+                    <td>{product.Detajet}</td>
+                    <td>{product.FotoSource}</td>
 
-                  <div className='button-edit-product'>
-                    <td>
-                      <Link to={"/addProduct"}>
-                        <button className="btn btn-product">
-                          <i class="fa-solid fa-cart-plus"></i>
-                        </button>
-                      </Link>
-                    </td>
+                    <div className='button-edit-product'>
+                      <td>
+                        <Link to={"/addProduct"}>
+                          <button className="btn btn-product">
+                            <i class="fa-solid fa-cart-plus"></i>
+                          </button>
+                        </Link>
+                      </td>
 
-                    <td>
-                      <Link to={`/product/update/${product.idproduct}`}>
-                        <button className="btn btn-edit">
-                          <i class="fa-solid fa-pen"></i>
-                        </button>
-                      </Link>
-                    </td>
+                      <td>
+                        <Link to={`/product/update/${product.idproduct}`}>
+                          <button className="btn btn-edit">
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+                        </Link>
+                      </td>
 
-                    <td>
-                      <Link>
-                        <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
-                          <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </div>
-                </tr>
-              </Fragment>
-            );
-          })}
-        </tbody>
-      </table>
-    </div >
+                      <td>
+                        <Link>
+                          <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        </Link>
+                      </td>
+                    </div>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div >
+    </>
   );
 };
 
