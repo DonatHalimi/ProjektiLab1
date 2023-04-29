@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./RegisterStyle.css";
+import Navbar from "../components/Navbar";
 
 export const Register = () => {
   const initialValues = { name: "", surname: "", email: "", password: "", confirmPassword: "" };
@@ -67,6 +68,7 @@ export const Register = () => {
 
   return (
     <>
+    <Navbar/>
       <div class="register-box">
         <p>Sign up</p>
         <form onSubmit={handleSubmit}>

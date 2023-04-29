@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "./AdminStyle.css"
 import { toast } from "react-toastify";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function App() {
   const [data, setData] = useState([]);
@@ -61,6 +62,8 @@ function App() {
   }
 
   return (
+    <>
+    <Navbar/>
     <div style={{ marginTop: "100px" }}>
 
       <h1>Admin Page</h1>
@@ -168,6 +171,7 @@ function App() {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
