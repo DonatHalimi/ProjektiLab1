@@ -5,6 +5,7 @@ import ToTop from "./components/ToTop";
 import Navbar from "./components/Navbar";
 import { Login } from "./Pages/Login";
 import { Register } from "./Pages/Register";
+import AboutUs from "./Pages/aboutUs";
 import Slider from "./components/Slider";
 import Admin from "./Pages/Admin";
 import AddEdit from "./Pages/AddEdit";
@@ -19,6 +20,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Slider />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/Admin" element={<Admin />} />
