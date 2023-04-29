@@ -7,6 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
 import "./SliderStyle.css";
+import Navbar from "./Navbar";
 
 function Home() {
     const slides = [
@@ -46,6 +47,9 @@ function Home() {
     };
 
     return (
+        <>
+        <Navbar/>
+
         <div className="slider">
             <div
                 style={{ backgroundImage: `url(${slides[currentIndex].src})` }}
@@ -75,6 +79,7 @@ function Home() {
                 ))}
             </div>
         </div>
+        </>
     )
 }
 

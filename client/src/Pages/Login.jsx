@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./LoginStyle.css";
 
-export const Login = () => {
+export const Login = (props) => {
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});

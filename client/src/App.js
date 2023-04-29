@@ -17,9 +17,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        
         <Routes>
-          <Route path="/" element={<Slider />} />
+          <Route path="/" element={<Home />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
