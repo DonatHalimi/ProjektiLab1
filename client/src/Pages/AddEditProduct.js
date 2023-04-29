@@ -35,7 +35,7 @@ const AddEditProduct = () => {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
-                axios.post('http://localhost:6001/api/product/get', {
+                axios.post('http://localhost:6001/api/product/post', {
                     Emri,
                     Detajet,
                     FotoSource

@@ -44,7 +44,7 @@ function App() {
 
   const deleteUser = (id) => {
     if (window.confirm("Are you sure that you want to delete that user?")) {
-      axios.delete(`http://localhost:6001/api/remove/${id}`);
+      axios.delete(`http://localhost:6001/api/user/remove/${id}`);
       toast.success("User deleted successfully");
 
       setTimeout(() => loadData(), 500)
@@ -53,7 +53,7 @@ function App() {
 
   const deleteProduct = (id) => {
     if (window.confirm("Are you sure that you want to delete this product?")) {
-      axios.delete(`http://localhost:6001/api/remove/${id}`);
+      axios.delete(`http://localhost:6001/api/product/remove/${id}`);
       toast.success("Product deleted successfully");
 
       setTimeout(() => loadData, 500)
@@ -116,6 +116,7 @@ function App() {
       </table>
 
       { /*Tabela per ndryshime ne produkte*/}
+      
       <table className='styled-table'>
         <thead>
           <tr>
@@ -124,20 +125,26 @@ function App() {
             <th>Detajet</th>
             <th>FotoSource</th>
             <th>Action</th>
+            <th><Link to={"/addProduct"}>
+                      <button className="btn btn-product">
+                        <i class="fa-solid fa-cart-plus"></i>
+                      </button>
+                    </Link></th>
           </tr>
         </thead>
         <tbody>
 
-          {data.map((product, indexproduct) => {
+          {productData.map((product, indexproduct) => {
             return (
               <Fragment key={product.idproduct}>
+                
                 <tr>
                   <th scope="row">{indexproduct + 1}</th>
                   <td>{product.Emri}</td>
                   <td>{product.Detajet}</td>
                   <td>{product.FotoSource}</td>
                   <td>
-                    <Link to={`/update/${product.idproduct}`}>
+                    <Link to={`/product/update/${product.idproduct}`}>
                       <button className="btn btn-edit">
                         <i class="fa-solid fa-pen"></i>
                       </button>
