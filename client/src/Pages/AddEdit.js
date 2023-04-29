@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Objekt i cili ka fushat per shtimin e nje useri te ri
 const initialState = {
     Name: "",
     Surname: "",
@@ -14,15 +15,16 @@ const initialState = {
 }
 
 const AddEdit = () => {
+
+    // Definimi i state me useState hook dhe destruktirimi i elementeve te states
     const [state, setState] = useState(initialState);
-
-
     const { Name, Surname, Email, Password, Role } = state;
 
+    // Definimi i hooks
     const navigate = useNavigate();
-
     const { id } = useParams();
 
+    // Perdorimi i useEffect hook per te marre te dhena nga API ne fillim te ngarkimit te komponentit
     useEffect(() => {
         axios.get(`http://localhost:6001/api/get/${id}`)
             .then((resp) => setState({ ...resp.data[0] }))
@@ -30,13 +32,17 @@ const AddEdit = () => {
     }, [id]);
 
 
+    // Funksioni i cili proceson submit-in e formes dhe ben kerkimet e nevojshme ne server
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
+
+        // Validimi i fushave te formes
         if (!Name || !Surname || !Email || !Password || !Role) {
             toast.error("Please fill out all the fields");
         } else {
             if (!id) {
+                // Nese id nuk ekziston, atehere kemi te bejme me nje kerkese post
                 axios.post('http://localhost:6001/api/post', {
                     Name,
                     Surname,
@@ -49,6 +55,7 @@ const AddEdit = () => {
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("User Added Successfully");
             } else {
+                // Perndryshe kemi te bejme me nje kerkese put
                 axios.put(`http://localhost:6001/api/update/${id}`, {
                     id,
                     Name,
@@ -63,17 +70,20 @@ const AddEdit = () => {
                 toast.success("User Added Successfully");
             }
 
+            // Navigimi ne faqen e Administrimit pasi kemi procesuar kerkesen me sukses
             setTimeout(() =>
                 navigate("/Admin")
             )
         }
     };
 
+    // Funskioni i cili ndryshon states ne baze te ndryshimeve ne input-et e formes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setState({ ...state, [name]: value });
     }
 
+    // Renderimi i HTML formes per te shtuar ose perditesuar nje user
     return (
         <div style={{ marginTop: "150px" }}>
 

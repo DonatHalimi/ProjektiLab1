@@ -5,21 +5,29 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Objekt i cili ka fushat per shtimin e nje produkti te ri
 const initialState = {
     Emri: "",
     Detajet: "",
     FotoSource: ""
 }
 
+// Krijimi i funksionit AddEditProduct duke perdorur React hooks
 const AddEditProduct = () => {
+
+    // Deklarimi i useState hook per ruajtjen e gjendjes se komponentit
     const [state, setState] = useState(initialState);
 
+    // Deklarimi i variablave Emri, Detajet dhe FotoSource duke i destrukturojme nga gjendja e komponentit
     const { Emri, Detajet, FotoSource } = state;
 
+    // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter
     const navigate = useNavigate();
 
+    // Deklarimi i useParams hook per te marre nje parameter nga URL
     const { idproduct } = useParams();
 
+    // Deklarimi i useEffect hook per te ekzekutuar nje kerkese pasi komponenti eshte renderizuar per here te pare
     useEffect(() => {
         axios.get(`http://localhost:6001/api/product/get/${idproduct}`)
             .then((resp) => setState({ ...resp.data[0] }))
@@ -27,14 +35,17 @@ const AddEditProduct = () => {
     }, [idproduct]);
 
 
+    // Deklarimi i funksionit handleSubmit per te shtuar ose perditesuar nje produkt
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
 
+        // Kontrolli i plotesimit te te gjitha fushave te formes
         if (!Emri || !Detajet || !FotoSource) {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
+                // Nese produkti nuk ekziston, kryejme nje post request per ta shtuar
                 axios.post('http://localhost:6001/api/product/post', {
                     Emri,
                     Detajet,
@@ -45,6 +56,7 @@ const AddEditProduct = () => {
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
             } else {
+                // Nese produkti ekziston, kryejme nje put request per ta perditesuar
                 axios.put(`http://localhost:6001/api/product/update/${idproduct}`, {
                     idproduct,
                     Emri,
@@ -57,17 +69,20 @@ const AddEditProduct = () => {
                 toast.success("Product Added Successfully");
             }
 
+            // Kalohet ne faqen Admin pasi qe produkti eshte shtuar ose perditesuar
             setTimeout(() =>
                 navigate("/Admin")
             )
         }
     };
 
+    // Deklarimi i funksionit handleInputChange per te ruajtur ndryshimet ne input fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setState({ ...state, [name]: value });
     }
 
+    // Renderimi i HTML formes per te shtuar ose perditesuar nje produkt
     return (
         <div style={{ marginTop: "150px" }}>
 

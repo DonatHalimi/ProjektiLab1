@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./LoginStyle.css";
+import Navbar from "../components/Navbar";
 
-export const Login = () => {
+export const Login = (props) => {
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -50,6 +51,8 @@ export const Login = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div class="login-box">
       <p>Log in</p>
       <pre></pre>
@@ -73,5 +76,6 @@ export const Login = () => {
       </form>
       <p id="account-text">Don't have an account? <a href="/register" class="a2">Sign up!</a></p>
     </div>
+    </>
   );
 };

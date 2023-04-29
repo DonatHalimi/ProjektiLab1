@@ -1,39 +1,44 @@
-import { Component } from "react";
+import React, { useState } from "react";
 import { MenuData } from "./MenuData";
 import "./NavbarStyle.css";
 
-class Navbar extends Component {
+// Krijohet komponenti Navbar
+const Navbar = (props) => {
 
-    // Pershkruan gjendjen fillestare te komponentit
-    state = { clicked: false };
+  // Krijohet state 'clicked' dhe funksioni 'setClicked' duke perdorur useState
+  const [clicked, setClicked] = useState(false);
 
-    // Metode qe ndryshon gjendjen "clicked" kur butoni "menu-icons" klikohet
-    handleClick = () => {
-        this.setState({ clicked: !this.state.clicked })
-    }
+  // Krijohet funksioni 'handleClick' per ndryshimin e gjendjes se 'clicked'
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
 
-    // Klase pergjegjese per ruajtjen e gjendjes se "clicked" per menune e Navbar-it dhe per shfaqjen e elementeve te navbar ne faqe.
-    render() {
-        return (
-            <nav className="NavbarItems">
-                <h1 className="logo">Ruby</h1>
-                <div className="menu-icons" onClick={this.handleClick}>
-                    <i className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}></i>
-                </div>
-                <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-                    {MenuData.map((item, index) => {
-                        return (
-                            <li key={index}>
-                                <a href={item.url} className={item.cName}>
-                                    <i className={item.icon}></i>{item.title}
-                                </a>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </nav>
-        );
-    }
-}
+  return (
+    <nav className="NavbarItems">
+
+      {/* Krijimi i logose*/}
+      <h1 className="logo">Ruby</h1>
+
+      {/* Krijimi i  ikonave te menyse */}
+      <div className="menu-icons" onClick={handleClick}>
+        <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
+      </div>
+
+      {/* Krijimi i listes se menyse */}
+      <ul className={clicked ? "nav-menu active" : "nav-menu"}>
+        {MenuData.map((item, index) => {
+          return (
+            <li key={index}>
+              <a href={item.url} className={item.cName}>
+                <i className={item.icon}></i>
+                {item.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;

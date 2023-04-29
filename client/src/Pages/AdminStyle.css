@@ -14,7 +14,7 @@ body {
 .styled-table thead tr {
     background-color: #222;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
 }
 
 .styled-table th,
@@ -30,12 +30,7 @@ body {
     background-color: #f3f3f3;
 }
 
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #222;
-}
-
 .btn {
-    border: none;
     color: white;
     padding: 5px 8px;
     text-align: center;
@@ -45,6 +40,16 @@ body {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.button-edit-user {
+    position: relative;
+    left: 200px;
+}
+
+.button-edit-product {
+    position: relative;
+    left: 240px;
 }
 
 .btn-edit {
@@ -61,4 +66,16 @@ body {
 
 .btn.btn-User {
     background-color: green;
+}
+
+.shto-user {
+    position: absolute;
+    top: 205px;
+    right: 237px;
+}
+
+.shto-product {
+    position: absolute;
+    bottom: 100px;
+    right: 430px;
 }
