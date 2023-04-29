@@ -1,9 +1,25 @@
 .about-container {
     max-width: 800px;
-    padding: 40px;
+    padding: 5px;
     text-align: center;
     margin-bottom: 100px;
     font-size: 48px;
-    color: red;
+    
   }
   
+#abt{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 80px;
+  position: relative;
+  top: 123px;
+  right: 80px;
+}
+
+#info{
+  font-size: 20px;
+  position: relative;
+  top: 145px;
+  left: 70px;
+  margin-right: 260px;
+  text-align: left;
+}

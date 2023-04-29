@@ -157,6 +157,63 @@ app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     });
 });
 
+// Selektimi i aboutus
+app.get("/api/aboutus/get", cors(), (req, res) => {
+    const sqlGet = "SELECT * FROM aboutus";
+    db.query(sqlGet, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Insertimi i (aboutus)
+app.post("/api/aboutus/post", (req, res) => {
+    const { teksti} = req.body;
+    const sqlInsert = "INSERT INTO aboutus (teksti)VALUES (?)";
+    db.query(sqlInsert, [teksti], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error inserting data into database" });
+        } else {
+            console.log(result);
+            res.sendStatus(200);
+        }
+    });
+});
+//update i tekstit
+app.put("/api/aboutus/update/:idaboutus", cors(), (req, res) => {
+    const { idaboutus } = req.params;
+    const {teksti } = req.body;
+    const sqlUpdate = "UPDATE aboutus SET teksti=? WHERE idaboutus=?";
+    db.query(sqlUpdate, [teksti, idaboutus], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Fshirja e tekstit
+app.delete("/api/aboutus/remove/:idaboutus", (req, res) => {
+    const idaboutus = req.params.idaboutus;
+    const sqlRemove = "DELETE FROM aboutus WHERE idaboutus=?";
+    db.query(sqlRemove, idaboutus, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error deleting data from aboutus" });
+        } else {
+            console.log(result);
+            res.sendStatus(200);
+        }
+    });
+});
+
 const PORT = 6001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);

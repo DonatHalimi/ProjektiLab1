@@ -8,6 +8,8 @@ function App() {
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
 
+  const [aboutUsData, setaboutUsData] = useState([]);
+
   const loadData = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/user/get');
@@ -34,9 +36,23 @@ function App() {
     }
   };
 
+  const loadDataAboutUs = async () => {
+    try {
+      const response = await axios.get('http://localhost:6001/api/aboutus/get');
+      if (response && response.data) {
+        setaboutUsData(response.data);
+      } else {
+        console.log('API endpoint did not return any data');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     loadData();
     loadDataProduct();
+    loadDataAboutUs();
   }, []);
 
 
@@ -57,6 +73,15 @@ function App() {
       toast.success("Product deleted successfully");
 
       setTimeout(() => loadData, 500)
+    }
+  }
+
+  const deleteAboutUs = (id) => {
+    if (window.confirm("Are you sure that you want to delete that user?")) {
+      axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
+      toast.success("User deleted successfully");
+
+      setTimeout(() => loadData(), 500)
     }
   }
 
@@ -167,8 +192,54 @@ function App() {
           })}
         </tbody>
       </table>
+      { /*Tabela per ndryshime ne user-a*/}
+      <table className='styled-table'>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Teksti</th>
+            <th>Insert</th>
+            <th>Update</th>
+            <th>Delete</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+
+          {aboutUsData.map((aboutus, indexaboutus) => {
+            return (
+              <Fragment key={aboutus.idaboutus}>
+                <tr>
+                  <th scope="row">{indexaboutus + 1}</th>
+                  <td>{aboutus.teksti}</td>
+                  
+                  <td>
+                    <Link to={`/update/${aboutus.idaboutus}`}>
+                      <button className="btn btn-edit">
+                        <i className="fa-solid fa-user-pen"></i>
+                      </button>
+                    </Link>
+
+                    <Link>
+                      <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
+                        <i class="fa-solid fa-user-minus"></i>
+                      </button>
+                    </Link>
+                    <Link to={"/addAboutUs"}>
+                      <button className="btn btn-User">
+                        <i class="fa-solid fa-user-plus"></i>
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              </Fragment>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
+
 
 export default App;
