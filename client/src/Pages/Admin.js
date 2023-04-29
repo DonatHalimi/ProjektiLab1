@@ -122,14 +122,20 @@ function App() {
                   <td>{product.FotoSource}</td>
                   <td>
                     <Link to={`/update/${product.idproduct}`}>
-                      <button className="btn btn-edit">Edit</button>
+                      <button className="btn btn-edit">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
                     </Link>
 
                     <Link>
-                      <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>Delete</button>
+                      <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
+                        <i class="fa-solid fa-trash-can"></i>
+                      </button>
                     </Link>
                     <Link to={"/addProduct"}>
-                      <button className="btn btn-product">Add Product</button>
+                      <button className="btn btn-product">
+                        <i class="fa-solid fa-cart-plus"></i>
+                      </button>
                     </Link>
                   </td>
                 </tr>
