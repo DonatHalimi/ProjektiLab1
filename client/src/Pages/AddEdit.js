@@ -15,21 +15,20 @@ const initialState = {
 
 const AddEdit = () => {
     const [state, setState] = useState(initialState);
-  
+
 
     const { Name, Surname, Email, Password, Role } = state;
 
     const navigate = useNavigate();
-    
-    const {id}=useParams();
+
+    const { id } = useParams();
 
     useEffect(() => {
         axios.get(`http://localhost:6001/api/get/${id}`)
-          .then((resp) => setState({...resp.data[0]}))
-          .catch((err) => console.log(err));
-      }, [id]);
-      
-     
+            .then((resp) => setState({ ...resp.data[0] }))
+            .catch((err) => console.log(err));
+    }, [id]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,7 +36,7 @@ const AddEdit = () => {
         if (!Name || !Surname || !Email || !Password || !Role) {
             toast.error("Please fill out all the fields");
         } else {
-            if(!id){
+            if (!id) {
                 axios.post('http://localhost:6001/api/post', {
                     Name,
                     Surname,
@@ -45,11 +44,11 @@ const AddEdit = () => {
                     Password,
                     Role
                 }).then(() => {
-                    setState({...state, Name: "", Surname: "", Email: "", Password: "", Role: "", })
-                    
+                    setState({ ...state, Name: "", Surname: "", Email: "", Password: "", Role: "", })
+
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("User Added Successfully");
-            }else{
+            } else {
                 axios.put(`http://localhost:6001/api/update/${id}`, {
                     id,
                     Name,
@@ -60,11 +59,10 @@ const AddEdit = () => {
                 }).then(() => {
                     setState({ ...state, Name: "", Surname: "", Email: "", Password: "", Role: "", })
 
-                    
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("User Added Successfully");
             }
-            
+
             setTimeout(() =>
                 navigate("/Admin")
             )
@@ -89,10 +87,8 @@ const AddEdit = () => {
             }}
                 onSubmit={handleSubmit}
             >
-
                 <label htmlFor='Name'>Name</label>
                 <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
-
 
                 <div className="user-box">
                     <label htmlFor='Surname'>Surname</label>
@@ -103,16 +99,17 @@ const AddEdit = () => {
                     <label htmlFor='Email'>Email</label>
                     <input value={Email || ""} onChange={handleInputChange} type="email" placeholder="Type e-mail" id="Email" name="Email"></input>
 
-
                 </div>
                 <div className="user-box">
                     <label htmlFor="Password">Password</label>
                     <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Type password" id="Password" name="Password"></input>
                 </div>
+
                 <div className="user-Box">
                     <label htmlFor="Role">Role</label>
                     <input value={Role || ""} onChange={handleInputChange} type="number" placeholder="Type role" id="role" name="Role"></input>
                 </div>
+
                 <input type="submit" value={id ? "Update" : "Save"} />
                 <Link to="/Admin">
                     <input type="button" value="Go Back"></input>

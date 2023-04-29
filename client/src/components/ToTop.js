@@ -3,6 +3,7 @@ import { FaArrowUp } from "react-icons/fa";
 import "./ToTopStyle.css";
 
 function ToTop() {
+    // Deklarimi i states nepermjet Hooks
     const [showButton, setShowButton] = useState(false);
 
     const handleScroll = () => {
@@ -13,12 +14,15 @@ function ToTop() {
         }
     };
 
+    // Funksioni qe aktivizohet me klikimin e butonit to-top
     const handleClick = () => {
         window.scrollTo({top: 0, behavior: "smooth"});
     }
 
+    // Event listener per scroll (Pret qe useri te bej scroll ne faqe)
     window.addEventListener("scroll", handleScroll);
 
+    // Renderimi i komponentit
     return (
         <>
             <div className="home"></div>

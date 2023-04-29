@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
 import "./SliderStyle.css";
 
 function Slider() {
+    // Krijimi i nje array me source te fotove per slider
     const slides = [
         {
             src: require("../img/slider-1.jpg")
@@ -21,26 +22,39 @@ function Slider() {
         {
             src: require("../img/slider-1.jpg")
         },
-    ];
+    ]; 
 
+    // Perditesimi i indexit te slideve
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    // Funksioni per kthimin ne slide-in paraprak
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
         const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
 
-    const nextSlide = () => {
+    // Funksioni per te shkuar te slide-i i ardhshem
+    const nextSlide = () => { 
         const isLastSlide = currentIndex === slides.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
 
+    // Funksioni per te shkuar te nje slide me indeks te caktuar
     const goToSlide = (slideIndex) => {
         setCurrentIndex(slideIndex);
     };
 
+    // Hook-u useEffect per levizjen automatike te slide-ve per nje interval te caktuar
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            nextSlide();
+        }, 4000);
+        return () => clearInterval(intervalId);
+    }, [currentIndex]);
+
+    // Komponenti Slider
     return (
         <div className="slider">
             <div

@@ -4,11 +4,15 @@ import "./NavbarStyle.css";
 
 class Navbar extends Component {
 
+    // Pershkruan gjendjen fillestare te komponentit
     state = { clicked: false };
+
+    // Metode qe ndryshon gjendjen "clicked" kur butoni "menu-icons" klikohet
     handleClick = () => {
         this.setState({ clicked: !this.state.clicked })
     }
 
+    // Klase pergjegjese per ruajtjen e gjendjes se "clicked" per menune e Navbar-it dhe per shfaqjen e elementeve te navbar ne faqe.
     render() {
         return (
             <nav className="NavbarItems">

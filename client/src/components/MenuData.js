@@ -1,3 +1,4 @@
+// Definimi i nje vargu te te dhenave te menyse per navbar
 export const MenuData = [
     {
         title: "Home",

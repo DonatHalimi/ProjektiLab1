@@ -12,5 +12,11 @@
 }
 
 .to-top-button:hover {
+    background: none;
+    background-color: #333;
     opacity: 0.8;
+}
+
+.to-top-button:hover::after {
+    content: none;
 }
