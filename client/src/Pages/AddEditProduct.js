@@ -86,13 +86,13 @@ const AddEditProduct = () => {
                 <input value={Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
 
                 <div className="product-box">
-                    <label htmlFor='Detajet'>Surname</label>
+                    <label htmlFor='Detajet'>Detajet</label>
                     <input value={Detajet || ""} onChange={handleInputChange} type="text" placeholder="Type details" id="detajet" name="Detajet"></input>
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor="FotoSource">Password</label>
-                    <input value={Password || ""} onChange={handleInputChange} type="text" placeholder="Type photo source" id="fotosource" name="FotoSource"></input>
+                    <label htmlFor="FotoSource">FotoSource</label>
+                    <input value={FotoSource || ""} onChange={handleInputChange} type="text" placeholder="Type photo source" id="fotosource" name="FotoSource"></input>
                 </div>
 
                 <input type="submit" value={id ? "Update" : "Save"} />
