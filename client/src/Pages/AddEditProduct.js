@@ -14,28 +14,28 @@ const initialState = {
 const AddEditProduct = () => {
     const [state, setState] = useState(initialState);
 
-
     const { Emri, Detajet, FotoSource } = state;
 
     const navigate = useNavigate();
 
-    const { id } = useParams();
+    const { idproduct } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:6001/api/get/${id}`)
+        axios.get(`http://localhost:6001/api/get/${idproduct}`)
             .then((resp) => setState({ ...resp.data[0] }))
             .catch((err) => console.log(err));
-    }, [id]);
+    }, [idproduct]);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
+
         if (!Emri || !Detajet || !FotoSource) {
             toast.error("Please fill out all the fields");
         } else {
-            if (!id) {
-                axios.post('http://localhost:6001/api/post', {
+            if (!idproduct) {
+                axios.post('http://localhost:6001/api/add-product', {
                     Emri,
                     Detajet,
                     FotoSource
@@ -45,8 +45,8 @@ const AddEditProduct = () => {
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
             } else {
-                axios.put(`http://localhost:6001/api/update/${id}`, {
-                    id,
+                axios.put(`http://localhost:6001/api/update/${idproduct}`, {
+                    idproduct,
                     Emri,
                     Detajet,
                     FotoSource
@@ -83,7 +83,7 @@ const AddEditProduct = () => {
             >
 
                 <label htmlFor='Emri'>Emri</label>
-                <input value={Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
+                <input value={Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emri" name="Emri"></input>
 
                 <div className="product-box">
                     <label htmlFor='Detajet'>Detajet</label>
@@ -95,7 +95,7 @@ const AddEditProduct = () => {
                     <input value={FotoSource || ""} onChange={handleInputChange} type="text" placeholder="Type photo source" id="fotosource" name="FotoSource"></input>
                 </div>
 
-                <input type="submit" value={id ? "Update" : "Save"} />
+                <input type="submit" value={idproduct ? "Update" : "Save"} />
                 <Link to="/Admin">
                     <input type="button" value="Go Back"></input>
                 </Link>

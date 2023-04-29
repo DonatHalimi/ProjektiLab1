@@ -24,8 +24,8 @@ function App() {
           <Route path="/Admin" element={<Admin />} />
           <Route path="/addUser" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
-          <Route path="/addUser" element={<AddEditProduct />} />
-          <Route path="/update/:id" element={<AddEditProduct />} />
+          <Route path="/addProduct" element={<AddEditProduct />} />
+          <Route path="/update/:idproduct" element={<AddEditProduct />} />
         </Routes>
         <ToTop />
       </BrowserRouter>

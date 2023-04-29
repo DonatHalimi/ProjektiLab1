@@ -37,7 +37,7 @@ function App() {
 
   const deleteProduct = (id) => {
     if (window.confirm("Are you sure that you want to delete this product?")) {
-      axios.delete(`http://localhost:6001/api.remove/${id}`);
+      axios.delete(`http://localhost:6001/api/remove/${id}`);
       toast.success("Product deleted successfully");
 
       setTimeout(() => loadData, 500)
@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <div style={{ marginTop: "150px" }}>
+    <div style={{ marginTop: "100px" }}>
 
       <h1>Admin Page</h1>
 
@@ -76,14 +76,20 @@ function App() {
                   <td>{item.Role}</td>
                   <td>
                     <Link to={`/update/${item.id}`}>
-                      <button className="btn btn-edit">Edit</button>
+                      <button className="btn btn-edit">
+                        <i className="fa-solid fa-user-pen"></i>
+                      </button>
                     </Link>
 
                     <Link>
-                      <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>Delete</button>
+                      <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
+                        <i class="fa-solid fa-user-minus"></i>
+                      </button>
                     </Link>
                     <Link to={"/addUser"}>
-                      <button className="btn btn-User">Add User</button>
+                      <button className="btn btn-User">
+                        <i class="fa-solid fa-user-plus"></i>
+                      </button>
                     </Link>
                   </td>
                 </tr>
@@ -106,21 +112,21 @@ function App() {
         </thead>
         <tbody>
 
-          {data.map((product, index) => {
+          {data.map((product, indexproduct) => {
             return (
-              <Fragment key={product.id}>
+              <Fragment key={product.idproduct}>
                 <tr>
-                  <th scope="row">{index + 1}</th>
+                  <th scope="row">{indexproduct + 1}</th>
                   <td>{product.Emri}</td>
                   <td>{product.Detajet}</td>
                   <td>{product.FotoSource}</td>
                   <td>
-                    <Link to={`/update/${product.id}`}>
+                    <Link to={`/update/${product.idproduct}`}>
                       <button className="btn btn-edit">Edit</button>
                     </Link>
 
                     <Link>
-                      <button className="btn btn-delete" onClick={() => deleteProduct(product.id)}>Delete</button>
+                      <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>Delete</button>
                     </Link>
                     <Link to={"/addProduct"}>
                       <button className="btn btn-product">Add Product</button>
