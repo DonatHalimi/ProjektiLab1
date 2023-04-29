@@ -21,7 +21,7 @@ const AddEditProduct = () => {
     const { idproduct } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:6001/api/get/${idproduct}`)
+        axios.get(`http://localhost:6001/api/product/get/${idproduct}`)
             .then((resp) => setState({ ...resp.data[0] }))
             .catch((err) => console.log(err));
     }, [idproduct]);
@@ -35,7 +35,7 @@ const AddEditProduct = () => {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
-                axios.post('http://localhost:6001/api/add-product', {
+                axios.post('http://localhost:6001/api/product/get', {
                     Emri,
                     Detajet,
                     FotoSource
@@ -45,7 +45,7 @@ const AddEditProduct = () => {
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
             } else {
-                axios.put(`http://localhost:6001/api/update/${idproduct}`, {
+                axios.put(`http://localhost:6001/api/product/update/${idproduct}`, {
                     idproduct,
                     Emri,
                     Detajet,

@@ -6,10 +6,11 @@ import axios from "axios";
 
 function App() {
   const [data, setData] = useState([]);
+  const [productData, setProductData] = useState([]);
 
   const loadData = async () => {
     try {
-      const response = await axios.get('http://localhost:6001/api/get');
+      const response = await axios.get('http://localhost:6001/api/user/get');
       if (response && response.data) {
         setData(response.data);
       } else {
@@ -20,9 +21,24 @@ function App() {
     }
   };
 
+  const loadDataProduct = async () => {
+    try {
+      const response = await axios.get('http://localhost:6001/api/product/get');
+      if (response && response.data) {
+        setProductData(response.data);
+      } else {
+        console.log('API endpoint did not return any data');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     loadData();
+    loadDataProduct();
   }, []);
+
 
   console.log(data);
 
