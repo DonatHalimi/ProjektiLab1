@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import "./AdminStyle.css"
 import { toast } from "react-toastify";
 import axios from "axios";
-import Navbar from "../components/Navbar";
 
 function App() {
   const [data, setData] = useState([]);
@@ -62,11 +61,12 @@ function App() {
   }
 
   return (
-    <>
-    <Navbar/>
-    <div style={{ marginTop: "100px" }}>
+    <div style={{ marginTop: "50px" }}>
 
       <h1>Admin Page</h1>
+      <br></br>
+      <br></br>
+      <br></br>
 
       { /*Tabela per ndryshime ne user-a*/}
       <table className='styled-table'>
@@ -78,7 +78,14 @@ function App() {
             <th>E-mail</th>
             <th>Password</th>
             <th>Role</th>
-            <th>Action</th>
+            <th>Insert</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th className='shto-user'><Link to={"/addUser"}>
+              <button className="btn btn-User">
+                <i class="fa-solid fa-user-plus"></i>
+              </button>
+            </Link></th>
           </tr>
         </thead>
         <tbody>
@@ -93,24 +100,32 @@ function App() {
                   <td>{item.Email}</td>
                   <td>{item.Password}</td>
                   <td>{item.Role}</td>
-                  <td>
-                    <Link to={`/update/${item.id}`}>
-                      <button className="btn btn-edit">
-                        <i className="fa-solid fa-user-pen"></i>
-                      </button>
-                    </Link>
 
-                    <Link>
-                      <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
-                        <i class="fa-solid fa-user-minus"></i>
-                      </button>
-                    </Link>
-                    <Link to={"/addUser"}>
-                      <button className="btn btn-User">
-                        <i class="fa-solid fa-user-plus"></i>
-                      </button>
-                    </Link>
-                  </td>
+                  <div className='button-edit-user'>
+                    <td>
+                      <Link to={"/addUser"}>
+                        <button className="btn btn-User">
+                          <i class="fa-solid fa-user-plus"></i>
+                        </button>
+                      </Link>
+                    </td>
+
+                    <td>
+                      <Link to={`/update/${item.id}`}>
+                        <button className="btn btn-edit">
+                          <i className="fa-solid fa-user-pen"></i>
+                        </button>
+                      </Link>
+                    </td>
+
+                    <td>
+                      <Link>
+                        <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
+                          <i class="fa-solid fa-user-minus"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  </div>
                 </tr>
               </Fragment>
             );
@@ -118,8 +133,22 @@ function App() {
         </tbody>
       </table>
 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <hr></hr>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
       { /*Tabela per ndryshime ne produkte*/}
-      
+
       <table className='styled-table'>
         <thead>
           <tr>
@@ -127,12 +156,10 @@ function App() {
             <th>Emri</th>
             <th>Detajet</th>
             <th>FotoSource</th>
-            <th>Action</th>
-            <th><Link to={"/addProduct"}>
-                      <button className="btn btn-product">
-                        <i class="fa-solid fa-cart-plus"></i>
-                      </button>
-                    </Link></th>
+            <th>Insert</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
           </tr>
         </thead>
         <tbody>
@@ -140,38 +167,45 @@ function App() {
           {productData.map((product, indexproduct) => {
             return (
               <Fragment key={product.idproduct}>
-                
+
                 <tr>
                   <th scope="row">{indexproduct + 1}</th>
                   <td>{product.Emri}</td>
                   <td>{product.Detajet}</td>
                   <td>{product.FotoSource}</td>
-                  <td>
-                    <Link to={`/product/update/${product.idproduct}`}>
-                      <button className="btn btn-edit">
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                    </Link>
 
-                    <Link>
-                      <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
-                        <i class="fa-solid fa-trash-can"></i>
-                      </button>
-                    </Link>
-                    <Link to={"/addProduct"}>
-                      <button className="btn btn-product">
-                        <i class="fa-solid fa-cart-plus"></i>
-                      </button>
-                    </Link>
-                  </td>
+                  <div className='button-edit-product'>
+                    <td>
+                      <Link to={"/addProduct"}>
+                        <button className="btn btn-product">
+                          <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                      </Link>
+                    </td>
+
+                    <td>
+                      <Link to={`/product/update/${product.idproduct}`}>
+                        <button className="btn btn-edit">
+                          <i class="fa-solid fa-pen"></i>
+                        </button>
+                      </Link>
+                    </td>
+
+                    <td>
+                      <Link>
+                        <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  </div>
                 </tr>
               </Fragment>
             );
           })}
         </tbody>
       </table>
-    </div>
-    </>
+    </div >
   );
 };
 
