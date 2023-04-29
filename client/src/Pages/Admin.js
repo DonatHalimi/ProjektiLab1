@@ -145,24 +145,23 @@ function App() {
                         </Link>
                       </td>
 
-                    <Link>
-                      <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
-                        <i class="fa-solid fa-trash-can"></i>
-                      </button>
-                    </Link>
-                    <Link to={"/addProduct"}>
-                      <button className="btn btn-product">
-                        <i class="fa-solid fa-cart-plus"></i>
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              </Fragment>
-            );
-          })}
-        </tbody>
-      </table>
-      <br></br>
+                      <td>
+                        <Link>
+                          <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
+                            <i class="fa-solid fa-user-minus"></i>
+                          </button>
+                        </Link>
+                      </td>
+                    </div>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+
+
+        <br></br>
         <br></br>
         <br></br>
         <br></br>
@@ -229,58 +228,59 @@ function App() {
                     </div>
                   </tr>
                 </Fragment>
-                );
-              })}
-            </tbody>
-          </table>
-      { /*Tabela per ndryshime ne user-a*/}
-      <table className='styled-table'>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Teksti</th>
-            <th>Insert</th>
-            <th>Update</th>
-            <th>Delete</th>
-            
-          </tr>
-        </thead>
-        <tbody>
+              );
+            })}
+          </tbody>
+        </table>
 
-          {aboutUsData.map((aboutus, indexaboutus) => {
-            return (
-              <Fragment key={aboutus.idaboutus}>
-                <tr>
-                  <th scope="row">{indexaboutus + 1}</th>
-                  <td>{aboutus.teksti}</td>
-                  
-                  <td>
-                    <Link to={`/update/${aboutus.idaboutus}`}>
-                      <button className="btn btn-edit">
-                        <i className="fa-solid fa-user-pen"></i>
-                      </button>
-                    </Link>
 
-                    <Link>
-                      <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
-                        <i class="fa-solid fa-user-minus"></i>
-                      </button>
-                    </Link>
-                    <Link to={"/addAboutUs"}>
-                      <button className="btn btn-User">
-                        <i class="fa-solid fa-user-plus"></i>
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              </Fragment>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+        { /*Tabela per ndryshime ne aboutus*/}
+        <table className='styled-table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Teksti</th>
+              <th>Insert</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {aboutUsData.map((aboutus, indexaboutus) => {
+              return (
+                <Fragment key={aboutus.idaboutus}>
+                  <tr>
+                    <th scope="row">{indexaboutus + 1}</th>
+                    <td>{aboutus.teksti}</td>
+
+                    <td>
+                      <Link to={`/update/${aboutus.idaboutus}`}>
+                        <button className="btn btn-edit">
+                          <i className="fa-solid fa-user-pen"></i>
+                        </button>
+                      </Link>
+
+                      <Link>
+                        <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
+                          <i class="fa-solid fa-user-minus"></i>
+                        </button>
+                      </Link>
+
+                      <Link to={"/addAboutUs"}>
+                        <button className="btn btn-User">
+                          <i class="fa-solid fa-user-plus"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
-        
   );
 };
 
