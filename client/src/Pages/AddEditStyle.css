@@ -45,11 +45,11 @@ input[type="submit"]:hover::after {
     content: none;
 }
 
-.user-box button {
+/* .user-box button {
     position: relative;
     bottom: 39px;
     left: 163px;
-    /* padding: 10px; */
+    padding: 10px;
     background: transparent;
     border: none;
     color: #000000;
@@ -63,7 +63,28 @@ input[type="submit"]:hover::after {
 
 .user-box button:hover::after {
     content: none;
+} */
+
+.visibility-button {
+    position: relative;
+    bottom: 39px;
+    left: 163px;
+    background: transparent;
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    font-size: 18px;
 }
+
+.visibility-button:hover {
+    background: none;
+}
+
+.visibility-button:hover::after {
+    content: none;
+}
+
+
 
 #submit-button {
     background-color: #33b249;
