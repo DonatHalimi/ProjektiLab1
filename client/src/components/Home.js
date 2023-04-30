@@ -15,9 +15,18 @@ function Home() {
 
     useEffect(() => {
         fetch("http://localhost:6001/api/product")
-            .then((response) => response.json())
-            .then((data) => setProducts(data));
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((data) => setProducts(data))
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
     }, []);
+
 
     // Krijimi i nje array me source te fotove per slider
     const slides = [
