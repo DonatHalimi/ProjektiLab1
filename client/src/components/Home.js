@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
+import Product from "./Product";
 import "./SliderStyle.css";
+import "./HomeStyle.css";
 import Navbar from "./Navbar";
 
 // Deklarimi i funksionit Home
 function Home() {
 
-    // Inicializimi i vargut me path-a te fotove per slider
+    // Deklarimi i variables products dhe funksionit setProducts si useState
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:6001/api/product")
+            .then((response) => response.json())
+            .then((data) => setProducts(data));
+    }, []);
+
+    // Krijimi i nje array me source te fotove per slider
     const slides = [
         {
             src: require("../img/slider-1.jpg")
@@ -27,33 +38,40 @@ function Home() {
         },
     ];
 
-    // Perdorimi i hooks useState per ta inicializuar currentIndex me 0
+    // Perditesimi i indexit te slideve
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Funksioni prevSlide per ndrrimin e sliderit ne foto paraardhese
+    // Funksioni per kthimin ne slide-in paraprak
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
         const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
 
-    // Funksioni nextSlide per ndrrimin e sliderit ne foto pasardhese
-    const nextSlide = () => { 
+    // Funksioni per te shkuar te slide-i i ardhshem
+    const nextSlide = () => {
         const isLastSlide = currentIndex === slides.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
 
-     // Funksioni goToSlide per kalimin e sliderit ne nje foto te caktuar
+    // Funksioni per te shkuar te nje slide me indeks te caktuar
     const goToSlide = (slideIndex) => {
         setCurrentIndex(slideIndex);
     };
 
+    // Hook-u useEffect per levizjen automatike te slide-ve per nje interval te caktuar
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            nextSlide();
+        }, 4000);
+        return () => clearInterval(intervalId);
+    }, [currentIndex]);
+
+    // Renderimi i HTML per produkte ne main page
     return (
         <>
-            {/*Thirrja e komponentit te navbar*/ }
             <Navbar />
-
             <div className="slider">
                 <div
                     style={{ backgroundImage: `url(${slides[currentIndex].src})` }}
@@ -83,8 +101,24 @@ function Home() {
                     ))}
                 </div>
             </div>
+
+            <div className="home-container">
+                <h1>Featured Products</h1>
+                <div className="product-list">
+                    {products.map((product) => (
+                        <Product
+                            key={product.idproduct}
+                            idproduct={product.idproduct}
+                            emri={product.Emri}
+                            detajet={product.Detajet}
+                            kategoria={product.Kategoria}
+                            fotoSource={product.FotoSource}
+                        />
+                    ))}
+                </div>
+            </div>
         </>
-    )
+    );
 }
 
 export default Home;

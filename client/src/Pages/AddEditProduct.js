@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
     Emri: "",
     Detajet: "",
+    Kategoria: "",
     FotoSource: ""
 }
 
@@ -19,7 +20,7 @@ const AddEditProduct = () => {
     const [state, setState] = useState(initialState);
 
     // Deklarimi i variablave Emri, Detajet dhe FotoSource duke i destrukturojme nga gjendja e komponentit
-    const { Emri, Detajet, FotoSource } = state;
+    const { Emri, Detajet, Kategoria, FotoSource } = state;
 
     // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ const AddEditProduct = () => {
         console.log("handleSubmit called");
 
         // Kontrolli i plotesimit te te gjitha fushave te formes
-        if (!Emri || !Detajet || !FotoSource) {
+        if (!Emri || !Detajet || !Kategoria || !FotoSource) {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
@@ -49,9 +50,10 @@ const AddEditProduct = () => {
                 axios.post('http://localhost:6001/api/product/post', {
                     Emri,
                     Detajet,
+                    Kategoria,
                     FotoSource
                 }).then(() => {
-                    setState({ ...state, Emri: "", Detajet: "", FotoSource: "", })
+                    setState({ ...state, Emri: "", Detajet: "", Kategoria: "", FotoSource: "", })
 
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
@@ -63,7 +65,7 @@ const AddEditProduct = () => {
                     Detajet,
                     FotoSource
                 }).then(() => {
-                    setState({ ...state, Emri: "", Detajet: "", FotoSource: "", })
+                    setState({ ...state, Emri: "", Detajet: "", Kategoria: "", FotoSource: "", })
 
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
@@ -106,11 +108,17 @@ const AddEditProduct = () => {
                 </div>
 
                 <div className="product-box">
+                    <label htmlFor='Kategoria'>Kategoria</label>
+                    <input value={Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Type category" id="kategoria" name="Kategoria"></input>
+                </div>
+
+                <div className="product-box">
                     <label htmlFor="FotoSource">FotoSource</label>
                     <input value={FotoSource || ""} onChange={handleInputChange} type="text" placeholder="Type photo source" id="fotosource" name="FotoSource"></input>
                 </div>
 
                 <input type="submit" value={idproduct ? "Update" : "Save"} />
+
                 <Link to="/Admin">
                     <input type="button" value="Go Back"></input>
                 </Link>

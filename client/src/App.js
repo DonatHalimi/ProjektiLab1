@@ -13,14 +13,15 @@ import AddEditProduct from "./Pages/AddEditProduct";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
+import Product from "./components/Product";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/" element={<Product />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

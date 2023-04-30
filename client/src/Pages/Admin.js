@@ -9,8 +9,7 @@ function App() {
   // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
-
-  const [aboutUsData, setaboutUsData] = useState([]);
+  const [aboutUsData, setAboutUsData] = useState([]);
 
   // Funksioni per te marre te dhenat e user-ave nga API
   const loadData = async () => {
@@ -45,7 +44,7 @@ function App() {
     try {
       const response = await axios.get('http://localhost:6001/api/aboutus/get');
       if (response && response.data) {
-        setaboutUsData(response.data);
+        setAboutUsData(response.data);
       } else {
         console.log('API endpoint did not return any data');
       }
@@ -165,7 +164,6 @@ function App() {
           </tbody>
         </table>
 
-
         <br></br>
         <br></br>
         <br></br>
@@ -182,18 +180,18 @@ function App() {
 
         { /*Tabela per ndryshime ne produkte*/}
         <table className='styled-table'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Emri</th>
-              <th>Detajet</th>
-              <th>FotoSource</th>
-              <th>Insert</th>
-              <th>Edit</th>
-              <th>Delete</th>
-
-            </tr>
-          </thead>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Emri</th>
+                <th>Detajet</th>
+                <th>Kategoria</th>
+                <th>FotoSource</th>
+                <th>Insert</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
           <tbody>
 
             {productData.map((product, indexproduct) => {
@@ -204,6 +202,7 @@ function App() {
                     <th scope="row">{indexproduct + 1}</th>
                     <td>{product.Emri}</td>
                     <td>{product.Detajet}</td>
+                    <td>{product.Kategoria}</td>
                     <td>{product.FotoSource}</td>
 
                     <div className='button-edit-product'>
@@ -274,25 +273,27 @@ function App() {
                     <th scope="row">{indexaboutus + 1}</th>
                     <td>{aboutus.teksti}</td>
 
-                    <td>
-                      <Link to={`/update/${aboutus.idaboutus}`}>
-                        <button className="btn btn-edit">
-                          <i className="fa-solid fa-user-pen"></i>
-                        </button>
-                      </Link>
+                    <div className='button-edit-aboutus'>
+                      <td>
+                        <Link to={`/update/${aboutus.idaboutus}`}>
+                          <button className="btn btn-edit">
+                            <i className="fa-solid fa-user-pen"></i>
+                          </button>
+                        </Link>
 
-                      <Link>
-                        <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
-                          <i class="fa-solid fa-user-minus"></i>
-                        </button>
-                      </Link>
+                        <Link>
+                          <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
+                            <i class="fa-solid fa-user-minus"></i>
+                          </button>
+                        </Link>
 
-                      <Link to={"/addAboutUs"}>
-                        <button className="btn btn-User">
-                          <i class="fa-solid fa-user-plus"></i>
-                        </button>
-                      </Link>
-                    </td>
+                        <Link to={"/addAboutUs"}>
+                          <button className="btn btn-User">
+                            <i class="fa-solid fa-user-plus"></i>
+                          </button>
+                        </Link>
+                      </td>
+                    </div>
                   </tr>
                 </Fragment>
               );

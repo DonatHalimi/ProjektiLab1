@@ -19,7 +19,7 @@ body {
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+    padding: 13px 17px;
 }
 
 .styled-table tbody tr {
@@ -42,7 +42,7 @@ body {
     cursor: pointer;
 }
 
-.button-edit-user {
+.button-edit-user{
     position: relative;
     left: 200px;
 }
@@ -50,6 +50,11 @@ body {
 .button-edit-product {
     position: relative;
     left: 240px;
+}
+
+.button-edit-aboutus {
+    position: relative;
+    left: 260px;
 }
 
 .btn-edit {

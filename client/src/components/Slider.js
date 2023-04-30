@@ -86,6 +86,6 @@ function Slider() {
             </div>
         </div>
     )
-}
+};
 
 export default Slider;
