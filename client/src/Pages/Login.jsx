@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./LoginStyle.css";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 export const Login = (props) => {
   const initialValues = { email: "", password: "" };
@@ -9,6 +10,11 @@ export const Login = (props) => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [Email,setEmail]=useState("");
+  const [Password,setPassword]=useState("");
+  const [loginStatus,setLoginStatus]=useState("");
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,10 +28,29 @@ export const Login = (props) => {
     setIsSubmit(true);
   }
 
+  const login= (e)=>{
+    e.preventDefault();
+    axios.post(`http://localhost:6001/api/user/login`,{
+    Email:Email,
+    Password:Password,
+
+  }).then((response) => {
+    if(response.data.message){
+      setLoginStatus(response.data.message)
+    }else{
+      setLoginStatus("ACCOUNT CREATED SUCCESSFULLY")
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+    setLoginStatus("Error registering user");
+  });
+}
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
+    
   }, [formErrors]);
 
   const validate = (values) => {
@@ -56,23 +81,23 @@ export const Login = (props) => {
     <div class="login-box">
       <p>Log in</p>
       <pre></pre>
-      <form onSubmit={handleSubmit}>
+      <form >
         <div class="user-box">
-          <input value={formValues.email} onChange={handleChange} type="email" placeholder="Type e-mail" id="email" name="email"></input>
+          <input  onChange={(e)=>{setEmail(e.target.value)}}type="email" placeholder="Type e-mail" id="email" name="Email"></input>
           <label htmlFor='email'>Email</label>
           <p id="error">{formErrors.email}</p>
         </div>
 
         <div class="user-box">
-          <input value={formValues.password} onChange={handleChange} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="password"></input>
-          <label htmlFor="password">Password</label>
+          <input onChange={(e)=>{setPassword(e.target.value)}} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
+          <label htmlFor="Password">Password</label>
           <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
             {passwordVisible ? <FaEyeSlash /> : <FaEye />}
           </button>
           <p id="error">{formErrors.password}</p>
         </div>
 
-        <button class="btn" type="submit" >Log in </button>
+        <button class="btn" type="submit" onClick={login}>Log in </button>
       </form>
       <p id="account-text">Don't have an account? <a href="/register" class="a2">Sign up!</a></p>
     </div>

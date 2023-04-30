@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const mysql = require('mysql');
 const cors = require("cors");
+const bodyParser=require("body-parser");
+const cookieParser=require("cookie-parser");
+const bcrypt=require("bcrypt");
+const saltRounds=10;
+
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -236,6 +241,72 @@ app.delete("/api/aboutus/remove/:idaboutus", (req, res) => {
         }
     });
 });
+
+//Insertimi i userave nga Register-formi
+
+app.post("/api/user/register",(req,res)=>{
+
+    const { Name, Surname, Email, Password, Role } = req.body;
+    const sqlInsert = "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
+    bcrypt.hash(Password,saltRounds,(err,hash)=>{
+        db.query(sqlInsert, [Name, Surname, Email, hash, Role], (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send({ error: "Error inserting data into database" });
+            } else {
+                console.log(result);
+                res.sendStatus(200);
+            }
+        });
+
+    })
+    
+    
+});
+
+app.post('/api/user/login', (req, res) => {
+    const { Email, Password } = req.body;
+    const sqlGet = "SELECT *, Role FROM userat WHERE Email = ?";
+    db.query(sqlGet, [Email], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+        } else {
+            if (result.length === 0) {
+                res.status(401).json({ message: "Invalid login credentials" });
+            } else {
+                const user = result[0];
+                if (user.Role === 2) {
+                    res.json({ message: "User logged in successfully", redirect: "/home" });
+                } else if (user.Role === 1) {
+                    res.json({ message: "Admin logged in successfully", redirect: "/Admin" });
+                } else {
+                    res.status(401).json({ message: "Invalid login credentials" });
+                }
+            }
+        }
+        if(result.length>0){
+            bcrypt.compare(Password,result[0].Password,(error,response)=> {
+            if(response){
+                res.send(result);
+            }else{
+                res.send({message:"Wrong username/password combination"})
+            }
+            })
+        }
+    });
+});
+
+   
+
+
+
+
+
+
+
+
+
 
 const PORT = 6001;
 app.listen(PORT, () => {
