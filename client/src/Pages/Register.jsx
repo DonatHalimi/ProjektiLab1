@@ -19,9 +19,6 @@ export const Register = () => {
   const [registerStatus, setRegisterStatus] = useState("");
 
 
-
-
-
   const register = (e) => {
     e.preventDefault();
     axios.post(`http://localhost:6001/api/user/register`, {

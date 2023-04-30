@@ -45,26 +45,6 @@ input[type="submit"]:hover::after {
     content: none;
 }
 
-/* .user-box button {
-    position: relative;
-    bottom: 39px;
-    left: 163px;
-    padding: 10px;
-    background: transparent;
-    border: none;
-    color: #000000;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.user-box button:hover {
-    background: none;
-}
-
-.user-box button:hover::after {
-    content: none;
-} */
-
 .visibility-button {
     position: relative;
     bottom: 39px;
