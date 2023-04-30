@@ -97,3 +97,22 @@
 .slider-button.active {
     color: #534a4a;
 }
+
+@media (max-width: 768px) {
+    .slider {
+        height: 500px;
+        padding-top: 50px;
+    }
+
+    .slider-buttons {
+        bottom: -33px;
+    }
+
+    .slider .arrow {
+        top: 50%;
+    }
+
+    .slider .dots {
+        top: 5px;
+    }
+}

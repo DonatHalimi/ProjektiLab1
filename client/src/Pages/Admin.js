@@ -184,6 +184,7 @@ function App() {
               <tr>
                 <th>ID</th>
                 <th>Emri</th>
+                <th>Cmimi</th>
                 <th>Detajet</th>
                 <th>Kategoria</th>
                 <th>FotoSource</th>
@@ -201,6 +202,7 @@ function App() {
                   <tr>
                     <th scope="row">{indexproduct + 1}</th>
                     <td>{product.Emri}</td>
+                    <td>{product.Cmimi}</td>
                     <td>{product.Detajet}</td>
                     <td>{product.Kategoria}</td>
                     <td>{product.FotoSource}</td>
