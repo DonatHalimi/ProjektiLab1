@@ -1,28 +1,252 @@
-@media only screen and (min-width: 768px) {
+.about-container {
+  max-width: 583px;
+  padding: 5px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  position: relative;
+  bottom: -180px;
+  left: 70px;
+  margin-right: 1x;
+  text-align: left;
+  color: grey;
+}
+#fotoabt{
+
+  position: absolute;
+  left: 917px;
+  top: 72px;
+  margin: 1px;
+  padding: 1px;
+  width: 810px;
+  height: 680px;
+}
+
+#abt{
+font-family:Arial, Helvetica, sans-serif;
+font-size: 80px;
+position: absolute;
+bottom: 15vw;
+right: 5vw;
+padding: 1vw;
+color: rgb(93, 73, 58);
+
+
+}
+
+#info4{
+color: rgb(93, 73, 58);
+
+}
+
+/* For screens with a width of 768px or less */
+@media screen and (max-width: 768px) {
   .about-container {
-    max-width: 30vw;
-    font-size: 1vw;
-    text-align: left;
-    margin-top: 155px;
-    margin-right: 20px;
-    margin-left: 20px;
+    max-width: 100%;
+    text-align: center;
+    bottom: auto;
+    left: auto;
+    margin: 0 auto;
+    font-size: 12px;
+    padding: 10px;
   }
 
   #fotoabt {
-    width: 50%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
+    position: static;
+    width: 100%;
+    height: 300px;
+    margin: 10px 0;
     padding: 0;
   }
 
   #abt {
-    font-size: 3vw;
+    font-size: 50px;
+    position: static;
+    bottom: auto;
+    right: auto;
+    padding: 1vw;
+  }
+
+  #info4 {
+    font-size: 12px;
+    color: grey;
+  }
+}
+
+/* For screens with a width between 768px and 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .about-container {
+    max-width: 50%;
+    text-align: left;
+    bottom: 559px;
+    left: -222px;
+    margin: 0 auto;
+    font-size: 18px;
+    padding: 20px;
+  }
+
+  #fotoabt {
     position: relative;
-    bottom: -8vw;
-    right: 38vw;
-    margin: 0;
+    left: 230px;
+    top: -15px;
+    width: 50%;
+    height: auto;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  #abt {
+    font-size: 60px;
+    position: relative;
+    bottom: 540px;
+    right: 230px;
+    padding: 10px;
+  }
+
+  #info4 {
+    font-size: 18px;
+    color: grey;
+  }
+}
+
+/* For screens with a width of 1025px or more */
+@media screen and (min-width: 1025px) {
+  .about-container {
+    max-width: 50%;
+    text-align: left;
+    bottom: -180px;
+    left: 56px;
+    margin: 10px;
+    font-size: 20px;
+    padding: 5px;
+  }
+
+  #fotoabt {
+    position: absolute;
+    left: 916px;
+    top: 56px;
+    margin: 1px;
+    padding: 1px;
+    width: 620px;
+    height: 737px;
+  }
+
+  #abt {
+    font-size: 80px;
+    position: relative;
+    bottom: -122px;
+    right: 510px;
+    padding: 5px;
+  }
+
+  #info4 {
+    color: grey;
+  }
+}
+
+/* For screens with a width of 480px or less */
+@media screen and (max-width: 480px) {
+  .about-container {
+    max-width: 100%;
+    text-align: center;
+    bottom: auto;
+    left: auto;
+    margin: 0 auto;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  #fotoabt {
+    position: relative;
+    top: -14px;
+    left: 3px;
+    width: 100%;
+    height: 410px;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  #abt {
+    font-size: 40px;
+    position: static;
+    bottom: auto;
+    right: auto;
+    padding: 10px;
+  }
+
+  #info4 {
+    font-size: 12px;
+    color: grey;
+  }
+}
+
+/* For screens with a width of 380px or less */
+@media screen and (max-width: 380px) {
+  .about-container {
+    max-width: 100%;
+    text-align: center;
+    bottom: auto;
+    left: auto;
+    margin: 0 auto;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  #fotoabt {
+    position: relative;
+    top: -14px;
+    left: 3px;
+    width: 100%;
+    height: 310px;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  #abt {
+    font-size: 40px;
+    position: static;
+    bottom: auto;
+    right: auto;
+    padding: 10px;
+  }
+
+  #info4 {
+    font-size: 12px;
+    color: grey;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1496px) {
+  .about-container {
+    max-width: 50%;
+    text-align: left;
+    bottom: 559px;
+    left: -222px;
+    margin: 0 auto;
+    font-size: 18px;
+    padding: 20px;
+  }
+
+  #fotoabt {
+    position: relative;
+    left: 916px;
+    top: -15px;
+    width: 50%;
+    height: auto;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  #abt {
+    font-size: 60px;
+    position: relative;
+    bottom: 240px;
+    right: 230px;
+    padding: 10px;
+  }
+
+  #info4 {
+    font-size: 18px;
+    color: grey;
   }
 }
