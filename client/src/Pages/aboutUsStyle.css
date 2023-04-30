@@ -54,8 +54,8 @@ color: rgb(93, 73, 58);
   #fotoabt {
     position: static;
     width: 100%;
-    height: 300px;
-    margin: 10px 0;
+    height: 491px;
+    margin: -5px 0;
     padding: 0;
   }
 
@@ -79,7 +79,7 @@ color: rgb(93, 73, 58);
     max-width: 50%;
     text-align: left;
     bottom: 559px;
-    left: -222px;
+    left: -254px;
     margin: 0 auto;
     font-size: 18px;
     padding: 20px;
@@ -99,7 +99,7 @@ color: rgb(93, 73, 58);
     font-size: 60px;
     position: relative;
     bottom: 540px;
-    right: 230px;
+    right: 346px;
     padding: 10px;
   }
 
@@ -114,8 +114,8 @@ color: rgb(93, 73, 58);
   .about-container {
     max-width: 50%;
     text-align: left;
-    bottom: -180px;
-    left: 56px;
+    bottom: -130px;
+    left: 47px;
     margin: 10px;
     font-size: 20px;
     padding: 5px;
@@ -123,19 +123,19 @@ color: rgb(93, 73, 58);
 
   #fotoabt {
     position: absolute;
-    left: 916px;
+    left: 703px;
     top: 56px;
     margin: 1px;
     padding: 1px;
-    width: 620px;
+    width: 575px;
     height: 737px;
   }
 
   #abt {
     font-size: 80px;
     position: relative;
-    bottom: -122px;
-    right: 510px;
+    bottom: -125px;
+    right: 400px;
     padding: 5px;
   }
 
@@ -216,37 +216,3 @@ color: rgb(93, 73, 58);
   }
 }
 
-@media screen and (min-width: 1025px) and (max-width: 1496px) {
-  .about-container {
-    max-width: 50%;
-    text-align: left;
-    bottom: 559px;
-    left: -222px;
-    margin: 0 auto;
-    font-size: 18px;
-    padding: 20px;
-  }
-
-  #fotoabt {
-    position: relative;
-    left: 916px;
-    top: -15px;
-    width: 50%;
-    height: auto;
-    margin: 10px 0;
-    padding: 0;
-  }
-
-  #abt {
-    font-size: 60px;
-    position: relative;
-    bottom: 240px;
-    right: 230px;
-    padding: 10px;
-  }
-
-  #info4 {
-    font-size: 18px;
-    color: grey;
-  }
-}
