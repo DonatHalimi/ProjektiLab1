@@ -1,25 +1,40 @@
 .about-container {
-    max-width: 800px;
+    max-width: 583px;
     padding: 5px;
     text-align: center;
-    margin-bottom: 100px;
-    font-size: 48px;
-    
+    margin-top: 10px;
+    font-size: 20px;
+    position: relative;
+    bottom: -180px;
+    left: 70px;
+    margin-right: 1x;
+    text-align: left;
+    color: grey;
+  }
+  #fotoabt{
+
+    position: absolute;
+    left: 917px;
+    top: 72px;
+    margin: 1px;
+    padding: 1px;
+    width: 610px;
+    height: 680px;
   }
   
 #abt{
   font-family:Arial, Helvetica, sans-serif;
   font-size: 80px;
-  position: relative;
-  top: 123px;
-  right: 80px;
+  position: absolute;
+  bottom: 500px;
+  right: 1100px;
+  padding: 5px;
+  color: rgb(93, 73, 58);
+  
+  
 }
 
-#info{
-  font-size: 20px;
-  position: relative;
-  top: 145px;
-  left: 70px;
-  margin-right: 260px;
-  text-align: left;
+#info4{
+  color: rgb(93, 73, 58);
+  
 }
