@@ -123,7 +123,7 @@ color: rgb(93, 73, 58);
 
   #fotoabt {
     position: absolute;
-    left: 703px;
+    left: 943px;
     top: 56px;
     margin: 1px;
     padding: 1px;
@@ -135,7 +135,7 @@ color: rgb(93, 73, 58);
     font-size: 80px;
     position: relative;
     bottom: -125px;
-    right: 400px;
+    right: 520px;
     padding: 5px;
   }
 
@@ -215,4 +215,5 @@ color: rgb(93, 73, 58);
     color: grey;
   }
 }
+
 
