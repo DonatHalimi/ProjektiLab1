@@ -1,40 +1,28 @@
-.about-container {
-    max-width: 583px;
-    padding: 5px;
-    text-align: center;
-    margin-top: 10px;
-    font-size: 20px;
-    position: relative;
-    bottom: -180px;
-    left: 70px;
-    margin-right: 1x;
+@media only screen and (min-width: 768px) {
+  .about-container {
+    max-width: 30vw;
+    font-size: 1vw;
     text-align: left;
-    color: grey;
+    margin-top: 155px;
+    margin-right: 20px;
+    margin-left: 20px;
   }
-  #fotoabt{
 
+  #fotoabt {
+    width: 50%;
+    height: auto;
     position: absolute;
-    left: 917px;
-    top: 72px;
-    margin: 1px;
-    padding: 1px;
-    width: 610px;
-    height: 680px;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
   }
-  
-#abt{
-  font-family:Arial, Helvetica, sans-serif;
-  font-size: 80px;
-  position: absolute;
-  bottom: 500px;
-  right: 1100px;
-  padding: 5px;
-  color: rgb(93, 73, 58);
-  
-  
-}
 
-#info4{
-  color: rgb(93, 73, 58);
-  
+  #abt {
+    font-size: 3vw;
+    position: relative;
+    bottom: -8vw;
+    right: 38vw;
+    margin: 0;
+  }
 }
