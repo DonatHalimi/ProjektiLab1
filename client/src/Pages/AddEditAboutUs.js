@@ -43,7 +43,7 @@ const AddEditAboutUs = () => {
         } else {
             if (!idaboutus) {
                 // Nese teksti nuk ekziston, kryejme nje post request per ta shtuar
-                axios.post('http://localhost:6001/api/post', {
+                axios.post('http://localhost:6001/api/aboutus/post', {
                     teksti
                 }).then(() => {
                     setState({ ...state, teksti: "", })

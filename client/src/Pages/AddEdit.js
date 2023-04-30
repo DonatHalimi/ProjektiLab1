@@ -26,7 +26,7 @@ const AddEdit = () => {
 
     // Perdorimi i useEffect hook per te marre te dhena nga API ne fillim te ngarkimit te komponentit
     useEffect(() => {
-        axios.get(`http://localhost:6001/api/get/${id}`)
+        axios.get(`http://localhost:6001/api/user/get/${id}`)
             .then((resp) => setState({ ...resp.data[0] }))
             .catch((err) => console.log(err));
     }, [id]);
@@ -43,7 +43,7 @@ const AddEdit = () => {
         } else {
             if (!id) {
                 // Nese id nuk ekziston, kryejme nje post request per ta shtuar
-                axios.post('http://localhost:6001/api/post', {
+                axios.post(`http://localhost:6001/api/user/post`, {
                     Name,
                     Surname,
                     Email,
@@ -56,7 +56,7 @@ const AddEdit = () => {
                 toast.success("User Added Successfully");
             } else {
                 // Nese id ekziston, kryejme nje put request per ta perditesuar
-                axios.put(`http://localhost:6001/api/update/${id}`, {
+                axios.put(`http://localhost:6001/api/user/update/${id}`, {
                     id,
                     Name,
                     Surname,

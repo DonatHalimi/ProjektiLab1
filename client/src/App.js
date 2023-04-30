@@ -26,11 +26,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/Admin" element={<Admin />} />
-          <Route path="/addUser" element={<AddEdit />} />
-          <Route path="/update/:id" element={<AddEdit />} />
+          <Route path="/user/addUser" element={<AddEdit />} />
+          <Route path="/user/update/:id" element={<AddEdit />} />
           <Route path="/addProduct" element={<AddEditProduct />} />
-          <Route path="/product/update/:idproduct" element={<AddEditProduct />} />
-          <Route path="/addAboutUs" element={<AddEditAboutUs />} />
+          <Route path="/update/:idproduct" element={<AddEditProduct />} />
+          <Route path="/aboutus/addAboutUs" element={<AddEditAboutUs />} />
           <Route path="/aboutus/update/:idaboutus" element={<AddEditAboutUs />} />
         </Routes>
         <ToTop />

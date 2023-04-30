@@ -134,7 +134,7 @@ function App() {
 
                     <div className='button-edit-user'>
                       <td>
-                        <Link to={"/addUser"}>
+                        <Link to={`/user/addUser`}>
                           <button className="btn btn-User">
                             <i class="fa-solid fa-user-plus"></i>
                           </button>
@@ -142,7 +142,7 @@ function App() {
                       </td>
 
                       <td>
-                        <Link to={`/update/${item.id}`}>
+                        <Link to={`/user/update/${item.id}`}>
                           <button className="btn btn-edit">
                             <i className="fa-solid fa-user-pen"></i>
                           </button>
@@ -217,7 +217,7 @@ function App() {
                       </td>
 
                       <td>
-                        <Link to={`/product/update/${product.idproduct}`}>
+                        <Link to={`/update/${product.idproduct}`}>
                           <button className="btn btn-edit">
                             <i class="fa-solid fa-pen"></i>
                           </button>
@@ -277,7 +277,7 @@ function App() {
 
                     <div className='button-edit-aboutus'>
                       <td>
-                        <Link to={`/update/${aboutus.idaboutus}`}>
+                        <Link to={`/aboutus/update/${aboutus.idaboutus}`}>
                           <button className="btn btn-edit">
                             <i className="fa-solid fa-user-pen"></i>
                           </button>
@@ -289,7 +289,7 @@ function App() {
                           </button>
                         </Link>
 
-                        <Link to={"/addAboutUs"}>
+                        <Link to={"/aboutus/addAboutUs"}>
                           <button className="btn btn-User">
                             <i class="fa-solid fa-user-plus"></i>
                           </button>
