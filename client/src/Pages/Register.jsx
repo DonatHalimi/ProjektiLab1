@@ -12,38 +12,38 @@ export const Register = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const [Name,setName]=useState("");
-  const [Surname,setSurname]=useState("");
-  const [Email,setEmail]=useState("");
-  const [Password,setPassword]=useState("");
-  const [registerStatus,setRegisterStatus]=useState("");
-  
+  const [Name, setName] = useState("");
+  const [Surname, setSurname] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [registerStatus, setRegisterStatus] = useState("");
 
 
 
 
-  const register= (e)=>{
+
+  const register = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:6001/api/user/register`,{
-    Name:Name,
-    Surname:Surname,
-    Email:Email,
-    Password:Password,
-    Role:2
+    axios.post(`http://localhost:6001/api/user/register`, {
+      Name: Name,
+      Surname: Surname,
+      Email: Email,
+      Password: Password,
+      Role: 2
 
-  }).then((response) => {
-    if(response.data.message){
-      setRegisterStatus(response.data.message)
-    }else{
-      setRegisterStatus("ACCOUNT CREATED SUCCESSFULLY")
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-    setRegisterStatus("Error registering user");
-  });
-}
-  
+    }).then((response) => {
+      if (response.data.message) {
+        setRegisterStatus(response.data.message)
+      } else {
+        setRegisterStatus("ACCOUNT CREATED SUCCESSFULLY")
+      }
+    })
+      .catch((error) => {
+        console.log(error);
+        setRegisterStatus("Error registering user");
+      });
+  }
+
 
   console.log(setRegisterStatus);
   const handleChange = (e) => {
@@ -103,30 +103,30 @@ export const Register = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div class="register-box">
         <p>Sign up</p>
         <form >
           <div class="user-box">
-            <input  onChange={(e)=>{setName(e.target.value)}} type="text" placeholder="Type name" id="name" name="Name"></input>
+            <input onChange={(e) => { setName(e.target.value) }} type="text" placeholder="Type name" id="name" name="Name"></input>
             <label htmlFor='name'>Name</label>
             <p id="error">{formErrors.name}</p>
           </div>
 
           <div class="user-box">
-            <input  onChange={(e)=>{setSurname(e.target.value)}} type="text" placeholder="Type surname" id="surname" name="Surname"></input>
+            <input onChange={(e) => { setSurname(e.target.value) }} type="text" placeholder="Type surname" id="surname" name="Surname"></input>
             <label htmlFor='surname'>Surname</label>
             <p id="error">{formErrors.surname}</p>
           </div>
 
           <div class="user-box">
-            <input  onChange={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
+            <input onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
             <label htmlFor='email'>Email</label>
             <p id="error">{formErrors.email}</p>
           </div>
 
           <div class="user-box">
-            <input  onChange={(e)=>{setPassword(e.target.value)}} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
+            <input onChange={(e) => { setPassword(e.target.value) }} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
             <label htmlFor="password">Password</label>
             <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
@@ -135,7 +135,7 @@ export const Register = () => {
           </div>
 
           <div class="user-box">
-            <input  onChange={handleChange} type={confirmPasswordVisible ? "text" : "password"} placeholder="Type password" id="confirmPassword" name="confirmPassword"></input>
+            <input onChange={handleChange} type={confirmPasswordVisible ? "text" : "password"} placeholder="Type password" id="confirmPassword" name="confirmPassword"></input>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <button type="button" class="visibility-btn" onClick={toggleConfirmPasswordVisibility}>
               {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}

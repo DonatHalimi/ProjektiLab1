@@ -83,21 +83,26 @@ const AddEditAboutUs = () => {
 
             <form style={{
                 margin: "auto",
-                padding: "15px",
+                padding: "25px",
+                paddingRight: "40px",
                 maxWidth: "400px",
-                alignContent: "center"
+                alignContent: "center",
+                backgroundColor: "#1e1f1e",
+                color: "white",
+                borderRadius: "10px"
             }}
                 onSubmit={handleSubmit}
             >
 
                 <div className="user-box">
                     <label htmlFor='teksti '>Teksti</label>
-                    <input value={teksti || ""} onChange={handleInputChange} type="text" placeholder="Type teksti" id="teksti" name="teksti"></input>
+                    <input value={teksti || ""} onChange={handleInputChange} type="text" placeholder="Type text" id="teksti" name="teksti"></input>
                 </div>
 
-                <input type="submit" value={idaboutus ? "Update" : "Save"} />
+                <input id="submit-button" type="submit" value={idaboutus ? "Update" : "Save"} />
+
                 <Link to="/Admin">
-                    <input type="button" value="Go Back"></input>
+                    <input id="goback-button" type="button" value="Go Back"></input>
                 </Link>
             </form>
         </div>

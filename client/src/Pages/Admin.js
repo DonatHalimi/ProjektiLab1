@@ -62,9 +62,10 @@ function App() {
 
   console.log(data);
 
+
   // Funksioni per te fshire user-in nga API
   const deleteUser = (id) => {
-    if (window.confirm("Are you sure that you want to delete that user?")) {
+    if (window.confirm(`Are you sure that you want to delete this user?`)) {
       axios.delete(`http://localhost:6001/api/user/remove/${id}`);
       toast.success("User deleted successfully");
 
@@ -84,7 +85,7 @@ function App() {
 
   // Funksioni per te fshire tekstin nga API
   const deleteAboutUs = (id) => {
-    if (window.confirm("Are you sure that you want to delete that user?")) {
+    if (window.confirm("Are you sure that you want to delete this?")) {
       axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
       toast.success("User deleted successfully");
 
@@ -180,19 +181,19 @@ function App() {
 
         { /*Tabela per ndryshime ne produkte*/}
         <table className='styled-table'>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Emri</th>
-                <th>Cmimi</th>
-                <th>Detajet</th>
-                <th>Kategoria</th>
-                <th>FotoSource</th>
-                <th>Insert</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Emri</th>
+              <th>Cmimi</th>
+              <th>Detajet</th>
+              <th>Kategoria</th>
+              <th>FotoSource</th>
+              <th>Insert</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
           <tbody>
 
             {productData.map((product, indexproduct) => {
@@ -277,6 +278,12 @@ function App() {
 
                     <div className='button-edit-aboutus'>
                       <td>
+                        <Link to={"/aboutus/addAboutUs"}>
+                          <button className="btn btn-User">
+                            <i class="fa-solid fa-user-plus"></i>
+                          </button>
+                        </Link>
+
                         <Link to={`/aboutus/update/${aboutus.idaboutus}`}>
                           <button className="btn btn-edit">
                             <i className="fa-solid fa-user-pen"></i>
@@ -286,12 +293,6 @@ function App() {
                         <Link>
                           <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
                             <i class="fa-solid fa-user-minus"></i>
-                          </button>
-                        </Link>
-
-                        <Link to={"/aboutus/addAboutUs"}>
-                          <button className="btn btn-User">
-                            <i class="fa-solid fa-user-plus"></i>
                           </button>
                         </Link>
                       </td>

@@ -95,13 +95,16 @@ const AddEditProduct = () => {
 
             <form style={{
                 margin: "auto",
-                padding: "15px",
+                padding: "25px",
+                paddingRight: "40px",
                 maxWidth: "400px",
-                alignContent: "center"
+                alignContent: "center",
+                backgroundColor: "#1e1f1e",
+                color: "white",
+                borderRadius: "10px"
             }}
                 onSubmit={handleSubmit}
             >
-
                 <label htmlFor='Emri'>Emri</label>
                 <input value={Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emri" name="Emri"></input>
 
@@ -125,10 +128,10 @@ const AddEditProduct = () => {
                     <input value={FotoSource || ""} onChange={handleInputChange} type="text" placeholder="Type photo source" id="fotosource" name="FotoSource"></input>
                 </div>
 
-                <input type="submit" value={idproduct ? "Update" : "Save"} />
+                <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
 
                 <Link to="/Admin">
-                    <input type="button" value="Go Back"></input>
+                    <input id="goback-button" type="button" value="Go Back"></input>
                 </Link>
             </form>
         </div>

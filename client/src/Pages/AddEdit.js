@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import "./AddEditStyle.css";
 import axios from "axios";
@@ -19,6 +20,9 @@ const AddEdit = () => {
     // Definimi i state me useState hook dhe destruktirimi i elementeve te states
     const [state, setState] = useState(initialState);
     const { Name, Surname, Email, Password, Role } = state;
+
+    // Shtimi i nje variable per te shfaqur passwordin
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     // Definimi i hooks
     const navigate = useNavigate();
@@ -83,46 +87,60 @@ const AddEdit = () => {
         setState({ ...state, [name]: value });
     }
 
+    // Deklarimi i nje funksioni per te ndryshuar gjendjen e password visibility
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    }
+
     // Renderimi i HTML formes per te shtuar ose perditesuar nje user
     return (
         <div style={{ marginTop: "150px" }}>
 
-            <h2>Add Edit</h2>
+            <h2>Add/Edit</h2>
 
             <form style={{
                 margin: "auto",
-                padding: "15px",
+                padding: "25px",
+                paddingRight: "40px",
                 maxWidth: "400px",
-                alignContent: "center"
+                alignContent: "center",
+                backgroundColor: "#1e1f1e",
+                color: "white",
+                borderRadius: "10px"
             }}
                 onSubmit={handleSubmit}
             >
-                <label htmlFor='Name'>Name</label>
-                <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
+                <div className="user-box">
+                    <label htmlFor='Name'>Name</label>
+                    <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
+                </div>
 
                 <div className="user-box">
                     <label htmlFor='Surname'>Surname</label>
                     <input value={Surname || ""} onChange={handleInputChange} type="text" placeholder="Type surname" id="surname" name="Surname"></input>
-
                 </div>
+
                 <div className="user-box">
                     <label htmlFor='Email'>Email</label>
                     <input value={Email || ""} onChange={handleInputChange} type="email" placeholder="Type e-mail" id="Email" name="Email"></input>
-
                 </div>
+
                 <div className="user-box">
                     <label htmlFor="Password">Password</label>
-                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Type password" id="Password" name="Password"></input>
+                    <input value={Password || ""} onChange={handleInputChange} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="Password" name="Password"></input>
+                    <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
+                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                 </div>
 
-                <div className="user-Box">
+                <div className="user-box">
                     <label htmlFor="Role">Role</label>
                     <input value={Role || ""} onChange={handleInputChange} type="number" placeholder="Type role" id="role" name="Role"></input>
                 </div>
 
-                <input type="submit" value={id ? "Update" : "Save"} />
+                <input id="submit-button" type="submit" value={id ? "Update" : "Save"} />
                 <Link to="/Admin">
-                    <input type="button" value="Go Back"></input>
+                    <input id="goback-button" type="button" value="Go Back"></input>
                 </Link>
             </form>
         </div>
