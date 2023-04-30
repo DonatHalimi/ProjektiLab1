@@ -22,7 +22,7 @@ function ToTop() {
     // Event listener per scroll (Pret qe useri te bej scroll ne faqe)
     window.addEventListener("scroll", handleScroll);
 
-    // Renderimi i komponentit
+    // Renderimi i HTML per shfaqjen e ToTop button
     return (
         <>
             <div className="home"></div>

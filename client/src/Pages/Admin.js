@@ -6,12 +6,13 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 
 function App() {
-  // Shtojme dy variabla per te mbajtur te dhenat e user-ave dhe produkteve
+  // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
 
   const [aboutUsData, setaboutUsData] = useState([]);
 
+  // Funksioni per te marre te dhenat e user-ave nga API
   const loadData = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/user/get');
@@ -39,6 +40,7 @@ function App() {
     }
   };
 
+  // Funksioni per te marre te dhenat e aboutus nga API
   const loadDataAboutUs = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/aboutus/get');
@@ -52,6 +54,7 @@ function App() {
     }
   };
 
+  // UseEffect hook per te marre te dhenat e user-ave, produkteve dhe aboutus
   useEffect(() => {
     loadData();
     loadDataProduct();
@@ -80,6 +83,7 @@ function App() {
     }
   }
 
+  // Funksioni per te fshire tekstin nga API
   const deleteAboutUs = (id) => {
     if (window.confirm("Are you sure that you want to delete that user?")) {
       axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
@@ -89,6 +93,7 @@ function App() {
     }
   }
 
+  // Renderimi i HTML formes per faqen e Adminit
   return (
     <>
       <Navbar />
@@ -234,6 +239,21 @@ function App() {
         </table>
 
 
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <hr></hr>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+
         { /*Tabela per ndryshime ne aboutus*/}
         <table className='styled-table'>
           <thead>
@@ -283,6 +303,5 @@ function App() {
     </>
   );
 };
-
 
 export default App;

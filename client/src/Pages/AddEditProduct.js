@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Objekt i cili ka fushat per shtimin e nje produkti te ri
+// Inicializimi i nje objekti i cili ka fushat per shtimin e nje produkti te ri
 const initialState = {
     Emri: "",
     Detajet: "",

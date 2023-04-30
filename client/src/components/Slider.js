@@ -54,7 +54,7 @@ function Slider() {
         return () => clearInterval(intervalId);
     }, [currentIndex]);
 
-    // Komponenti Slider
+    // Renderimi i HTML per shfaqjen e Slider-it
     return (
         <div className="slider">
             <div

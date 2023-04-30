@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Objekt i cili ka fushat per shtimin e nje useri te ri
+// Inicializimi i nje objekti i cili ka fushat per shtimin e nje useri te ri
 const initialState = {
     Name: "",
     Surname: "",
@@ -42,7 +42,7 @@ const AddEdit = () => {
             toast.error("Please fill out all the fields");
         } else {
             if (!id) {
-                // Nese id nuk ekziston, atehere kemi te bejme me nje kerkese post
+                // Nese id nuk ekziston, kryejme nje post request per ta shtuar
                 axios.post('http://localhost:6001/api/post', {
                     Name,
                     Surname,
@@ -55,7 +55,7 @@ const AddEdit = () => {
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("User Added Successfully");
             } else {
-                // Perndryshe kemi te bejme me nje kerkese put
+                // Nese id ekziston, kryejme nje put request per ta perditesuar
                 axios.put(`http://localhost:6001/api/update/${id}`, {
                     id,
                     Name,
@@ -70,14 +70,14 @@ const AddEdit = () => {
                 toast.success("User Added Successfully");
             }
 
-            // Navigimi ne faqen e Administrimit pasi kemi procesuar kerkesen me sukses
+            // Kalohet ne faqen Admin pasi qe id eshte shtuar ose perditesuar
             setTimeout(() =>
                 navigate("/Admin")
             )
         }
     };
 
-    // Funskioni i cili ndryshon states ne baze te ndryshimeve ne input-et e formes
+    // Deklarimi i funksionit handleInputChange per te ruajtur ndryshimet ne input fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setState({ ...state, [name]: value });
