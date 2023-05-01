@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
     Emri: "",
     Cmimi: "",
+    Valuta: "",
     Detajet: "",
     Kategoria: "",
     FotoSource: ""
@@ -21,7 +22,7 @@ const AddEditProduct = () => {
     const [state, setState] = useState(initialState);
 
     // Deklarimi i variablave Emri, Cmimi, Detajet, Kategoria dhe FotoSource dhe i destrukturojme nga gjendja e komponentit
-    const { Emri, Cmimi, Detajet, Kategoria, FotoSource } = state;
+    const { Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource } = state;
 
     // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ const AddEditProduct = () => {
         console.log("handleSubmit called");
 
         // Kontrolli i plotesimit te te gjitha fushave te formes
-        if (!Emri || !Cmimi || !Detajet || !Kategoria || !FotoSource) {
+        if (!Emri || !Cmimi || !Valuta || !Detajet || !Kategoria || !FotoSource) {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
@@ -51,11 +52,12 @@ const AddEditProduct = () => {
                 axios.post('http://localhost:6001/api/product/post', {
                     Emri,
                     Cmimi,
+                    Valuta,
                     Detajet,
                     Kategoria,
                     FotoSource
                 }).then(() => {
-                    setState({ ...state, Emri: "", Cmimi: "", Detajet: "", Kategoria: "", FotoSource: "", })
+                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Detajet: "", Kategoria: "", FotoSource: "", })
 
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
@@ -65,10 +67,11 @@ const AddEditProduct = () => {
                     idproduct,
                     Emri,
                     Cmimi,
+                    Valuta,
                     Detajet,
                     FotoSource
                 }).then(() => {
-                    setState({ ...state, Emri: "", Cmimi: "", Detajet: "", Kategoria: "", FotoSource: "", })
+                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Detajet: "", Kategoria: "", FotoSource: "", })
 
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
@@ -111,6 +114,11 @@ const AddEditProduct = () => {
                 <div className="product-box">
                     <label htmlFor='Cmimi'>Cmimi</label>
                     <input value={Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Type price" id="cmimi" name="Cmimi"></input>
+                </div>
+
+                <div className="product-box">
+                    <label htmlFor='Valuta'>Valuta</label>
+                    <input value={Valuta || ""} onChange={handleInputChange} type="text" placeholder="Type currency" id="valuta" name="Valuta"></input>
                 </div>
 
                 <div className="product-box">

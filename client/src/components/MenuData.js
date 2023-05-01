@@ -37,16 +37,3 @@ export const MenuData = [
         icon: "fas fa-user",
     },
 ];
-
-// export const categories = [
-//     {
-//         id: 1,
-//         img: "../img/category-jeans.jpg",
-//         title: 'JEANS'
-//     },
-//     {
-//         id:2,
-//         img: "../img/category-t-shirts.jpg",
-//         title: 'TSHIRTS'
-//     }
-// ];

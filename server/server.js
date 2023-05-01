@@ -124,9 +124,9 @@ app.get("/api/product/get/:idproduct", cors(), (req, res) => {
 
 // Insertimi i produkteve
 app.post("/api/product/post", (req, res) => {
-    const { Emri, Cmimi, Detajet, Kategoria, FotoSource } = req.body;
-    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Detajet, Kategoria, FotoSource)VALUES (?,?,?,?,?)";
-    db.query(sqlInsert, [Emri, Cmimi, Detajet, Kategoria, FotoSource], (error, result) => {
+    const { Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource } = req.body;
+    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource)VALUES (?,?,?,?,?,?)";
+    db.query(sqlInsert, [Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error inserting data into database" });
@@ -140,9 +140,9 @@ app.post("/api/product/post", (req, res) => {
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
-    const { Emri, Cmimi, Detajet, Kategoria, FotoSource } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Detajet=?, Kategoria=?, FotoSource=? WHERE idproduct=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Detajet, Kategoria, FotoSource, idproduct], (error, result) => {
+    const { Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource } = req.body;
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Kategoria=?, FotoSource=? WHERE idproduct=?";
+    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource, idproduct], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });

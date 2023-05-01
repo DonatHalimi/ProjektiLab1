@@ -67,7 +67,7 @@ function App() {
 
 
   // Funksioni per te fshire user-in nga API
-  const deleteUser = (id) => {
+  const deleteUser = async (id) => {
     const confirmDialog = () => {
       confirmAlert({
         title: 'Confirm Deletion',
@@ -80,12 +80,15 @@ function App() {
           },
           {
             label: 'Yes',
-            onClick: () => {
-              // Dergojme kerkesen per fshirje ne server
-              axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-              toast.success("User deleted successfully");
-
-              setTimeout(() => loadData(), 500);
+            onClick: async () => {
+              try {
+                // Dergojme kerkesen per fshirje ne server
+                await axios.delete(`http://localhost:6001/api/user/remove/${id}`);
+                toast.success("User deleted successfully");
+                setTimeout(() => loadData(), 500);
+              } catch (error) {
+                toast.error(`Error deleting user: ${error.message}`);
+              }
             },
             className: 'yes-btn'
           }
@@ -99,7 +102,7 @@ function App() {
 
 
   // Funksioni per te fshire produktin nga API
-  const deleteProduct = (id) => {
+  const deleteProduct = async (id) => {
     const confirmDialog = () => {
       confirmAlert({
         title: 'Confirm Deletion',
@@ -112,12 +115,15 @@ function App() {
           },
           {
             label: 'Yes',
-            onClick: () => {
-              // Dergojme kerkesen per fshirje ne server
-              axios.delete(`http://localhost:6001/api/product/remove/${id}`);
-              toast.success("Product deleted successfully");
-
-              setTimeout(() => loadData(), 500);
+            onClick: async () => {
+              try {
+                // Dergojme kerkesen per fshirje ne server
+                await axios.delete(`http://localhost:6001/api/product/remove/${id}`);
+                toast.success("Product deleted successfully");
+                setTimeout(() => loadData(), 500);
+              } catch (error) {
+                toast.error(`Error deleting product: ${error.message}`);
+              }
             },
             className: 'yes-btn'
           }
@@ -129,8 +135,9 @@ function App() {
     confirmDialog();
   }
 
+
   // Funksioni per te fshire tekstin nga API
-  const deleteAboutUs = (id) => {
+  const deleteAboutUs = async (id) => {
     const confirmDialog = () => {
       confirmAlert({
         title: 'Confirm Deletion',
@@ -143,12 +150,15 @@ function App() {
           },
           {
             label: 'Yes',
-            onClick: () => {
-              // Dergojme kerkesen per fshirje ne server
-              axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
-              toast.success("Text deleted successfully");
-
-              setTimeout(() => loadData(), 500);
+            onClick: async () => {
+              try {
+                // Dergojme kerkesen per fshirje ne server
+                await axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
+                toast.success("Text deleted successfully");
+                setTimeout(() => loadData(), 500);
+              } catch (error) {
+                toast.error(`Error deleting text: ${error.message}`);
+              }
             },
             className: 'yes-btn'
           }
@@ -158,7 +168,8 @@ function App() {
 
     // Thirrja e confirm dialog custom
     confirmDialog();
-  }
+  };
+
 
   // Renderimi i HTML formes per faqen e Adminit
   return (
@@ -252,6 +263,7 @@ function App() {
                 <th>ID</th>
                 <th>Emri</th>
                 <th>Cmimi</th>
+                <th>Valuta</th>
                 <th>Detajet</th>
                 <th>Kategoria</th>
                 <th>FotoSource</th>
@@ -270,6 +282,7 @@ function App() {
                       <th scope="row">{indexproduct + 1}</th>
                       <td>{product.Emri}</td>
                       <td>{product.Cmimi}</td>
+                      <td>{product.Valuta}</td>
                       <td>{product.Detajet}</td>
                       <td>{product.Kategoria}</td>
                       <td>{product.FotoSource}</td>
