@@ -72,10 +72,20 @@ body {
 }
 
 .btn.btn-edit:hover {
-    background: none;
+    background:#008cba ;
+    
 }
 
-.btn.btn-edit:hover {
+.btn.btn-edit:hover::after {
+    content: none;
+}
+
+.btn.btn-delete:hover {
+    background:#f44336 ;
+    
+}
+
+.btn.btn-delete:hover::after {
     content: none;
 }
 
@@ -109,13 +119,30 @@ button:hover::after {
 }
 
 button.btn.btn-edit {
-    margin-left: 200px;
+    margin-left: 20px;
+    padding:50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-color: transparent;
+    border-radius: 10px;
+
 }
 
 button.btn.btn-User {
-    margin-left: 200px;
+    
+    margin-left: 20px;
+    padding:50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-color: transparent;
+    border-radius: 10px;
 }
 
 button.btn.btn-delete {
-    margin-left: 200px;
+    margin-left: 20px;
+    padding:50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-color: transparent;
+    border-radius: 10px;
 }

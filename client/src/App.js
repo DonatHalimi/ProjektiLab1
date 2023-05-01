@@ -10,8 +10,6 @@ import Slider from "./components/Slider";
 import Admin from "./Pages/Admin";
 import AddEdit from "./Pages/AddEdit";
 import AddEditProduct from "./Pages/AddEditProduct";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import Product from "./components/Product";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import "./LoginStyle.css";
+import LogInStyle from '../styles/Login.module.css';
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
@@ -90,29 +90,33 @@ export const Login = (props) => {
   // Renderimi i HTML per login form
   return (
     <>
+    
+    <div className={LogInStyle['login-Container']}>
       <Navbar />
-      <div class="login-box">
+      
+      <div className={LogInStyle['login-box']}>
         <p>Log in</p>
         <pre></pre>
         <form >
-          <div class="user-box">
+          <div className={LogInStyle['user-box']}>
             <input onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
             <label htmlFor='email'>Email</label>
             <p id="error">{formErrors.email}</p>
           </div>
 
-          <div class="user-box">
+          <div className={LogInStyle['user-box']}>
             <input onChange={(e) => { setPassword(e.target.value) }} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
             <label htmlFor="Password">Password</label>
-            <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
+            <button type="button" className={LogInStyle['visibility-btn']} onClick={togglePasswordVisibility}>
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
             </button>
             <p id="error">{formErrors.password}</p>
           </div>
 
-          <button class="btn" type="submit" onClick={login}>Log in </button>
+          <button className={LogInStyle['btn']} type="submit" onClick={login}>Log in </button>
         </form>
-        <p id="account-text">Don't have an account? <a href="/register" class="a2">Sign up!</a></p>
+        <p id={LogInStyle['account-text']}>Don't have an account? <a href="/register" className={LogInStyle['a2']}>Sign up!</a></p>
+      </div>
       </div>
     </>
   );

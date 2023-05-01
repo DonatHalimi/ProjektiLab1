@@ -1,13 +1,11 @@
-
-body{
-
+.register-Container{
   height: 100vh;
   margin: 0;
   background: linear-gradient(to bottom, #000000, #1EA486);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.login-box {
+.register-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -21,7 +19,7 @@ body{
   border-radius: 10px;
 }
 
-.login-box p:first-child {
+.register-box p:first-child {
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
@@ -31,11 +29,11 @@ body{
   letter-spacing: 1px;
 }
 
-.login-box .user-box {
+.register-box .user-box {
   position: relative;
 }
 
-.login-box .user-box input {
+.register-box .user-box input {
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
@@ -47,7 +45,7 @@ body{
   background: transparent;
 }
 
-.login-box .user-box label {
+.register-box .user-box label {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,15 +56,15 @@ body{
   transition: .5s;
 }
 
-.login-box .user-box input:focus~label,
-.login-box .user-box input:valid~label {
+.register-box .user-box input:focus~label,
+.register-box .user-box input:valid~label {
   top: -20px;
   left: 0;
   color: #fff;
   font-size: 12px;
 }
 
-.login-box form a {
+.register-box form a {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -81,18 +79,18 @@ body{
   letter-spacing: 3px
 }
 
-.login-box a:hover {
+.register-box a:hover {
   background: #fff;
   color: #272727;
   border-radius: 5px;
 }
 
-.login-box a span {
+.register-box a span {
   position: absolute;
   display: block;
 }
 
-.login-box a span:nth-child(1) {
+.register-box a span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -112,7 +110,7 @@ body{
   }
 }
 
-.login-box a span:nth-child(2) {
+.register-box a span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -133,7 +131,7 @@ body{
   }
 }
 
-.login-box a span:nth-child(3) {
+.register-box a span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -154,7 +152,7 @@ body{
   }
 }
 
-.login-box a span:nth-child(4) {
+.register-box a span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -175,18 +173,19 @@ body{
   }
 }
 
-.login-box p:last-child {
+.register-box p:last-child {
   color: #aaa;
   font-size: 14px;
 }
 
-.login-box a.a2 {
+.register-box a.a2 {
   color: #fff;
   text-decoration: none;
-
 }
 
-.login-box a.a2:hover {
+
+
+.register-box a.a2:hover {
   background: transparent;
   color: #aaa;
   border-radius: 5px;
@@ -215,9 +214,12 @@ body{
   top: 11px;
 }
 
-.btn:hover {
-  color: black;
-}
+
+  .btn:hover {
+    background-color: rgb(255, 247, 247);
+    color: #000000;
+  }
+
 
 .btn:after {
   content: "";
@@ -238,16 +240,11 @@ body{
   transition: all 0.5s;
 }
 
-#error {
-  color: red;
-  padding-bottom: 10px;
-}
-
-.login-box .user-box {
+.register-box .user-box {
   position: relative;
 }
 
-.login-box .user-box button {
+.register-box .user-box button {
   position: absolute;
   top: 0;
   right: 0;
@@ -259,10 +256,10 @@ body{
   font-size: 18px;
 }
 
-.login-box .user-box button:hover {
+.register-box .user-box button:hover {
   background: none;
 }
 
-.login-box .user-box button:hover::after {
+.register-box .user-box button:hover::after {
   content: none;
 }

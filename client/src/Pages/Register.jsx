@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import "./RegisterStyle.css";
+import RegisterStyle from '../styles/Register.module.css';
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
@@ -100,29 +100,31 @@ export const Register = () => {
 
   return (
     <>
+    <div className={RegisterStyle['register-Container']}>
       <Navbar />
-      <div class="register-box">
+      
+      <div className={RegisterStyle['register-box']}>
         <p>Sign up</p>
         <form >
-          <div class="user-box">
+          <div className={RegisterStyle['user-box']}>
             <input onChange={(e) => { setName(e.target.value) }} type="text" placeholder="Type name" id="name" name="Name"></input>
             <label htmlFor='name'>Name</label>
             <p id="error">{formErrors.name}</p>
           </div>
 
-          <div class="user-box">
+          <div className={RegisterStyle['user-box']}>
             <input onChange={(e) => { setSurname(e.target.value) }} type="text" placeholder="Type surname" id="surname" name="Surname"></input>
             <label htmlFor='surname'>Surname</label>
             <p id="error">{formErrors.surname}</p>
           </div>
 
-          <div class="user-box">
+          <div className={RegisterStyle['user-box']}>
             <input onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
             <label htmlFor='email'>Email</label>
             <p id="error">{formErrors.email}</p>
           </div>
 
-          <div class="user-box">
+          <div className={RegisterStyle['user-box']}>
             <input onChange={(e) => { setPassword(e.target.value) }} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
             <label htmlFor="password">Password</label>
             <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
@@ -131,7 +133,7 @@ export const Register = () => {
             <p id="error">{formErrors.password}</p>
           </div>
 
-          <div class="user-box">
+          <div className={RegisterStyle['user-box']}>
             <input onChange={handleChange} type={confirmPasswordVisible ? "text" : "password"} placeholder="Type password" id="confirmPassword" name="confirmPassword"></input>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <button type="button" class="visibility-btn" onClick={toggleConfirmPasswordVisibility}>
@@ -140,11 +142,12 @@ export const Register = () => {
             <p id="error">{formErrors.confirmPassword}</p>
           </div>
 
-          <button class="btn" type="submit" onClick={register}>Sign up </button>
+          <button className={RegisterStyle['btn']} type="submit" onClick={register}>Sign up </button>
         </form>
 
-        <p id="account-text">Already have an account? <a href="/Login" class="a2">Log in!</a></p>
+        <p id={RegisterStyle['account-text']}>Already have an account? <a href="/Login" className={RegisterStyle['a2']}>Log in!</a></p>
       </div>
+    </div>
     </>
   );
 };

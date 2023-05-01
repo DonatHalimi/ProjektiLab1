@@ -1,6 +1,4 @@
-
-
-body {
+.login-Container{
   height: 100vh;
   margin: 0;
   background: linear-gradient(to bottom, #000000, #1EA486);
@@ -8,13 +6,7 @@ body {
   background-repeat: no-repeat;
 }
 
-    
-  
-
-
-
-
-.register-box {
+.login-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,7 +20,7 @@ body {
   border-radius: 10px;
 }
 
-.register-box p:first-child {
+.login-box p:first-child {
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
@@ -38,11 +30,11 @@ body {
   letter-spacing: 1px;
 }
 
-.register-box .user-box {
+.login-box .user-box {
   position: relative;
 }
 
-.register-box .user-box input {
+.login-box .user-box input {
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
@@ -54,7 +46,7 @@ body {
   background: transparent;
 }
 
-.register-box .user-box label {
+.login-box .user-box label {
   position: absolute;
   top: 0;
   left: 0;
@@ -65,15 +57,15 @@ body {
   transition: .5s;
 }
 
-.register-box .user-box input:focus~label,
-.register-box .user-box input:valid~label {
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
   top: -20px;
   left: 0;
   color: #fff;
   font-size: 12px;
 }
 
-.register-box form a {
+.login-box form a {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -88,18 +80,18 @@ body {
   letter-spacing: 3px
 }
 
-.register-box a:hover {
+.login-box a:hover {
   background: #fff;
   color: #272727;
   border-radius: 5px;
 }
 
-.register-box a span {
+.login-box a span {
   position: absolute;
   display: block;
 }
 
-.register-box a span:nth-child(1) {
+.login-box a span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -119,7 +111,7 @@ body {
   }
 }
 
-.register-box a span:nth-child(2) {
+.login-box a span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -140,7 +132,7 @@ body {
   }
 }
 
-.register-box a span:nth-child(3) {
+.login-box a span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -161,7 +153,7 @@ body {
   }
 }
 
-.register-box a span:nth-child(4) {
+.login-box a span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -182,21 +174,23 @@ body {
   }
 }
 
-.register-box p:last-child {
+.login-box p:last-child {
   color: #aaa;
   font-size: 14px;
 }
 
-.register-box a.a2 {
+.login-box .a2 {
   color: #fff;
   text-decoration: none;
 }
 
-.register-box a.a2:hover {
+.login-box .a2:hover {
   background: transparent;
   color: #aaa;
   border-radius: 5px;
 }
+
+
 
 .btn {
   width: 6.5em;
@@ -215,19 +209,20 @@ body {
   overflow: hidden;
 }
 
-#account-text {
+:local(#account-text) {
   position: relative;
   right: 50px;
   top: 11px;
 }
 
 .btn:hover {
-  color: black;
+  background-color: rgb(255, 247, 247);
+  color: #000000;
 }
 
 .btn:after {
   content: "";
-  background: rgb(248, 246, 246);
+  background: rgb(146, 19, 19);
   position: absolute;
   z-index: -1;
   left: -20%;
@@ -244,11 +239,16 @@ body {
   transition: all 0.5s;
 }
 
-.register-box .user-box {
+#error {
+  color: red;
+  padding-bottom: 10px;
+}
+
+.login-box .user-box {
   position: relative;
 }
 
-.register-box .user-box button {
+.login-box .user-box button {
   position: absolute;
   top: 0;
   right: 0;
@@ -260,10 +260,11 @@ body {
   font-size: 18px;
 }
 
-.register-box .user-box button:hover {
+.login-box .user-box button:hover {
   background: none;
 }
 
-.register-box .user-box button:hover::after {
+.login-box .user-box button:hover::after {
   content: none;
+  
 }

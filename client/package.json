@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.4.0",
     "http": "^0.0.1-security",
+    "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.2",
     "react-bootstrap": "^2.7.4",
