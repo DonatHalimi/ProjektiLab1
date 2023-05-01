@@ -1,0 +1,47 @@
+
+.container .row{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 20px;
+    margin-right: 120px;
+}
+.container .row .abotUs{
+    padding: 30px;
+    margin-right: 120px;
+
+}
+.container .row .contact{
+    padding: 30px;
+    margin-right: 120px;
+
+}
+.container .row .follow{
+    padding: 30px;
+    margin-right: 20%;
+
+}
+
+ul.social-icons {
+    list-style-type: none;
+    
+    margin-top: 10px;
+    
+  }
+.paragrafi{
+    margin-top: 20px;
+}
+
+.social-icons li a i {
+    font-size: 2em;
+    
+    margin: 0;
+    padding: 0;
+    color: #12128f;
+
+  }
+
+ 
+  
+  

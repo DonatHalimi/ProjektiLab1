@@ -4,6 +4,7 @@ import "./SliderStyle.css";
 import "./HomeStyle.css";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
+import Footer from "./Footer";
 import { product_card } from "./ProductData";
 
 // Deklarimi i funksionit Home
@@ -62,6 +63,7 @@ function Home() {
                     {listItems}
                 </div>
             </div>
+            <Footer/>
 
 
             {/* <div className="home-container">
