@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
+const session = require("express-session");
 const saltRounds = 10;
 
 
@@ -15,8 +16,29 @@ const db = mysql.createPool({
     database: 'projektilab1'
 })
 
-app.use(cors());
+app.use(cors({
+    origin:["http://localhost:3000"],
+    methods:["GET","POST","DELETE","PUT"],
+    credentials:true,
+}));
 app.use(express.json());
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended:true}));
+
+
+app.use(
+    session({
+        key:"userId",
+        secret:"mosikllzkerkujt",
+        resave:false,
+        saveUninitialized:false,
+        cookie:{
+            expires:60*60*24,
+        },
+
+    },)
+)
 
 // SQL KOMANDAT PER USERA
 
@@ -267,28 +289,17 @@ app.post("/api/user/register", (req, res) => {
 
 app.post('/api/user/login', (req, res) => {
     const { Email, Password } = req.body;
-    const sqlGet = "SELECT *, Role FROM userat WHERE Email = ?";
+    const sqlGet = "SELECT * FROM userat WHERE Email = ?";
     db.query(sqlGet, [Email], (error, result) => {
         if (error) {
             console.log(error);
             res.sendStatus(500);
-        } else {
-            if (result.length === 0) {
-                res.status(401).json({ message: "Invalid login credentials" });
-            } else {
-                const user = result[0];
-                if (user.Role === 2) {
-                    res.json({ message: "User logged in successfully", redirect: "/home" });
-                } else if (user.Role === 1) {
-                    res.json({ message: "Admin logged in successfully", redirect: "/Admin" });
-                } else {
-                    res.status(401).json({ message: "Invalid login credentials" });
-                }
-            }
-        }
+        } 
         if (result.length > 0) {
             bcrypt.compare(Password, result[0].Password, (error, response) => {
                 if (response) {
+                    req.session.user = result;
+                    console.log(req.session.user);
                     res.send(result);
                 } else {
                     res.send({ message: "Wrong username/password combination" })

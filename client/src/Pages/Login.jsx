@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import LogInStyle from '../styles/Login.module.css';
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
+
 // Komponenti i Login
 export const Login = (props) => {
 
+  const navigate = useNavigate();
   // Deklarimi i konstanteve per login  
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -17,7 +20,7 @@ export const Login = (props) => {
   const [Password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
 
-
+  axios.defaults.withCredentials =true;
   // Funksioni qe ndryshon vleren e formes ne baze te ndryshimit te input-it
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,16 +43,17 @@ export const Login = (props) => {
       Password: Password,
 
     }).then((response) => {
+      console.log(response);
       if (response.data.message) {
-        setLoginStatus(response.data.message)
-      } else {
-        setLoginStatus("ACCOUNT CREATED SUCCESSFULLY")
+        setLoginStatus(response.data.message);
+      } else if (response.data[0].Role === 2) {
+        navigate("/");
+        setLoginStatus(response.data[0].Name);
+      } else if (response.data[0].User_Type === 1) {
+        navigate("/Admin");
+        setLoginStatus(response.data[0].Name);
       }
-    })
-      .catch((error) => {
-        console.log(error);
-        setLoginStatus("Error registering user");
-      });
+    });
   }
 
   // UseEffect hook qe printon ne console vlerat e formes kur nuk ka gabime dhe forma eshte derguar
@@ -116,6 +120,7 @@ export const Login = (props) => {
           <button className={LogInStyle['btn']} type="submit" onClick={login}>Log in </button>
         </form>
         <p id={LogInStyle['account-text']}>Don't have an account? <a href="/register" className={LogInStyle['a2']}>Sign up!</a></p>
+        <p>{loginStatus}</p>
       </div>
       </div>
     </>
