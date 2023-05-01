@@ -1,8 +1,7 @@
 .register-Container{
   height: 100vh;
   margin: 0;
-  background: rgb(93,75,58);
-background: linear-gradient(90deg, rgba(93,75,58,1) 48%, rgba(175,159,159,1) 100%);
+  background: linear-gradient(to bottom, #000000, #1EA486);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
