@@ -35,7 +35,9 @@ function Home() {
                 <h2>{item.product_name}</h2>
                 <p>{item.description}</p>
                 <p className="price"> {item.price} <span>{item.currency}</span> </p>
-                <div className="btn">Add To Cart</div>
+                <div className="buton" ><i class="fa-solid fa-heart"></i></div>
+                <div className="btn" ><i class="fa-solid fa-shopping-cart"></i></div>
+                
             </div>
         </div>
     )
