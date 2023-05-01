@@ -37,13 +37,13 @@ function Home() {
             src: require("../img/slider-2.jpg")
         },
         {
-            src: require("../img/slider-1.jpg")
+            src: require("../img/slider-3.jpg")
         },
         {
-            src: require("../img/slider-2.jpg")
+            src: require("../img/slider-4.jpg")
         },
         {
-            src: require("../img/slider-1.jpg")
+            src: require("../img/slider-5.jpeg")
         },
     ];
 

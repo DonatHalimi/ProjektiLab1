@@ -7,7 +7,7 @@ body {
     margin: auto;
     font-size: 0.9em;
     font-family: sans-serif;
-    max-width: 800px;
+    max-width: 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -19,7 +19,7 @@ body {
 
 .styled-table th,
 .styled-table td {
-    padding: 13px 17px;
+    padding: 13px 9px;
 }
 
 .styled-table tbody tr {
@@ -36,16 +36,12 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    border-radius: 5px;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    background-color: inherit;
 }
 
-.button-edit-user {
-    position: relative;
-    left: 200px;
-}
 
 .button-edit-product {
     position: relative;
@@ -65,10 +61,6 @@ body {
     background-color: #f44336;
 }
 
-.btn-view {
-    background-color: orange;
-}
-
 .btn.btn-User {
     background-color: green;
 }
@@ -79,19 +71,51 @@ body {
     right: 237px;
 }
 
+.btn.btn-edit:hover {
+    background: none;
+}
+
+.btn.btn-edit:hover {
+    content: none;
+}
+
 .shto-product {
     position: absolute;
     bottom: 100px;
     right: 430px;
 }
-.popup button {
+
+.btn:hover {
+    background-color: none;
+    color: black;
+}
+
+button:hover {
     background: none;
 }
 
-.popup button:hover {
-    background: none;
+button:hover::after {
     content: none;
-    background-color: initial;
-    color: initial;
-  }
-  
+}
+
+.cancel-btn,
+.yes-btn {
+    padding: 10px 20px;
+}
+
+.cancel-btn:hover,
+.yes-btn:hover {
+    background-color: gray;
+}
+
+button.btn.btn-edit {
+    margin-left: 200px;
+}
+
+button.btn.btn-User {
+    margin-left: 200px;
+}
+
+button.btn.btn-delete {
+    margin-left: 200px;
+}

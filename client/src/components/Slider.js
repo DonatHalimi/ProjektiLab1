@@ -14,30 +14,30 @@ function Slider() {
             src: require("../img/slider-2.jpg")
         },
         {
-            src: require("../img/slider-1.jpg")
+            src: require("../img/slider-3.jpg")
         },
         {
-            src: require("../img/slider-2.jpg")
+            src: require("../img/slider-4.jpg")
         },
         {
-            src: require("../img/slider-1.jpg")
+            src: require("../img/slider-5.jpeg")
         },
-    ]; 
+    ];
 
     // Perditesimi i indexit te slideve
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Funksioni per te shkuar te slide-i i ardhshem
+    const nextSlide = () => {
+        const isLastSlide = currentIndex === slides.length - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex);
+    };
 
     // Funksioni per kthimin ne slide-in paraprak
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
         const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-        setCurrentIndex(newIndex);
-    };
-
-    // Funksioni per te shkuar te slide-i i ardhshem
-    const nextSlide = () => { 
-        const isLastSlide = currentIndex === slides.length - 1;
-        const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
 

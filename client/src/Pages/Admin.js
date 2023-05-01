@@ -75,7 +75,8 @@ function App() {
         buttons: [
           {
             label: 'Cancel',
-            onClick: () => { }
+            onClick: () => { },
+            className: 'cancel-btn'
           },
           {
             label: 'Yes',
@@ -85,9 +86,9 @@ function App() {
               toast.success("User deleted successfully");
 
               setTimeout(() => loadData(), 500);
-            }
-          },
-
+            },
+            className: 'yes-btn'
+          }
         ]
       });
     };
@@ -106,7 +107,8 @@ function App() {
         buttons: [
           {
             label: 'Cancel',
-            onClick: () => { }
+            onClick: () => { },
+            className: 'cancel-btn'
           },
           {
             label: 'Yes',
@@ -116,9 +118,9 @@ function App() {
               toast.success("Product deleted successfully");
 
               setTimeout(() => loadData(), 500);
-            }
-          },
-
+            },
+            className: 'yes-btn'
+          }
         ]
       });
     };
@@ -136,7 +138,8 @@ function App() {
         buttons: [
           {
             label: 'Cancel',
-            onClick: () => { }
+            onClick: () => { },
+            className: 'cancel-btn'
           },
           {
             label: 'Yes',
@@ -145,11 +148,10 @@ function App() {
               axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
               toast.success("Text deleted successfully");
 
-              // Reload data after a short delay
               setTimeout(() => loadData(), 500);
-            }
-          },
-
+            },
+            className: 'yes-btn'
+          }
         ]
       });
     };
@@ -171,34 +173,34 @@ function App() {
         <br></br>
 
         { /*Tabela per ndryshime ne user-a*/}
-        <table className='styled-table'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>E-mail</th>
-              <th>Password</th>
-              <th>Role</th>
-              <th>Insert</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className='table-container'>
+          <table className='styled-table'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>E-mail</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Insert</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
 
-            {data.map((item, index) => {
-              return (
-                <Fragment key={item.id}>
-                  <tr>
-                    <th scope="row">{index + 1}</th>
-                    <td>{item.Name}</td>
-                    <td>{item.Surname}</td>
-                    <td>{item.Email}</td>
-                    <td>{item.Password}</td>
-                    <td>{item.Role}</td>
+              {data.map((item, index) => {
+                return (
+                  <Fragment key={item.id}>
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.Name}</td>
+                      <td>{item.Surname}</td>
+                      <td>{item.Email}</td>
+                      <td>{item.Password}</td>
+                      <td>{item.Role}</td>
 
-                    <div className='button-edit-user'>
                       <td>
                         <Link to={`/user/addUser`}>
                           <button className="btn btn-User">
@@ -222,61 +224,59 @@ function App() {
                           </button>
                         </Link>
                       </td>
-                    </div>
-                  </tr>
-                </Fragment>
-              );
-            })}
-          </tbody>
-        </table>
+                    </tr>
+                  </Fragment>
+                );
+              })}
+            </tbody>
+          </table>
 
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <hr></hr>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <hr></hr>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
 
-        { /*Tabela per ndryshime ne produkte*/}
-        <table className='styled-table'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Emri</th>
-              <th>Cmimi</th>
-              <th>Detajet</th>
-              <th>Kategoria</th>
-              <th>FotoSource</th>
-              <th>Insert</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
+          { /*Tabela per ndryshime ne produkte*/}
+          <table className='styled-table'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Emri</th>
+                <th>Cmimi</th>
+                <th>Detajet</th>
+                <th>Kategoria</th>
+                <th>FotoSource</th>
+                <th>Insert</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
 
-            {productData.map((product, indexproduct) => {
-              return (
-                <Fragment key={product.idproduct}>
+              {productData.map((product, indexproduct) => {
+                return (
+                  <Fragment key={product.idproduct}>
 
-                  <tr>
-                    <th scope="row">{indexproduct + 1}</th>
-                    <td>{product.Emri}</td>
-                    <td>{product.Cmimi}</td>
-                    <td>{product.Detajet}</td>
-                    <td>{product.Kategoria}</td>
-                    <td>{product.FotoSource}</td>
+                    <tr>
+                      <th scope="row">{indexproduct + 1}</th>
+                      <td>{product.Emri}</td>
+                      <td>{product.Cmimi}</td>
+                      <td>{product.Detajet}</td>
+                      <td>{product.Kategoria}</td>
+                      <td>{product.FotoSource}</td>
 
-                    <div className='button-edit-product'>
                       <td>
                         <Link to={"/addProduct"}>
-                          <button className="btn btn-product">
+                          <button className="btn btn-User">
                             <i class="fa-solid fa-cart-plus"></i>
                           </button>
                         </Link>
@@ -297,78 +297,80 @@ function App() {
                           </button>
                         </Link>
                       </td>
-                    </div>
-                  </tr>
-                </Fragment>
-              );
-            })}
-          </tbody>
-        </table>
+                    </tr>
+                  </Fragment>
+                );
+              })}
+            </tbody>
+          </table>
 
 
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <hr></hr>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <hr></hr>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
 
 
-        { /*Tabela per ndryshime ne aboutus*/}
-        <table className='styled-table'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Teksti</th>
-              <th>Insert</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
+          { /*Tabela per ndryshime ne aboutus*/}
+          <table className='styled-table'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Teksti</th>
+                <th>Insert</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
 
-            {aboutUsData.map((aboutus, indexaboutus) => {
-              return (
-                <Fragment key={aboutus.idaboutus}>
-                  <tr>
-                    <th scope="row">{indexaboutus + 1}</th>
-                    <td>{aboutus.teksti}</td>
+              {aboutUsData.map((aboutus, indexaboutus) => {
+                return (
+                  <Fragment key={aboutus.idaboutus}>
+                    <tr>
+                      <th scope="row">{indexaboutus + 1}</th>
+                      <td>{aboutus.teksti}</td>
 
-                    <div className='button-edit-aboutus'>
                       <td>
                         <Link to={"/aboutus/addAboutUs"}>
                           <button className="btn btn-User">
-                            <i class="fa-solid fa-user-plus"></i>
-                          </button>
-                        </Link>
-
-                        <Link to={`/aboutus/update/${aboutus.idaboutus}`}>
-                          <button className="btn btn-edit">
-                            <i className="fa-solid fa-user-pen"></i>
-                          </button>
-                        </Link>
-
-                        <Link>
-                          <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
-                            <i class="fa-solid fa-user-minus"></i>
+                            <i class="fa-solid fa-plus"></i>
                           </button>
                         </Link>
                       </td>
-                    </div>
-                  </tr>
-                </Fragment>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+
+                      <td>
+                        <Link to={`/aboutus/update/${aboutus.idaboutus}`}>
+                          <button className="btn btn-edit">
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+                        </Link>
+                      </td>
+
+                      <td>
+                        <Link>
+                          <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        </Link>
+                      </td>
+                    </tr>
+                  </Fragment>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div >
     </>
   );
 };
