@@ -1,3 +1,19 @@
+
+
+body {
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to bottom, #000000, #1EA486);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+    
+  
+
+
+
+
 .register-box {
   position: absolute;
   top: 50%;
