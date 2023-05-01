@@ -13,6 +13,30 @@ select {
     box-sizing: border-box;
 }
 
+#foto {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+}
+
+#foto::-webkit-file-upload-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 10px;
+    margin: 2px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 input[type="submit"] {
     width: 100%;
     background-color: #4caf50;

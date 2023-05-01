@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const mysql = require('mysql');
 const cors = require("cors");
-const bodyParser=require("body-parser");
-const cookieParser=require("cookie-parser");
-const bcrypt=require("bcrypt");
-const saltRounds=10;
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 
 const db = mysql.createPool({
@@ -24,6 +24,20 @@ app.use(express.json());
 app.get("/api/user/get", cors(), (req, res) => {
     const sqlGet = "SELECT * FROM userat";
     db.query(sqlGet, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Selektimi i userave sipas ID
+app.get("/api/user/get/:id", cors(), (req, res) => {
+    const { id } = req.params;
+    const sqlGet = "SELECT * FROM userat WHERE id=?";
+    db.query(sqlGet, id, (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -59,20 +73,6 @@ app.delete("/api/user/remove/:id", (req, res) => {
         } else {
             console.log(result);
             res.sendStatus(200);
-        }
-    });
-});
-
-// Selektimi i userave sipas ID
-app.get("/api/user/get/:id", cors(), (req, res) => {
-    const { id } = req.params;
-    const sqlGet = "SELECT * FROM userat WHERE id=?";
-    db.query(sqlGet, id, (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: "Error retrieving data from database" });
-        } else {
-            res.status(200).send(result);
         }
     });
 });
@@ -141,7 +141,7 @@ app.post("/api/product/post", (req, res) => {
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
     const { Emri, Cmimi, Detajet, Kategoria, FotoSource } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Detajet=?, FotoSource=?, Kategoria=? WHERE idproduct=?";
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Detajet=?, Kategoria=?, FotoSource=? WHERE idproduct=?";
     db.query(sqlUpdate, [Emri, Cmimi, Detajet, Kategoria, FotoSource, idproduct], (error, result) => {
         if (error) {
             console.log(error);
@@ -244,11 +244,11 @@ app.delete("/api/aboutus/remove/:idaboutus", (req, res) => {
 
 //Insertimi i userave nga Register-formi
 
-app.post("/api/user/register",(req,res)=>{
+app.post("/api/user/register", (req, res) => {
 
     const { Name, Surname, Email, Password, Role } = req.body;
     const sqlInsert = "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
-    bcrypt.hash(Password,saltRounds,(err,hash)=>{
+    bcrypt.hash(Password, saltRounds, (err, hash) => {
         db.query(sqlInsert, [Name, Surname, Email, hash, Role], (error, result) => {
             if (error) {
                 console.log(error);
@@ -260,8 +260,8 @@ app.post("/api/user/register",(req,res)=>{
         });
 
     })
-    
-    
+
+
 });
 
 app.post('/api/user/login', (req, res) => {
@@ -285,19 +285,19 @@ app.post('/api/user/login', (req, res) => {
                 }
             }
         }
-        if(result.length>0){
-            bcrypt.compare(Password,result[0].Password,(error,response)=> {
-            if(response){
-                res.send(result);
-            }else{
-                res.send({message:"Wrong username/password combination"})
-            }
+        if (result.length > 0) {
+            bcrypt.compare(Password, result[0].Password, (error, response) => {
+                if (response) {
+                    res.send(result);
+                } else {
+                    res.send({ message: "Wrong username/password combination" })
+                }
             })
         }
     });
 });
 
-   
+
 
 
 

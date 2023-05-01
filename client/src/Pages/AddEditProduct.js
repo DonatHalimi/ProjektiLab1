@@ -20,7 +20,7 @@ const AddEditProduct = () => {
     // Deklarimi i useState hook per ruajtjen e gjendjes se komponentit
     const [state, setState] = useState(initialState);
 
-    // Deklarimi i variablave Emri, Cmimi, Detajet, Kategoria dhe FotoSource duke i destrukturojme nga gjendja e komponentit
+    // Deklarimi i variablave Emri, Cmimi, Detajet, Kategoria dhe FotoSource dhe i destrukturojme nga gjendja e komponentit
     const { Emri, Cmimi, Detajet, Kategoria, FotoSource } = state;
 
     // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter

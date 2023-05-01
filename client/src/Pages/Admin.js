@@ -4,6 +4,9 @@ import "./AdminStyle.css"
 import { toast } from "react-toastify";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 
 function App() {
   // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus
@@ -65,32 +68,94 @@ function App() {
 
   // Funksioni per te fshire user-in nga API
   const deleteUser = (id) => {
-    if (window.confirm(`Are you sure that you want to delete this user?`)) {
-      axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-      toast.success("User deleted successfully");
+    const confirmDialog = () => {
+      confirmAlert({
+        title: 'Confirm Deletion',
+        message: 'Are you sure that you want to delete this user?',
+        buttons: [
+          {
+            label: 'Cancel',
+            onClick: () => { }
+          },
+          {
+            label: 'Yes',
+            onClick: () => {
+              // Dergojme kerkesen per fshirje ne server
+              axios.delete(`http://localhost:6001/api/user/remove/${id}`);
+              toast.success("User deleted successfully");
 
-      setTimeout(() => loadData(), 500)
-    }
+              setTimeout(() => loadData(), 500);
+            }
+          },
+
+        ]
+      });
+    };
+
+    // Thirrja e confirm dialog custom
+    confirmDialog();
   }
+
 
   // Funksioni per te fshire produktin nga API
   const deleteProduct = (id) => {
-    if (window.confirm("Are you sure that you want to delete this product?")) {
-      axios.delete(`http://localhost:6001/api/product/remove/${id}`);
-      toast.success("Product deleted successfully");
+    const confirmDialog = () => {
+      confirmAlert({
+        title: 'Confirm Deletion',
+        message: 'Are you sure that you want to delete this product?',
+        buttons: [
+          {
+            label: 'Cancel',
+            onClick: () => { }
+          },
+          {
+            label: 'Yes',
+            onClick: () => {
+              // Dergojme kerkesen per fshirje ne server
+              axios.delete(`http://localhost:6001/api/product/remove/${id}`);
+              toast.success("Product deleted successfully");
 
-      setTimeout(() => loadData, 500)
-    }
+              setTimeout(() => loadData(), 500);
+            }
+          },
+
+        ]
+      });
+    };
+
+    // Thirrja e confirm dialog custom
+    confirmDialog();
   }
 
   // Funksioni per te fshire tekstin nga API
   const deleteAboutUs = (id) => {
-    if (window.confirm("Are you sure that you want to delete this?")) {
-      axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
-      toast.success("User deleted successfully");
+    const confirmDialog = () => {
+      confirmAlert({
+        title: 'Confirm Deletion',
+        message: 'Are you sure that you want to delete this?',
+        buttons: [
+          {
+            label: 'Cancel',
+            onClick: () => { }
+          },
+          {
+            label: 'Yes',
+            onClick: () => {
+              // Dergojme kerkesen per fshirje ne server
+              axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
+              toast.success("Text deleted successfully");
 
-      setTimeout(() => loadData(), 500)
-    }
+              // Reload data after a short delay
+              setTimeout(() => loadData(), 500);
+            }
+          },
+
+        ]
+      });
+    };
+
+    // Thirrja e confirm dialog custom
+    confirmDialog();
   }
 
   // Renderimi i HTML formes per faqen e Adminit

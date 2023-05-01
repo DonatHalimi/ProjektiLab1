@@ -84,3 +84,14 @@ body {
     bottom: 100px;
     right: 430px;
 }
+.popup button {
+    background: none;
+}
+
+.popup button:hover {
+    background: none;
+    content: none;
+    background-color: initial;
+    color: initial;
+  }
+  
