@@ -183,6 +183,7 @@ app.get("/api/aboutus/get", cors(), (req, res) => {
     });
 });
 
+
 // Selektimi i aboutus sipas ID
 app.get("/api/aboutus/get/:idaboutus", cors(), (req, res) => {
     const { idaboutus } = req.params;
