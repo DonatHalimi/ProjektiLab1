@@ -72,8 +72,8 @@ body {
 }
 
 .btn.btn-edit:hover {
-    background:#008cba ;
-    
+    background: #008cba;
+
 }
 
 .btn.btn-edit:hover::after {
@@ -81,8 +81,8 @@ body {
 }
 
 .btn.btn-delete:hover {
-    background:#f44336 ;
-    
+    background: #f44336;
+
 }
 
 .btn.btn-delete:hover::after {
@@ -108,6 +108,18 @@ button:hover::after {
     content: none;
 }
 
+.yes-btn {
+    margin-left: 5px;
+}
+
+.yes-btn label {
+    font-size: 20px;
+}
+
+.cancel-btn {
+    margin-left: 200px;
+}
+
 .cancel-btn,
 .yes-btn {
     padding: 20px 20px;
@@ -120,7 +132,7 @@ button:hover::after {
 
 button.btn.btn-edit {
     margin-left: 20px;
-    padding:50px;
+    padding: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-color: transparent;
@@ -129,9 +141,9 @@ button.btn.btn-edit {
 }
 
 button.btn.btn-User {
-    
+
     margin-left: 20px;
-    padding:50px;
+    padding: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-color: transparent;
@@ -140,7 +152,7 @@ button.btn.btn-User {
 
 button.btn.btn-delete {
     margin-left: 20px;
-    padding:50px;
+    padding: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-color: transparent;

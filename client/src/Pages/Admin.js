@@ -70,7 +70,7 @@ function App() {
   const deleteUser = async (id) => {
     const confirmDialog = () => {
       confirmAlert({
-        title: 'Confirm Deletion',
+        title: 'Confirm Deletion\n',
         message: 'Are you sure that you want to delete this user?',
         buttons: [
           {
