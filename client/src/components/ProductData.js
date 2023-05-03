@@ -9,11 +9,11 @@ export const product_card = [
     },
     {
         id: 2,
-        product_name: "Blue Hoodie",
-        description: "Comfortable, High Quality, Blue",
-        price: 15,
+        product_name: "Black Shirt",
+        description: "Comfortable, High Quality, Black",
+        price: 10,
         currency: "$",
-        thumb: require("../img/blue-hoodie-1.png")
+        thumb: require("../img/black-shirt-1.png")
     },
     {
         id: 3,
@@ -39,7 +39,7 @@ export const product_card = [
         currency: "$",
         thumb: require("../img/violet-t-shirt-1.png")
     },
-   /* {
+    {
         id: 6,
         product_name: "Gray T-Shirt",
         description: "Comfortable, High Quality, Gray",
@@ -49,19 +49,34 @@ export const product_card = [
     },
     {
         id: 7,
-        product_name: "White T-Shirt",
-        description: "Comfortable, High Quality, White",
-        price: 10,
-        currency: "$",
-        thumb: require("../img/white-t-shirt-1.png")
-    },
-    {
-        id: 8,
         product_name: "Red T-Shirt",
         description: "Comfortable, High Quality, Red",
         price: 10,
         currency: "$",
         thumb: require("../img/red-t-shirt-1.png")
-    }
-    */
+    },
+    {
+        id: 8,
+        product_name: "Black Shorts",
+        description: "Comfortable, High Quality, Black",
+        price: 15,
+        currency: "$",
+        thumb: require("../img/black-shorts-1.png")
+    },
+    {
+        id: 9,
+        product_name: "Black Hoodie",
+        description: "Comfortable, High Quality, Black",
+        price: 15,
+        currency: "$",
+        thumb: require("../img/black-hoodie-2.png")
+    },
+    // {
+    //     id: 10,
+    //     product_name: "Gray Hoodie",
+    //     description: "Comfortable, High Quality, Black",
+    //     price: 15,
+    //     currency: "$",
+    //     thumb: require("../img/gray-hoodie-2.png")
+    // },
 ]
