@@ -5,6 +5,7 @@
     width: 200px;
     height: 300px;
     display: inline-block;
+    margin-top: 10px;
 }
 
 .product-container h3 {

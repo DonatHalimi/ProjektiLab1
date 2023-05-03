@@ -60,7 +60,8 @@ function Home() {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    flexWrap: "wrap"
+                    flexWrap: "wrap",
+                    
                 }}>
                     {listItems}
                 </div>

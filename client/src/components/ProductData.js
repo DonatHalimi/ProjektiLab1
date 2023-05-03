@@ -39,7 +39,7 @@ export const product_card = [
         currency: "$",
         thumb: require("../img/violet-t-shirt-1.png")
     },
-    {
+   /* {
         id: 6,
         product_name: "Gray T-Shirt",
         description: "Comfortable, High Quality, Gray",
@@ -63,4 +63,5 @@ export const product_card = [
         currency: "$",
         thumb: require("../img/red-t-shirt-1.png")
     }
+    */
 ]
