@@ -3,6 +3,7 @@ import "./aboutUsStyle.css";
 import Navbar from "../components/Navbar";
 import aboutFoto from "../img/aboutfoto.jpg";
 
+
 function AboutPage() {
   return (
     <>

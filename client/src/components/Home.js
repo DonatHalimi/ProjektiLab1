@@ -5,6 +5,7 @@ import "./HomeStyle.css";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
 import { product_card } from "./ProductData";
+import Footer from "./Footer";
 
 // Deklarimi i funksionit Home
 function Home() {
@@ -51,6 +52,7 @@ function Home() {
         {/* Thirrja e komponenteve te Navbar dhe Slider ne Home.js */}
             <Navbar />
             <Slider />
+            
 
             <div>
                 <h1>Featured Products</h1>
@@ -80,6 +82,7 @@ function Home() {
                     ))}
                 </div>
             </div> */}
+            <Footer/>
         </>
     );
 }

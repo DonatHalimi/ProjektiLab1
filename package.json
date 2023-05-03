@@ -5,6 +5,7 @@
   "dependencies": {
     "browserify-zlib": "^0.2.0",
     "https-browserify": "^1.0.0",
+    "react-confirm-alert": "^3.0.6",
     "stream-browserify": "^3.0.0"
   }
 }
