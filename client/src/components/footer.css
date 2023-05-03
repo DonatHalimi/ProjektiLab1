@@ -8,22 +8,40 @@ container .row{
 }
 .container .row .abotUs{
     padding: 30px;
-    margin-right: 120px;
+    margin: 1px;
+    text-align: left;
+    
+    
 
 }
 .container .row .contact{
     padding: 30px;
-    margin-right: 120px;
+    margin-right: 60px;
+    text-align:right;
+    position: relative;
+    bottom: 8vw;
+    
 
 }
+
+footer {
+    position: relative;
+    background-color: #222;
+    color: #fff;
+  }
+  
 .container .row .follow{
-    padding: 30px;
-    margin-right: 20%;
+    position: absolute;
+  bottom: 1vw;
+  left: 50%;
+  transform: translateX(-50%);
 
 }
 
 ul.social-icons {
     list-style-type: none;
+    display: inline-flex;
+    gap: 50px;
     
     margin-top: 10px;
     
@@ -40,3 +58,4 @@ ul.social-icons {
     color: #12128f;
 
   }
+  

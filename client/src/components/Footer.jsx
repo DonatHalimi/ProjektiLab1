@@ -15,7 +15,7 @@ const Footer = () => {
     <div className="row">
       <div className="abotUs">
         <h4>About Us</h4>
-        <p className="paragrafi">We are an e-commerce website that specializes in selling high-quality products at affordable prices.</p>
+        <p className="paragrafi">We are an e-commerce website that specializes in selling high-quality apparel products at affordable prices.</p>
       </div>
       <div className="contact">
         <h4>Contact Us</h4>
