@@ -11,7 +11,7 @@ const Navbar = (props) => {
   // Krijohet funksioni 'handleClick' per ndryshimin e gjendjes se 'clicked'
   const handleClick = () => {
     setClicked(!clicked);
-    document.body.style.overflow = clicked ? "auto" : "hidden";
+    // document.body.classList.toggle("auto", clicked);
   };
 
   return (
@@ -20,7 +20,7 @@ const Navbar = (props) => {
       {/* Krijimi i logose*/}
       <h1 className="logo">Ruby</h1>
 
-      {/* Krijimi i  ikonave te menyse */}
+      {/* Krijimi i ikonave te menyse */}
       <div className="menu-icons" onClick={handleClick}>
         <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
