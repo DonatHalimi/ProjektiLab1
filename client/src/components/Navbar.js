@@ -11,6 +11,7 @@ const Navbar = (props) => {
   // Krijohet funksioni 'handleClick' per ndryshimin e gjendjes se 'clicked'
   const handleClick = () => {
     setClicked(!clicked);
+    document.body.style.overflow = clicked ? "auto" : "hidden";
   };
 
   return (

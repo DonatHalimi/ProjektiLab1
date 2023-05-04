@@ -1,3 +1,4 @@
+// Definimi i nje vargu te perkohshem per te dhenat e produkteve per main page
 export const product_card = [
     {
         id: 1,

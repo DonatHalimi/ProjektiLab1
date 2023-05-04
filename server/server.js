@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const saltRounds = 10;
 
-
+// Krijimi i nje lidhje me bazen e te dhenave MySQL duke perdorur te dhenat e qasjes
 const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -16,27 +16,28 @@ const db = mysql.createPool({
     database: 'projektilab1'
 })
 
+// Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
-    origin:["http://localhost:3000"],
-    methods:["GET","POST","DELETE","PUT"],
-    credentials:true,
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
 }));
 app.use(express.json());
 
+// Konfigurimi i middleware per trajtimin e parserit te cookies edhe encoding e trupit te kerkeses se klientit
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-
+// Konfigurimi i middleware per sessionin e perdoruesit duke i percaktuar parametrat e atij sessioni
 app.use(
     session({
-        key:"userId",
-        secret:"mosikllzkerkujt",
-        resave:false,
-        saveUninitialized:false,
-        cookie:{
-            expires:60*60*24,
+        key: "userId",
+        secret: "mosikllzkerkujt",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 60 * 60 * 24,
         },
-
     },)
 )
 
@@ -265,8 +266,7 @@ app.delete("/api/aboutus/remove/:idaboutus", (req, res) => {
     });
 });
 
-//Insertimi i userave nga Register-formi
-
+// Insertimi i userave nga Register-formi
 app.post("/api/user/register", (req, res) => {
 
     const { Name, Surname, Email, Password, Role } = req.body;
@@ -287,6 +287,7 @@ app.post("/api/user/register", (req, res) => {
 
 });
 
+// Krijojme nje API POST per kerkesa te lidhura me autentifikimin e perdoruesit ne aplikacion
 app.post('/api/user/login', (req, res) => {
     const { Email, Password } = req.body;
     const sqlGet = "SELECT * FROM userat WHERE Email = ?";
@@ -294,7 +295,7 @@ app.post('/api/user/login', (req, res) => {
         if (error) {
             console.log(error);
             res.sendStatus(500);
-        } 
+        }
         if (result.length > 0) {
             bcrypt.compare(Password, result[0].Password, (error, response) => {
                 if (response) {
@@ -309,17 +310,7 @@ app.post('/api/user/login', (req, res) => {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
+// Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);

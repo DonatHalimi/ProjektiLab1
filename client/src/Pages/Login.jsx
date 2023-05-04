@@ -20,7 +20,7 @@ export const Login = (props) => {
   const [Password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
 
-  axios.defaults.withCredentials =true;
+  axios.defaults.withCredentials = true;
   // Funksioni qe ndryshon vleren e formes ne baze te ndryshimit te input-it
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,34 +94,34 @@ export const Login = (props) => {
   // Renderimi i HTML per login form
   return (
     <>
-    
-    <div className={LogInStyle['login-Container']}>
-      <Navbar />
-      
-      <div className={LogInStyle['login-box']}>
-        <p>Log in</p>
-        <pre></pre>
-        <form >
-          <div className={LogInStyle['user-box']}>
-            <input onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
-            <label htmlFor='email'>Email</label>
-            <p id="error">{formErrors.email}</p>
-          </div>
 
-          <div className={LogInStyle['user-box']}>
-            <input onChange={(e) => { setPassword(e.target.value) }} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
-            <label htmlFor="Password">Password</label>
-            <button type="button" className={LogInStyle['visibility-btn']} onClick={togglePasswordVisibility}>
-              {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-            </button>
-            <p id="error">{formErrors.password}</p>
-          </div>
+      <div className={LogInStyle['login-Container']}>
+        <Navbar />
 
-          <button className={LogInStyle['btn']} type="submit" onClick={login}>Log in </button>
-        </form>
-        <p id={LogInStyle['account-text']}>Don't have an account? <a href="/register" className={LogInStyle['a2']}>Sign up!</a></p>
-        <p>{loginStatus}</p>
-      </div>
+        <div className={LogInStyle['login-box']}>
+          <p>Log in</p>
+          <pre></pre>
+          <form >
+            <div className={LogInStyle['user-box']}>
+              <input onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
+              <label htmlFor='email'>Email</label>
+              <p id="error">{formErrors.email}</p>
+            </div>
+
+            <div className={LogInStyle['user-box']}>
+              <input onChange={(e) => { setPassword(e.target.value) }} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
+              <label htmlFor="Password">Password</label>
+              <button type="button" className={LogInStyle['visibility-btn']} onClick={togglePasswordVisibility}>
+                {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+              </button>
+              <p id="error">{formErrors.password}</p>
+            </div>
+
+            <button className={LogInStyle['btn']} type="submit" onClick={login}>Log in </button>
+          </form>
+          <p id={LogInStyle['account-text']}>Don't have an account? <a href="/register" className={LogInStyle['a2']}>Sign up!</a></p>
+          <p>{loginStatus}</p>
+        </div>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import "./ProductStyle.css"
 
+// Definimi i nje funksioni per shfaqjen e produkteve ne main page prej databazes (paperfundume)
 function Product({ idproduct, Emri, Cmimi, Detajet, Kategoria, FotoSource }) {
     return (
         <div className="product">

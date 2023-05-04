@@ -42,7 +42,6 @@ body {
     background-color: inherit;
 }
 
-
 .button-edit-product {
     position: relative;
     left: 240px;
@@ -137,11 +136,9 @@ button.btn.btn-edit {
     padding-bottom: 10px;
     border-color: transparent;
     border-radius: 10px;
-
 }
 
 button.btn.btn-User {
-
     margin-left: 20px;
     padding: 50px;
     padding-top: 10px;

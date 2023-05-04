@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
 import "./SliderStyle.css";
 
+// Definimi i nje funksioni per Slider
 function Slider() {
     // Krijimi i nje array me source te fotove per slider
     const slides = [
@@ -57,22 +58,19 @@ function Slider() {
     // Renderimi i HTML per shfaqjen e Slider-it
     return (
         <div className="slider">
-            <div
-                style={{ backgroundImage: `url(${slides[currentIndex].src})` }}
-                className="slide"
-            ></div>
+            <div style={{ backgroundImage: `url(${slides[currentIndex].src})` }} className="slide"></div>
 
-            {/*Shigjeta majte*/}
+            {/* Shigjeta majte */}
             <div className="arrow left" onClick={prevSlide}>
                 <IoIosArrowBack size={30} />
             </div>
 
-            {/*Shigjeta djathte*/}
+            {/* Shigjeta djathte */}
             <div className="arrow right" onClick={nextSlide}>
                 <IoIosArrowForward size={30} />
             </div>
 
-            {/*Butonat*/}
+            {/* Butonat */}
             <div className="slider-buttons">
                 {slides.map((slide, slideIndex) => (
                     <div
