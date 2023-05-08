@@ -1,5 +1,5 @@
 import React from "react";
-import "./AboutUsStyle.css";
+import "./aboutUsStyle.css";
 import Navbar from "../components/Navbar";
 import aboutFoto from "../img/aboutfoto.jpg";
 
