@@ -30,6 +30,15 @@ body {
     background-color: #f3f3f3;
 }
 
+.table-container {
+    position: fixed;
+    top: 200px;
+    left: 200px;
+    width: calc(100% - 150px);
+    height: 100vh;
+    overflow-y: auto;
+}
+
 .btn {
     color: white;
     padding: 5px 8px;
@@ -64,12 +73,6 @@ body {
     background-color: green;
 }
 
-.shto-user {
-    position: absolute;
-    top: 205px;
-    right: 237px;
-}
-
 .btn.btn-edit:hover {
     background: #008cba;
 
@@ -81,17 +84,10 @@ body {
 
 .btn.btn-delete:hover {
     background: #f44336;
-
 }
 
 .btn.btn-delete:hover::after {
     content: none;
-}
-
-.shto-product {
-    position: absolute;
-    bottom: 100px;
-    right: 430px;
 }
 
 .btn:hover {

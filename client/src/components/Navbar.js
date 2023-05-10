@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import { MenuData } from "./MenuData";
 import "./NavbarStyle.css";
 
-// Krijohet komponenti Navbar
+// Krijimi i komponentit Navbar
 const Navbar = (props) => {
 
-  // Krijohet state 'clicked' dhe funksioni 'setClicked' duke perdorur useState
+  // Krijimi i state 'clicked' dhe funksioni 'setClicked' duke perdorur useState
   const [clicked, setClicked] = useState(false);
 
-  // Krijohet funksioni 'handleClick' per ndryshimin e gjendjes se 'clicked'
+  // Krijimi i funksionit 'handleClick' per ndryshimin e gjendjes se 'clicked'
   const handleClick = () => {
     setClicked(!clicked);
     // document.body.classList.toggle("auto", clicked);
   };
 
+  // Renderimi i HTML per Navbar
   return (
     <nav className="NavbarItems">
 
