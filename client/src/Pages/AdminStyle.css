@@ -151,3 +151,7 @@ button.btn.btn-delete {
     border-color: transparent;
     border-radius: 10px;
 }
+ 
+#txt .td {
+    padding-right: 20px;
+}

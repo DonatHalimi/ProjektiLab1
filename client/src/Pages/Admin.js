@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from "../components/Navbar";
 import "./AdminStyle.css"
 import AdminSidebar from './AdminSidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";
 import { confirmAlert } from 'react-confirm-alert';
@@ -19,6 +19,8 @@ function App() {
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
   };
+
+  const navigate = useNavigate();
 
   // Funksioni per te marre te dhenat e user-ave nga API
   const loadData = async () => {
@@ -372,6 +374,8 @@ function App() {
         return renderProductsTable();
       case 'aboutUs':
         return renderAboutUsTable();
+      case 'home':
+        return navigate('/');
       default:
         return renderUsersTable();
     }
@@ -379,15 +383,16 @@ function App() {
 
   // Renderimi i HTML formes per faqen e Adminit
   return (
-    <>
-      <div>
-        <Navbar />
-        <AdminSidebar activeTab={activeTab} handleTabChange={handleTabChange} />
-        <div className="content">
-          {renderContent()}
-        </div>
+    <div>
+      {/* <Navbar /> */}
+      <AdminSidebar
+        activeTab={activeTab}
+        handleTabChange={handleTabChange}
+      />
+      <div className={`content`}>
+        {renderContent()}
       </div>
-    </>
+    </div>
   );
 };
 

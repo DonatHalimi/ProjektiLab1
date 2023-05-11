@@ -2,6 +2,7 @@ import React from 'react';
 import './AdminSidebarStyle.css';
 
 const Sidebar = ({ activeTab, handleTabChange }) => {
+
     return (
         <div className="sidebar">
             <div className="sidebar-header">
@@ -16,6 +17,9 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
                 </li>
                 <li className={`sidebar-menu-item ${activeTab === 'aboutUs' ? 'active' : ''}`} onClick={() => handleTabChange('aboutUs')}>
                     <i className="fa-solid fa-circle-info"></i> About Us
+                </li>
+                <li className={`sidebar-menu-item-home ${activeTab === 'home' ? 'active' : ''}`} onClick={() => handleTabChange('home')}>
+                    <i className='fa-solid fa-house'></i> Home
                 </li>
             </ul>
         </div>

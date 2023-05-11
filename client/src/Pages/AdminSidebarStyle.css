@@ -1,8 +1,8 @@
 .sidebar {
     position: fixed; /* Mundet mu ndrru nese jane shtu shum usera edhe nuk mundemi me scroll poshte */
     background-color: #222;
-    width: 190px;
-    height: 100vh;
+    width: 200px;
+    height: 1000vh;
     color: white;
     margin-top: -5px;
     overflow: hidden;
@@ -36,6 +36,28 @@
 }
 
 .sidebar-menu-item:hover {
+    background-color: rgb(80, 80, 238);
+    border-radius: 50px;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+}
+
+.sidebar-menu-item-home {
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    margin-bottom: 10px;
+    padding: 0.6rem 1rem;
+    white-space: nowrap;
+    margin-top: 720px;
+}
+
+.sidebar-menu-item-home:active {
+    font-weight: bold;
+}
+
+.sidebar-menu-item-home:hover {
     background-color: rgb(80, 80, 238);
     border-radius: 50px;
     transition: all 0.2s ease-in-out;
