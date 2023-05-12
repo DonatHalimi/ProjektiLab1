@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Navbar from "../components/Navbar";
-import "./AdminStyle.css"
 import AdminSidebar from './AdminSidebar';
+import "./AdminStyle.css"
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -14,12 +13,15 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
 
+  // Caktimi i tab-it aktiv per te shfaq users
   const [activeTab, setActiveTab] = useState('users');
 
+  // Perditesimi i tab-it aktiv kur ndryshohet prej admin-it
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
   };
 
+  // Krijimi i konstantes navigate per ta kthyer adminin ne home page
   const navigate = useNavigate();
 
   // Funksioni per te marre te dhenat e user-ave nga API
@@ -191,7 +193,11 @@ function App() {
               <th>E-mail</th>
               <th>Password</th>
               <th>Role</th>
-              <th>Insert</th>
+              <th>
+                <Link to='/user/addUser' className='clickable-header'>
+                  Insert
+                </Link>
+              </th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -206,7 +212,8 @@ function App() {
                     <td>{item.Name}</td>
                     <td>{item.Surname}</td>
                     <td>{item.Email}</td>
-                    <td>{item.Password}</td>
+                    {/* <td>{item.Password}</td> */}
+                    <td>*******</td>
                     <td>{item.Role}</td>
 
                     <td>
@@ -256,7 +263,11 @@ function App() {
               <th>Detajet</th>
               <th>Kategoria</th>
               <th>FotoSource</th>
-              <th>Insert</th>
+              <th>
+                <Link to='/addProduct' className='clickable-header'>
+                  Insert
+                </Link>
+              </th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -318,7 +329,11 @@ function App() {
             <tr>
               <th>ID</th>
               <th>Teksti</th>
-              <th>Insert</th>
+              <th>
+                <Link to='/aboutus/addAboutUs' className='clickable-header'>
+                  Insert
+                </Link>
+              </th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -365,6 +380,30 @@ function App() {
     );
   };
 
+  // Funksioni per dialogun e konfirmimit per te derguar adminin ne home page 
+  const handleHomeButtonClick = () => {
+    confirmAlert({
+      title: 'Confirm Navigation',
+      message: 'Are you sure you want to navigate to the Home page?',
+      buttons: [
+        {
+          label: 'Cancel',
+          onClick: () => {
+            handleTabChange('users');
+          },
+          className: 'cancel-btn'
+        },
+        {
+          label: 'Yes',
+          onClick: () => {
+            navigate('/');
+          },
+          className: 'yes-btn'
+        }
+      ]
+    });
+  };
+
   // Funksioni per leximin e tabelave varesisht se qka kerkohet te shikohet
   const renderContent = () => {
     switch (activeTab) {
@@ -375,7 +414,7 @@ function App() {
       case 'aboutUs':
         return renderAboutUsTable();
       case 'home':
-        return navigate('/');
+        return handleHomeButtonClick();
       default:
         return renderUsersTable();
     }
@@ -384,7 +423,6 @@ function App() {
   // Renderimi i HTML formes per faqen e Adminit
   return (
     <div>
-      {/* <Navbar /> */}
       <AdminSidebar
         activeTab={activeTab}
         handleTabChange={handleTabChange}

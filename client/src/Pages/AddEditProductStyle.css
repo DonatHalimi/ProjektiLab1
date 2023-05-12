@@ -81,3 +81,8 @@ input[type="submit"]:hover::after {
     background-color: #5e5e5e;
     margin-left: 7px;
 }
+
+.user-box label {
+    font-size: 1.2em;
+    /* Adjust the font size to your preference */
+}

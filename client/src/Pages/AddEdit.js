@@ -127,10 +127,7 @@ const AddEdit = () => {
 
                 <div className="user-box">
                     <label htmlFor="Password">Password</label>
-                    <input value={Password || ""} onChange={handleInputChange} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="Password" name="Password"></input>
-                    <button type="button" class="visibility-button" onClick={togglePasswordVisibility}>
-                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-                    </button>
+                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Type password" id="Password" name="Password"></input>
                 </div>
 
                 <div className="user-box">
