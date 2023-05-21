@@ -53,7 +53,6 @@
     background: rgb(80, 80, 238);
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
-    transform: scale(1.1);
 }
 
 .fa-bars,
