@@ -147,9 +147,9 @@ app.get("/api/product/get/:idproduct", cors(), (req, res) => {
 
 // Insertimi i produkteve
 app.post("/api/product/post", (req, res) => {
-    const { Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource } = req.body;
-    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource)VALUES (?,?,?,?,?,?)";
-    db.query(sqlInsert, [Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource], (error, result) => {
+    const { Emri, Cmimi, Valuta, Kategoria, Foto } = req.body;
+    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Foto)VALUES (?,?,?,?,?)";
+    db.query(sqlInsert, [Emri, Cmimi, Valuta, Kategoria, Foto], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error inserting data into database" });
@@ -163,9 +163,9 @@ app.post("/api/product/post", (req, res) => {
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
-    const { Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Kategoria=?, FotoSource=? WHERE idproduct=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource, idproduct], (error, result) => {
+    const { Emri, Cmimi, Valuta, Kategoria, Foto } = req.body;
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Kategoria=?, Foto=? WHERE idproduct=?";
+    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Kategoria, Foto, idproduct], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -182,7 +182,7 @@ app.delete("/api/product/remove/:idproduct", (req, res) => {
     db.query(sqlRemove, idproduct, (error, result) => {
         if (error) {
             console.log(error);
-            res.status(500).send({ error: "Error deleting data from produkti" });
+            res.status(500).send({ error: "Error deleting data from database" });
         } else {
             console.log(result);
             res.sendStatus(200);

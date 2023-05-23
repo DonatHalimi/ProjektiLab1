@@ -73,17 +73,19 @@ function Home() {
             <div>
                 <h1>Featured Products</h1>
                 <div className="products-container">
-                    {products.map((product) => (
-                        <Product
-                            key={product.idproduct}
-                            idproduct={product.idproduct}
-                            Emri={product.Emri}
-                            Cmimi={product.Cmimi}
-                            Detajet={product.Detajet}
-                            Kategoria={product.Kategoria}
-                            FotoSource={product.FotoSource}
-                        />
-                    ))}
+                    {products.map((product) => {
+                        const fotoBlob = new Blob([product.Foto], { type: "image/jpeg" });
+                        return (
+                            <Product
+                                key={product.idproduct}
+                                idproduct={product.idproduct}
+                                Emri={product.Emri}
+                                Cmimi={product.Cmimi}
+                                Detajet={product.Detajet}
+                                Foto={fotoBlob}
+                            />
+                        );
+                    })}
                 </div>
             </div>
 

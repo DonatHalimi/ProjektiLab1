@@ -10,9 +10,8 @@ const initialState = {
     Emri: "",
     Cmimi: "",
     Valuta: "",
-    Detajet: "",
     Kategoria: "",
-    FotoSource: ""
+    Foto: ""
 }
 
 // Krijimi i funksionit AddEditProduct duke perdorur React hooks
@@ -21,8 +20,8 @@ const AddEditProduct = () => {
     // Deklarimi i useState hook per ruajtjen e gjendjes se komponentit
     const [state, setState] = useState(initialState);
 
-    // Deklarimi i variablave Emri, Cmimi, Detajet, Kategoria dhe FotoSource dhe i destrukturojme nga gjendja e komponentit
-    const { Emri, Cmimi, Valuta, Detajet, Kategoria, FotoSource } = state;
+    // Deklarimi i variablave Emri, Cmimi, Detajet, Kategoria dhe Foto dhe i destrukturojme nga gjendja e komponentit
+    const { Emri, Cmimi, Valuta, Kategoria, Foto } = state;
 
     // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter
     const navigate = useNavigate();
@@ -38,13 +37,14 @@ const AddEditProduct = () => {
     }, [idproduct]);
 
 
+
     // Deklarimi i funksionit handleSubmit per te shtuar ose perditesuar nje produkt
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
 
         // Kontrolli i plotesimit te te gjitha fushave te formes
-        if (!Emri || !Cmimi || !Valuta || !Detajet || !Kategoria || !FotoSource) {
+        if (!Emri || !Cmimi || !Valuta || !Kategoria || !Foto) {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
@@ -53,11 +53,10 @@ const AddEditProduct = () => {
                     Emri,
                     Cmimi,
                     Valuta,
-                    Detajet,
                     Kategoria,
-                    FotoSource
+                    Foto
                 }).then(() => {
-                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Detajet: "", Kategoria: "", FotoSource: "", })
+                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Kategoria: "", Foto: "", })
 
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
@@ -68,10 +67,9 @@ const AddEditProduct = () => {
                     Emri,
                     Cmimi,
                     Valuta,
-                    Detajet,
-                    FotoSource
+                    Foto
                 }).then(() => {
-                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Detajet: "", Kategoria: "", FotoSource: "", })
+                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Kategoria: "", Foto: "", })
 
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("Product Added Successfully");
@@ -122,18 +120,13 @@ const AddEditProduct = () => {
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor='Detajet'>Detajet</label>
-                    <input value={Detajet || ""} onChange={handleInputChange} type="text" placeholder="Type details" id="detajet" name="Detajet"></input>
-                </div>
-
-                <div className="product-box">
                     <label htmlFor='Kategoria'>Kategoria</label>
                     <input value={Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Type category" id="kategoria" name="Kategoria"></input>
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor="FotoSource">FotoSource</label>
-                    <input value={FotoSource || ""} onChange={handleInputChange} type="text" placeholder="Type photo source" id="fotosource" name="FotoSource"></input>
+                    <label htmlFor="Foto">Foto</label>
+                    <input type="file" id="foto" name="Foto"></input>
                 </div>
 
                 <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />

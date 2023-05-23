@@ -7,6 +7,7 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
         <div className="sidebar">
             <div className="sidebar-header">
                 Admin Panel
+                <hr className="sidebar-hr" />
             </div>
             <ul className="sidebar-menu">
                 <li className={`sidebar-menu-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => handleTabChange('users')}>

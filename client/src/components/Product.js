@@ -1,19 +1,26 @@
-import React from "react";
-import "./ProductStyle.css"
+import React, { useEffect, useState } from "react";
+import "./ProductStyle.css";
 
-// Definimi i nje funksioni per shfaqjen e produkteve ne main page prej databazes (paperfundume)
-function Product({ idproduct, Emri, Cmimi, Detajet, Kategoria, FotoSource }) {
+function Product({ idproduct, Emri, Cmimi, Valuta, Kategoria, Foto }) {
+    const [fotoUrl, setFotoUrl] = useState("");
+
+    useEffect(() => {
+        if (Foto instanceof Blob) {
+            setFotoUrl(URL.createObjectURL(Foto));
+        }
+    }, [Foto]);
+
     return (
         <div className="product">
-            <img src={FotoSource} alt={Emri} />
+            {fotoUrl && <img src={fotoUrl} alt={Emri} />}
             <div className="product-info">
                 <h3>{Emri}</h3>
+                <p>{Valuta}</p>
                 <p>{Cmimi}</p>
-                <p>{Detajet}</p>
                 <p>{Kategoria}</p>
             </div>
         </div>
     );
-};
+}
 
 export default Product;

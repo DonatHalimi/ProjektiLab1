@@ -1,5 +1,6 @@
 .sidebar {
-    position: fixed; /* Mundet mu ndrru nese jane shtu shum usera edhe nuk mundemi me scroll poshte */
+    position: fixed;
+    /* Mundet mu ndrru nese jane shtu shum usera edhe nuk mundemi me scroll poshte */
     background-color: #222;
     width: 200px;
     height: 1000vh;
@@ -62,4 +63,11 @@
     border-radius: 50px;
     transition: all 0.2s ease-in-out;
     transform: scale(1.1);
+}
+
+.sidebar-hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px auto;
+    width: 75%;
 }

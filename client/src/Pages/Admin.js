@@ -212,8 +212,7 @@ function App() {
                     <td>{item.Name}</td>
                     <td>{item.Surname}</td>
                     <td>{item.Email}</td>
-                    {/* <td>{item.Password}</td> */}
-                    <td>*******</td>
+                    <td>**************</td>
                     <td>{item.Role}</td>
 
                     <td>
@@ -260,9 +259,8 @@ function App() {
               <th>Emri</th>
               <th>Cmimi</th>
               <th>Valuta</th>
-              <th>Detajet</th>
               <th>Kategoria</th>
-              <th>FotoSource</th>
+              <th>Foto</th>
               <th>
                 <Link to='/addProduct' className='clickable-header'>
                   Insert
@@ -277,16 +275,17 @@ function App() {
             {productData.map((product, indexproduct) => {
               return (
                 <Fragment key={product.idproduct}>
-
                   <tr>
                     <th scope="row">{indexproduct + 1}</th>
                     <td>{product.Emri}</td>
                     <td>{product.Cmimi}</td>
                     <td>{product.Valuta}</td>
-                    <td>{product.Detajet}</td>
                     <td>{product.Kategoria}</td>
-                    <td>{product.FotoSource}</td>
-
+                    <td>
+                      {product.Foto instanceof Blob && (
+                        <img src={URL.createObjectURL(product.Foto)} alt="Product" />
+                      )}
+                    </td>
                     <td>
                       <Link to={"/addProduct"}>
                         <button className="btn btn-User">
@@ -294,7 +293,6 @@ function App() {
                         </button>
                       </Link>
                     </td>
-
                     <td>
                       <Link to={`/update/${product.idproduct}`}>
                         <button className="btn btn-edit">
@@ -302,7 +300,6 @@ function App() {
                         </button>
                       </Link>
                     </td>
-
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
