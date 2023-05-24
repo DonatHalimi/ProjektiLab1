@@ -10,6 +10,7 @@ import AddEdit from "./Pages/AddEdit";
 import AddEditProduct from "./Pages/AddEditProduct";
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import Product from "./components/Product";
+import './App.css'
 
 function App() {
   return (
