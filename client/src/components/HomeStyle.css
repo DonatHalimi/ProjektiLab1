@@ -159,3 +159,9 @@ body {
     width: 100%;
   }
 }
+
+.products-container {
+  display: flex;
+  direction: row;
+  padding: 50px;
+}

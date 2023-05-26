@@ -147,12 +147,14 @@ app.get("/api/product/get/:idproduct", cors(), (req, res) => {
 
 // Insertimi i produkteve
 app.post("/api/product/post", (req, res) => {
-    const { Emri, Cmimi, Valuta, Kategoria, Foto } = req.body;
-    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Foto)VALUES (?,?,?,?,?)";
-    db.query(sqlInsert, [Emri, Cmimi, Valuta, Kategoria, Foto], (error, result) => {
+    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto } = req.body;
+    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
+    const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, Foto];
+    const sql = mysql.format(sqlInsert, values);
+    db.query(sql, (error, result) => {
         if (error) {
             console.log(error);
-            res.status(500).send({ error: "Error inserting data into database" });
+            res.status(500).json({ error: "Error inserting data into database" });
         } else {
             console.log(result);
             res.sendStatus(200);
@@ -163,9 +165,9 @@ app.post("/api/product/post", (req, res) => {
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
-    const { Emri, Cmimi, Valuta, Kategoria, Foto } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Kategoria=?, Foto=? WHERE idproduct=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Kategoria, Foto, idproduct], (error, result) => {
+    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto } = req.body;
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Kategoria=?, Detajet=?, Foto=? WHERE idproduct=?";
+    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idproduct], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -313,5 +315,5 @@ app.post('/api/user/login', (req, res) => {
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+    console.log('Server is running on port 6001');
 });

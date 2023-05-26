@@ -260,6 +260,7 @@ function App() {
               <th>Cmimi</th>
               <th>Valuta</th>
               <th>Kategoria</th>
+              <th>Detajet</th>
               <th>Foto</th>
               <th>
                 <Link to='/addProduct' className='clickable-header'>
@@ -281,11 +282,13 @@ function App() {
                     <td>{product.Cmimi}</td>
                     <td>{product.Valuta}</td>
                     <td>{product.Kategoria}</td>
+                    <td>{product.Detajet}</td>
                     <td>
                       {product.Foto instanceof Blob && (
                         <img src={URL.createObjectURL(product.Foto)} alt="Product" />
                       )}
                     </td>
+
                     <td>
                       <Link to={"/addProduct"}>
                         <button className="btn btn-User">
@@ -293,6 +296,7 @@ function App() {
                         </button>
                       </Link>
                     </td>
+
                     <td>
                       <Link to={`/update/${product.idproduct}`}>
                         <button className="btn btn-edit">
@@ -300,6 +304,7 @@ function App() {
                         </button>
                       </Link>
                     </td>
+
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
@@ -347,7 +352,7 @@ function App() {
                     <td>
                       <Link to={"/aboutus/addAboutUs"}>
                         <button className="btn btn-User">
-                          <i class="fa-solid fa-plus"></i>
+                          <i className="fa-solid fa-plus"></i>
                         </button>
                       </Link>
                     </td>
@@ -355,7 +360,7 @@ function App() {
                     <td>
                       <Link to={`/aboutus/update/${aboutus.idaboutus}`}>
                         <button className="btn btn-edit">
-                          <i class="fa-solid fa-pen"></i>
+                          <i className="fa-solid fa-pen"></i>
                         </button>
                       </Link>
                     </td>
@@ -363,7 +368,7 @@ function App() {
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
-                          <i class="fa-solid fa-trash-can"></i>
+                          <i className="fa-solid fa-trash-can"></i>
                         </button>
                       </Link>
                     </td>

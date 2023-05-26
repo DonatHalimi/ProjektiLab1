@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import "./AddEditProductStyle.css";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./AddEditProductStyle.css";
 
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje produkti te ri
 const initialState = {
@@ -11,88 +11,113 @@ const initialState = {
     Cmimi: "",
     Valuta: "",
     Kategoria: "",
-    Foto: ""
-}
+    Detajet: "",
+    Foto: null,
+    FotoFile: null
+};
 
-// Krijimi i funksionit AddEditProduct duke perdorur React hooks
+// Krijimi i funksionit AddEditProduct per te shtuar produkte
 const AddEditProduct = () => {
 
-    // Deklarimi i useState hook per ruajtjen e gjendjes se komponentit
+    // Definimi i state me useState hook dhe destruktirimi i elementeve te states
     const [state, setState] = useState(initialState);
+    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, FotoFile } = state;
 
-    // Deklarimi i variablave Emri, Cmimi, Detajet, Kategoria dhe Foto dhe i destrukturojme nga gjendja e komponentit
-    const { Emri, Cmimi, Valuta, Kategoria, Foto } = state;
-
-    // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter
+    // Deklarimi i hooks per te kaluar ne nje faqe tjeter dhe per te marrur ID
     const navigate = useNavigate();
-
-    // Deklarimi i useParams hook per te marre nje parameter nga URL
     const { idproduct } = useParams();
 
     // Deklarimi i useEffect hook per te ekzekutuar nje kerkese pasi komponenti eshte renderizuar per here te pare
     useEffect(() => {
         axios.get(`http://localhost:6001/api/product/get/${idproduct}`)
             .then((resp) => setState({ ...resp.data[0] }))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err.response));
     }, [idproduct]);
-
-
 
     // Deklarimi i funksionit handleSubmit per te shtuar ose perditesuar nje produkt
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
 
-        // Kontrolli i plotesimit te te gjitha fushave te formes
-        if (!Emri || !Cmimi || !Valuta || !Kategoria || !Foto) {
+        // Validimi i fushave te formes
+        if (!Emri || !Cmimi || !Valuta || !Kategoria || !Detajet || !Foto) {
             toast.error("Please fill out all the fields");
         } else {
             if (!idproduct) {
                 // Nese produkti nuk ekziston, kryejme nje post request per ta shtuar
-                axios.post('http://localhost:6001/api/product/post', {
-                    Emri,
-                    Cmimi,
-                    Valuta,
-                    Kategoria,
-                    Foto
-                }).then(() => {
-                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Kategoria: "", Foto: "", })
+                const formData = new FormData();
+                formData.append("Emri", Emri);
+                formData.append("Cmimi", Cmimi);
+                formData.append("Valuta", Valuta);
+                formData.append("Kategoria", Kategoria);
+                formData.append("Detajet", Detajet);
+                formData.append("Foto", Foto);
+                formData.append("FotoFile", FotoFile);
 
-                }).catch((err) => toast.error(err.response.data))
-                toast.success("Product Added Successfully");
+                axios
+                    .post(`http://localhost:6001/api/product/post`, formData)
+                    .then(() => {
+                        setState(initialState);
+                        toast.success("Product Added Successfully");
+                        navigate("/Admin");
+                    })
+                    .catch((err) => {
+                        if (err.response && err.response.data) {
+                            toast.error(err.response.data);
+                        } else {
+                            toast.error("An error occurred");
+                        }
+                    });
             } else {
                 // Nese produkti ekziston, kryejme nje put request per ta perditesuar
-                axios.put(`http://localhost:6001/api/product/update/${idproduct}`, {
-                    idproduct,
-                    Emri,
-                    Cmimi,
-                    Valuta,
-                    Foto
-                }).then(() => {
-                    setState({ ...state, Emri: "", Cmimi: "", Valuta: "", Kategoria: "", Foto: "", })
+                const formData = new FormData();
+                formData.append("Emri", Emri);
+                formData.append("Cmimi", Cmimi);
+                formData.append("Valuta", Valuta);
+                formData.append("Kategoria", Kategoria);
+                formData.append("Detajet", Detajet);
+                formData.append("Foto", Foto);
+                formData.append("FotoFile", FotoFile);
 
-                }).catch((err) => toast.error(err.response.data))
-                toast.success("Product Added Successfully");
+                axios
+                    .put(`http://localhost:6001/api/product/update/${idproduct}`, formData)
+                    .then(() => {
+                        setState(initialState);
+                        toast.success("Product Updated Successfully");
+                        navigate("/Admin");
+                    })
+                    .catch((err) => {
+                        if (err.response && err.response.data) {
+                            toast.error(err.response.data);
+                        } else {
+                            toast.error("An error occurred");
+                        }
+                    });
             }
-
-            // Kalohet ne faqen Admin pasi qe produkti eshte shtuar ose perditesuar
-            setTimeout(() =>
-                navigate("/Admin")
-            )
-        }
+        };
     };
 
     // Deklarimi i funksionit handleInputChange per te ruajtur ndryshimet ne input fields
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setState({ ...state, [name]: value });
-    }
+        const { name, value, files } = e.target;
+        if (name === "Foto") {
+            const selectedFile = files[0];
+            const blob = new Blob([selectedFile], { type: selectedFile.type });
+            setState((prevState) => ({
+                ...prevState,
+                Foto: blob,
+                FotoFile: URL.createObjectURL(selectedFile),
+            }));
+        } else {
+            setState((prevState) => ({ ...prevState, [name]: value }));
+        }
+    };
 
     // Renderimi i HTML formes per te shtuar ose perditesuar nje produkt
     return (
         <div style={{ marginTop: "150px" }}>
 
-            <h2>Add Edit</h2>
+            <h2>Add/Edit</h2>
 
             <form style={{
                 margin: "auto",
@@ -106,8 +131,11 @@ const AddEditProduct = () => {
             }}
                 onSubmit={handleSubmit}
             >
-                <label htmlFor='Emri'>Emri</label>
-                <input value={Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emri" name="Emri"></input>
+
+                <div className="product-box">
+                    <label htmlFor='Emri'>Emri</label>
+                    <input value={Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emri" name="Emri"></input>
+                </div>
 
                 <div className="product-box">
                     <label htmlFor='Cmimi'>Cmimi</label>
@@ -125,12 +153,16 @@ const AddEditProduct = () => {
                 </div>
 
                 <div className="product-box">
+                    <label htmlFor='Detajet'>Detajet</label>
+                    <input value={Detajet || ""} onChange={handleInputChange} type="text" placeholder="Type details" id="detajet" name="Detajet"></input>
+                </div>
+
+                <div className="product-box">
                     <label htmlFor="Foto">Foto</label>
-                    <input type="file" id="foto" name="Foto"></input>
+                    <input onChange={handleInputChange} type="file" id="foto" name="Foto" />
                 </div>
 
                 <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
-
                 <Link to="/Admin">
                     <input id="goback-button" type="button" value="Go Back"></input>
                 </Link>

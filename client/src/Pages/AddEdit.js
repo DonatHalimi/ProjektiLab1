@@ -1,10 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate, useParams, Link } from "react-router-dom";
-import "./AddEditStyle.css";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./AddEditStyle.css";
 
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje useri te ri
 const initialState = {
@@ -15,16 +14,14 @@ const initialState = {
     Role: ""
 }
 
+// Krijimi i funksionit AddEdit per te shtuar perdorues
 const AddEdit = () => {
 
     // Definimi i state me useState hook dhe destruktirimi i elementeve te states
     const [state, setState] = useState(initialState);
     const { Name, Surname, Email, Password, Role } = state;
 
-    // Shtimi i nje variable per te shfaqur passwordin
-    const [passwordVisible, setPasswordVisible] = useState(false);
-
-    // Definimi i hooks
+    // Definimi i hooks per te kaluar ne nje faqe tjeter dhe per te marrur ID
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -46,7 +43,7 @@ const AddEdit = () => {
             toast.error("Please fill out all the fields");
         } else {
             if (!id) {
-                // Nese id nuk ekziston, kryejme nje post request per ta shtuar
+                // Nese perdoruesi nuk ekziston, kryejme nje post request per ta shtuar
                 axios.post(`http://localhost:6001/api/user/post`, {
                     Name,
                     Surname,
@@ -59,7 +56,7 @@ const AddEdit = () => {
                 }).catch((err) => toast.error(err.response.data))
                 toast.success("User Added Successfully");
             } else {
-                // Nese id ekziston, kryejme nje put request per ta perditesuar
+                // Nese perdoruesi ekziston, kryejme nje put request per ta perditesuar
                 axios.put(`http://localhost:6001/api/user/update/${id}`, {
                     id,
                     Name,
@@ -87,11 +84,6 @@ const AddEdit = () => {
         setState({ ...state, [name]: value });
     }
 
-    // Deklarimi i nje funksioni per te ndryshuar gjendjen e password visibility
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
-    }
-
     // Renderimi i HTML formes per te shtuar ose perditesuar nje user
     return (
         <div style={{ marginTop: "150px" }}>
@@ -110,6 +102,7 @@ const AddEdit = () => {
             }}
                 onSubmit={handleSubmit}
             >
+                
                 <div className="user-box">
                     <label htmlFor='Name'>Name</label>
                     <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
