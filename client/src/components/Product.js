@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./ProductStyle.css";
+import ProductStyle from "../styles/ProductStyle.css";
 
 function Product({ idproduct, Emri, Cmimi, Valuta, Kategoria, Foto }) {
     const [fotoUrl, setFotoUrl] = useState("");
