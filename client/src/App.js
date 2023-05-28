@@ -15,9 +15,11 @@ import Cart from './components/Cart';
 import { ShopContextProvider } from "./context/shop-context";
 
 
+
 function App() {
   return (
     <div className="App">
+      
       <ShopContextProvider>
       <BrowserRouter>
         <Routes>
@@ -37,7 +39,9 @@ function App() {
         </Routes>
         <ToTop />
       </BrowserRouter>
+ 
       </ShopContextProvider>
+     
     </div>
   );
 }

@@ -1,5 +1,5 @@
 // Definimi i nje vargu te perkohshem per te dhenat e produkteve per main page
-export const PRODUCTS = [
+ const PRODUCTS = [
     {
         id: 1,
         product_name: "Black Hoodie",
@@ -80,4 +80,17 @@ export const PRODUCTS = [
     //     currency: "$",
     //     thumb: require("../img/gray-hoodie-2.png")
     // },
-]
+];
+
+
+function getProductData(id){
+    let productData =PRODUCTS.find(product =>product.id === id);
+
+    if(productData == undefined){
+        console.log("Product data does not exist for ID :" + id);
+        return undefined
+    }
+    return productData;
+}
+
+export {PRODUCTS, getProductData};

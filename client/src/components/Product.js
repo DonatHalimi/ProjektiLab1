@@ -3,10 +3,15 @@ import ProductStyle from "../styles/ProductStyle.css";
 import { ShopContext } from "../context/shop-context";
 import { PRODUCTS } from "./ProductData";
 
-export const Product = (props) => {
-  const { id, product_name, description, price, currency, thumb } = props.data;
+
+function  Product (props) {
+  const product = props.data;
   const [fotoUrl, setFotoUrl] = useState("");
-  const { addToCart } = useContext(ShopContext);
+  const cart = useContext(ShopContext);
+  const getProductQuantity=cart.getProductQuantity(product.id);
+  console.log(cart.items);
+
+
 
   const handleAddToCart = () => {
     addToCart(id);
@@ -21,6 +26,9 @@ export const Product = (props) => {
   }, [thumb]);
 
   return (
+    <>
+   
+    
     <div className="product">
      
       <div className="card">
@@ -31,11 +39,12 @@ export const Product = (props) => {
         <h3>{product_name}</h3>
         <p className="price">${price}</p>
         </div>
-        <button className="buton" onClick={handleAddToCart}>
+        <button className="buton" onClick={()=>cart.addToCart(product.id)}>
           <i className="fa-solid fa-shopping-cart"></i>
         </button>
       </div>
     </div>
+      </>
   );
 };
 

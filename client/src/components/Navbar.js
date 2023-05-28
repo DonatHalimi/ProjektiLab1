@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { MenuData } from "./MenuData";
 import NavbarStyle from "../styles/NavbarStyle.css";
 import Cart from "./Cart";
+import { Link } from 'react-router-dom';
+
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {
@@ -30,18 +32,18 @@ const Navbar = (props) => {
 
       {/* Krijimi i listes se menyse */}
       <ul className={clicked ? "nav-menu active" : "nav-menu"}>
-        {MenuData.map((item, index) => {
-          return (
-            <li key={index}>
-              <a href={item.url} className={item.cName}>
-                <i className={item.icon}></i>
-                {item.title}
-              </a>
-            </li>
-          );
-        })}
-     
-      </ul>
+  {MenuData.map((item, index) => {
+    return (
+      <li key={index}>
+        <Link to={item.url} className={item.cName}>
+          <i className={item.icon}></i>
+          {item.title}
+        </Link>
+      </li>
+    );
+  })}
+</ul>
+
     </nav>
   );
 };

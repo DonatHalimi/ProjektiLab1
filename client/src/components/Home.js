@@ -71,12 +71,12 @@ function Home() {
 
                 }}>
                
-                    {PRODUCTS.map((product) => {
+                    {PRODUCTS.map((product,idx) => {
                         
                         
                         return (
                             <div className="products-container">
-                            <Product data={product}/>
+                            <Product key={idx} data={product}/>
                             </div>
                         );
                     })}
