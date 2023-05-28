@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
-import "./SliderStyle.css";
-import "./HomeStyle.css";
+import SliderStyle from "../styles/SliderStyle.css";
+import HomeStyle from "../styles/HomeStyle.css";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
 import { product_card } from "./ProductData";

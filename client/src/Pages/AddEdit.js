@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "./AddEditStyle.css";
+import AddEditStyle from "../styles/AddEditStyle.css";
 
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje useri te ri
 const initialState = {

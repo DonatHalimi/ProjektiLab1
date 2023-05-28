@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MenuData } from "./MenuData";
-import "./NavbarStyle.css";
+import NavbarStyle from "../styles/NavbarStyle.css";
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {

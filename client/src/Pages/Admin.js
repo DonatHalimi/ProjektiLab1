@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import AdminSidebar from './AdminSidebar';
-import "./AdminStyle.css"
+import AdminStyle from "../styles/AdminStyle.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";

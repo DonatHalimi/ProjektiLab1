@@ -1,5 +1,6 @@
 import React from 'react';
-import './AdminSidebarStyle.css';
+import AdminSidebarStyle from "../styles/AdminSidebarStyle.css";
+
 
 const Sidebar = ({ activeTab, handleTabChange }) => {
 

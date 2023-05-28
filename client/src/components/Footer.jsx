@@ -1,5 +1,5 @@
 import React from 'react';
-import './FooterStyle.css';
+import FooterStyle from "../styles/FooterStyle.css";
 
 
 // Definimi i nje funksioni per krijimin e Footerit
