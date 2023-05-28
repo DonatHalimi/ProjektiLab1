@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const saltRounds = 10;
+const multer = require('multer');
+const path = require('path');
 
 // Krijimi i nje lidhje me bazen e te dhenave MySQL duke perdorur te dhenat e qasjes
 const db = mysql.createPool({
@@ -145,20 +147,58 @@ app.get("/api/product/get/:idproduct", cors(), (req, res) => {
     });
 });
 
+// Set up multer configuration
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../client/src/img'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 10000000 },
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpeg|jpg|png|gif/;
+        const mimeType = fileTypes.test(file.mimetype);
+        const extname = fileTypes.test(path.extname(file.originalname));
+
+        if (mimeType && extname) {
+            return cb(null, true);
+        }
+        cb('Give proper file format to upload!');
+    },
+}).single('Foto');
+
 // Insertimi i produkteve
 app.post("/api/product/post", (req, res) => {
-    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto } = req.body;
-    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
-    const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, Foto];
-    const sql = mysql.format(sqlInsert, values);
-    db.query(sql, (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).json({ error: "Error inserting data into database" });
-        } else {
-            console.log(result);
-            res.sendStatus(200);
+    upload(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            console.error(err);
+            return res.status(500).json({ error: 'Multer Error: ' + err.message });
+        } else if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Error: ' + err.message });
         }
+
+        const { Emri, Cmimi, Valuta, Kategoria, Detajet } = req.body;
+        const fotoPath = req.file ? req.file.path : null;
+
+        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
+        const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fotoPath];
+        const sql = mysql.format(sqlInsert, values);
+
+        db.query(sql, (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({ error: "Error inserting data into database" });
+            } else {
+                console.log(result);
+                res.sendStatus(200);
+            }
+        });
     });
 });
 

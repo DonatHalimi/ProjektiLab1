@@ -1,8 +1,8 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./AddEditProductStyle.css";
 
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje produkti te ri
@@ -28,13 +28,6 @@ const AddEditProduct = () => {
     const { idproduct } = useParams();
 
     // Deklarimi i useEffect hook per te ekzekutuar nje kerkese pasi komponenti eshte renderizuar per here te pare
-    useEffect(() => {
-        axios.get(`http://localhost:6001/api/product/get/${idproduct}`)
-            .then((resp) => setState({ ...resp.data[0] }))
-            .catch((err) => console.log(err.response));
-    }, [idproduct]);
-
-    // Deklarimi i funksionit handleSubmit per te shtuar ose perditesuar nje produkt
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
@@ -43,19 +36,21 @@ const AddEditProduct = () => {
         if (!Emri || !Cmimi || !Valuta || !Kategoria || !Detajet || !Foto) {
             toast.error("Please fill out all the fields");
         } else {
+            const formData = new FormData();
+            formData.append("Emri", Emri);
+            formData.append("Cmimi", Cmimi);
+            formData.append("Valuta", Valuta);
+            formData.append("Kategoria", Kategoria);
+            formData.append("Detajet", Detajet);
+            formData.append("Foto", Foto);
+            formData.append("FotoFile", FotoFile);
+
+            console.log("Form Data:", formData);
+
             if (!idproduct) {
                 // Nese produkti nuk ekziston, kryejme nje post request per ta shtuar
-                const formData = new FormData();
-                formData.append("Emri", Emri);
-                formData.append("Cmimi", Cmimi);
-                formData.append("Valuta", Valuta);
-                formData.append("Kategoria", Kategoria);
-                formData.append("Detajet", Detajet);
-                formData.append("Foto", Foto);
-                formData.append("FotoFile", FotoFile);
-
                 axios
-                    .post(`http://localhost:6001/api/product/post`, formData)
+                    .post("http://localhost:6001/api/product/post", formData)
                     .then(() => {
                         setState(initialState);
                         toast.success("Product Added Successfully");
@@ -70,17 +65,11 @@ const AddEditProduct = () => {
                     });
             } else {
                 // Nese produkti ekziston, kryejme nje put request per ta perditesuar
-                const formData = new FormData();
-                formData.append("Emri", Emri);
-                formData.append("Cmimi", Cmimi);
-                formData.append("Valuta", Valuta);
-                formData.append("Kategoria", Kategoria);
-                formData.append("Detajet", Detajet);
-                formData.append("Foto", Foto);
-                formData.append("FotoFile", FotoFile);
-
                 axios
-                    .put(`http://localhost:6001/api/product/update/${idproduct}`, formData)
+                    .put(
+                        `http://localhost:6001/api/product/update/${idproduct}`,
+                        formData
+                    )
                     .then(() => {
                         setState(initialState);
                         toast.success("Product Updated Successfully");
@@ -94,7 +83,7 @@ const AddEditProduct = () => {
                         }
                     });
             }
-        };
+        }
     };
 
     // Deklarimi i funksionit handleInputChange per te ruajtur ndryshimet ne input fields
@@ -106,7 +95,7 @@ const AddEditProduct = () => {
             setState((prevState) => ({
                 ...prevState,
                 Foto: blob,
-                FotoFile: URL.createObjectURL(selectedFile),
+                FotoFile: selectedFile,
             }));
         } else {
             setState((prevState) => ({ ...prevState, [name]: value }));

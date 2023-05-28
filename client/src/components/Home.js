@@ -32,23 +32,23 @@ function Home() {
     }, []);
 
     // Krijimi i nje vargu me te dhenat e produktit duke perdorur metoden map prej vargut product_card ne klasen ProductData
-    // const listItems = product_card.map((item =>
-    //     <div className="card" key={item.id}>
-    //         <div className="card_img">
-    //             <img src={item.thumb}></img>
-    //         </div>
-    //         <div className="card_header">
-    //             <h2>{item.product_name}</h2>
-    //             <p>{item.description}</p>
-    //             <p className="price"> {item.price} <span>{item.currency}</span> </p>
-    //             <div className="butonat">
-    //                 <div className="buton" ><i class="fa-solid fa-heart"></i></div>
-    //                 <div className="btn" ><i class="fa-solid fa-shopping-cart"></i></div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // )
-    // );
+    const listItems = product_card.map((item =>
+        <div className="card" key={item.id}>
+            <div className="card_img">
+                <img src={item.thumb}></img>
+            </div>
+            <div className="card_header">
+                <h2>{item.product_name}</h2>
+                <p>{item.description}</p>
+                <p className="price"> {item.price} <span>{item.currency}</span> </p>
+                <div className="butonat">
+                    <div className="buton" ><i class="fa-solid fa-heart"></i></div>
+                    <div className="btn" ><i class="fa-solid fa-shopping-cart"></i></div>
+                </div>
+            </div>
+        </div>
+    )
+    );
 
     // Renderimi i HTML per produkte ne main page
     return (
@@ -57,7 +57,7 @@ function Home() {
             <Navbar />
             <Slider />
 
-            {/* <div>
+            <div>
                 <h1>Featured Products</h1>
                 <div className="main-content" style={{
                     display: "flex",
@@ -68,7 +68,7 @@ function Home() {
                 }}>
                     {listItems}
                 </div>
-            </div> */}
+            </div>
 
             <div>
                 <h1>Featured Products</h1>
