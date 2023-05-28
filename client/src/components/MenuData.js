@@ -26,7 +26,7 @@ export const MenuData = [
     },
     {
         title: "Cart",
-        url: "#",
+        url: "/Cart",
         cName: "nav-links",
         icon: "fa-solid fa-shopping-cart",
     },

@@ -4,7 +4,7 @@ import SliderStyle from "../styles/SliderStyle.css";
 import HomeStyle from "../styles/HomeStyle.css";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
-import { product_card } from "./ProductData";
+import { PRODUCTS} from "./ProductData";
 import Footer from "./Footer";
 
 // Deklarimi i funksionit Home
@@ -32,7 +32,7 @@ function Home() {
     }, []);
 
     // Krijimi i nje vargu me te dhenat e produktit duke perdorur metoden map prej vargut product_card ne klasen ProductData
-    const listItems = product_card.map((item =>
+  /*  const listItems = PRODUCTS.map((item =>
         <div className="card" key={item.id}>
             <div className="card_img">
                 <img src={item.thumb}></img>
@@ -41,6 +41,7 @@ function Home() {
                 <h2>{item.product_name}</h2>
                 <p>{item.description}</p>
                 <p className="price"> {item.price} <span>{item.currency}</span> </p>
+                
                 <div className="butonat">
                     <div className="buton" ><i class="fa-solid fa-heart"></i></div>
                     <div className="btn" ><i class="fa-solid fa-shopping-cart"></i></div>
@@ -49,13 +50,16 @@ function Home() {
         </div>
     )
     );
-
+*/
     // Renderimi i HTML per produkte ne main page
     return (
         <>
             {/* Thirrja e komponenteve te Navbar dhe Slider */}
             <Navbar />
             <Slider />
+
+         
+        
 
             <div>
                 <h1>Featured Products</h1>
@@ -66,28 +70,19 @@ function Home() {
                     flexWrap: "wrap",
 
                 }}>
-                    {listItems}
-                </div>
-            </div>
-
-            <div>
-                <h1>Featured Products</h1>
-                <div className="products-container">
-                    {products.map((product) => {
-                        const fotoBlob = new Blob([product.Foto], { type: "image/jpeg" });
+               
+                    {PRODUCTS.map((product) => {
+                        
+                        
                         return (
-                            <Product
-                                key={product.idproduct}
-                                idproduct={product.idproduct}
-                                Emri={product.Emri}
-                                Cmimi={product.Cmimi}
-                                Detajet={product.Detajet}
-                                Foto={fotoBlob}
-                            />
+                            <div className="products-container">
+                            <Product data={product}/>
+                            </div>
                         );
                     })}
                 </div>
             </div>
+         
 
             {/* Thirrja e komponentit te Footer */}
             <Footer />

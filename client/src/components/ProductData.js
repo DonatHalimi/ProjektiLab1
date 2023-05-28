@@ -1,5 +1,5 @@
 // Definimi i nje vargu te perkohshem per te dhenat e produkteve per main page
-export const product_card = [
+export const PRODUCTS = [
     {
         id: 1,
         product_name: "Black Hoodie",

@@ -11,14 +11,19 @@ import AddEditProduct from "./Pages/AddEditProduct";
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import Product from "./components/Product";
 import './App.css'
+import Cart from './components/Cart';
+import { ShopContextProvider } from "./context/shop-context";
+
 
 function App() {
   return (
     <div className="App">
+      <ShopContextProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/" element={<Product />} />
+          <Route path="/Cart" element={<Cart/>}/>
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -32,6 +37,7 @@ function App() {
         </Routes>
         <ToTop />
       </BrowserRouter>
+      </ShopContextProvider>
     </div>
   );
 }

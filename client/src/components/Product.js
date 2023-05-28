@@ -1,26 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductStyle from "../styles/ProductStyle.css";
+import { ShopContext } from "../context/shop-context";
+import { PRODUCTS } from "./ProductData";
 
-function Product({ idproduct, Emri, Cmimi, Valuta, Kategoria, Foto }) {
-    const [fotoUrl, setFotoUrl] = useState("");
+export const Product = (props) => {
+  const { id, product_name, description, price, currency, thumb } = props.data;
+  const [fotoUrl, setFotoUrl] = useState("");
+  const { addToCart } = useContext(ShopContext);
 
-    useEffect(() => {
-        if (Foto instanceof Blob) {
-            setFotoUrl(URL.createObjectURL(Foto));
-        }
-    }, [Foto]);
+  const handleAddToCart = () => {
+    addToCart(id);
+  };
 
-    return (
-        <div className="product">
-            {fotoUrl && <img src={fotoUrl} alt={Emri} />}
-            <div className="product-info">
-                <h3>{Emri}</h3>
-                <p>{Valuta}</p>
-                <p>{Cmimi}</p>
-                <p>{Kategoria}</p>
-            </div>
+  useEffect(() => {
+    if (thumb instanceof Blob) {
+      setFotoUrl(URL.createObjectURL(thumb));
+    } else if (typeof thumb === "string") {
+      setFotoUrl(thumb);
+    }
+  }, [thumb]);
+
+  return (
+    <div className="product">
+     
+      <div className="card">
+      <div className="card_img">
+        <img src={fotoUrl} alt="Product" /> 
         </div>
-    );
-}
+       <div className="card_header" >
+        <h3>{product_name}</h3>
+        <p className="price">${price}</p>
+        </div>
+        <button className="buton" onClick={handleAddToCart}>
+          <i className="fa-solid fa-shopping-cart"></i>
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default Product;

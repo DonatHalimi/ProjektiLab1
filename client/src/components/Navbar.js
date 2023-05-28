@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MenuData } from "./MenuData";
 import NavbarStyle from "../styles/NavbarStyle.css";
+import Cart from "./Cart";
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {
@@ -16,6 +17,7 @@ const Navbar = (props) => {
 
   // Renderimi i HTML per Navbar
   return (
+    
     <nav className="NavbarItems">
 
       {/* Krijimi i logose*/}
@@ -38,6 +40,7 @@ const Navbar = (props) => {
             </li>
           );
         })}
+     
       </ul>
     </nav>
   );
