@@ -7,6 +7,22 @@ const Cart = () => {
   const cart=useContext(ShopContext);
   const productsCount= cart.items.reduce((sum, product)=> sum + product.quantity, 0);
   
+  const checkout =async() =>{
+    await fetch(`http://localhost:6001/checkout`, {
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify({items: cart.items})
+    }).then((response)=>{
+      return response.json();
+    }).then((response)=>{
+      if(response.url){
+        window.location.assign(response.url);
+      }
+    })
+
+    }
 
   return (<>
     <Navbar/>
@@ -22,7 +38,7 @@ const Cart = () => {
           
           <h1>Total :{cart.getTotalCost().toFixed(2)}</h1>
          
-            
+          <button variant="success" onClick={checkout}>Purchase items</button> 
 
           </>
           :

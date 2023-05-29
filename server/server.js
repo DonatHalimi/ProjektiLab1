@@ -9,6 +9,7 @@ const session = require("express-session");
 const saltRounds = 10;
 const multer = require('multer');
 const path = require('path');
+const stripe=require('stripe')('sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax');
 
 // Krijimi i nje lidhje me bazen e te dhenave MySQL duke perdorur te dhenat e qasjes
 const db = mysql.createPool({
@@ -25,6 +26,7 @@ app.use(cors({
     credentials: true,
 }));
 app.use(express.json());
+app.use(express.static("public"));
 
 // Konfigurimi i middleware per trajtimin e parserit te cookies edhe encoding e trupit te kerkeses se klientit
 app.use(cookieParser());
@@ -351,6 +353,38 @@ app.post('/api/user/login', (req, res) => {
         }
     });
 });
+
+//Secret key: sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax
+//Maic:price_1NDESDHB8rLE0wX1TGxQmkVO
+//Pantolla:price_1NDETcHB8rLE0wX1hBgetkUb
+
+app.post('/checkout',async(req,res)=>{
+    console.log(req.body);
+    const items=req.body.items;
+    let lineItems=[];
+    items.forEach((item)=>{
+        lineItems.push(
+            {
+                price:item.id,
+                quantity:item.quantity
+            }
+        )
+    });
+
+    const session =await stripe.checkout.sessions.create({
+        line_items:lineItems,
+        mode:'payment',
+        success_url:"http://localhost:3000/Success",
+        cancel_url:"http://localhost:3000/Cancel"
+    })
+
+    res.send(JSON.stringify({
+        url:session.url
+    }))
+
+
+});
+
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;

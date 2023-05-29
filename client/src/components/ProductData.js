@@ -1,7 +1,7 @@
 // Definimi i nje vargu te perkohshem per te dhenat e produkteve per main page
  const PRODUCTS = [
     {
-        id: 1,
+        id: "price_1NDETcHB8rLE0wX1hBgetkUb",
         product_name: "Black Hoodie",
         description: "Comfortable, High Quality, Black",
         price: 15,
@@ -33,7 +33,7 @@
         thumb: require("../img/gray-hoodie-1.png")
     },
     {
-        id: 5,
+        id: "price_1NDESDHB8rLE0wX1TGxQmkVO",
         product_name: "Violet T-Shirt",
         description: "Comfortable, High Quality, Violet",
         price: 10,

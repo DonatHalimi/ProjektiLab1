@@ -11,6 +11,10 @@ function CartItem (props)  {
   const productData= getProductData(id);
   const [fotoUrl, setFotoUrl] = useState("");
 
+
+  
+
+
   useEffect(() => {
     if (productData.thumb instanceof Blob) {
       setFotoUrl(URL.createObjectURL(productData.thumb));
@@ -42,6 +46,7 @@ function CartItem (props)  {
           
           <button onClick={()=>cart.removeOneFromCart(id)}><i class='fa fa-minus'></i></button>
           <button onClick={()=>cart.deleteFromCart(id)}><i class='fa fa-trash'></i></button>
+          
         </div>
         </div>
       </>

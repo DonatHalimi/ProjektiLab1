@@ -13,7 +13,8 @@ import Product from "./components/Product";
 import './App.css'
 import Cart from './components/Cart';
 import { ShopContextProvider } from "./context/shop-context";
-
+import Success from "./Pages/Success";
+import Cancel from "./Pages/Cancel";
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/" element={<Product />} />
+          <Route path="/Success" element={<Success/>}/>
+          <Route path="/Cancel" element={<Cancel/>}/>
           <Route path="/Cart" element={<Cart/>}/>
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />

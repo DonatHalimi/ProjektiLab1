@@ -14,7 +14,7 @@ function Home() {
     const [products, setProducts] = useState([]);
 
     // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit (paperfundume)
-    useEffect(() => {
+   /* useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await fetch("http://localhost:6001/api/product/get");
@@ -30,7 +30,7 @@ function Home() {
 
         fetchProducts();
     }, []);
-
+*/
     // Krijimi i nje vargu me te dhenat e produktit duke perdorur metoden map prej vargut product_card ne klasen ProductData
   /*  const listItems = PRODUCTS.map((item =>
         <div className="card" key={item.id}>
