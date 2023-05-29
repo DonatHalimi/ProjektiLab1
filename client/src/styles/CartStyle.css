@@ -1,3 +1,11 @@
 .cart-container{
     background-color: white;
 }
+.cart-items{
+    
+    display: "flex";
+  
+
+
+}
+ 

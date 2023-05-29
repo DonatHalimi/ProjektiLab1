@@ -87,7 +87,7 @@ export function ShopContextProvider ({children})  {
     }
 
   const contextValue = { 
-    items:[],
+    items:cartProducts,
     getProductQuantity,
     addToCart,
     removeOneFromCart,

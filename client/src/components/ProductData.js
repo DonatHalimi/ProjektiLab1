@@ -84,12 +84,13 @@
 
 
 function getProductData(id){
-    let productData =PRODUCTS.find(product =>product.id === id);
+    let productData =PRODUCTS.find(product => product.id === id);
 
-    if(productData == undefined){
+    /*if(productData == undefined){
         console.log("Product data does not exist for ID :" + id);
         return undefined
     }
+    */
     return productData;
 }
 

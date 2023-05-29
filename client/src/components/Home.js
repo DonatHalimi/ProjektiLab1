@@ -71,23 +71,17 @@ function Home() {
 
                 }}>
                
-                    {PRODUCTS.map((product,idx) => {
-                        
-                        
-                        return (
-                            <div className="products-container">
-                            <Product key={idx} data={product}/>
-                            </div>
-                        );
-                    })}
-                </div>
+               {PRODUCTS.map((product, idx) => (
+            <div className="products-container" key={idx}>
+              <Product product={product}/>
             </div>
-         
+          ))}
+        </div>
+      </div>
 
-            {/* Thirrja e komponentit te Footer */}
-            <Footer />
-        </>
-    );
+      <Footer />
+    </>
+  );
 }
 
 export default Home;
