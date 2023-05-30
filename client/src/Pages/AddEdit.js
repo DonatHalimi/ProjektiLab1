@@ -102,7 +102,7 @@ const AddEdit = () => {
             }}
                 onSubmit={handleSubmit}
             >
-                
+
                 <div className="user-box">
                     <label htmlFor='Name'>Name</label>
                     <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>

@@ -30,9 +30,9 @@ export const MenuData = [
         url: "/Cart",
         cName: "nav-links",
         icon: "fa-solid fa-shopping-cart",
-        component: <Cart/>  // Add the component prop with the Cart component
-      }
-      ,
+        component: <Cart />  // Add the component prop with the Cart component
+    }
+    ,
     {
         title: "Log In",
         url: "/login",

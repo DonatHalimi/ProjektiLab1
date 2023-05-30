@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import ProductStyle from "../styles/ProductStyle.css";
+import "../styles/ProductStyle.css";
 import { ShopContext } from "../context/shop-context";
 import { getProductData } from "./ProductData";
 
@@ -7,7 +7,7 @@ function Product(props) {
   const product = props.product;
   const [fotoUrl, setFotoUrl] = useState("");
 
-  
+  // Efekti qe ndryshon URL-ne e fotos bazuar ne llojin e thumbnail-it te produktit
   useEffect(() => {
     if (product.thumb instanceof Blob) {
       setFotoUrl(URL.createObjectURL(product.thumb));
@@ -17,24 +17,25 @@ function Product(props) {
   }, [product.thumb]);
 
   const cart = useContext(ShopContext);
+  const [showCartPopup, setShowCartPopup] = useState(false);
 
-  const getProductQuantity=cart.getProductQuantity(product.id);
+  // Merr sasine e produkteve nga shporta
+  const getProductQuantity = cart.getProductQuantity(product.id);
   console.log(cart.items);
 
+  // Funksioni qe shton nje produkt ne shporte
   const handleAddToCart = () => {
     cart.addToCart(product.id);
+    setShowCartPopup(true);
   };
 
-
   if (!product) {
-    // Render a loading state or an error message
+    // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
     return <div>Loading...</div>;
   }
 
-  
-
+  // Numri i produkteve ne shporte
   const itemsInCart = cart.items.length;
-
 
   return (
     <>
@@ -51,8 +52,9 @@ function Product(props) {
             <i className="fa-solid fa-shopping-cart"></i>
           </button>
         </div>
+        {showCartPopup}
       </div>
-     
+
     </>
   );
 }

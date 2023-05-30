@@ -5,8 +5,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddEditAboutUsStyle from "../styles/AddEditAboutUsStyle.css";
 
-
-
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje teksti te ri
 const initialState = {
     teksti: ""

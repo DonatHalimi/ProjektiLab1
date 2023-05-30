@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { MenuData } from "./MenuData";
-import NavbarStyle from "../styles/NavbarStyle.css";
-import Cart from "./Cart";
+import "../styles/NavbarStyle.css";
+import "./Cart";
 import { Link } from 'react-router-dom';
-
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {
@@ -17,9 +16,15 @@ const Navbar = (props) => {
     // document.body.classList.toggle("auto", clicked);
   };
 
+  const [showCartPopup, setShowCartPopup] = useState(false);
+
+  const handleShowCart = () => {
+    setShowCartPopup(true);
+  };
+
   // Renderimi i HTML per Navbar
   return (
-    
+
     <nav className="NavbarItems">
 
       {/* Krijimi i logose*/}
@@ -32,17 +37,17 @@ const Navbar = (props) => {
 
       {/* Krijimi i listes se menyse */}
       <ul className={clicked ? "nav-menu active" : "nav-menu"}>
-  {MenuData.map((item, index) => {
-    return (
-      <li key={index}>
-        <Link to={item.url} className={item.cName}>
-          <i className={item.icon}></i>
-          {item.title}
-        </Link>
-      </li>
-    );
-  })}
-</ul>
+        {MenuData.map((item, index) => {
+          return (
+            <li key={index}>
+              <Link to={item.url} className={item.cName}>
+                <i className={item.icon}></i>
+                {item.title}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
 
     </nav>
   );

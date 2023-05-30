@@ -1,5 +1,5 @@
 // Definimi i nje vargu te perkohshem per te dhenat e produkteve per main page
- const PRODUCTS = [
+const PRODUCTS = [
     {
         id: "price_1NDETcHB8rLE0wX1hBgetkUb",
         product_name: "Black Hoodie",
@@ -82,9 +82,8 @@
     // },
 ];
 
-
-function getProductData(id){
-    let productData =PRODUCTS.find(product => product.id === id);
+function getProductData(id) {
+    let productData = PRODUCTS.find(product => product.id === id);
 
     /*if(productData == undefined){
         console.log("Product data does not exist for ID :" + id);
@@ -94,4 +93,4 @@ function getProductData(id){
     return productData;
 }
 
-export {PRODUCTS, getProductData};
+export { PRODUCTS, getProductData };

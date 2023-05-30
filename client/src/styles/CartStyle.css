@@ -1,11 +1,150 @@
-.cart-container{
-    background-color: white;
+.cartCard {
+    flex: 0 0 30%;
+    margin: 90px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
-.cart-items{
-    
-    display: "flex";
-  
 
-
+.cartCard_img img {
+    max-width: 10%;
+    margin: auto;
+    margin-right: 1300px;
+    position: relative;
+    top: 60px;
 }
- 
+
+.cartCard_header {
+    flex-grow: 1;
+    position: relative;
+    bottom: 115px;
+    left: 480px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.cart-items {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.cart-items p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.cart-items h1 {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+#addButton {
+    position: relative;
+    bottom: 220px;
+    left: 770px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#addButton:hover {
+    background-color: #0069d9;
+}
+
+#removeButton {
+    position: relative;
+    bottom: 175px;
+    left: 716px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#removeButton:hover {
+    background-color: #0069d9;
+}
+
+#deleteButton {
+    position: relative;
+    bottom: 130px;
+    left: 662px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#deleteButton:hover {
+    background-color: #0069d9;
+}
+
+#noItemsInCart {
+    position: relative;
+    margin: auto;
+    top: 400px;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+#purchaseButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#purchaseButton:hover {
+    background-color: #0069d9;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .cart-items {
+        padding: 10px;
+    }
+
+    .cart-items p {
+        font-size: 16px;
+    }
+
+    .cart-items h1 {
+        font-size: 20px;
+    }
+
+    .editButtons {
+        font-size: 14px;
+    }
+
+    .empty-cart {
+        font-size: 20px;
+    }
+}

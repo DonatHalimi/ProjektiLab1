@@ -1,4 +1,4 @@
-.login-Container{
+.login-Container {
   height: 100vh;
   margin: 0;
   background: linear-gradient(to bottom, #000000, #1EA486);
@@ -267,5 +267,5 @@
 
 .login-box .user-box button:hover::after {
   content: none;
-  
+
 }

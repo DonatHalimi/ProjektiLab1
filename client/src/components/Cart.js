@@ -1,54 +1,61 @@
- import React, { useContext } from 'react';
+import React, { useContext } from 'react';
 import { ShopContext } from '../context/shop-context';
 import CartItem from './cart-items';
 import Navbar from './Navbar';
+import "../styles/CartStyle.css"
 
+// Krijimi i funksionit per Cart
 const Cart = () => {
-  const cart=useContext(ShopContext);
-  const productsCount= cart.items.reduce((sum, product)=> sum + product.quantity, 0);
-  
-  const checkout =async() =>{
+
+  // Merr kontekstin e dyqanit nga komponenti ShopContext
+  const cart = useContext(ShopContext);
+
+  // Krijojme funksionin per me llogarit numrin total te produkteve ne shporte
+  const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
+
+  // Krijimi i nje funksioni per blerjen e produkteve
+  const checkout = async () => {
     await fetch(`http://localhost:6001/checkout`, {
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json',
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({items: cart.items})
-    }).then((response)=>{
+      body: JSON.stringify({ items: cart.items })
+    }).then((response) => {
       return response.json();
-    }).then((response)=>{
-      if(response.url){
+    }).then((response) => {
+      if (response.url) {
         window.location.assign(response.url);
       }
     })
+  }
 
-    }
+  return (
+    <>
+      <Navbar />
+      <div>
+        <h1>Cart</h1>
+        <div className="cart-items">
+          {productsCount > 0 ?
+            <>
+              <p>Items in your cart :</p>
+              {/* Per secilin produkt ne shporte, shfaqe komponentin CartItem */}
+              {cart.items.map((currentProduct, idx) => (
+                <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
+              ))}
 
-  return (<>
-    <Navbar/>
-    <div>
-      <h1>Cart</h1>
-      <div className="cart-items">
-        {productsCount > 0 ?
-           <>
-        <p>Items in your cart :</p> 
-          {cart.items.map((currentProduct, idx) => (
-            <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
-          ))}
-          
-          <h1>Total :{cart.getTotalCost().toFixed(2)}</h1>
-         
-          <button variant="success" onClick={checkout}>Purchase items</button> 
+              {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes */}
+              <h1>Total: ${cart.getTotalCost().toFixed(2)}</h1>
 
-          </>
-          :
-            <h1>There are no items in your cart</h1>
+              <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>
+            </>
+            :
+            <h1 id='noItemsInCart'>There are no items in your cart.</h1>
           }
+        </div>
       </div>
-    </div>
     </>
   );
-
 };
 
-export default Cart
+export default Cart;

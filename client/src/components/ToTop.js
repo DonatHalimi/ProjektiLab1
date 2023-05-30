@@ -16,7 +16,7 @@ function ToTop() {
 
     // Funksioni qe aktivizohet me klikimin e butonit to-top
     const handleClick = () => {
-        window.scrollTo({top: 0, behavior: "smooth"});
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     // Event listener per scroll (Pret qe useri te bej scroll ne faqe)
