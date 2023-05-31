@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillCircleFill } from "react-icons/bs";
-import SliderStyle from "../styles/SliderStyle.css";
+import "../styles/SliderStyle.css";
 
 // Definimi i nje funksioni per Slider
 function Slider() {

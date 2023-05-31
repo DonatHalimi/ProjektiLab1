@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
-import ToTopStyle from "../styles/ToTopStyle.css";
+import "../styles/ToTopStyle.css";
 
 function ToTop() {
     // Deklarimi i states nepermjet Hooks

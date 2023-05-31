@@ -1,15 +1,19 @@
 .cartCard {
-    flex: 0 0 30%;
-    margin: 90px;
-    padding: 5px;
+    flex: 0 0 20%;
+    margin: 0px;
+    position: relative;
+    left: 30px;
+    top: 60px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    background-color: rgb(242, 242, 242);
+    border-radius: 20px;
 }
 
 .cartCard_img img {
     max-width: 10%;
     margin: auto;
-    margin-right: 1300px;
+    margin-right: 1500px;
     position: relative;
     top: 60px;
 }
@@ -18,7 +22,7 @@
     flex-grow: 1;
     position: relative;
     bottom: 115px;
-    left: 480px;
+    left: 350px;
 }
 
 h1 {
@@ -26,8 +30,9 @@ h1 {
     margin-bottom: 20px;
 }
 
-.cart-items {
-    border: 1px solid #ccc;
+.cartItem {
+    border: 10px solid #ffffff;
+    border-top: 100px;
     padding: 20px;
     margin-bottom: 20px;
 }
@@ -42,21 +47,28 @@ h1 {
     margin-top: 20px;
 }
 
-#addButton {
+#addButton,
+#deleteButton,
+#removeButton {
     position: relative;
     bottom: 220px;
-    left: 770px;
+    left: 769px;
     justify-content: space-between;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
 
-#addButton:hover {
+#addButton:hover,
+#removeButton:hover,
+#deleteButton:hover {
+    background-color: #0069d9;
+}
+
+/* #addButton:hover {
     background-color: #0069d9;
 }
 
@@ -94,15 +106,38 @@ h1 {
 
 #deleteButton:hover {
     background-color: #0069d9;
-}
+} */
 
-#noItemsInCart {
+.noItemsInCart {
     position: relative;
-    margin: auto;
     top: 400px;
     text-align: center;
     margin-top: 50px;
     font-size: 24px;
+}
+
+.noItemsInCart p {
+    position: relative;
+    bottom: 190px;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.noItemsInCart a {
+    position: relative;
+    bottom: 190px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.noItemsInCart img {
+    position: relative;
+    bottom: 200px;
+}
+
+.noItemsInCart a:hover {
+    text-decoration: none;
+    color: #015bba;
 }
 
 #purchaseButton {
@@ -146,5 +181,15 @@ h1 {
 
     .empty-cart {
         font-size: 20px;
+    }
+
+    #addButton,
+    #removeButton,
+    #deleteButton {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: 10px;
+        width: 100%;
     }
 }

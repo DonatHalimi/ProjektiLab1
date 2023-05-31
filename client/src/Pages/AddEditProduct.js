@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AdminEditProductStyle from "../styles/AddEditProductStyle.css";
+import "../styles/AddEditProductStyle.css";
 
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje produkti te ri
 const initialState = {

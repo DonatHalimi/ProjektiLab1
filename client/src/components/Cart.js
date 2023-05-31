@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { ShopContext } from '../context/shop-context';
+import { Link } from 'react-router-dom';
 import CartItem from './cart-items';
 import Navbar from './Navbar';
 import "../styles/CartStyle.css"
+import Footer from './Footer';
 
 // Krijimi i funksionit per Cart
 const Cart = () => {
@@ -50,10 +52,16 @@ const Cart = () => {
               <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>
             </>
             :
-            <h1 id='noItemsInCart'>There are no items in your cart.</h1>
+            <div className='noItemsInCart'>
+              <img src='https://o.remove.bg/downloads/9c2ba529-89a6-4e4e-8b83-4d48e54a5e1d/5034313-middle-removebg-preview.png' alt="Empty Cart"></img>
+              <p>Ju nuk keni ndonje produkt ne cart.</p>
+              <Link to="/">Kthehu ne faqen kryesore</Link>
+            </div>
           }
         </div>
       </div>
+
+      {/* <Footer /> */}
     </>
   );
 };

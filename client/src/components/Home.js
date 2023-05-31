@@ -4,8 +4,9 @@ import "../styles/SliderStyle.css";
 import "../styles/HomeStyle.css";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
-import { PRODUCTS } from "./ProductData";
 import Footer from "./Footer";
+import { PRODUCTS } from "./ProductData";
+import Wishlist from "./Wishlist";
 
 // Deklarimi i funksionit Home
 function Home() {
@@ -59,7 +60,6 @@ function Home() {
             <Slider />
 
             <div>
-                <h1>Featured Products</h1>
                 <div className="main-content" style={{
                     display: "flex",
                     flexDirection: "row",

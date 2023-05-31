@@ -14,7 +14,7 @@ export const ShopContext = createContext({
 export function ShopContextProvider({ children }) {
     const [cartProducts, setCartProducts] = useState([]);
 
-    // Funksioni per te marrur sasisne e produktit
+    // Funksioni per te marrur sasine e produktit
     function getProductQuantity(id) {
         const quantity = cartProducts.find(product => product.id === id)?.quantity
 
@@ -105,7 +105,9 @@ export function ShopContextProvider({ children }) {
 
     // Kthen kontekstin e shportes te mbeshtjelle me <ShopContext.Provider> per te qene i perdorshem nga komponentet femije
     return (
-        <ShopContext.Provider value={contextValue}>{children}</ShopContext.Provider>
+        <ShopContext.Provider value={contextValue}>
+            {children}
+        </ShopContext.Provider>
     );
 };
 

@@ -72,14 +72,14 @@ const PRODUCTS = [
         currency: "$",
         thumb: require("../img/black-hoodie-2.png")
     },
-    // {
-    //     id: 10,
-    //     product_name: "Gray Hoodie",
-    //     description: "Comfortable, High Quality, Black",
-    //     price: 15,
-    //     currency: "$",
-    //     thumb: require("../img/gray-hoodie-2.png")
-    // },
+    {
+        id: 10,
+        product_name: "Gray Hoodie",
+        description: "Comfortable, High Quality, Black",
+        price: 15,
+        currency: "$",
+        thumb: require("../img/gray-hoodie-2.png")
+    },
 ];
 
 function getProductData(id) {

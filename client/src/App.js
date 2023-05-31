@@ -12,39 +12,40 @@ import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import Product from "./components/Product";
 import './App.css'
 import Cart from './components/Cart';
+import Wishlist from './components/Wishlist';
 import { ShopContextProvider } from "./context/shop-context";
+import { WishlistContextProvider } from "./context/wishlist-context";
 import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
-
 
 function App() {
   return (
     <div className="App">
-
       <ShopContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/" element={<Product />} />
-            <Route path="/Success" element={<Success />} />
-            <Route path="/Cancel" element={<Cancel />} />
-            <Route path="/Cart" element={<Cart />} />
-            <Route path="/aboutUs" element={<AboutUs />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/Admin" element={<Admin />} />
-            <Route path="/user/addUser" element={<AddEdit />} />
-            <Route path="/user/update/:id" element={<AddEdit />} />
-            <Route path="/addProduct" element={<AddEditProduct />} />
-            <Route path="/update/:idproduct" element={<AddEditProduct />} />
-            <Route path="/aboutus/addAboutUs" element={<AddEditAboutUs />} />
-            <Route path="/aboutus/update/:idaboutus" element={<AddEditAboutUs />} />
-          </Routes>
-          <ToTop />
-        </BrowserRouter>
-
+        <WishlistContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Product />} />
+              <Route path="/Success" element={<Success />} />
+              <Route path="/Cancel" element={<Cancel />} />
+              <Route path="/Cart" element={<Cart />} />
+              <Route path="/Wishlist" element={<Wishlist />} />
+              <Route path="/aboutUs" element={<AboutUs />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/Admin" element={<Admin />} />
+              <Route path="/user/addUser" element={<AddEdit />} />
+              <Route path="/user/update/:id" element={<AddEdit />} />
+              <Route path="/addProduct" element={<AddEditProduct />} />
+              <Route path="/update/:idproduct" element={<AddEditProduct />} />
+              <Route path="/aboutus/addAboutUs" element={<AddEditAboutUs />} />
+              <Route path="/aboutus/update/:idaboutus" element={<AddEditAboutUs />} />
+            </Routes>
+            <ToTop />
+          </BrowserRouter>
+        </WishlistContextProvider>
       </ShopContextProvider>
-
     </div>
   );
 }

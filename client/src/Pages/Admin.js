@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import AdminSidebar from './AdminSidebar';
-import AdminStyle from "../styles/AdminStyle.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import AdminSidebar from './AdminSidebar';
+import "../styles/AdminStyle.css";
 
 function App() {
   // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus

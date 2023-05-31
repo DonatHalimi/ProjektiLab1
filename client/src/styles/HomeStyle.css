@@ -39,18 +39,27 @@ body {
   margin-bottom: 5px;
 }
 
-.product button {
-  background-color: #546655;
-  border: 10px;
-  color: rgb(177, 23, 23);
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 5px 0;
-  border-radius: 4px;
+.card .wishlistButton {
+  background-color: #942020;
+  border: 0ch;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  width: 55px;
+  margin-top: 5px;
+  padding: 12px;
+  height: 44px;
+  width: 50%;
+}
+
+.card .wishlistButton:hover {
   cursor: pointer;
+  color: black;
+}
+
+
+.wishlistButton {
+  position: relative;
+  left: 10px;
 }
 
 /* .main_content {
@@ -67,8 +76,6 @@ body {
     justify-content: space-between;
     flex-wrap: wrap;
 } */
-
-
 
 .card_img img {
   max-width: 100%;
@@ -90,22 +97,6 @@ body {
   padding: 12px;
   height: 44px;
   width: 30%;
-}
-
-.card .buton {
-  background-color: rgb(212, 37, 60);
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  width: 55px;
-  margin-top: 5px;
-  padding: 12px;
-  height: 44px;
-  width: 30%;
-}
-
-.card .buton:hover {
-  cursor: pointer;
-  color: black;
 }
 
 .card .butonat {

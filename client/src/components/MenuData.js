@@ -1,5 +1,7 @@
-// Definimi i nje vargu te te dhenave te menyse per navbar
 import Cart from "./Cart";
+import Wishlist from "./Wishlist";
+
+// Definimi i nje vargu te te dhenave te menyse per navbar
 export const MenuData = [
     {
         title: "Home",
@@ -15,9 +17,10 @@ export const MenuData = [
     },
     {
         title: "Wishlist",
-        url: "#",
+        url: "/Wishlist",
         cName: "nav-links",
         icon: "fa-solid fa-heart",
+        component: <Wishlist />
     },
     {
         title: "About Us",
@@ -30,7 +33,7 @@ export const MenuData = [
         url: "/Cart",
         cName: "nav-links",
         icon: "fa-solid fa-shopping-cart",
-        component: <Cart />  // Add the component prop with the Cart component
+        component: <Cart />
     }
     ,
     {

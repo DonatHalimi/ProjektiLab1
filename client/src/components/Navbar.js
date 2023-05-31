@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { MenuData } from "./MenuData";
+import { Link } from 'react-router-dom';
 import "../styles/NavbarStyle.css";
 import "./Cart";
-import { Link } from 'react-router-dom';
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {

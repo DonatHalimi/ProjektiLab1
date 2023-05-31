@@ -20,20 +20,25 @@
   width: 30%;
 }
 
-.card .buton {
+.card .cartButton {
   background-color: #28a745;
+  border: 0ch;
   border-radius: 10px;
   color: rgb(255, 255, 255);
-  width: 55px;
   margin-top: 5px;
   padding: 12px;
   height: 44px;
   width: 50%;
 }
 
-.card .buton:hover {
+.card .cartButton:hover {
   cursor: pointer;
   color: black;
+}
+
+.cartButton {
+  position: relative;
+  right: 10px;
 }
 
 .card .butonat {
