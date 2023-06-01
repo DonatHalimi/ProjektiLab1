@@ -9,7 +9,7 @@ const PRODUCTS = [
         thumb: require("../img/black-hoodie-1.png")
     },
     {
-        id: 2,
+        id: "price_1NEGo4HB8rLE0wX1s5UWXAMj",
         product_name: "Black Shirt",
         description: "Comfortable, High Quality, Black",
         price: 10,
@@ -17,7 +17,7 @@ const PRODUCTS = [
         thumb: require("../img/black-shirt-1.png")
     },
     {
-        id: 3,
+        id: "price_1NEGokHB8rLE0wX1iOROEEuE",
         product_name: "Orange Hoodie",
         description: "Comfortable, High Quality, Orange",
         price: 15,
@@ -25,7 +25,7 @@ const PRODUCTS = [
         thumb: require("../img/orange-hoodie-1.png")
     },
     {
-        id: 4,
+        id: "price_1NEGpOHB8rLE0wX1BTzH7T6F",
         product_name: "Gray Hoodie",
         description: "Comfortable, High Quality, Gray",
         price: 15,
@@ -41,7 +41,7 @@ const PRODUCTS = [
         thumb: require("../img/violet-t-shirt-1.png")
     },
     {
-        id: 6,
+        id: "price_1NEGqZHB8rLE0wX1JAnjHfWL",
         product_name: "Gray T-Shirt",
         description: "Comfortable, High Quality, Gray",
         price: 10,
@@ -49,7 +49,7 @@ const PRODUCTS = [
         thumb: require("../img/gray-t-shirt-1.png")
     },
     {
-        id: 7,
+        id: "price_1NEGrIHB8rLE0wX19bPhqKkV",
         product_name: "Red T-Shirt",
         description: "Comfortable, High Quality, Red",
         price: 10,
@@ -57,7 +57,7 @@ const PRODUCTS = [
         thumb: require("../img/red-t-shirt-1.png")
     },
     {
-        id: 8,
+        id: "price_1NEGrvHB8rLE0wX1VYmBla3m",
         product_name: "Black Shorts",
         description: "Comfortable, High Quality, Black",
         price: 15,
@@ -65,7 +65,7 @@ const PRODUCTS = [
         thumb: require("../img/black-shorts-1.png")
     },
     {
-        id: 9,
+        id: "price_1NEGsSHB8rLE0wX112okeiko",
         product_name: "Black Hoodie",
         description: "Comfortable, High Quality, Black",
         price: 15,
@@ -73,7 +73,7 @@ const PRODUCTS = [
         thumb: require("../img/black-hoodie-2.png")
     },
     {
-        id: 10,
+        id: "price_1NEGsuHB8rLE0wX1eyYXOAAg",
         product_name: "Gray Hoodie",
         description: "Comfortable, High Quality, Black",
         price: 15,
