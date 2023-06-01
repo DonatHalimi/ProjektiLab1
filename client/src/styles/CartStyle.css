@@ -133,6 +133,7 @@ h1 {
 .noItemsInCart img {
     position: relative;
     bottom: 200px;
+    left: 45px;
 }
 
 .noItemsInCart a:hover {
