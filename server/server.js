@@ -21,10 +21,11 @@ const db = mysql.createPool({
 
 // Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "http://localhost:3002"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
-}));
+  }));
+  
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -78,7 +79,8 @@ app.get("/api/user/get/:id", cors(), (req, res) => {
 app.post("/api/user/post", (req, res) => {
     const { Name, Surname, Email, Password, Role } = req.body;
     const sqlInsert = "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
-    db.query(sqlInsert, [Name, Surname, Email, Password, Role], (error, result) => {
+    bcrypt.hash(Password,saltRounds, (err, hash) => {
+    db.query(sqlInsert, [Name, Surname, Email, hash, Role], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error inserting data into database" });
@@ -88,6 +90,9 @@ app.post("/api/user/post", (req, res) => {
         }
     });
 });
+}
+)
+
 
 // Fshirja e userave
 app.delete("/api/user/remove/:id", (req, res) => {
