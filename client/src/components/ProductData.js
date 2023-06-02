@@ -26,7 +26,7 @@ const PRODUCTS = [
     },
     {
         id: "price_1NEGpOHB8rLE0wX1BTzH7T6F",
-        product_name: "Gray Hoodie",
+        product_name: "Gray Blouse",
         description: "Comfortable, High Quality, Gray",
         price: 15,
         currency: "$",
