@@ -6,11 +6,11 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f5f5f5;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .product:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .product img {
@@ -29,4 +29,74 @@
     margin-top: 5px;
     font-size: 14px;
     color: #666;
+}
+
+.alertCart {
+    position: fixed;
+    bottom: 980px;
+    right: 8px;
+    width: 420px;
+    height: 50px;
+    background-color: rgba(34, 139, 34, 0.8);
+    color: white;
+    border-radius: 9px;
+}
+
+.alertCart p {
+    text-align: center;
+    position: relative;
+    top: 12px;
+    right: 56px;
+}
+
+.cancelPopupButtonCart {
+    position: relative;
+    bottom: 19px;
+    left: 190px;
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.cancelPopupButtonCart:hover {
+    text-decoration: underline;
+    color: #dfdede;
+}
+
+.alertWishlist {
+    position: fixed;
+    bottom: 980px;
+    right: 8px;
+    width: 450px;
+    height: 50px;
+    background-color: rgba(34, 139, 34, 0.8);
+    color: white;
+    border-radius: 9px;
+}
+
+.alertWishlist p {
+    text-align: center;
+    position: relative;
+    top: 12px;
+    right: 56px;
+}
+
+.cancelPopupButtonWishlist {
+    position: relative;
+    bottom: 19px;
+    left: 200px;
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.cancelPopupButtonWishlist:hover {
+    text-decoration: underline;
+    color: #dfdede;
 }

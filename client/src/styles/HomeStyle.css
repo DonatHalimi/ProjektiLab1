@@ -13,20 +13,18 @@ body {
   flex-wrap: wrap;
 }
 
+.card_img img {
+  max-width: 100%;
+}
+
 /* Stilizimi i komponentit te produktit */
 .product {
-  border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0px 0px 5px #ccc;
-  margin: 10px;
-  padding: 10px;
+  box-shadow: 3px 3px 5px #ccc;
+  padding: 90px;
   text-align: center;
   width: 250px;
   margin-top: 10px;
-}
-
-.product img {
-  max-width: 100%;
 }
 
 .product h3 {
@@ -39,46 +37,14 @@ body {
   margin-bottom: 5px;
 }
 
-.card .wishlistButton {
-  background-color: #942020;
-  border: 0ch;
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  width: 55px;
-  margin-top: 5px;
-  padding: 12px;
-  height: 44px;
-  width: 50%;
-}
-
 .card .wishlistButton:hover {
   cursor: pointer;
-  color: black;
+  color: rgb(226, 226, 226);
 }
-
 
 .wishlistButton {
   position: relative;
   left: 10px;
-}
-
-/* .main_content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 70%;
-    height: 100%;
-    margin: 50px auto;
-    padding: 50px 0 0;
-    box-sizing: border-box;
-    justify-content: space-between;
-    flex-wrap: wrap;
-} */
-
-.card_img img {
-  max-width: 100%;
 }
 
 .card_header {
@@ -103,6 +69,52 @@ body {
   display: flex;
   justify-content: space-evenly;
 }
+
+.card .cartButton {
+  background-color: #28a745;
+  border: 0;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  margin-top: 5px;
+  padding: 12px;
+  height: 44px;
+  width: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card .cartButton:hover {
+  transform: translateY(-2px);
+}
+
+.card .cartButton:active {
+  transform: translateY(2px);
+}
+
+.card .wishlistButton {
+  background-color: #f01a1a;
+  position: relative;
+  bottom: 50px;
+  left: 60px;
+  border: 0ch;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  margin-top: 5px;
+  padding: 12px;
+  height: 44px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+.card .wishlistButton:hover {
+  transform: translateY(-2px);
+}
+
+.card .wishlistButton:active {
+  transform: translateY(2px);
+}
+
 
 @media only screen and (max-width: 768px) {
   .main-content {

@@ -117,7 +117,7 @@ export const Login = (props) => {
               <p id="error">{formErrors.password}</p>
             </div>
 
-            <button className={LogInStyle['btn']} type="submit" onClick={login}>Log in </button>
+            <button className={LogInStyle['btnLogIn']} type="submit" onClick={login}>Log in </button>
           </form>
           <p id={LogInStyle['account-text']}>Don't have an account? <a href="/register" className={LogInStyle['a2']}>Sign up!</a></p>
           <p>{loginStatus}</p>

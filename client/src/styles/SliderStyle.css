@@ -18,7 +18,7 @@
 
 .slider .arrow {
     position: absolute;
-    top: 70%;
+    top: 50%;
     transform: translateY(-50%);
     font-size: 2rem;
     background-color: rgba(0, 0, 0, 0.2);
@@ -26,6 +26,16 @@
     padding: 0.5rem;
     color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.slider .arrow:hover {
+    color: #585656;
 }
 
 .slider .arrow.left,
@@ -92,6 +102,11 @@
     font-size: 1.3rem;
     color: hsl(0, 0%, 80%);
     cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.slider-button:hover {
+    color: #585656;
 }
 
 .slider-button.active {

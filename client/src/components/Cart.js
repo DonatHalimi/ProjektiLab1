@@ -36,26 +36,25 @@ const Cart = () => {
     <>
       <Navbar />
       <div>
-        <h1>Cart</h1>
+        <h1 className='cart-name'>Cart</h1>
         <div className="cart-items">
           {productsCount > 0 ?
             <>
-              <p>Items in your cart :</p>
               {/* Per secilin produkt ne shporte, shfaqe komponentin CartItem */}
               {cart.items.map((currentProduct, idx) => (
                 <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
               ))}
 
               {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes */}
-              <h1>Total: ${cart.getTotalCost().toFixed(2)}</h1>
+              <h1 className='cart-total'>Total: ${cart.getTotalCost().toFixed(2)}</h1>
 
               <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>
             </>
             :
             <div className='noItemsInCart'>
-              <img src='https://o.remove.bg/downloads/d31a7764-4d0e-4486-bb3a-0a459e35543f/image-removebg-preview.png' alt="Empty Cart"></img>
-              <p>Ju nuk keni ndonje produkt ne cart.</p>
-              <Link to="/">Kthehu ne faqen kryesore</Link>
+              <img src='https://media.istockphoto.com/id/861576608/vector/empty-shopping-bag-icon-online-business-vector-icon-template.jpg?s=612x612&w=0&k=20&c=I7MbHHcjhRH4Dy0NVpf4ZN4gn8FVDnwn99YdRW2x5k0=' alt="Empty Cart"></img>
+              <p>Ju nuk keni ndonjë produkt në cart.</p>
+              <Link to="/">Kthehu në faqen kryesore</Link>
             </div>
           }
         </div>

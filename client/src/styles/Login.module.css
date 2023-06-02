@@ -190,9 +190,7 @@
   border-radius: 5px;
 }
 
-
-
-.btn {
+.btnLogIn {
   width: 6.5em;
   height: 2.3em;
   margin: 0.5em;
@@ -216,12 +214,12 @@
   color: #fff;
 }
 
-.btn:hover {
+.btnLogIn:hover {
   background-color: rgb(255, 247, 247);
   color: #000000;
 }
 
-.btn:after {
+.btnLogIn:after {
   content: "";
   background: rgb(146, 19, 19);
   position: absolute;
@@ -234,7 +232,7 @@
   transition: all 0.5s;
 }
 
-.btn:hover:after {
+.btnLogIn:hover:after {
   transform: skewX(-45deg) scale(1, 1);
   -webkit-transition: all 0.5s;
   transition: all 0.5s;

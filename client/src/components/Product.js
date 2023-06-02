@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import "../styles/ProductStyle.css";
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
@@ -7,6 +7,8 @@ import { getProductData } from "./ProductData";
 function Product(props) {
   const product = props.product;
   const [fotoUrl, setFotoUrl] = useState("");
+  const [showAlertCart, setShowAlertCart] = useState(false);
+  const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
   // Efekti qe ndryshon URL-ne e fotos bazuar ne llojin e thumbnail-it te produktit
   useEffect(() => {
@@ -19,7 +21,6 @@ function Product(props) {
 
   const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
-  const [showCartPopup, setShowCartPopup] = useState(false);
 
   // Merr sasine e produkteve nga shporta
   const getProductQuantity = cart.getProductQuantity(product.id);
@@ -27,12 +28,22 @@ function Product(props) {
   // Funksioni qe shton nje produkt ne shporte
   const handleAddToCart = () => {
     cart.addToCart(product.id);
-    setShowCartPopup(true);
+    setShowAlertCart(true);
+
+    setTimeout(() => {
+      setShowAlertCart(false);
+    }, 5000);
   };
 
   // Funksioni qe shton nje produkt ne listën e dëshirave
   const handleAddToWishlist = () => {
     wishlist.addItemToWishlist(product.id);
+
+    setShowAlertWishlist(true);
+
+    setTimeout(() => {
+      setShowAlertWishlist(false);
+    }, 5000);
   };
 
   if (!product) {
@@ -61,8 +72,24 @@ function Product(props) {
             <i className="fa-solid fa-heart"></i>
           </button>
         </div>
-        {showCartPopup}
       </div>
+      {showAlertCart && (
+        <div className="alertCart">
+          <p>Produkti është shtuar në cart me sukses! </p>
+          <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      )}
+
+      {showAlertWishlist && (
+        <div className="alertWishlist">
+          <p>Produkti është shtuar në wishlist me sukses! </p>
+          <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      )}
     </>
   );
 }

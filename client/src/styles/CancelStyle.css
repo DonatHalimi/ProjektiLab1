@@ -1,0 +1,43 @@
+@keyframes fade {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.cancel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 400px;
+    left: 900px;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.cancel-animation {
+    animation: fade 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.cancel-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.cancel-subtext {
+    font-size: 16px;
+    color: #666;
+}

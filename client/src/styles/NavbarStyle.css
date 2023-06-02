@@ -22,6 +22,8 @@
     color: #fff;
     justify-self: start;
     cursor: pointer;
+    position: relative;
+    top: 8px;
 }
 
 .fa-react {

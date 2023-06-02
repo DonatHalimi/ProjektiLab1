@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { WishlistContext } from '../context/wishlist-context';
 import { getProductData } from './ProductData';
+import { ShopContext } from '../context/shop-context';
 import '../styles/WishlistItemsStyle.css';
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
+    const cart = useContext(ShopContext);
+
     const id = props.id;
     const productData = getProductData(id);
     const fotoUrl = productData.thumb;
@@ -22,11 +25,11 @@ function WishlistItem(props) {
                 </div>
 
                 <div className="wishlistButtons">
-                    <button
-                        id="wishlistRemoveButton"
-                        onClick={() => wishlist.removeItemFromWishlist(id)}
-                    >
-                        Remove
+                    <button id='wishlistAddToCartButton' onClick={() => cart.addToCart(id)}>
+                        <i className="fa-solid fa-cart-shopping"></i>
+                    </button>
+                    <button id="wishlistRemoveButton" onClick={() => wishlist.removeItemFromWishlist(id)}>
+                        <i className='fa-solid fa-trash-can'></i>
                     </button>
                 </div>
             </div>

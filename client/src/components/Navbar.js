@@ -28,7 +28,9 @@ const Navbar = (props) => {
     <nav className="NavbarItems">
 
       {/* Krijimi i logose*/}
-      <h1 className="logo">Ruby</h1>
+      <Link to="/" className="logo" style={{ textDecoration: 'none' }}>
+        <h1>Ruby</h1>
+      </Link>
 
       {/* Krijimi i ikonave te menyse */}
       <div className="menu-icons" onClick={handleClick}>

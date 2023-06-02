@@ -24,8 +24,8 @@ const Wishlist = () => {
                 ) : (
                     <div className='noItemsInWishlist'>
                         <img src="https://elegantjewelersli.com/assets/images/empty-wishlist.png" alt="Empty Wishlist" />
-                        <p>Lista juaj e deshirave eshte e zbrazet!</p>
-                        <Link to="/">Kthehu ne faqen kryesore</Link>
+                        <p>Lista juaj e dëshirave është e zbrazët!</p>
+                        <Link to="/">Kthehu në faqen kryesore</Link>
                     </div>
                 )}
             </div>

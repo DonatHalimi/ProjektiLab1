@@ -1,0 +1,41 @@
+@keyframes checkAnimation {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 400px;
+    left: 900px;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.success-animation {
+    animation: checkAnimation 0.5s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.success-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.success-subtext {
+    font-size: 16px;
+    color: #666;
+}

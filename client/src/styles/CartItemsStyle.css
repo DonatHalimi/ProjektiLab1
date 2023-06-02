@@ -1,7 +1,3 @@
-.card_img img {
-  max-width: 100%;
-}
-
 .card_header {
   flex-grow: 1;
 }
@@ -21,6 +17,8 @@
 }
 
 .card .cartButton {
+  position: relative;
+  right: 50px;
   background-color: #28a745;
   border: 0ch;
   border-radius: 10px;
@@ -28,17 +26,12 @@
   margin-top: 5px;
   padding: 12px;
   height: 44px;
-  width: 50%;
+  width: 100%;
 }
 
 .card .cartButton:hover {
   cursor: pointer;
-  color: black;
-}
-
-.cartButton {
-  position: relative;
-  right: 10px;
+  color: rgb(226, 226, 226);
 }
 
 .card .butonat {

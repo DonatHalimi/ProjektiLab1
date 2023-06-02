@@ -142,7 +142,7 @@ export const Register = () => {
             <p id="error">{formErrors.confirmPassword}</p>
           </div>
 
-          <button className={RegisterStyle['btn']} type="submit" onClick={register}>Sign up </button>
+          <button className={RegisterStyle['btnRegister']} type="submit" onClick={register}>Sign up </button>
         </form>
 
         <p id={RegisterStyle['account-text']}>Already have an account? <a href="/Login" className={RegisterStyle['a2']}>Log in!</a></p>

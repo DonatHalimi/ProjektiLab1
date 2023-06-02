@@ -18,8 +18,9 @@ const Footer = () => {
               <p className="paragrafi">We are an e-commerce website that specializes in selling high-quality apparel products at affordable prices.</p>
             </div>
             <div className="contact">
+              <br />
               <h4 id="contact-h4">Contact Us</h4>
-              <p className="paragrafi">Email: info@ecommerce.com<br />Phone: 044-123-456<br />Address: Lagjja Kalabria,10000 Prishtine, Kosovo</p>
+              <p className="paragrafi">Email: info@rubyecommerce.com<br />Phone: 044-123-456<br />Address: Lagjja Kalabria,10000 Prishtine, Kosovo</p>
             </div>
             <div className="follow">
               <h4>Follow Us</h4>
