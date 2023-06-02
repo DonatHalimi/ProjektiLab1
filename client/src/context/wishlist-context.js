@@ -2,8 +2,8 @@ import React, { createContext, useState } from 'react';
 
 export const WishlistContext = createContext({
   items: [],
-  addItemToWishlist: () => {},
-  removeItemFromWishlist: () => {},
+  addItemToWishlist: () => { },
+  removeItemFromWishlist: () => { },
 });
 
 export function WishlistContextProvider({ children }) {

@@ -26,6 +26,7 @@ function Success() {
                 </div>
                 <h1 className="success-heading">Pagesa juaj është kryer me sukses!</h1>
                 <p className="success-subtext">Ne e vlerësojmë besimin tuaj.</p>
+                <p className='redirecting'>Redirecting...</p>
             </div>
         </>
     );

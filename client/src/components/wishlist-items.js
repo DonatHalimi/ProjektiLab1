@@ -13,6 +13,7 @@ function WishlistItem(props) {
     const fotoUrl = productData.thumb;
 
     return (
+        <>
         <div className="wishlistItem">
             <div className="wishlistCard">
                 <div className="wishlistCard_img">
@@ -25,15 +26,27 @@ function WishlistItem(props) {
                 </div>
 
                 <div className="wishlistButtons">
-                    <button id='wishlistAddToCartButton' onClick={() => cart.addToCart(id)}>
+                    <button id='wishlistAddToCartButton' onClick={() => cart.addToCart(id)} title='Add To Cart'>
                         <i className="fa-solid fa-cart-shopping"></i>
                     </button>
-                    <button id="wishlistRemoveButton" onClick={() => wishlist.removeItemFromWishlist(id)}>
+                    <button id="wishlistRemoveButton" onClick={() => wishlist.removeItemFromWishlist(id)} title='Remove'>
                         <i className='fa-solid fa-trash-can'></i>
                     </button>
                 </div>
             </div>
         </div>
+
+{/* {
+        showAlertCart && (
+            <div className="alertCart">
+                <p>Produkti është shtuar në cart me sukses! </p>
+                <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        )
+    } */}
+</>
     );
 }
 

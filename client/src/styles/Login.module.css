@@ -190,7 +190,7 @@
   border-radius: 5px;
 }
 
-.btnLogIn {
+.btn {
   width: 6.5em;
   height: 2.3em;
   margin: 0.5em;
@@ -214,12 +214,12 @@
   color: #fff;
 }
 
-.btnLogIn:hover {
+.btn:hover {
   background-color: rgb(255, 247, 247);
   color: #000000;
 }
 
-.btnLogIn:after {
+.btn:after {
   content: "";
   background: rgb(146, 19, 19);
   position: absolute;

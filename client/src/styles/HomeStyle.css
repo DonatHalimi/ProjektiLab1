@@ -13,7 +13,7 @@ body {
   flex-wrap: wrap;
 }
 
-.card_img img {
+.card_img {
   max-width: 100%;
 }
 

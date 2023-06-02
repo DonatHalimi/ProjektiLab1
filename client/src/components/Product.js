@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import "../styles/ProductStyle.css";
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import { getProductData } from "./ProductData";
+import "../styles/ProductStyle.css";
 
 function Product(props) {
   const product = props.product;
@@ -58,17 +58,17 @@ function Product(props) {
     <>
       <div className="product" key={product.id}>
         <div className="card">
-          <div className="card_img">
+          <div className="cardImg">
             <img src={fotoUrl} alt="Product" />
           </div>
           <div className="card_header">
             <h3>{product.product_name}</h3>
             <p className="price">${product.price}</p>
           </div>
-          <button className="cartButton" onClick={handleAddToCart}>
+          <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
             <i className="fa-solid fa-shopping-cart"></i>
           </button>
-          <button className="wishlistButton" onClick={handleAddToWishlist}>
+          <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
             <i className="fa-solid fa-heart"></i>
           </button>
         </div>

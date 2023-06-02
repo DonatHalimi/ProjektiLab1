@@ -20,7 +20,7 @@ const Footer = () => {
             <div className="contact">
               <br />
               <h4 id="contact-h4">Contact Us</h4>
-              <p className="paragrafi">Email: info@rubyecommerce.com<br />Phone: 044-123-456<br />Address: Lagjja Kalabria,10000 Prishtine, Kosovo</p>
+              <p className="paragrafi">Email: info@rubyecommerce.com<br />Phone: 044-123-456<br />Address: Lagjja Kalabria, 10000 Prishtinë, Kosovë</p>
             </div>
             <div className="follow">
               <h4>Follow Us</h4>

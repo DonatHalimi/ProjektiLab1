@@ -192,7 +192,7 @@
   border-radius: 5px;
 }
 
-.btnRegister {
+.btn {
   width: 6.5em;
   height: 2.3em;
   margin: 0.5em;
@@ -215,14 +215,12 @@
   top: 11px;
 }
 
-
-.btnRegister:hover {
+.btn:hover {
   background-color: rgb(255, 247, 247);
   color: #000000;
 }
 
-
-.btnRegister:after {
+.btn:after {
   content: "";
   background: rgb(248, 246, 246);
   position: absolute;
@@ -235,7 +233,7 @@
   transition: all 0.5s;
 }
 
-.btnRegister:hover:after {
+.btn:hover:after {
   transform: skewX(-45deg) scale(1, 1);
   -webkit-transition: all 0.5s;
   transition: all 0.5s;

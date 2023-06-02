@@ -34,9 +34,9 @@ function CartItem(props) {
           </div>
 
           <div className='editButtons'>
-            <button id='addButton' onClick={() => cart.addToCart(id)}> <i class="fa fa-plus" aria-hidden="true"></i></button>
-            <button id='removeButton' onClick={() => cart.removeOneFromCart(id)}><i class='fa fa-minus'></i></button>
-            <button id='deleteButton' onClick={() => cart.deleteFromCart(id)}><i class='fa fa-trash'></i></button>
+            <button id='addButton' onClick={() => cart.addToCart(id)} title='Add'> <i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button id='removeButton' onClick={() => cart.removeOneFromCart(id)} title='Remove'><i class='fa fa-minus'></i></button>
+            <button id='deleteButton' onClick={() => cart.deleteFromCart(id)} title='Delete'><i class='fa fa-trash'></i></button>
           </div>
         </div>
       </div>
