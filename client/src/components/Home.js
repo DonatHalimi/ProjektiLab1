@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
-import "../styles/SliderStyle.css";
-import "../styles/HomeStyle.css";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
-import Footer from "./Footer";
+import Footer from "../Pages/Footer";
 import { PRODUCTS } from "./ProductData";
 import Wishlist from "./Wishlist";
+import "../styles/SliderStyle.css";
+import "../styles/HomeStyle.css";
 
 // Deklarimi i funksionit Home
 function Home() {

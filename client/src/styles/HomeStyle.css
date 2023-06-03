@@ -49,6 +49,8 @@ body {
 
 .card_header {
   flex-grow: 1;
+  position: relative;
+  bottom: 40px;
 }
 
 .price {
@@ -78,7 +80,9 @@ body {
   margin-top: 5px;
   padding: 12px;
   height: 44px;
-  width: 50%;
+  width: 100%;
+  position: relative;
+  bottom: 40px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
 }
@@ -95,7 +99,7 @@ body {
   background-color: #f01a1a;
   position: relative;
   bottom: 50px;
-  left: 60px;
+  left: 50px;
   border: 0ch;
   border-radius: 10px;
   color: rgb(255, 255, 255);

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import { getProductData } from "./ProductData";
@@ -6,6 +7,9 @@ import "../styles/ProductStyle.css";
 
 function Product(props) {
   const product = props.product;
+  const cart = useContext(ShopContext);
+  const wishlist = useContext(WishlistContext);
+
   const [fotoUrl, setFotoUrl] = useState("");
   const [showAlertCart, setShowAlertCart] = useState(false);
   const [showAlertWishlist, setShowAlertWishlist] = useState(false);
@@ -18,9 +22,6 @@ function Product(props) {
       setFotoUrl(product.thumb);
     }
   }, [product.thumb]);
-
-  const cart = useContext(ShopContext);
-  const wishlist = useContext(WishlistContext);
 
   // Merr sasine e produkteve nga shporta
   const getProductQuantity = cart.getProductQuantity(product.id);
@@ -56,15 +57,20 @@ function Product(props) {
 
   return (
     <>
+      {/* Karta e produkteve */}
       <div className="product" key={product.id}>
         <div className="card">
-          <div className="cardImg">
-            <img src={fotoUrl} alt="Product" />
-          </div>
-          <div className="card_header">
-            <h3>{product.product_name}</h3>
-            <p className="price">${product.price}</p>
-          </div>
+          <Link to={`/product/${product.id}`} className="product-details-link">
+            <div className="cardImg">
+              <img src={fotoUrl} alt="Product" />
+            </div>
+            <div className="card_header">
+              <h3>{product.product_name}</h3>
+              <p className="price">{product.currency}{product.price}</p>
+            </div>
+          </Link>
+
+          {/* Butonat per me shtu produktin ne cart/wishlist */}
           <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
             <i className="fa-solid fa-shopping-cart"></i>
           </button>
@@ -73,6 +79,7 @@ function Product(props) {
           </button>
         </div>
       </div>
+
       {showAlertCart && (
         <div className="alertCart">
           <p>Produkti është shtuar në cart me sukses! </p>
@@ -80,16 +87,19 @@ function Product(props) {
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-      )}
+      )
+      }
 
-      {showAlertWishlist && (
-        <div className="alertWishlist">
-          <p>Produkti është shtuar në wishlist me sukses! </p>
-          <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      )}
+      {
+        showAlertWishlist && (
+          <div className="alertWishlist">
+            <p>Produkti është shtuar në wishlist me sukses! </p>
+            <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        )
+      }
     </>
   );
 }

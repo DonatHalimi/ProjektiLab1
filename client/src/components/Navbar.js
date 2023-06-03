@@ -28,7 +28,7 @@ const Navbar = (props) => {
     <nav className="NavbarItems">
 
       {/* Krijimi i logose*/}
-      <Link to="/" className="logo" style={{ textDecoration: 'none' }}>
+      <Link to="/" className="logo" style={{ textDecoration: 'none' }} title="Home">
         <h1>Ruby</h1>
       </Link>
 

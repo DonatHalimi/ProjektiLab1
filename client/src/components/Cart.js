@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CartItem from './cart-items';
 import Navbar from './Navbar';
 import "../styles/CartStyle.css"
-import Footer from './Footer';
+import Footer from '../Pages/Footer';
 
 // Krijimi i funksionit per Cart
 const Cart = () => {

@@ -17,6 +17,7 @@ import { ShopContextProvider } from "./context/shop-context";
 import { WishlistContextProvider } from "./context/wishlist-context";
 import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
+import ProductDetails from './components/ProductDetails';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/Cancel" element={<Cancel />} />
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Wishlist" element={<Wishlist />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

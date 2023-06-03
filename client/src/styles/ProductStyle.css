@@ -21,29 +21,33 @@
     border-radius: 8px;
     position: relative;
     bottom: 50px;
-    right: 35px;
+    right: 32px;
 }
 
 .product h3 {
     margin-top: 10px;
+    color: black;
     font-size: 16px;
+    text-decoration: none;
 }
 
 .product p {
     margin-top: 5px;
     font-size: 14px;
     color: #666;
+    text-decoration: none;
 }
 
 .alertCart {
     position: fixed;
-    bottom: 980px;
+    bottom: 870px;
     right: 8px;
     width: 420px;
     height: 50px;
     background-color: rgba(34, 139, 34, 0.8);
     color: white;
     border-radius: 9px;
+    z-index: 5;
 }
 
 .alertCart p {
@@ -72,13 +76,14 @@
 
 .alertWishlist {
     position: fixed;
-    bottom: 980px;
+    bottom: 870px;
     right: 8px;
     width: 450px;
     height: 50px;
     background-color: rgba(34, 139, 34, 0.8);
     color: white;
     border-radius: 9px;
+    z-index: 10;
 }
 
 .alertWishlist p {

@@ -14,29 +14,29 @@ function WishlistItem(props) {
 
     return (
         <>
-        <div className="wishlistItem">
-            <div className="wishlistCard">
-                <div className="wishlistCard_img">
-                    <img src={fotoUrl} alt="Item" />
-                </div>
+            <div className="wishlistItem">
+                <div className="wishlistCard">
+                    <div className="wishlistCard_img">
+                        <img src={fotoUrl} alt="Item" />
+                    </div>
 
-                <div className="wishlistCard_header">
-                    <h3>{productData.product_name}</h3>
-                    <p>${productData.price.toFixed(2)}</p>
-                </div>
+                    <div className="wishlistCard_header">
+                        <h3>{productData.product_name}</h3>
+                        <p>${productData.price.toFixed(2)}</p>
+                    </div>
 
-                <div className="wishlistButtons">
-                    <button id='wishlistAddToCartButton' onClick={() => cart.addToCart(id)} title='Add To Cart'>
-                        <i className="fa-solid fa-cart-shopping"></i>
-                    </button>
-                    <button id="wishlistRemoveButton" onClick={() => wishlist.removeItemFromWishlist(id)} title='Remove'>
-                        <i className='fa-solid fa-trash-can'></i>
-                    </button>
+                    <div className="wishlistButtons">
+                        <button id='wishlistAddToCartButton' onClick={() => cart.addToCart(id)} title='Add To Cart'>
+                            <i className="fa-solid fa-cart-shopping"></i>
+                        </button>
+                        <button id="wishlistRemoveButton" onClick={() => wishlist.removeItemFromWishlist(id)} title='Remove'>
+                            <i className='fa-solid fa-trash-can'></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-{/* {
+            {/* {
         showAlertCart && (
             <div className="alertCart">
                 <p>Produkti është shtuar në cart me sukses! </p>
@@ -46,7 +46,7 @@ function WishlistItem(props) {
             </div>
         )
     } */}
-</>
+        </>
     );
 }
 
