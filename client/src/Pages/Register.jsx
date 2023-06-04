@@ -3,92 +3,58 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import RegisterStyle from '../styles/Register.module.css';
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useFormik } from "formik";
+import { advancedSchema } from "../schemas";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const initialValues = { name: "", surname: "", email: "", password: "", confirmPassword: "" };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const [Name, setName] = useState("");
-  const [Surname, setSurname] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  
   const [registerStatus, setRegisterStatus] = useState("");
 
 
-  const register = (e) => {
-    e.preventDefault();
-    axios.post(`http://localhost:6001/api/user/register`, {
-      Name: Name,
-      Surname: Surname,
-      Email: Email,
-      Password: Password,
-      Role: 2
+  const register = async (values, actions) => {
 
-    }).then((response) => {
-      if (response.data.message) {
-        setRegisterStatus(response.data.message)
-      } else {
-        setRegisterStatus("ACCOUNT CREATED SUCCESSFULLY")
-      }
-    })
-      .catch((error) => {
-        console.log(error);
-        setRegisterStatus("Error registering user");
+    try {
+      const response = await axios.post('http://localhost:6001/api/user/register', {
+        Name: values.Name,
+        Surname: values.Surname,
+        Email: values.Email,
+        Password: values.Password,
+        Role: 2
       });
+    
+      if (response.data.message) {
+        setRegisterStatus(response.data.message);
+      } else {
+        setRegisterStatus('ACCOUNT CREATED SUCCESSFULLY');
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      setRegisterStatus('Error registering user');
+    } finally {
+      actions.setSubmitting(false);
+    }
   }
+  const formik = useFormik({
+    initialValues: {
+      Name:"",
+      Surname:"",
+      Email: "",
+      Password: "",
+      confirmPassword:"",
+    },
+    validationSchema: advancedSchema,
+    onSubmit: (values, actions) => {
+      register(values, actions);
+    },
+  });
 
-
-  console.log(setRegisterStatus);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  }
-  /*const handleSubmit = (e) => {
-    e.preventDefault();
-    validate(formValues);
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-  }*/
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
-
-  const validate = (values) => {
-    const errors = {}
-    const regexEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net)$/;
-    const regexPass = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+=-])[A-Za-z\d!@#$%^&*()_+=-]{8,}$/;
-
-    if (!values.name) {
-      errors.name = "Name is required";
-    }
-    if (!values.surname) {
-      errors.surname = "Surname is required";
-    }
-    if (!values.email) {
-      errors.email = "Email is required";
-    } else if (!regexEmail.test(values.email)) {
-      errors.email = "This is not a valid email";
-    }
-
-    if (!values.password) {
-      errors.password = "Password is required";
-    } else if (!regexPass.test(values.password)) {
-      errors.password = "This is not a valid password";
-    }
-
-    if (!values.confirmPassword) {
-      errors.confirmPassword = "You need to confirm password";
-    } else if (values.confirmPassword !== values.password) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-    return errors;
-  }
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -105,44 +71,76 @@ export const Register = () => {
       
       <div className={RegisterStyle['register-box']}>
         <p>Sign up</p>
-        <form >
+        <form onSubmit={formik.handleSubmit} autoComplete="off">
           <div className={RegisterStyle['user-box']}>
-            <input onChange={(e) => { setName(e.target.value) }} type="text" placeholder="Type name" id="name" name="Name"></input>
+            <input value={formik.values.Name} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" placeholder="Type name" id="name" name="Name"   className={
+                  formik.errors.Name && formik.touched.Name
+                    ? "input-error"
+                    : ""
+                }></input>
             <label htmlFor='name'>Name</label>
-            <p id="error">{formErrors.name}</p>
+            {formik.errors.Name && formik.touched.Name && (
+                <p className="error">{formik.errors.Name}</p>
+              )}
+           
           </div>
 
           <div className={RegisterStyle['user-box']}>
-            <input onChange={(e) => { setSurname(e.target.value) }} type="text" placeholder="Type surname" id="surname" name="Surname"></input>
+          <input value={formik.values.Surname} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" placeholder="Type surname" id="surname" name="Surname" className={
+                  formik.errors.Surname && formik.touched.Surname
+                    ? "input-error"
+                    : ""
+                }></input>
             <label htmlFor='surname'>Surname</label>
-            <p id="error">{formErrors.surname}</p>
+            {formik.errors.Surname && formik.touched.Surname && (
+                <p className="error">{formik.errors.Surname}</p>
+              )}
           </div>
 
           <div className={RegisterStyle['user-box']}>
-            <input onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Type e-mail" id="email" name="Email"></input>
+          <input value={formik.values.Email} onChange={formik.handleChange} onBlur={formik.handleBlur} type="email" placeholder="Type e-mail" id="email" name="Email" className={
+                  formik.errors.Email && formik.touched.Email
+                    ? "input-error"
+                    : ""
+                }
+              ></input>
             <label htmlFor='email'>Email</label>
-            <p id="error">{formErrors.email}</p>
+            {formik.errors.Email && formik.touched.Email && (
+                <p className="error">{formik.errors.Email}</p>
+              )}
           </div>
 
           <div className={RegisterStyle['user-box']}>
-            <input onChange={(e) => { setPassword(e.target.value) }} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password"></input>
+          <input value={formik.values.Password} onChange={formik.handleChange} onBlur={formik.handleBlur} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password" className={
+                  formik.errors.Password && formik.touched.Password
+                    ? "input-error"
+                    : ""
+                }></input>
             <label htmlFor="password">Password</label>
             <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
             </button>
-            <p id="error">{formErrors.password}</p>
+            {formik.errors.Password && formik.touched.Password && (
+                <p>{formik.errors.Password}</p>
+              )}
           </div>
 
           <div className={RegisterStyle['user-box']}>
-            <input onChange={handleChange} type={confirmPasswordVisible ? "text" : "password"} placeholder="Type password" id="confirmPassword" name="confirmPassword"></input>
+            <input value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur} type={confirmPasswordVisible ? "text" : "password"} placeholder="Type password" id="confirmPassword" name="confirmPassword" className={
+                  formik.errors.confirmPassword && formik.touched.confirmPassword
+                    ? "input-error"
+                    : ""
+                }></input>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <button type="button" class="visibility-btn" onClick={toggleConfirmPasswordVisibility}>
               {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
             </button>
-            <p id="error">{formErrors.confirmPassword}</p>
+            {formik.errors.confirmPassword && formik.touched.confirmPassword && (
+                <p>{formik.errors.confirmPassword}</p>
+              )}
           </div>
 
-          <button className={RegisterStyle['btn']} type="submit" onClick={register}>Sign up </button>
+          <button disabled={formik.isSubmitting} className={RegisterStyle['btn']} type="submit" >Sign up </button>
         </form>
 
         <p id={RegisterStyle['account-text']}>Already have an account? <a href="/Login" className={RegisterStyle['a2']}>Log in!</a></p>

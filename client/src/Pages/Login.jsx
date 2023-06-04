@@ -117,13 +117,7 @@ const Login = () => {
               )}
             </div>
 
-            <button
-              disabled={formik.isSubmitting}
-              className={LogInStyle["btn"]}
-              type="submit"
-            >
-              Log in{" "}
-            </button>
+            <button disabled={formik.isSubmitting} className={LogInStyle["btn"]} type="submit"> Log in{" "}</button>
           </form>
           <p id={LogInStyle["account-text"]}>
             Don't have an account?{" "}
