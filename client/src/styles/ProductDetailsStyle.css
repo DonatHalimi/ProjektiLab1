@@ -35,7 +35,9 @@
   bottom: 10px;
   right: 410px;
 }
-
+.product-details-link{
+  text-decoration: none;
+}
 .product-details-price {
   font-size: 18px;
   color: #888;
