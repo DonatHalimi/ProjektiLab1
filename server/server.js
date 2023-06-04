@@ -339,24 +339,28 @@ app.post("/api/user/register", (req, res) => {
 // Krijojme nje API POST per kerkesa te lidhura me autentifikimin e perdoruesit ne aplikacion
 app.post('/api/user/login', (req, res) => {
     const { Email, Password } = req.body;
+  
     const sqlGet = "SELECT * FROM userat WHERE Email = ?";
-    db.query(sqlGet, [Email], (error, result) => {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        }
-        if (result.length > 0) {
-            bcrypt.compare(Password, result[0].Password, (error, response) => {
-                if (response) {
-                    req.session.user = result;
-                    console.log(req.session.user);
-                    res.send(result);
-                } else {
-                    res.send({ message: "Wrong username/password combination" })
-                }
-            })
-        }
+    db.query(sqlGet, Email, (error, result) => {
+      if (error) {
+        console.log(error);
+        res.sendStatus(500);
+      }
+  console.log("Result:", result); // Check the value of 'result'
+  if (result && result.length > 0) {
+    bcrypt.compare(Password, result[0].Password, (error, response) => {
+      if (response) {
+        req.session.user = result;
+        console.log(req.session.user);
+        res.send(result);
+      } else {
+        res.send({ message: "Wrong username/password combination" });
+      }
     });
+  } else {
+    res.send({ message: "User not found" });
+  }
+});
 });
 
 //Secret key: sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import ToTop from "./components/ToTop";
-import { Login } from "./Pages/Login";
+import  Login  from "./Pages/Login";
 import { Register } from "./Pages/Register";
 import AboutUs from "./Pages/aboutUs";
 import Admin from "./Pages/Admin";
