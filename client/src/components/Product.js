@@ -36,7 +36,7 @@ function Product(props) {
     }, 5000);
   };
 
-  // Funksioni qe shton nje produkt ne listën e dëshirave
+  // Funksioni qe shton nje produkt ne listen e deshirave
   const handleAddToWishlist = () => {
     wishlist.addItemToWishlist(product.id);
 
@@ -80,20 +80,24 @@ function Product(props) {
         </div>
       </div>
 
+      {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne cart/wishlist */}
       {showAlertCart && (
         <div className="alertCart">
-          <p>Produkti është shtuar në cart me sukses! </p>
+          <Link to="/Cart" className="cartLink">
+            <p>Produkti është shtuar në shportë me sukses! </p>
+          </Link>
           <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-      )
-      }
+      )}
 
       {
         showAlertWishlist && (
           <div className="alertWishlist">
-            <p>Produkti është shtuar në wishlist me sukses! </p>
+            <Link to="/Wishlist" className="wishlistLink">
+              <p>Produkti është shtuar në wishlist me sukses! </p>
+            </Link>
             <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
               <i class="fa-solid fa-xmark"></i>
             </button>

@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import WishlistItem from './wishlist-items';
 
 const Wishlist = () => {
+
+    // Merr kontekstin e dyqanit nga komponenti ShopContext
     const { items, removeItemFromWishlist } = useContext(WishlistContext);
 
     return (

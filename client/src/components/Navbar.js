@@ -16,12 +16,6 @@ const Navbar = (props) => {
     // document.body.classList.toggle("auto", clicked);
   };
 
-  const [showCartPopup, setShowCartPopup] = useState(false);
-
-  const handleShowCart = () => {
-    setShowCartPopup(true);
-  };
-
   // Renderimi i HTML per Navbar
   return (
 

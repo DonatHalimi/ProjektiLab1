@@ -17,8 +17,8 @@
 .product img {
     max-width: 300%;
     max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
+    aspect-ratio: 2/3;
+    object-fit: contain;
     position: relative;
     bottom: 50px;
     right: 32px;
@@ -53,8 +53,8 @@
 .alertCart p {
     text-align: center;
     position: relative;
-    top: 12px;
-    right: 56px;
+    top: 14px;
+    right: 42px;
 }
 
 .cancelPopupButtonCart {
@@ -74,6 +74,12 @@
     color: #dfdede;
 }
 
+.cartLink,
+.wishlistLink {
+    text-decoration: none;
+    color: white;
+}
+
 .alertWishlist {
     position: fixed;
     bottom: 870px;
@@ -89,7 +95,7 @@
 .alertWishlist p {
     text-align: center;
     position: relative;
-    top: 12px;
+    top: 14px;
     right: 56px;
 }
 

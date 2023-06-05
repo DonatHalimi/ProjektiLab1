@@ -10,6 +10,8 @@
 .product-details-image {
   position: relative;
   top: 200px;
+  aspect-ratio: 3/2;
+  object-fit: contain;
   /* right: 10px; */
 }
 
@@ -20,35 +22,60 @@
 .product-details-content {
   width: 50%;
   position: relative;
-  top: 30px;
+  top: 1 0px;
   right: 100px;
 }
 
 .product-details-name {
   font-size: 24px;
   position: relative;
-  right: 450px;
+  right: 485px;
 }
 
 .product-details-description {
+  text-align: justify;
   position: relative;
-  bottom: 10px;
-  right: 410px;
+  top: 5px;
+  right: 110px;
+  margin-right: 250px;
+}
+
+.product-details-rating {
+  position: relative;
+  bottom: 15px;
+  right: 490px;
 }
 
 .product-details-price {
   font-size: 18px;
-  color: #888;
+  color: black;
   position: relative;
-  top: 10px;
-  right: 516px;
+  top: 20px;
+  right: 545px;
+}
+
+.product-details-size label {
+  margin-right: 8px;
+  position: relative;
+  top: 20px;
+  right: 485px;
+}
+
+.product-details-size select {
+  position: relative;
+  top: 20px;
+  right: 485px;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  padding: 4px;
 }
 
 .product-details-buttons {
   display: flex;
   position: relative;
-  right: 80px;
-  top: 260px;
+  top: 150px;
+  right: 112px;
 }
 
 .cartButton,
@@ -77,4 +104,10 @@
 
 .wishlistButton:hover {
   background-color: #e63d26;
+}
+
+.cartLink,
+.wishlistLink {
+  text-decoration: none;
+  color: white;
 }
