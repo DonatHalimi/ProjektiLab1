@@ -45,7 +45,9 @@
   bottom: 15px;
   right: 490px;
 }
-
+.product-details-link{
+  text-decoration: none;
+}
 .product-details-price {
   font-size: 18px;
   color: black;

@@ -272,8 +272,8 @@ function App() {
             </tr>
           </thead>
           <tbody>
-
             {productData.map((product, indexproduct) => {
+              console.log(product.Foto)
               return (
                 <Fragment key={product.idproduct}>
                   <tr>
@@ -284,9 +284,15 @@ function App() {
                     <td>{product.Kategoria}</td>
                     <td>{product.Detajet}</td>
                     <td>
-                      {product.Foto instanceof Blob && (
-                        <img src={URL.createObjectURL(product.Foto)} alt="Product" />
+                    <td>
+                    <td>
+                      {product.Foto && (
+                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" />
                       )}
+                    </td>
+
+                    </td>
+                    
                     </td>
 
                     <td>

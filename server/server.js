@@ -164,51 +164,41 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: 10000000 },
-    fileFilter: (req, file, cb) => {
-        const fileTypes = /jpeg|jpg|png|gif/;
-        const mimeType = fileTypes.test(file.mimetype);
-        const extname = fileTypes.test(path.extname(file.originalname));
-
-        if (mimeType && extname) {
-            return cb(null, true);
-        }
-        cb('Give proper file format to upload!');
-    },
-}).single('Foto');
-
-// Insertimi i produkteve
-app.post("/api/product/post", (req, res) => {
-    upload(req, res, (err) => {
-        if (err instanceof multer.MulterError) {
-            console.error(err);
-            return res.status(500).json({ error: 'Multer Error: ' + err.message });
-        } else if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Error: ' + err.message });
-        }
-
-        const { Emri, Cmimi, Valuta, Kategoria, Detajet } = req.body;
-        const fotoPath = req.file ? req.file.path : null;
-
-        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
-        const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fotoPath];
-        const sql = mysql.format(sqlInsert, values);
-
-        db.query(sql, (error, result) => {
-            if (error) {
-                console.log(error);
-                res.status(500).json({ error: "Error inserting data into database" });
-            } else {
-                console.log(result);
-                res.sendStatus(200);
-            }
-        });
-    });
+var upload = multer({
+    storage: storage
 });
 
+
+// Insertimi i produkteve
+app.post("/api/product/post", upload.single('Foto'), (req, res) => {
+    if (!req.file) {
+        console.log("No file upload");
+        return res.status(400).json({ error: "No file uploaded" });
+    }
+    
+    // Retrieve form data
+    const { Emri, Cmimi, Valuta, Kategoria, Detajet } = req.body;
+    
+    // Retrieve uploaded file data
+    const Foto = req.file.buffer;
+
+    console.log(req.filename)
+    
+    var imgsrc= "http://localhost:3000/img/"+ req.filename
+    // Insert into produktet table
+    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
+    const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, imgsrc];
+   
+    db.query(sqlInsert, values, (error, result) => {
+        if (error) {
+            console.log("Database error:", error);
+            res.status(500).json({ error: "Error inserting data into the database" });
+        } else {
+            console.log("Database result:", result);
+            res.sendStatus(200);
+        }
+    });
+});
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
