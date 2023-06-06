@@ -124,9 +124,10 @@ const AddEditProduct = () => {
                 </div>
 
                 <div className="product-box">
-                            <label htmlFor="Foto">Foto</label>
-                            <input  onChange={handleInputChange} type="file" id="foto" name="Foto" accept='Foto/*'/>
-                        </div>
+  <label htmlFor="Foto">Foto</label>
+  <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
+</div>
+
 
                 <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
                 <Link to="/Admin">

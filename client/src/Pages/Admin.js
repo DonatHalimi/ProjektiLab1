@@ -272,56 +272,47 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {productData.map((product, indexproduct) => {
-              console.log(product.Foto)
-              return (
-                <Fragment key={product.idproduct}>
-                  <tr>
-                    <th scope="row">{indexproduct + 1}</th>
-                    <td>{product.Emri}</td>
-                    <td>{product.Cmimi}</td>
-                    <td>{product.Valuta}</td>
-                    <td>{product.Kategoria}</td>
-                    <td>{product.Detajet}</td>
-                    <td>
-                    <td>
-                    <td>
-                      {product.Foto && (
-                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" />
-                      )}
-                    </td>
-
-                    </td>
-                    
-                    </td>
-
-                    <td>
-                      <Link to={"/addProduct"}>
-                        <button className="btn btn-User">
-                          <i class="fa-solid fa-cart-plus"></i>
-                        </button>
-                      </Link>
-                    </td>
-
-                    <td>
-                      <Link to={`/update/${product.idproduct}`}>
-                        <button className="btn btn-edit">
-                          <i class="fa-solid fa-pen"></i>
-                        </button>
-                      </Link>
-                    </td>
-
-                    <td>
-                      <Link>
-                        <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
-                          <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-                </Fragment>
-              );
-            })}
+          {productData.map((product, indexproduct) => {
+  console.log(product.Foto);
+  return (
+    <Fragment key={product.idproduct}>
+      <tr>
+        <th scope="row">{indexproduct + 1}</th>
+        <td>{product.Emri}</td>
+        <td>{product.Cmimi}</td>
+        <td>{product.Valuta}</td>
+        <td>{product.Kategoria}</td>
+        <td>{product.Detajet}</td>
+        <td>
+          {product.Foto && (
+            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" />
+          )}
+        </td>
+        <td>
+          <Link to={"/addProduct"}>
+            <button className="btn btn-User">
+              <i className="fa-solid fa-cart-plus"></i>
+            </button>
+          </Link>
+        </td>
+        <td>
+          <Link to={`/update/${product.idproduct}`}>
+            <button className="btn btn-edit">
+              <i className="fa-solid fa-pen"></i>
+            </button>
+          </Link>
+        </td>
+        <td>
+          <Link>
+            <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
+              <i className="fa-solid fa-trash-can"></i>
+            </button>
+          </Link>
+        </td>
+      </tr>
+    </Fragment>
+  );
+})}
           </tbody>
         </table>
       </div>

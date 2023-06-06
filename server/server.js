@@ -9,6 +9,7 @@ const session = require("express-session");
 const saltRounds = 10;
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const stripe = require('stripe')('sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax');
 
 // Krijimi i nje lidhje me bazen e te dhenave MySQL duke perdorur te dhenat e qasjes
@@ -127,19 +128,24 @@ app.put("/api/user/update/:id", cors(), (req, res) => {
 
 // SQL KOMANDAT PER PRODUKTE
 
-// Selektimi i produkteve
 app.get("/api/product/get", cors(), (req, res) => {
     const sqlGet = "SELECT * FROM produktet";
     db.query(sqlGet, (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: "Error retrieving data from database" });
-        } else {
-            res.status(200).send(result);
-        }
+      if (error) {
+        console.log(error);
+        res.status(500).send({ error: "Error retrieving data from the database" });
+      } else {
+        // Convert the image data to base64 strings
+        const productsWithImageData = result.map((product) => {
+          const base64Data = Buffer.from(product.Foto).toString("base64");
+          return { ...product, Foto: base64Data };
+        });
+  
+        res.status(200).send(productsWithImageData);
+      }
     });
-});
-
+  });
+  
 // Selektimi i produkteve sipas ID
 app.get("/api/product/get/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
@@ -169,36 +175,44 @@ var upload = multer({
 });
 
 
+
 // Insertimi i produkteve
 app.post("/api/product/post", upload.single('Foto'), (req, res) => {
+    console.log(req.file);
     if (!req.file) {
-        console.log("No file upload");
-        return res.status(400).json({ error: "No file uploaded" });
+      console.log("No file upload");
+      return res.status(400).json({ error: "No file uploaded" });
     }
     
     // Retrieve form data
     const { Emri, Cmimi, Valuta, Kategoria, Detajet } = req.body;
-    
-    // Retrieve uploaded file data
-    const Foto = req.file.buffer;
-
-    console.log(req.filename)
-    
-    var imgsrc= "http://localhost:3000/img/"+ req.filename
-    // Insert into produktet table
-    const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
-    const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, imgsrc];
-   
-    db.query(sqlInsert, values, (error, result) => {
+  
+    // Retrieve uploaded file path
+    const filePath = req.file.path;
+  
+    // Read file from path
+    fs.readFile(filePath, (error, fileData) => {
+      if (error) {
+        console.log("Error reading file:", error);
+        return res.status(500).json({ error: "Error reading file" });
+      }
+  
+      // Insert into produktet table
+      const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
+      const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fileData];
+  
+      db.query(sqlInsert, values, (error, result) => {
         if (error) {
-            console.log("Database error:", error);
-            res.status(500).json({ error: "Error inserting data into the database" });
+          console.log("Database error:", error);
+          res.status(500).json({ error: "Error inserting data into the database" });
         } else {
-            console.log("Database result:", result);
-            res.sendStatus(200);
+          console.log("Database result:", result);
+          res.sendStatus(200);
         }
+      });
     });
-});
+  });
+  
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
