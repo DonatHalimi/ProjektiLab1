@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
-import { getProductData } from "./ProductData";
 import "../styles/ProductStyle.css";
 
 function Product(props) {
@@ -10,18 +9,8 @@ function Product(props) {
   const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
 
-  const [fotoUrl, setFotoUrl] = useState("");
   const [showAlertCart, setShowAlertCart] = useState(false);
   const [showAlertWishlist, setShowAlertWishlist] = useState(false);
-
-  // Efekti qe ndryshon URL-ne e fotos bazuar ne llojin e thumbnail-it te produktit
-  useEffect(() => {
-    if (product.thumb instanceof Blob) {
-      setFotoUrl(URL.createObjectURL(product.thumb));
-    } else if (typeof product.thumb === "string") {
-      setFotoUrl(product.thumb);
-    }
-  }, [product.thumb]);
 
   // Merr sasine e produkteve nga shporta
   const getProductQuantity = cart.getProductQuantity(product.id);

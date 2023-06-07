@@ -3,9 +3,6 @@ import Product from "./Product";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
 import Footer from "../Pages/Footer";
-import { PRODUCTS } from "./ProductData";
-import Wishlist from "./Wishlist";
-import "../styles/SliderStyle.css";
 import "../styles/HomeStyle.css";
 
 // Deklarimi i funksionit Home
@@ -65,6 +62,7 @@ function Home() {
             <Navbar />
             <Slider />
 
+            {/* Krijimi i kartes se produkteve ne Home page */}
             <div>
                 <div
                     className="main-content"
