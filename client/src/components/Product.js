@@ -58,15 +58,15 @@ function Product(props) {
   return (
     <>
       {/* Karta e produkteve */}
-      <div className="product" key={product.id}>
+      <div className="product" key={product.idproduct}>
         <div className="card">
-          <Link to={`/product/${product.id}`} className="product-details-link">
+          <Link to={`/product/${product.idproduct}`} className="product-details-link">
             <div className="cardImg">
-              <img src={fotoUrl} alt="Product" />
+              <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
             </div>
             <div className="card_header">
-              <h3>{product.product_name}</h3>
-              <p className="price">{product.currency}{product.price}</p>
+              <h3>{product.Emri}</h3>
+              <p className="price">{product.Valuta}{product.Cmimi}</p>
             </div>
           </Link>
 

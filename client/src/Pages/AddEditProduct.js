@@ -6,14 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/AddEditProductStyle.css";
 
 const initialState = {
-    Emri: "",
-    Cmimi: "",
-    Valuta: "",
-    Kategoria: "",
-    Detajet: "",
-    Foto: undefined,
-  };
-  
+  Emri: "",
+  Cmimi: "",
+  Valuta: "",
+  Kategoria: "",
+  Detajet: "",
+  Foto: undefined,
+};
 
 const AddEditProduct = () => {
   const [state, setState] = useState(initialState);
@@ -66,15 +65,14 @@ const AddEditProduct = () => {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-  
-  
+
     if (name === "Foto") {
       setState((prevState) => ({ ...prevState, Foto: files[0] }));
     } else {
       setState((prevState) => ({ ...prevState, [name]: value }));
     }
   };
-              
+
   return (
     <div style={{ marginTop: "150px" }}>
       <h2>Add/Edit</h2>
@@ -93,48 +91,42 @@ const AddEditProduct = () => {
       >
         <div className="product-box">
           <label htmlFor="Emri">Emri</label>
-          <input
-            value={state.Emri || ""}
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Type name"
-            id="emri"
-            name="Emri"
-          ></input>
+          <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emri" name="Emri"></input>
         </div>
 
-                <div className="product-box">
-                    <label htmlFor='Cmimi'>Cmimi</label>
-                    <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Type price" id="cmimi" name="Cmimi"></input>
-                </div>
-
-                <div className="product-box">
-                    <label htmlFor='Valuta'>Valuta</label>
-                    <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Type currency" id="valuta" name="Valuta"></input>
-                </div>
-
-                <div className="product-box">
-                    <label htmlFor='Kategoria'>Kategoria</label>
-                    <input value={state.Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Type category" id="kategoria" name="Kategoria"></input>
-                </div>
-
-                <div className="product-box">
-                    <label htmlFor='Detajet'>Detajet</label>
-                    <input value={state.Detajet || ""} onChange={handleInputChange} type="text" placeholder="Type details" id="detajet" name="Detajet"></input>
-                </div>
-
-                <div className="product-box">
-  <label htmlFor="Foto">Foto</label>
-  <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
-</div>
-
-
-                <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
-                <Link to="/Admin">
-                    <input id="goback-button" type="button" value="Go Back"></input>
-                </Link>
-            </form>
+        <div className="product-box">
+          <label htmlFor='Cmimi'>Cmimi</label>
+          <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Type price" id="cmimi" name="Cmimi"></input>
         </div>
-    );
-    }
+
+        <div className="product-box">
+          <label htmlFor='Valuta'>Valuta</label>
+          <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Type currency" id="valuta" name="Valuta"></input>
+        </div>
+
+        <div className="product-box">
+          <label htmlFor='Kategoria'>Kategoria</label>
+          <input value={state.Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Type category" id="kategoria" name="Kategoria"></input>
+        </div>
+
+        <div className="product-box">
+          <label htmlFor='Detajet'>Detajet</label>
+          <input value={state.Detajet || ""} onChange={handleInputChange} type="text" placeholder="Type details" id="detajet" name="Detajet"></input>
+        </div>
+
+        <div className="product-box">
+          <label htmlFor="Foto">Foto</label>
+          <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
+        </div>
+
+
+        <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
+        <Link to="/Admin">
+          <input id="goback-button" type="button" value="Go Back"></input>
+        </Link>
+      </form>
+    </div>
+  );
+}
+
 export default AddEditProduct;

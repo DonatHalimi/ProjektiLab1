@@ -42,7 +42,7 @@ const Cart = () => {
             <>
               {/* Per secilin produkt ne shporte, shfaqe komponentin CartItem */}
               {cart.items.map((currentProduct, idx) => (
-                <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
+                <CartItem key={idx} id={currentProduct.idproduct} quantity={currentProduct.quantity}></CartItem>
               ))}
 
               {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes */}

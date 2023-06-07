@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { PRODUCTS, getProductData } from '../components/ProductData';
 
 // Krijimi i nje instance te Context per kontekstin e dyqanit
@@ -11,8 +11,31 @@ export const ShopContext = createContext({
     getTotalCost: () => { },
 });
 
-export function ShopContextProvider({ children }) {
+export function ShopContextProvider({ children, id }) {
+
+    const [products, setProducts] = useState([]);
     const [cartProducts, setCartProducts] = useState([]);
+    const product = products.find((product) => product.id === id);
+
+    // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch("http://localhost:6001/api/product/get");
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const Cmimi = product ? parseFloat(product.Cmimi).toFixed(2) : 0;
 
     // Funksioni per te marrur sasine e produktit
     function getProductQuantity(id) {
@@ -31,24 +54,11 @@ export function ShopContextProvider({ children }) {
 
         // Nese sasia eshte 0 (produkti nuk gjendet ne shporte), shto produktin me sasi 1
         if (quantity === 0) {
-            setCartProducts(
-                [
-                    ...cartProducts,
-                    {
-                        id: id,
-                        quantity: 1
-                    }
-                ]
-            )
+            setCartProducts([...cartProducts, { id: id, quantity: 1 }]);
         } else {
             // Nese sasia eshte me shume se 0 (produkti gjendet ne shporte), shto nje sasi te re ne produkt
-            setCartProducts(
-                cartProducts.map(
-                    product =>
-                        product.id === id
-                            ? { ...product, quantity: product.quantity + 1 }
-                            : product
-                )
+            setCartProducts(cartProducts.map(product =>
+                product.id === id ? { ...product, quantity: product.quantity + 1 } : product)
             )
         }
     }
@@ -62,13 +72,8 @@ export function ShopContextProvider({ children }) {
             deleteFromCart(id);
         } else {
             // Nese sasia eshte me shume se 1, zvogelo sasine e produktit per nje
-            setCartProducts(
-                cartProducts.map(
-                    product =>
-                        product.id === id
-                            ? { ...product, quantity: product.quantity - 1 }
-                            : product
-                )
+            setCartProducts(cartProducts.map(product =>
+                product.id === id ? { ...product, quantity: product.quantity - 1 } : product)
             )
         }
     }
@@ -77,19 +82,17 @@ export function ShopContextProvider({ children }) {
     function getTotalCost() {
         let totalCost = 0;
         cartProducts.map((cartItem) => {
-            const productData = getProductData(cartItem.id);
-            totalCost += (productData.price * cartItem.quantity)
+            totalCost += (Cmimi * cartItem.quantity)
         });
         return totalCost;
     }
 
     // Krijimi i nje funksioni per largimin e nje produkti nga shporta
     function deleteFromCart(id) {
-        setCartProducts(
-            cartProducts =>
-                cartProducts.filter(currentProduct => {
-                    return currentProduct.id != id;
-                })
+        setCartProducts(cartProducts =>
+            cartProducts.filter(currentProduct => {
+                return currentProduct.id != id;
+            })
         )
     }
 
