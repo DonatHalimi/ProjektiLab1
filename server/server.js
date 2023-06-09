@@ -22,7 +22,7 @@ const db = mysql.createPool({
 
 // Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
-    origin: ["http://localhost:3000","http://localhost:3001", "http://localhost:3002"],
+    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
@@ -47,7 +47,7 @@ app.use(
     },)
 )
 
-// SQL KOMANDAT PER USERA
+// CRUDAT PER USERA
 
 // Selektimi i userave
 app.get("/api/user/get", cors(), (req, res) => {
@@ -126,26 +126,26 @@ app.put("/api/user/update/:id", cors(), (req, res) => {
 });
 
 
-// SQL KOMANDAT PER PRODUKTE
+// CRUDAT PER PRODUKTE
 
 app.get("/api/product/get", cors(), (req, res) => {
     const sqlGet = "SELECT * FROM produktet";
     db.query(sqlGet, (error, result) => {
-      if (error) {
-        console.log(error);
-        res.status(500).send({ error: "Error retrieving data from the database" });
-      } else {
-        // Convert the image data to base64 strings
-        const productsWithImageData = result.map((product) => {
-          const base64Data = Buffer.from(product.Foto).toString("base64");
-          return { ...product, Foto: base64Data };
-        });
-  
-        res.status(200).send(productsWithImageData);
-      }
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from the database" });
+        } else {
+            // Convert the image data to base64 strings
+            const productsWithImageData = result.map((product) => {
+                const base64Data = Buffer.from(product.Foto).toString("base64");
+                return { ...product, Foto: base64Data };
+            });
+
+            res.status(200).send(productsWithImageData);
+        }
     });
-  });
-  
+});
+
 // Selektimi i produkteve sipas ID
 app.get("/api/product/get/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
@@ -175,44 +175,43 @@ var upload = multer({
 });
 
 
-
 // Insertimi i produkteve
 app.post("/api/product/post", upload.single('Foto'), (req, res) => {
     console.log(req.file);
     if (!req.file) {
-      console.log("No file upload");
-      return res.status(400).json({ error: "No file uploaded" });
+        console.log("No file upload");
+        return res.status(400).json({ error: "No file uploaded" });
     }
-    
+
     // Retrieve form data
     const { Emri, Cmimi, Valuta, Kategoria, Detajet } = req.body;
-  
+
     // Retrieve uploaded file path
     const filePath = req.file.path;
-  
+
     // Read file from path
     fs.readFile(filePath, (error, fileData) => {
-      if (error) {
-        console.log("Error reading file:", error);
-        return res.status(500).json({ error: "Error reading file" });
-      }
-  
-      // Insert into produktet table
-      const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
-      const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fileData];
-  
-      db.query(sqlInsert, values, (error, result) => {
         if (error) {
-          console.log("Database error:", error);
-          res.status(500).json({ error: "Error inserting data into the database" });
-        } else {
-          console.log("Database result:", result);
-          res.sendStatus(200);
+            console.log("Error reading file:", error);
+            return res.status(500).json({ error: "Error reading file" });
         }
-      });
+
+        // Insert into produktet table
+        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
+        const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fileData];
+
+        db.query(sqlInsert, values, (error, result) => {
+            if (error) {
+                console.log("Database error:", error);
+                res.status(500).json({ error: "Error inserting data into the database" });
+            } else {
+                console.log("Database result:", result);
+                res.sendStatus(200);
+            }
+        });
     });
-  });
-  
+});
+
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
@@ -244,7 +243,7 @@ app.delete("/api/product/remove/:idproduct", (req, res) => {
 });
 
 
-// SQL KOMANDAT PER ABOUTUS
+// CRUDAT PER ABOUTUS
 
 // Selektimi i aboutus
 app.get("/api/aboutus/get", cors(), (req, res) => {
@@ -319,6 +318,122 @@ app.delete("/api/aboutus/remove/:idaboutus", (req, res) => {
     });
 });
 
+// CRUDAT PER SLIDESHOW
+
+app.get("/api/slideshow/get", cors(), (req, res) => {
+    const sqlGet = "SELECT * FROM slideshow";
+    db.query(sqlGet, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from the database" });
+        } else {
+            // Convert the image data to base64 strings
+            const slideshowWithImageData = result.map((slideshow) => {
+                const base64Data = Buffer.from(slideshow.Foto).toString("base64");
+                return { ...slideshow, Foto: base64Data };
+            });
+
+            res.status(200).send(slideshowWithImageData);
+        }
+    });
+});
+
+// Selektimi i slideshow sipas ID
+app.get("/api/slideshow/get/:idslideshow", cors(), (req, res) => {
+    const { idslideshow } = req.params;
+    const sqlGet = "SELECT * FROM slideshow WHERE idslideshow=?";
+    db.query(sqlGet, idslideshow, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Set up multer configuration
+const storageSlideshow = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../client/src/img'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+var upload = multer({
+    storageSlideshow: storageSlideshow
+});
+
+
+// Insertimi i slideshow
+app.post("/api/slideshow/post", upload.single('Foto'), (req, res) => {
+    console.log(req.file);
+    if (!req.file) {
+        console.log("No file upload");
+        return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    // Retrieve form data
+    const { EmriFoto } = req.body;
+
+    // Retrieve uploaded file path
+    const filePath = req.file.path;
+
+    // Read file from path
+    fs.readFile(filePath, (error, fileData) => {
+        if (error) {
+            console.log("Error reading file:", error);
+            return res.status(500).json({ error: "Error reading file" });
+        }
+
+        // Insert into slideshow table
+        const sqlInsert = "INSERT INTO slideshow (EmriFoto, Foto) VALUES (?,?)";
+        const values = [EmriFoto, fileData];
+
+        db.query(sqlInsert, values, (error, result) => {
+            if (error) {
+                console.log("Database error:", error);
+                res.status(500).json({ error: "Error inserting data into the database" });
+            } else {
+                console.log("Database result:", result);
+                res.sendStatus(200);
+            }
+        });
+    });
+});
+
+// Update i slideshow
+app.put("/api/slideshow/update/:idslideshow", cors(), (req, res) => {
+    const { idslideshow } = req.params;
+    const { EmriFoto, Foto } = req.body;
+    const sqlUpdate = "UPDATE slideshow SET EmriFoto, Foto=? WHERE idslideshow=?";
+    db.query(sqlUpdate, [EmriFoto, Foto, idslideshow], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Fshirja e slideshow
+app.delete("/api/slideshow/remove/:idslideshow", (req, res) => {
+    const idslideshow = req.params.idslideshow;
+    const sqlRemove = "DELETE FROM slideshow WHERE idslideshow=?";
+    db.query(sqlRemove, idslideshow, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error deleting data from database" });
+        } else {
+            console.log(result);
+            res.sendStatus(200);
+        }
+    });
+});
+
 // Insertimi i userave nga Register-formi
 app.post("/api/user/register", (req, res) => {
 
@@ -334,10 +449,7 @@ app.post("/api/user/register", (req, res) => {
                 res.sendStatus(200);
             }
         });
-
     })
-
-
 });
 
 // Krijojme nje API POST per kerkesa te lidhura me autentifikimin e perdoruesit ne aplikacion
@@ -350,7 +462,7 @@ app.post('/api/user/login', (req, res) => {
             console.log(error);
             res.sendStatus(500);
         }
-        console.log("Result:", result); // Check the value of 'result'
+        console.log("Result:", result);
         if (result && result.length > 0) {
             bcrypt.compare(Password, result[0].Password, (error, response) => {
                 if (response) {
@@ -367,9 +479,9 @@ app.post('/api/user/login', (req, res) => {
     });
 });
 
-//Secret key: sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax
-//Maic:price_1NDESDHB8rLE0wX1TGxQmkVO
-//Pantolla:price_1NDETcHB8rLE0wX1hBgetkUb
+// Secret key: sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax
+// Maic:price_1NDESDHB8rLE0wX1TGxQmkVO
+// Pantolla:price_1NDETcHB8rLE0wX1hBgetkUb
 
 app.post('/checkout', async (req, res) => {
     console.log(req.body);

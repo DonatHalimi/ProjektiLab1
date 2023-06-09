@@ -36,7 +36,7 @@ const Cart = () => {
     <>
       <Navbar />
       <div>
-        <h1 className='cart-name'>Cart</h1>
+        <h1 className='cart-name'></h1>
         <div className="cart-items">
           {productsCount > 0 ?
             <>
@@ -53,7 +53,7 @@ const Cart = () => {
             :
             <div className='noItemsInCart'>
               <img src='https://media.istockphoto.com/id/861576608/vector/empty-shopping-bag-icon-online-business-vector-icon-template.jpg?s=612x612&w=0&k=20&c=I7MbHHcjhRH4Dy0NVpf4ZN4gn8FVDnwn99YdRW2x5k0=' alt="Empty Cart"></img>
-              <p>Ju nuk keni ndonjë produkt në cart.</p>
+              <p>Ju nuk keni ndonjë produkt në shportë.</p>
               <Link to="/">Kthehu në faqen kryesore</Link>
             </div>
           }

@@ -12,6 +12,7 @@ function App() {
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
+  const [slideshowData, setSlideshowData] = useState([]);
 
   // Caktimi i tab-it aktiv per te shfaq users
   const [activeTab, setActiveTab] = useState('users');
@@ -66,6 +67,19 @@ function App() {
     }
   };
 
+  const loadDataSlideshow = async () => {
+    try {
+      const response = await axios.get('http://localhost:6001/api/slideshow/get');
+      if (response && response.data) {
+        setSlideshowData(response.data);
+      } else {
+        console.log('API endpoint did not return any data');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // UseEffect hook per te marre te dhenat e user-ave, produkteve dhe aboutus
   useEffect(() => {
     loadData();
@@ -74,7 +88,6 @@ function App() {
   }, []);
 
   console.log(data);
-
 
   // Funksioni per te fshire user-in nga API
   const deleteUser = async (id) => {
@@ -145,7 +158,6 @@ function App() {
     confirmDialog();
   }
 
-
   // Funksioni per te fshire tekstin nga API
   const deleteAboutUs = async (id) => {
     const confirmDialog = () => {
@@ -179,6 +191,40 @@ function App() {
     // Thirrja e confirm dialog custom
     confirmDialog();
   };
+
+  // Fshirja e fotos nga slideshow
+  const deleteSlideshow = async (id) => {
+    const confirmDialog = () => {
+      confirmAlert({
+        title: 'Confirm Deletion',
+        message: 'Are you sure that you want to delete this photo?',
+        buttons: [
+          {
+            label: 'Cancel',
+            onClick: () => { },
+            className: 'cancel-btn'
+          },
+          {
+            label: 'Yes',
+            onClick: async () => {
+              try {
+                // Dergojme kerkesen per fshirje ne server
+                await axios.delete(`http://localhost:6001/api/slideshow/remove/${id}`);
+                toast.success("Photo deleted successfully");
+                setTimeout(() => loadData(), 500);
+              } catch (error) {
+                toast.error(`Error deleting product: ${error.message}`);
+              }
+            },
+            className: 'yes-btn'
+          }
+        ]
+      });
+    };
+
+    // Thirrja e confirm dialog custom
+    confirmDialog();
+  }
 
   // Funksioni per krijimin e tabelave per CRUD te user-ave
   const renderUsersTable = () => {
@@ -285,7 +331,7 @@ function App() {
                     <td>{product.Detajet}</td>
                     <td>
                       {product.Foto && (
-                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='fotoSize'/>
+                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='fotoSize' />
                       )}
                     </td>
                     <td>
@@ -379,6 +425,69 @@ function App() {
     );
   };
 
+  const renderSlideshowTable = () => {
+    return (
+      <div className='table-container'>
+        <table className='styled-table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>EmriFoto</th>
+              <th>Foto</th>
+              <th>
+                <Link to='/addSlideshow' className='clickable-header'>
+                  Insert
+                </Link>
+              </th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {slideshowData.map((slideshow, indexslideshow) => {
+              console.log(slideshow.Foto);
+              return (
+                <Fragment key={slideshow.idslideshow}>
+                  <tr>
+                    <th scope="row">{indexslideshow + 1}</th>
+                    <td>{slideshow.EmriFoto}</td>
+                    <td>
+                      {slideshow.Foto && (
+                        <img src={`data:image/jpeg;base64,${slideshow.Foto.toString('base64')}`} alt="Slideshow" id='fotoSize' />
+                      )}
+                    </td>
+                    <td>
+                      <Link to={"/addSlideshow"}>
+                        <button className="btn btn-User">
+                          <i className="fa-solid fa-cart-plus"></i>
+                        </button>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/update/${slideshow.idslideshow}`}>
+                        <button className="btn btn-edit">
+                          <i className="fa-solid fa-pen"></i>
+                        </button>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link>
+                        <button className="btn btn-delete" onClick={() => deleteSlideshow(slideshow.idslideshow)}>
+                          <i className="fa-solid fa-trash-can"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+
   // Funksioni per dialogun e konfirmimit per te derguar adminin ne home page 
   const handleHomeButtonClick = () => {
     confirmAlert({
@@ -414,6 +523,8 @@ function App() {
         return renderAboutUsTable();
       case 'home':
         return handleHomeButtonClick();
+      case 'slideshow':
+        return renderSlideshowTable();
       default:
         return renderUsersTable();
     }

@@ -29,33 +29,6 @@ function Home() {
         fetchProducts();
     }, []);
 
-    // Renderimi i HTML per produkte ne main page
-    // return (
-    //     <>
-    //         {/* Thirrja e komponenteve te Navbar dhe Slider */}
-    //         <Navbar />
-    //         <Slider />
-
-    //         <div>
-    //             <div className="main-content" style={{
-    //                 display: "flex",
-    //                 flexDirection: "row",
-    //                 justifyContent: "space-between",
-    //                 flexWrap: "wrap",
-    //             }}>
-
-    //                 {PRODUCTS.map((product, idx) => (
-    //                     <div className="products-container" key={idx}>
-    //                         <Product product={product} />
-    //                     </div>
-    //                 ))}
-    //             </div>
-    //         </div>
-
-    //         <Footer />
-    //     </>
-    // );
-
     return (
         <>
             {/* Thirrja e komponenteve te Navbar dhe Slider */}

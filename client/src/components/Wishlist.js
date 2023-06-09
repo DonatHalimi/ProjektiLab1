@@ -1,25 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { WishlistContext } from '../context/wishlist-context';
 import Navbar from './Navbar';
 import WishlistItem from './wishlist-items';
+import Footer from '../Pages/Footer';
 
 const Wishlist = () => {
 
     // Merr kontekstin e dyqanit nga komponenti ShopContext
     const { items, removeItemFromWishlist } = useContext(WishlistContext);
+    const [showAlertRemove, setShowAlertRemove] = useState(false);
 
+    const handleRemoveFromWishlist = (id) => {
+        removeItemFromWishlist(id);
+        setShowAlertRemove(true);
+        setTimeout(() => {
+            setShowAlertRemove(false);
+        }, 5000);
+    };
     return (
         <>
             <Navbar />
 
             <div>
+
+                {showAlertRemove && (
+                    <div className="alertRemove">
+                        <p>Produkti është larguar nga wishlist me sukses!</p>
+                        <button className="cancelPopupButtonRemove" onClick={() => setShowAlertRemove(false)}>
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                )}
+
                 <h1>Wishlist</h1>
                 {items.length > 0 ? (
                     <ul>
                         {items.map((item) => (
                             <li key={item.id}>
-                                <WishlistItem id={item.id} />
+                                <WishlistItem id={item.id}
+                                    onRemoveFromWishlist={() => handleRemoveFromWishlist(item.id)} />
                             </li>
                         ))}
                     </ul>
@@ -31,6 +51,8 @@ const Wishlist = () => {
                     </div>
                 )}
             </div>
+
+            {/* <Footer /> */}
         </>
     );
 };

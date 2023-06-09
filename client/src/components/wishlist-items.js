@@ -36,6 +36,11 @@ function WishlistItem(props) {
         return null;
     }
 
+    const handleRemoveFromWishlist = () => {
+        wishlist.removeItemFromWishlist(id);
+        props.onRemoveFromWishlist();
+    };
+
     const Cmimi = parseFloat(product.Cmimi).toFixed(2);
 
     console.log(products);
@@ -67,15 +72,15 @@ function WishlistItem(props) {
             </div>
 
             {/* {
-        showAlertCart && (
-            <div className="alertCart">
-                <p>Produkti është shtuar në cart me sukses! </p>
-                <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        )
-    } */}
+                showAlertCart && (
+                    <div className="alertCart">
+                        <p>Produkti është shtuar në cart me sukses! </p>
+                        <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                )
+            } */}
         </>
     );
 }

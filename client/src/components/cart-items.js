@@ -9,8 +9,6 @@ function CartItem(props) {
 
   const id = props.id;
   const quantity = props.quantity;
-  // const productData = getProductData(id);
-  // const [fotoUrl, setFotoUrl] = useState("");
 
   const [products, setProducts] = useState([]);
 
