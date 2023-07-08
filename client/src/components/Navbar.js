@@ -3,6 +3,7 @@ import { MenuData } from "./MenuData";
 import { Link } from 'react-router-dom';
 import "../styles/NavbarStyle.css";
 import "./Cart";
+import LogoImage from '../img/Logo.png';
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {
@@ -21,9 +22,15 @@ const Navbar = (props) => {
 
     <nav className="NavbarItems">
 
-      {/* Krijimi i logose*/}
+      {/* Krijimi i logose
+      <Link to="/" className="logo" style={{ textDecoration: 'none' }} title="Home"> */}
+      {/* <h1>Ruby</h1> */}
+      {/* <img src="../../img/Logo2.png" /> */}
+      {/* </Link> */}
+
+      {/* Krijimi i logose */}
       <Link to="/" className="logo" style={{ textDecoration: 'none' }} title="Home">
-        <h1>Ruby</h1>
+        <img src={LogoImage} alt="Logo" style={{ width: '150px', height: 'auto', marginBottom: '10px' }} />
       </Link>
 
       {/* Krijimi i ikonave te menyse */}

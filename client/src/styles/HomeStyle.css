@@ -24,17 +24,27 @@ body {
   padding: 90px;
   text-align: center;
   width: 250px;
+  height: 350px;
   margin-top: 10px;
 }
 
 .product h3 {
+  position: relative;
+  bottom: 80px;
   font-size: 18px;
   margin-bottom: 10px;
 }
 
 .product p {
+  position: relative;
+  bottom: 50px;
   font-size: 14px;
   margin-bottom: 5px;
+}
+
+.product .price {
+  position: relative;
+  bottom: 80px;
 }
 
 .card .wishlistButton:hover {
@@ -72,7 +82,22 @@ body {
   justify-content: space-evenly;
 }
 
-.card .cartButton {
+/* .card .cartButton {
+  background-color: #28a745;
+  position: relative;
+  bottom: 400px;
+  border: 0ch;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  margin-top: 5px;
+  padding: 12px;
+  height: 44px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+} */
+
+ .card .cartButton {
   background-color: #28a745;
   border: 0;
   border-radius: 10px;
@@ -82,10 +107,11 @@ body {
   height: 44px;
   width: 100%;
   position: relative;
-  bottom: 40px;
+  bottom: 106px;
+  left: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
-}
+} 
 
 .card .cartButton:hover {
   transform: translateY(-2px);
@@ -98,8 +124,8 @@ body {
 .card .wishlistButton {
   background-color: #f01a1a;
   position: relative;
-  bottom: 50px;
-  left: 50px;
+  bottom: 155px;
+  left: -40px;
   border: 0ch;
   border-radius: 10px;
   color: rgb(255, 255, 255);

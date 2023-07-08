@@ -85,6 +85,7 @@ function App() {
     loadData();
     loadDataProduct();
     loadDataAboutUs();
+    loadDataSlideshow();
   }, []);
 
   console.log(data);
@@ -521,10 +522,10 @@ function App() {
         return renderProductsTable();
       case 'aboutUs':
         return renderAboutUsTable();
-      case 'home':
-        return handleHomeButtonClick();
       case 'slideshow':
         return renderSlideshowTable();
+      case 'home':
+        return handleHomeButtonClick();
       default:
         return renderUsersTable();
     }

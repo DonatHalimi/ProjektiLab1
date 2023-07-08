@@ -29,7 +29,9 @@
   bottom: 15vw;
   right: 5vw;
   padding: 1vw;
-  color: rgb(93, 73, 58);
+  background: linear-gradient(90deg, rgba(75,146,175,1) 0%, rgba(250,252,211,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 #info4 {
