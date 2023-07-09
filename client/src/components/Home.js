@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Product from "./Product";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
-import Footer from "../Pages/Footer";
+import Footer from "../components/Footer";
 import "../styles/HomeStyle.css";
 
 // Deklarimi i funksionit Home

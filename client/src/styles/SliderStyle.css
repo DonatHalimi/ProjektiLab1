@@ -113,6 +113,17 @@
     color: #534a4a;
 }
 
+.rounded-rectangle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+}
+
 @media (max-width: 768px) {
     .slider {
         height: 500px;

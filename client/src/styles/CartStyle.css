@@ -94,14 +94,14 @@ h1 {
 .noItemsInCart p {
     align-content: center;
     position: relative;
-    bottom: 390px;
+    bottom: 350px;
     font-size: 22px;
     margin-bottom: 10px;
 }
 
 .noItemsInCart a {
     position: relative;
-    bottom: 390px;
+    bottom: 350px;
     color: #007bff;
     text-decoration: none;
 }
@@ -110,6 +110,11 @@ h1 {
     position: relative;
     bottom: 320px;
     left: 20px;
+    width: 510px;
+    height: auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-165%);
 }
 
 .noItemsInCart a:hover {

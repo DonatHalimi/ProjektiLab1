@@ -3,8 +3,9 @@ import { ShopContext } from '../context/shop-context';
 import { Link } from 'react-router-dom';
 import CartItem from './cart-items';
 import Navbar from './Navbar';
+import Footer from '../components/Footer';
+import NoProductInCart from '../img/NoProductInCart.png';
 import "../styles/CartStyle.css"
-import Footer from '../Pages/Footer';
 
 // Krijimi i funksionit per Cart
 const Cart = () => {
@@ -52,7 +53,7 @@ const Cart = () => {
             </>
             :
             <div className='noItemsInCart'>
-              <img src='https://media.istockphoto.com/id/861576608/vector/empty-shopping-bag-icon-online-business-vector-icon-template.jpg?s=612x612&w=0&k=20&c=I7MbHHcjhRH4Dy0NVpf4ZN4gn8FVDnwn99YdRW2x5k0=' alt="Empty Cart"></img>
+              <img src={NoProductInCart} alt="NoProductInCart" />
               <p>Ju nuk keni ndonjë produkt në shportë.</p>
               <Link to="/">Kthehu në faqen kryesore</Link>
             </div>

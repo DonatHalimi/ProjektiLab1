@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { WishlistContext } from '../context/wishlist-context';
 import Navbar from './Navbar';
 import WishlistItem from './wishlist-items';
-import Footer from '../Pages/Footer';
+import Footer from '../components/Footer';
 
 const Wishlist = () => {
 
