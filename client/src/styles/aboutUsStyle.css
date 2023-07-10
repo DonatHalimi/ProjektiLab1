@@ -1,221 +1,83 @@
-.about-container {
-  max-width: 583px;
-  padding: 5px;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 20px;
-  position: relative;
-  bottom: -180px;
-  left: 70px;
-  margin-right: 1x;
+.about-us {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
   text-align: left;
-  color: grey;
 }
 
-#fotoabt {
-  position: absolute;
-  left: 917px;
-  top: 72px;
-  margin: 1px;
-  padding: 1px;
-  width: 810px;
-  height: 680px;
-}
-
-#abt {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 80px;
-  position: absolute;
-  bottom: 15vw;
-  right: 5vw;
-  padding: 1vw;
-  background: linear-gradient(90deg, rgba(75,146,175,1) 0%, rgba(250,252,211,1) 100%);
+.about-us h1 {
+  /* background: rgb(75, 146, 175);
+  background: linear-gradient(90deg, rgba(75, 146, 175, 1) 0%, rgba(249, 251, 221, 1) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: right;
+  position: relative;
+  top: 170px;
+  right: 50px;
 }
 
-#info4 {
-  color: rgb(93, 73, 58);
+.about-us p {
+  position: relative;
+  bottom: 500px;
+  left: 290px;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-/* Per ekranet me width 768 ose me pak */
+.about-us-image {
+  position: relative;
+  top: 130px;
+  right: 350px;
+  width: 550px;
+  height: auto;
+}
+
+.gradient-button {
+  background: rgb(75, 146, 175);
+  background: linear-gradient(90deg, rgba(75, 146, 175, 1) 0%, rgba(174, 175, 160, 1) 100%);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  bottom: 500px;
+  left: 280px;
+  text-decoration: none;
+}
+
+.gradient-button:hover {
+  opacity: 0.9;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  font-size: 30px;
+}
+
+/* Responsive Styles */
 @media screen and (max-width: 768px) {
-  .about-container {
-    max-width: 100%;
-    text-align: center;
-    bottom: auto;
-    left: auto;
-    margin: 0 auto;
-    font-size: 12px;
+  .about-us {
     padding: 10px;
   }
 
-  #fotoabt {
-    position: static;
-    width: 100%;
-    height: 491px;
-    margin: -5px 0;
-    padding: 0;
+  .about-us h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: right;
   }
 
-  #abt {
-    font-size: 50px;
-    position: static;
-    bottom: auto;
-    right: auto;
-    padding: 1vw;
-  }
-
-  #info4 {
-    font-size: 12px;
-    color: grey;
-  }
-}
-
-/* Per ekranet me width prej 768px deri 1024px */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-  .about-container {
-    max-width: 50%;
-    text-align: left;
-    bottom: 559px;
-    left: -254px;
-    margin: 0 auto;
-    font-size: 18px;
-    padding: 20px;
-  }
-
-  #fotoabt {
-    position: relative;
-    left: 230px;
-    top: -15px;
-    width: 50%;
-    height: auto;
-    margin: 10px 0;
-    padding: 0;
-  }
-
-  #abt {
-    font-size: 60px;
-    position: relative;
-    bottom: 540px;
-    right: 346px;
-    padding: 10px;
-  }
-
-  #info4 {
-    font-size: 18px;
-    color: grey;
-  }
-}
-
-/* Per ekranet me width 1025px ose me shume */
-@media screen and (min-width: 1025px) {
-  .about-container {
-    max-width: 50%;
-    text-align: left;
-    bottom: -130px;
-    left: 47px;
-    margin: 10px;
-    font-size: 20px;
-    padding: 5px;
-  }
-
-  #fotoabt {
-    position: absolute;
-    left: 943px;
-    top: 56px;
-    margin: 1px;
-    padding: 1px;
-    width: 575px;
-    height: 737px;
-  }
-
-  #abt {
-    font-size: 80px;
-    position: relative;
-    bottom: -125px;
-    right: 520px;
-    padding: 5px;
-  }
-
-  #info4 {
-    color: grey;
-  }
-
-  #fotoabt {
-    margin-left: 200px;
-    margin-top: 100px;
-  }
-}
-
-/* Per ekranet me width 480px ose me pak */
-@media screen and (max-width: 480px) {
-  .about-container {
-    max-width: 100%;
-    text-align: center;
-    bottom: auto;
-    left: auto;
-    margin: 0 auto;
-    font-size: 12px;
-    padding: 10px;
-  }
-
-  #fotoabt {
-    position: relative;
-    top: -14px;
-    left: 3px;
-    width: 100%;
-    height: 410px;
-    margin: 10px 0;
-    padding: 0;
-  }
-
-  #abt {
-    font-size: 40px;
-    position: static;
-    bottom: auto;
-    right: auto;
-    padding: 10px;
-  }
-
-  #info4 {
-    font-size: 12px;
-    color: grey;
-  }
-}
-
-/* Per ekranet me width 380px ose me pak */
-@media screen and (max-width: 380px) {
-  .about-container {
-    max-width: 100%;
-    text-align: center;
-    bottom: auto;
-    left: auto;
-    margin: 0 auto;
-    font-size: 12px;
-    padding: 10px;
-  }
-
-  #fotoabt {
-    position: relative;
-    top: -14px;
-    left: 3px;
-    width: 100%;
-    height: 310px;
-    margin: 10px 0;
-    padding: 0;
-  }
-
-  #abt {
-    font-size: 40px;
-    position: static;
-    bottom: auto;
-    right: auto;
-    padding: 10px;
-  }
-
-  #info4 {
-    font-size: 12px;
-    color: grey;
+  .about-us p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: right;
   }
 }

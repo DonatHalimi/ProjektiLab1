@@ -24,7 +24,7 @@ export const MenuData = [
     },
     {
         title: "About Us",
-        url: "/aboutUs",
+        url: "/AboutUs",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
     },
