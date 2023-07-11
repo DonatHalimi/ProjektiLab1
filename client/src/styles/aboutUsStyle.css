@@ -23,7 +23,7 @@
   position: relative;
   bottom: 500px;
   left: 290px;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.5;
   margin-bottom: 20px;
   text-align: left;
@@ -44,7 +44,7 @@
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 22px;
   cursor: pointer;
   position: relative;
   bottom: 500px;
@@ -53,7 +53,8 @@
 }
 
 .gradient-button:hover {
-  opacity: 0.9;
+  opacity: 0.7;
+  transition: all 0.6s ease-in-out;
 }
 
 .icon {

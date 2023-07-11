@@ -104,6 +104,7 @@ h1 {
     bottom: 350px;
     color: #007bff;
     text-decoration: none;
+    transition: all 0.6s ease-in-out;
 }
 
 .noItemsInCart img {

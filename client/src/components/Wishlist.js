@@ -52,7 +52,9 @@ const Wishlist = () => {
                 )}
             </div>
 
-            {/* <Footer /> */}
+            <div style={{ height: '600px' }}></div>
+
+            <Footer />
         </>
     );
 };

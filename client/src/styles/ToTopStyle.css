@@ -15,8 +15,5 @@
     background: none;
     background-color: #333;
     opacity: 0.8;
-}
-
-.to-top-button:hover::after {
-    content: none;
+    transition: 0.5s ease-in-out;
 }

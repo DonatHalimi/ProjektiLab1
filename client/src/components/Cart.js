@@ -61,7 +61,9 @@ const Cart = () => {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <div style={{ height: '600px' }}></div>
+
+      <Footer />
     </>
   );
 };

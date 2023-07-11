@@ -32,14 +32,10 @@ section {
   vertical-align: top;
 }
 
-/* Footer left */
-
 .footer-distributed .footer-left {
   width: 40%;
   margin-top: auto;
 }
-
-/* The company logo */
 
 .footer-distributed h3 {
   color: #ffffff;
@@ -50,8 +46,6 @@ section {
 .footer-distributed h3 span {
   color: lightseagreen;
 }
-
-/* Footer links */
 
 .footer-distributed .footer-links {
   color: #ffffff;
@@ -68,7 +62,8 @@ section {
 }
 
 .footer-distributed .footer-links a:hover {
-  color: lightseagreen;
+  color: rgb(29, 126, 122);
+  transition: color 0.6s ease;
 }
 
 .footer-distributed .footer-company-name {
@@ -77,8 +72,6 @@ section {
   font-weight: normal;
   margin: 0;
 }
-
-/* Footer Center */
 
 .footer-distributed .footer-center {
   width: 35%;
@@ -125,6 +118,7 @@ section {
 
 .footer-distributed .footer-center p a:hover {
   color: rgb(29, 126, 122);
+  transition: color 0.6s ease;
 }
 
 .footer-distributed .footer-links a:before {
@@ -140,8 +134,6 @@ section {
 .footer-distributed .footer-links .link-1:before {
   content: none;
 }
-
-/* Footer Right */
 
 .footer-distributed .footer-right {
   width: 20%;
@@ -188,29 +180,27 @@ section {
   display: inline-block;
   margin-right: 10px;
   color: #000;
-  /* Set the default color of the icons */
-  transition: color 0.3s ease;
-  /* Add a transition effect for smooth color change */
+  transition: color 0.6s ease;
 }
 
 .footer-icons a:hover {
   color: #3b5998;
-  /* Change the color on hover (Facebook blue) */
+  transition: color 0.6s ease;
 }
 
 .footer-icons a:hover .fa-twitter {
   color: #1da1f2;
-  /* Change the color on hover (Twitter blue) */
+  transition: color 0.6s ease;
 }
 
 .footer-icons a:hover .fa-linkedin {
   color: #0e76a8;
-  /* Change the color on hover (LinkedIn blue) */
+  transition: color 0.6s ease;
 }
 
 .footer-icons a:hover .fa-github {
   color: #333;
-  /* Change the color on hover (GitHub default color) */
+  transition: color 0.6s ease;
 }
 
 @media (max-width: 880px) {

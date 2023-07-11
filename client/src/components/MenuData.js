@@ -23,19 +23,18 @@ export const MenuData = [
         component: <Wishlist />
     },
     {
-        title: "About Us",
-        url: "/AboutUs",
-        cName: "nav-links",
-        icon: "fa-solid fa-circle-info",
-    },
-    {
         title: "Cart",
         url: "/Cart",
         cName: "nav-links",
         icon: "fa-solid fa-shopping-cart",
         component: <Cart />
-    }
-    ,
+    },
+    {
+        title: "About Us",
+        url: "/AboutUs",
+        cName: "nav-links",
+        icon: "fa-solid fa-circle-info",
+    },
     {
         title: "Log In",
         url: "/login",
