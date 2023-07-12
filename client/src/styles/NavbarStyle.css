@@ -52,10 +52,29 @@
     padding-right: 10px;
 }
 
-.nav-links:hover {
+.nav-links:hover:not(.active) {
     background: rgb(29, 126, 122);
-    transition: all 0.6s ease;
+    transition: all 0.5s ease-in-out;
     border-radius: 12px;
+}
+
+.nav-links.active {
+    position: relative;
+    transition: all 0.8s ease-in-out;
+    border-radius: 5px;
+    transition: border-bottom 0.5s ease-in-out;
+}
+
+.nav-links.active::after {
+    background-color: rgb(29, 126, 122);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    border-radius: 5px;
 }
 
 .fa-bars,
