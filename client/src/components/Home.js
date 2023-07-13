@@ -8,10 +8,10 @@ import "../styles/HomeStyle.css";
 // Deklarimi i funksionit Home
 function Home() {
 
-    // Deklarimi i variables products dhe funksionit setProducts si useState (paperfundume)
+    // Deklarimi i variables products dhe funksionit setProducts si useState
     const [products, setProducts] = useState([]);
 
-    // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit (paperfundume)
+    // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
     useEffect(() => {
         const fetchProducts = async () => {
             try {

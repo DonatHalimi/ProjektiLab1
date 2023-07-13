@@ -124,7 +124,6 @@ function App() {
     confirmDialog();
   }
 
-
   // Funksioni per te fshire produktin nga API
   const deleteProduct = async (id) => {
     const confirmDialog = () => {
@@ -493,7 +492,7 @@ function App() {
   const handleHomeButtonClick = () => {
     confirmAlert({
       title: 'Confirm Navigation',
-      message: 'Are you sure you want to navigate to the Home page?',
+      message: 'Are you sure you want to go to the Home page?',
       buttons: [
         {
           label: 'Cancel',
@@ -513,21 +512,44 @@ function App() {
     });
   };
 
+  const renderTableForTab = (tabName) => {
+    if (tabName === 'users') {
+      return renderUsersTable();
+    } else if (tabName === 'products') {
+      return renderProductsTable();
+    } else if (tabName === 'aboutUs') {
+      return renderAboutUsTable();
+    } else if (tabName === 'slideshow') {
+      return renderSlideshowTable();
+    } else if (tabName === 'home') {
+      return handleHomeButtonClick();
+    } else {
+      return null;
+    }
+  };
+
   // Funksioni per leximin e tabelave varesisht se qka kerkohet te shikohet
   const renderContent = () => {
+    let fallbackTab;
+
     switch (activeTab) {
       case 'users':
+        fallbackTab = 'users';
         return renderUsersTable();
       case 'products':
+        fallbackTab = 'products';
         return renderProductsTable();
       case 'aboutUs':
+        fallbackTab = 'aboutUs';
         return renderAboutUsTable();
       case 'slideshow':
+        fallbackTab = 'slideshow';
         return renderSlideshowTable();
       case 'home':
+        fallbackTab = 'home';
         return handleHomeButtonClick();
       default:
-        return renderUsersTable();
+        return fallbackTab ? renderTableForTab(fallbackTab) : null;
     }
   };
 

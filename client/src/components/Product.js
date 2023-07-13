@@ -46,6 +46,7 @@ function Product(props) {
 
   return (
     <>
+
       {/* Karta e produkteve */}
       <div className="product" key={product.idproduct}>
         <div className="card">
@@ -59,17 +60,18 @@ function Product(props) {
             </div>
           </Link>
 
-          {/* Butonat per me shtu produktin ne cart/wishlist */}
+          {/* Butonat per me shtu produktin ne Cart & Wishlist */}
           <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
             <i className="fa-solid fa-shopping-cart"></i>
           </button>
+
           <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
             <i className="fa-solid fa-heart"></i>
           </button>
         </div>
       </div>
 
-      {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne cart/wishlist */}
+      {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
       {showAlertCart && (
         <div className="alertCart">
           <Link to="/Cart" className="cartLink">

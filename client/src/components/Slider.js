@@ -6,6 +6,7 @@ import "../styles/SliderStyle.css";
 
 // Definimi i nje funksioni per Slider
 function Slider() {
+    
     // Krijimi i nje array me source te fotove per slider
     const slides = [
         {
@@ -28,7 +29,7 @@ function Slider() {
     // Perditesimi i indexit te slideve
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Funksioni per te shkuar te slide-i i ardhshem
+    // Funksioni per me shku ne slide-in e ardhshem
     const nextSlide = () => {
         const isLastSlide = currentIndex === slides.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
@@ -60,12 +61,12 @@ function Slider() {
         <div className="slider">
             <div style={{ backgroundImage: `url(${slides[currentIndex].src})` }} className="slide"></div>
 
-            {/* Shigjeta majte */}
+            {/* Shigjeta e majte */}
             <div className="arrow left" onClick={prevSlide}>
                 <IoIosArrowBack size={30} />
             </div>
 
-            {/* Shigjeta djathte */}
+            {/* Shigjeta e djathte */}
             <div className="arrow right" onClick={nextSlide}>
                 <IoIosArrowForward size={30} />
             </div>

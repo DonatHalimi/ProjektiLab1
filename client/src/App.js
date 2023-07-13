@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from './components/Home';
-import ToTop from "./components/ToTop";
 import Login from "./Pages/Login";
 import { Register } from "./Pages/Register";
+import Home from './components/Home';
+import ToTop from "./components/ToTop";
 import AboutUs from "./components/AboutUs";
 import Admin from "./Pages/Admin";
 import AddEdit from "./Pages/AddEdit";
@@ -11,7 +11,6 @@ import AddEditProduct from "./Pages/AddEditProduct";
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import AddEditSlideshow from "./Pages/AddEditSlideshow";
 import Product from "./components/Product";
-import './App.css'
 import Cart from './components/Cart';
 import Wishlist from './components/Wishlist';
 import { ShopContextProvider } from "./context/shop-context";
@@ -19,6 +18,7 @@ import { WishlistContextProvider } from "./context/wishlist-context";
 import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
 import ProductDetails from './components/ProductDetails';
+import './App.css'
 
 function App() {
   return (

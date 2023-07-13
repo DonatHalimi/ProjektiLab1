@@ -36,6 +36,7 @@ const Cart = () => {
   return (
     <>
       <Navbar />
+
       <div>
         <h1 className='cart-name'></h1>
         <div className="cart-items">

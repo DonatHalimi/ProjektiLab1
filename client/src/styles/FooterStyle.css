@@ -95,6 +95,16 @@ section {
   line-height: 38px;
 }
 
+.footer-distributed .footer-center i.fa-map-marker {
+  font-size: 23px;
+  line-height: 38px;
+}
+
+.footer-distributed .footer-center i.fa-phone {
+  font-size: 23px;
+  line-height: 38px;
+}
+
 .footer-distributed .footer-center p {
   display: inline-block;
   color: #ffffff;

@@ -14,7 +14,7 @@ function CartItem(props) {
 
   const product = products.find((product) => product.id === id);
 
-  // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
+  // Krijimi i nje funksioni per me i marr te dhenat nga API i produktit
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -32,6 +32,7 @@ function CartItem(props) {
     fetchProducts();
   }, []);
 
+  // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
   if (!product) {
     <div>Loading...</div>
     return null;
@@ -42,6 +43,8 @@ function CartItem(props) {
 
   return (
     <>
+
+      {/* Cart card per produkte */}
       <div className="cartItem">
         <div className="cartCard">
           <div className="cartCard_img">
