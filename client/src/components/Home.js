@@ -25,7 +25,6 @@ function Home() {
                 console.error("Error fetching products:", error);
             }
         };
-
         fetchProducts();
     }, []);
 
@@ -55,6 +54,8 @@ function Home() {
 
                 </div>
             </div>
+
+            <div style={{height: '100px'}}></div>
 
             <Footer />
         </>

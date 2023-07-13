@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import { getProductData } from "./ProductData";
-import CartItem from './cart-items';
+// import CartItem from './cart-items';
 // import Footer from '../Pages/Footer';
 import "../styles/ProductDetailsStyle.css";
 

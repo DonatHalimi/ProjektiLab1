@@ -7,9 +7,11 @@ import "../styles/FooterStyle.css";
 
 const Footer = () => {
     return (
+        
         <footer className="footer-distributed">
             <div className="footer-left">
                 <img src={LogoImage} alt="Logo" style={{ width: '150px', height: 'auto', marginBottom: '10px' }} />
+
                 <p className="footer-links">
                     <a href="/" className="link-1">Home</a>
                     <a href="/Categories">Categories</a>
@@ -34,6 +36,7 @@ const Footer = () => {
                     <p><a href="mailto:support@ruby.com">support@ruby.com</a></p>
                 </div>
             </div>
+
             <div className="footer-right">
                 <p className="footer-company-about">
                     <span>About the company</span>

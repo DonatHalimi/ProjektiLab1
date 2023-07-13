@@ -73,7 +73,7 @@ function Product(props) {
       {showAlertCart && (
         <div className="alertCart">
           <Link to="/Cart" className="cartLink">
-            <p>Produkti është shtuar në shportë me sukses! </p>
+            <p>Produkti është shtuar në shportë me sukses!</p>
           </Link>
           <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
             <i class="fa-solid fa-xmark"></i>
@@ -85,7 +85,7 @@ function Product(props) {
         showAlertWishlist && (
           <div className="alertWishlist">
             <Link to="/Wishlist" className="wishlistLink">
-              <p>Produkti është shtuar në wishlist me sukses! </p>
+              <p>Produkti është shtuar në wishlist me sukses!</p>
             </Link>
             <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
               <i class="fa-solid fa-xmark"></i>

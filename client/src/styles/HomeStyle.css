@@ -1,3 +1,7 @@
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -97,7 +101,7 @@ body {
   width: 100%;
 } */
 
- .card .cartButton {
+.card .cartButton {
   background-color: #28a745;
   border: 0;
   border-radius: 10px;
@@ -111,7 +115,7 @@ body {
   left: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
-} 
+}
 
 .card .cartButton:hover {
   transform: translateY(-2px);
