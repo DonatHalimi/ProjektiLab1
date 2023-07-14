@@ -228,6 +228,11 @@ function App() {
 
   // Funksioni per krijimin e tabelave per CRUD te user-ave
   const renderUsersTable = () => {
+
+    const getRoleLabel = (roleId) => {
+      return roleId === 1 ? 'Admin' : 'User';
+    };
+
     return (
       <div className='table-container'>
         <table className='styled-table'>
@@ -259,7 +264,7 @@ function App() {
                     <td>{item.Surname}</td>
                     <td>{item.Email}</td>
                     <td>**************</td>
-                    <td>{item.Role}</td>
+                    <td>{getRoleLabel(item.Role)}</td>
 
                     <td>
                       <Link to={`/user/addUser`}>
@@ -297,8 +302,8 @@ function App() {
   // Funksioni per krijimin e tabelave per CRUD te produkteve
   const renderProductsTable = () => {
     return (
-      <div className='table-container'>
-        <table className='styled-table'>
+      <div className='table-container' style={{ position: 'fixed', top: '100px' }}>
+        <table className='styled-table' style={{ transform: 'scale(0.79)', position: 'relative', bottom: '590px', overflowY: 'auto', fontSize: '17px' }}>
           <thead>
             <tr>
               <th>ID</th>
@@ -328,7 +333,7 @@ function App() {
                     <td>{product.Cmimi}</td>
                     <td>{product.Valuta}</td>
                     <td>{product.Kategoria}</td>
-                    <td>{product.Detajet}</td>
+                    <td style={{ textAlign: 'justify' }}>{product.Detajet}</td>
                     <td>
                       {product.Foto && (
                         <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='fotoSize' />
@@ -368,8 +373,11 @@ function App() {
   // Funksioni per krijimin e tabelave per CRUD te aboutUs
   const renderAboutUsTable = () => {
     return (
-      <div className='table-container'>
-        <table className='styled-table'>
+
+      <div className='table-container' style={{ position: 'fixed', top: '100px' }}>
+        <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
+          {/* <div className='table-container'>
+        <table className='styled-table'> */}
           <thead>
             <tr>
               <th>ID</th>
@@ -390,7 +398,7 @@ function App() {
                 <Fragment key={aboutus.idaboutus}>
                   <tr>
                     <th scope="row">{indexaboutus + 1}</th>
-                    <td>{aboutus.teksti}</td>
+                    <td style={{ textAlign: 'justify' }}>{aboutus.teksti}</td>
 
                     <td>
                       <Link to={"/aboutus/addAboutUs"}>

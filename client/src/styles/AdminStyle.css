@@ -20,6 +20,7 @@ body {
 .styled-table th,
 .styled-table td {
     padding: 13px 9px;
+    cursor: default;
 }
 
 .styled-table tbody tr {
@@ -75,9 +76,14 @@ body {
     background-color: green;
 }
 
-.btn.btn-edit:hover {
-    background: #008cba;
+.btn.btn-User:hover {
+    background-color: #006b07;
+    transition: all 0.8s ease-in-out;
+}
 
+.btn.btn-edit:hover {
+    background-color: #005d80;
+    transition: all 0.8s ease-in-out;
 }
 
 .btn.btn-edit:hover::after {
@@ -85,7 +91,8 @@ body {
 }
 
 .btn.btn-delete:hover {
-    background: #f44336;
+    background: #b53636;
+    transition: all 0.8s ease-in-out;
 }
 
 .btn.btn-delete:hover::after {

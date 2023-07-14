@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/AdminSidebarStyle.css";
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -8,6 +8,21 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
     };
+
+    // Use effect per me mujt me toggle sidebar me Esc ne tastiere
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                toggleSidebar();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [sidebarVisible]);
 
     return (
         <div className="sidebar-container">

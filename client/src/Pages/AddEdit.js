@@ -125,7 +125,10 @@ const AddEdit = () => {
 
                 <div className="user-box">
                     <label htmlFor="Role">Role</label>
-                    <input value={Role || ""} onChange={handleInputChange} type="number" placeholder="Type role" id="role" name="Role"></input>
+                    <select value={Role} onChange={handleInputChange} id="role" name="Role">
+                        <option value="1">Admin</option>
+                        <option value="2">User</option>
+                    </select>
                 </div>
 
                 <input id="submit-button" type="submit" value={id ? "Update" : "Save"} />
