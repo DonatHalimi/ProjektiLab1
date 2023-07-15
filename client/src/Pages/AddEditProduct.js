@@ -75,7 +75,7 @@ const AddEditProduct = () => {
 
   return (
     <div style={{ marginTop: "150px" }}>
-      <h2>Add/Edit</h2>
+      <h2>{idproduct ? "Edit" : "Add"}</h2>
       <form action="/" encType="multipart/form-data" method="post"
         style={{
           margin: "auto",

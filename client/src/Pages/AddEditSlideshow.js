@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import "../styles/AddEditSlideshowStyle.css";
 const initialState = {
     EmriFoto: "",
     Foto: undefined,
+    FotoFile: null,
 };
 
 const AddEditSlideshow = () => {
@@ -15,20 +16,43 @@ const AddEditSlideshow = () => {
     const navigate = useNavigate();
     const { idslideshow } = useParams();
 
+    // Fetch slideshow data when the component mounts
+    useEffect(() => {
+        const fetchSlideshowData = async () => {
+            if (idslideshow) {
+                try {
+                    const response = await axios.get(`http://localhost:6001/api/slideshow/${idslideshow}`);
+                    const { EmriFoto, Foto } = response.data;
+                    setState({ EmriFoto, Foto: null, FotoFile: null });
+                } catch (error) {
+                    console.log("Error:", error);
+                }
+            }
+        };
+
+        fetchSlideshowData();
+    }, [idslideshow]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
 
         // Client-side validation
-        if (!state.EmriFoto || !state.Foto) {
+        if (!state.EmriFoto || (!state.Foto && !state.FotoFile)) {
             toast.error("Please fill in all fields.");
             return;
         }
 
         try {
             const formData = new FormData();
-            formData.append("EmriFoto", state.Emri);
-            formData.append("Foto", state.Foto);
+            formData.append("EmriFoto", state.EmriFoto);
+
+            // Append either the existing image or the selected file
+            if (state.FotoFile) {
+                formData.append("Foto", state.FotoFile);
+            } else if (state.Foto) {
+                formData.append("Foto", state.Foto);
+            }
 
             const url = idslideshow
                 ? `http://localhost:6001/api/slideshow/update/${idslideshow}`
@@ -59,7 +83,7 @@ const AddEditSlideshow = () => {
         const { name, value, files } = e.target;
 
         if (name === "Foto") {
-            setState((prevState) => ({ ...prevState, Foto: files[0] }));
+            setState((prevState) => ({ ...prevState, Foto: files[0], FotoFile: files[0] }));
         } else {
             setState((prevState) => ({ ...prevState, [name]: value }));
         }
@@ -67,7 +91,7 @@ const AddEditSlideshow = () => {
 
     return (
         <div style={{ marginTop: "150px" }}>
-            <h2>Add/Edit</h2>
+            <h2>{idslideshow ? "Edit" : "Add"}</h2>
             <form action="/" encType="multipart/form-data" method="post"
                 style={{
                     margin: "auto",

@@ -45,7 +45,7 @@ function App() {
               <Route path="/aboutus/addAboutUs" element={<AddEditAboutUs />} />
               <Route path="/aboutus/update/:idaboutus" element={<AddEditAboutUs />} />
               <Route path="/addSlideshow" element={<AddEditSlideshow />} />
-              <Route path="/update/:idslideshow" element={<AddEditSlideshow />} />
+              <Route path="/updateSlideshow/:idslideshow" element={<AddEditSlideshow />} />
             </Routes>
             <ToTop />
           </BrowserRouter>

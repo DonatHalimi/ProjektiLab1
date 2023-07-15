@@ -79,8 +79,7 @@ const AddEditAboutUs = () => {
     return (
         <div style={{ marginTop: "150px" }}>
 
-            <h2>Add Edit</h2>
-
+            <h2>{idaboutus ? "Edit" : "Add"}</h2>
             <form style={{
                 margin: "auto",
                 padding: "25px",

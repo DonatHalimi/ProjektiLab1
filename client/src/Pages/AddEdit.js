@@ -87,9 +87,7 @@ const AddEdit = () => {
     // Renderimi i HTML formes per te shtuar ose perditesuar nje user
     return (
         <div style={{ marginTop: "150px" }}>
-
-            <h2>Add/Edit</h2>
-
+            <h2>{id ? "Edit" : "Add"}</h2>
             <form style={{
                 margin: "auto",
                 padding: "25px",

@@ -435,8 +435,8 @@ function App() {
 
   const renderSlideshowTable = () => {
     return (
-      <div className='table-container'>
-        <table className='styled-table'>
+      <div className='table-container' style={{ position: 'relative', top: '-90px' }}>
+        <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
           <thead>
             <tr>
               <th>ID</th>
@@ -461,7 +461,7 @@ function App() {
                     <td>{slideshow.EmriFoto}</td>
                     <td>
                       {slideshow.Foto && (
-                        <img src={`data:image/jpeg;base64,${slideshow.Foto.toString('base64')}`} alt="Slideshow" id='fotoSize' />
+                        <img src={`data:image/jpeg;base64,${slideshow.Foto.toString('base64')}`} alt="Slideshow" id='fotoSizeSlideshow' />
                       )}
                     </td>
                     <td>
@@ -472,7 +472,7 @@ function App() {
                       </Link>
                     </td>
                     <td>
-                      <Link to={`/update/${slideshow.idslideshow}`}>
+                      <Link to={`/updateSlideshow/${slideshow.idslideshow}`}>
                         <button className="btn btn-edit">
                           <i className="fa-solid fa-pen"></i>
                         </button>

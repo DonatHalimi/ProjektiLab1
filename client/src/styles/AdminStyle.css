@@ -170,3 +170,8 @@ button.btn.btn-delete {
     max-width: 200px;
     max-height: 200px;
 }
+
+#fotoSizeSlideshow {
+    max-width: 500px;
+    max-height: 500px;
+}

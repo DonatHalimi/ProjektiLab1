@@ -363,7 +363,7 @@ const storageSlideshow = multer.diskStorage({
 });
 
 var upload = multer({
-    storageSlideshow: storageSlideshow
+    storage: storageSlideshow
 });
 
 
