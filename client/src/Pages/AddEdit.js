@@ -103,22 +103,22 @@ const AddEdit = () => {
 
                 <div className="user-box">
                     <label htmlFor='Name'>Name</label>
-                    <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="name" name="Name"></input>
+                    <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="name" name="Name"></input>
                 </div>
 
                 <div className="user-box">
                     <label htmlFor='Surname'>Surname</label>
-                    <input value={Surname || ""} onChange={handleInputChange} type="text" placeholder="Type surname" id="surname" name="Surname"></input>
+                    <input value={Surname || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj mbiemrin" id="surname" name="Surname"></input>
                 </div>
 
                 <div className="user-box">
                     <label htmlFor='Email'>Email</label>
-                    <input value={Email || ""} onChange={handleInputChange} type="email" placeholder="Type e-mail" id="Email" name="Email"></input>
+                    <input value={Email || ""} onChange={handleInputChange} type="email" placeholder="Shkruaj e-mail" id="Email" name="Email"></input>
                 </div>
 
                 <div className="user-box">
                     <label htmlFor="Password">Password</label>
-                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Type password" id="Password" name="Password"></input>
+                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Shkruaj password" id="Password" name="Password"></input>
                 </div>
 
                 <div className="user-box">

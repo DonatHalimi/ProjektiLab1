@@ -74,7 +74,7 @@ const Login = () => {
                 onChange={formik.handleChange}
                 type="email"
                 onBlur={formik.handleBlur}
-                placeholder="Type e-mail"
+                placeholder="Shkruaj e-mail"
                 id="Email"
                 name="Email"
                 className={
@@ -88,14 +88,13 @@ const Login = () => {
                 <p className="error">{formik.errors.Email}</p>
               )}
             </div>
-
             <div className={LogInStyle["user-box"]}>
               <input
                 value={formik.values.Password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 type={passwordVisible ? "text" : "password"}
-                placeholder="Type password"
+                placeholder="Shkruaj password"
                 id="Password"
                 name="Password"
                 className={
@@ -104,6 +103,7 @@ const Login = () => {
                     : ""
                 }
               ></input>
+
               <label htmlFor="Password">Password</label>
               <button
                 type="button"
@@ -120,7 +120,7 @@ const Login = () => {
             <button disabled={formik.isSubmitting} className={LogInStyle["btn"]} type="submit"> Log in{" "}</button>
           </form>
           <p id={LogInStyle["account-text"]}>
-            Don't have an account?{" "}
+            Nuk keni llogari?{" "}
             <a href="/register" className={LogInStyle["a2"]}>
               Sign up!
             </a>

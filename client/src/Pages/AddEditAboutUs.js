@@ -94,8 +94,8 @@ const AddEditAboutUs = () => {
             >
 
                 <div className="user-box">
-                    <label htmlFor='teksti '>Teksti</label>
-                    <input value={teksti || ""} onChange={handleInputChange} type="text" placeholder="Type text" id="teksti" name="teksti"></input>
+                    <label htmlFor='teksti'>Teksti</label>
+                    <input value={teksti || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj tekstin" id="teksti" name="teksti" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></input>
                 </div>
 
                 <input id="submit-button" type="submit" value={idaboutus ? "Update" : "Save"} />

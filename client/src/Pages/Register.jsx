@@ -73,49 +73,49 @@ export const Register = () => {
         <p>Sign up</p>
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           <div className={RegisterStyle['user-box']}>
-            <input value={formik.values.Name} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" placeholder="Type name" id="name" name="Name"   className={
+            <input value={formik.values.Name} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" placeholder="Shkruaj emrin" id="name" name="Name"   className={
                   formik.errors.Name && formik.touched.Name
                     ? "input-error"
                     : ""
                 }></input>
-            <label htmlFor='name'>Name</label>
+            <label htmlFor='name'>Emri</label>
             {formik.errors.Name && formik.touched.Name && (
                 <p className="error">{formik.errors.Name}</p>
               )}
            
           </div>
-
           <div className={RegisterStyle['user-box']}>
-          <input value={formik.values.Surname} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" placeholder="Type surname" id="surname" name="Surname" className={
+          <input value={formik.values.Surname} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" placeholder="Shkruaj mbiemrin" id="surname" name="Surname" className={
                   formik.errors.Surname && formik.touched.Surname
                     ? "input-error"
                     : ""
                 }></input>
-            <label htmlFor='surname'>Surname</label>
+
+            <label htmlFor='surname'>Mbiemri</label>
             {formik.errors.Surname && formik.touched.Surname && (
                 <p className="error">{formik.errors.Surname}</p>
               )}
           </div>
-
           <div className={RegisterStyle['user-box']}>
-          <input value={formik.values.Email} onChange={formik.handleChange} onBlur={formik.handleBlur} type="email" placeholder="Type e-mail" id="email" name="Email" className={
+          <input value={formik.values.Email} onChange={formik.handleChange} onBlur={formik.handleBlur} type="email" placeholder="Shkruaj e-mail" id="email" name="Email" className={
                   formik.errors.Email && formik.touched.Email
                     ? "input-error"
                     : ""
                 }
               ></input>
-            <label htmlFor='email'>Email</label>
+
+            <label htmlFor='email'>E-mail</label>
             {formik.errors.Email && formik.touched.Email && (
                 <p className="error">{formik.errors.Email}</p>
               )}
           </div>
-
           <div className={RegisterStyle['user-box']}>
-          <input value={formik.values.Password} onChange={formik.handleChange} onBlur={formik.handleBlur} type={passwordVisible ? "text" : "password"} placeholder="Type password" id="password" name="Password" className={
+          <input value={formik.values.Password} onChange={formik.handleChange} onBlur={formik.handleBlur} type={passwordVisible ? "text" : "password"} placeholder="Shkruaj password" id="password" name="Password" className={
                   formik.errors.Password && formik.touched.Password
                     ? "input-error"
                     : ""
                 }></input>
+
             <label htmlFor="password">Password</label>
             <button type="button" class="visibility-btn" onClick={togglePasswordVisibility}>
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
@@ -124,13 +124,13 @@ export const Register = () => {
                 <p>{formik.errors.Password}</p>
               )}
           </div>
-
           <div className={RegisterStyle['user-box']}>
-            <input value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur} type={confirmPasswordVisible ? "text" : "password"} placeholder="Type password" id="confirmPassword" name="confirmPassword" className={
+            <input value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur} type={confirmPasswordVisible ? "text" : "password"} placeholder="Rishkruaj password" id="confirmPassword" name="confirmPassword" className={
                   formik.errors.confirmPassword && formik.touched.confirmPassword
                     ? "input-error"
                     : ""
                 }></input>
+                
             <label htmlFor="confirmPassword">Confirm Password</label>
             <button type="button" class="visibility-btn" onClick={toggleConfirmPasswordVisibility}>
               {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
@@ -143,7 +143,7 @@ export const Register = () => {
           <button disabled={formik.isSubmitting} className={RegisterStyle['btn']} type="submit" >Sign up </button>
         </form>
 
-        <p id={RegisterStyle['account-text']}>Already have an account? <a href="/Login" className={RegisterStyle['a2']}>Log in!</a></p>
+        <p id={RegisterStyle['account-text']}>Posedoni një llogari? <a href="/Login" className={RegisterStyle['a2']}>Log in!</a></p>
       </div>
     </div>
     </>

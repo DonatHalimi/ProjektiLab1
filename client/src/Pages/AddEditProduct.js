@@ -120,31 +120,31 @@ const AddEditProduct = () => {
         onSubmit={handleSubmit}
       >
         <div className="product-box">
-          <label htmlFor="Emri">Emri</label>
-          <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emri" name="Emri"></input>
+          <label htmlFor="emri">Emri</label>
+          <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emri" name="Emri"></input>
         </div>
 
         <div className="product-box">
-          <label htmlFor='Cmimi'>Cmimi</label>
-          <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Type price" id="cmimi" name="Cmimi"></input>
+          <label htmlFor='cmimi'>Çmimi</label>
+          <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj çmimin" id="cmimi" name="Cmimi"></input>
         </div>
 
         <div className="product-box">
-          <label htmlFor='Valuta'>Valuta</label>
-          <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Type currency" id="valuta" name="Valuta"></input>
+          <label htmlFor='valuta'>Valuta</label>
+          <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj valutën" id="valuta" name="Valuta"></input>
         </div>
 
         <div className="product-box">
-          <label htmlFor='Kategoria'>Kategoria</label>
-          <input value={state.Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Type category" id="kategoria" name="Kategoria"></input>
+          <label htmlFor='kategoria'>Kategoria</label>
+          <input value={state.Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj kategorinë" id="kategoria" name="Kategoria"></input>
         </div>
         <div className="product-box">
-          <label htmlFor="Detajet">Detajet</label>
-          <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Type details" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
+          <label htmlFor="detajet">Detajet</label>
+          <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
         </div>
 
         <div className="product-box">
-          <label htmlFor="Foto">Foto</label>
+          <label htmlFor="foto">Foto</label>
           <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
         </div>
 

@@ -119,7 +119,7 @@ const AddEditSlideshow = () => {
             >
                 <div className="product-box">
                     <label htmlFor="emrifoto">EmriFoto</label>
-                    <input value={state.EmriFoto || ""} onChange={handleInputChange} type="text" placeholder="Type name" id="emrifoto" name="EmriFoto"></input>
+                    <input value={state.EmriFoto || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emrifoto" name="EmriFoto"></input>
                 </div>
 
                 <div className="product-box">
