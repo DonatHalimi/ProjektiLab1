@@ -18,6 +18,7 @@ import { WishlistContextProvider } from "./context/wishlist-context";
 import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
 import ProductDetails from './components/ProductDetails';
+import CookiePopup from "./components/CookiePopup";
 import './App.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,6 +29,7 @@ function App() {
       <ShopContextProvider>
         <WishlistContextProvider>
           <BrowserRouter>
+            <CookiePopup />
             <ToastContainer />
             <Routes>
               <Route path="/" element={<Home />} />
