@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import "../styles/AdminSidebarStyle.css";
 import { GiHamburgerMenu } from 'react-icons/gi';
+import "../styles/AdminSidebarStyle.css";
 
 const Sidebar = ({ activeTab, handleTabChange }) => {
     const [sidebarVisible, setSidebarVisible] = useState(true);

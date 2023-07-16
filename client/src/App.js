@@ -41,7 +41,7 @@ function App() {
               <Route path="/user/addUser" element={<AddEdit />} />
               <Route path="/user/update/:id" element={<AddEdit />} />
               <Route path="/addProduct" element={<AddEditProduct />} />
-              <Route path="/update/:idproduct" element={<AddEditProduct />} />
+              <Route path="/updateProduct/:idproduct" element={<AddEditProduct />} />
               <Route path="/aboutus/addAboutUs" element={<AddEditAboutUs />} />
               <Route path="/aboutus/update/:idaboutus" element={<AddEditAboutUs />} />
               <Route path="/addSlideshow" element={<AddEditSlideshow />} />

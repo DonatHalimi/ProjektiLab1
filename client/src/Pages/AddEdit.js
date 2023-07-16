@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../styles/AddEditStyle.css";
 
-// Inicializimi i nje objekti i cili ka fushat per shtimin e nje useri te ri
+// Krijojme nje objekt qe permban te dhenat fillestare te perdoruesit
 const initialState = {
     Name: "",
     Surname: "",
@@ -14,7 +14,7 @@ const initialState = {
     Role: ""
 }
 
-// Krijimi i funksionit AddEdit per te shtuar perdorues
+// Krijimi i funksionit AddEdit per te shtuar dhe perditesuar perdorues
 const AddEdit = () => {
 
     // Definimi i state me useState hook dhe destruktirimi i elementeve te states
@@ -25,7 +25,7 @@ const AddEdit = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Perdorimi i useEffect hook per te marre te dhena nga API ne fillim te ngarkimit te komponentit
+    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e perdoruesit
     useEffect(() => {
         axios.get(`http://localhost:6001/api/user/get/${id}`)
             .then((resp) => setState({ ...resp.data[0] }))
@@ -33,12 +33,12 @@ const AddEdit = () => {
     }, [id]);
 
 
-    // Funksioni i cili proceson submit-in e formes dhe ben kerkimet e nevojshme ne server
+    // Funksioni qe thirret kur formulari dergohet (submit)
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
 
-        // Validimi i fushave te formes
+        // Validimi ne ane te klientit
         if (!Name || !Surname || !Email || !Password || !Role) {
             toast.error("Please fill out all the fields");
         } else {
@@ -123,9 +123,9 @@ const AddEdit = () => {
 
                 <div className="user-box">
                     <label htmlFor="Role">Role</label>
-                    <select value={Role} onChange={handleInputChange} id="role" name="Role">
-                        <option value="1">Admin</option>
+                    <select value={Role || ""} onChange={handleInputChange} id="role" name="Role">
                         <option value="2">User</option>
+                        <option value="1">Admin</option>
                     </select>
                 </div>
 

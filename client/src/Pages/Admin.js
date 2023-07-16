@@ -2,28 +2,25 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";
+import AdminSidebar from './AdminSidebar';
+import ToTop from '../components/ToTop.js';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import AdminSidebar from './AdminSidebar';
 import "../styles/AdminStyle.css";
 
-function App() {
+function Admin() {
   // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
   const [slideshowData, setSlideshowData] = useState([]);
-
-  // Caktimi i tab-it aktiv per te shfaq users
   const [activeTab, setActiveTab] = useState('users');
+  const navigate = useNavigate();
 
   // Perditesimi i tab-it aktiv kur ndryshohet prej admin-it
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
   };
-
-  // Krijimi i konstantes navigate per ta kthyer adminin ne home page
-  const navigate = useNavigate();
 
   // Funksioni per te marre te dhenat e user-ave nga API
   const loadData = async () => {
@@ -80,7 +77,7 @@ function App() {
     }
   };
 
-  // UseEffect hook per te marre te dhenat e user-ave, produkteve dhe aboutus
+  // UseEffect hook per te marre te dhenat e user-ave, produkteve, aboutus dhe slideshow
   useEffect(() => {
     loadData();
     loadDataProduct();
@@ -143,7 +140,7 @@ function App() {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/product/remove/${id}`);
                 toast.success("Product deleted successfully");
-                setTimeout(() => loadData(), 500);
+                setTimeout(() => loadDataProduct(), 500);
               } catch (error) {
                 toast.error(`Error deleting product: ${error.message}`);
               }
@@ -177,7 +174,7 @@ function App() {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
                 toast.success("Text deleted successfully");
-                setTimeout(() => loadData(), 500);
+                setTimeout(() => loadDataAboutUs(), 500);
               } catch (error) {
                 toast.error(`Error deleting text: ${error.message}`);
               }
@@ -211,7 +208,8 @@ function App() {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/slideshow/remove/${id}`);
                 toast.success("Photo deleted successfully");
-                setTimeout(() => loadData(), 500);
+
+                setTimeout(() => loadDataSlideshow(), 500);
               } catch (error) {
                 toast.error(`Error deleting product: ${error.message}`);
               }
@@ -263,7 +261,7 @@ function App() {
                     <td>{item.Name}</td>
                     <td>{item.Surname}</td>
                     <td>{item.Email}</td>
-                    <td>**************</td>
+                    <td>●●●●●●</td>
                     <td>{getRoleLabel(item.Role)}</td>
 
                     <td>
@@ -347,7 +345,7 @@ function App() {
                       </Link>
                     </td>
                     <td>
-                      <Link to={`/update/${product.idproduct}`}>
+                      <Link to={`/updateProduct/${product.idproduct}`}>
                         <button className="btn btn-edit">
                           <i className="fa-solid fa-pen"></i>
                         </button>
@@ -564,15 +562,11 @@ function App() {
   // Renderimi i HTML formes per faqen e Adminit
   return (
     <div>
-      <AdminSidebar
-        activeTab={activeTab}
-        handleTabChange={handleTabChange}
-      />
-      <div className={`content`}>
-        {renderContent()}
-      </div>
+      <ToTop />
+      <AdminSidebar activeTab={activeTab} handleTabChange={handleTabChange} />
+      <div className={`content`}>{renderContent()}</div>
     </div>
   );
 };
 
-export default App;
+export default Admin;
