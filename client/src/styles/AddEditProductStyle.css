@@ -1,87 +1,71 @@
-body {
-    text-align: center;
+.input-label {
+    position: absolute;
+    top: -18px;
+    left: 2px;
+    padding: 10px 5;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+    font-weight: bold;
 }
 
-input[type="text"],
-select {
+.product-box {
+    position: relative;
+}
+
+.product-box input {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+#emri,
+#cmimi,
+#valuta,
+#kategoria,
+#detajet {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+#emri,
+#cmimi {
+    position: relative;
+    right: 8px;
 }
 
 #foto {
-    position: relative;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: white;
-    color: black;
-}
-
-#foto::-webkit-file-upload-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 8px 10px;
-    margin: 2px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-
-input[type="submit"] {
-    width: 100%;
-    background-color: #4caf50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="button"] {
-    width: 100%;
-    background-color: #40453e;
-    color: rgb(255, 255, 255);
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    content: none;
-}
-
-input[type="submit"]:hover {
-    background-color: #4caf50;
-    background: none;
-    content: none;
-}
-
-input[type="submit"]:hover::after {
-    background: none;
-    content: none;
+    background-color: #3e3e3e;
+    font-size: 14px;
 }
 
 #submit-button {
     background-color: #33b249;
     margin-left: 7px;
+    position: relative;
+    right: 7px;
+    width: 343px;
 }
 
 #goback-button {
     background-color: #5e5e5e;
     margin-left: 7px;
+    position: relative;
+    right: 7px;
+    width: 343px;
 }
 
-.user-box label {
-    font-size: 1.2em;
-}

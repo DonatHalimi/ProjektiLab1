@@ -75,7 +75,7 @@ const AddEditProduct = () => {
 
       // Pastrojme formen dhe shfaqim njoftimin per sukses
       setState(initialState);
-      toast.success(idproduct ? "Product Updated Successfully" : "Product Added Successfully");
+      toast.success(idproduct ? "Produkti është perditësuar me sukses!" : "Produkti është shtuar me sukses!");
 
       // Navigimi prapa ne faqen e Admin-it pasi perditesimi/shtimi perfundon
       navigate("/Admin");
@@ -111,7 +111,8 @@ const AddEditProduct = () => {
           margin: "auto",
           padding: "25px",
           paddingRight: "30px",
-          maxWidth: "400px",
+          paddingTop: "50px",
+          maxWidth: "387px",
           alignContent: "center",
           backgroundColor: "#1e1f1e",
           color: "white",
@@ -120,31 +121,31 @@ const AddEditProduct = () => {
         onSubmit={handleSubmit}
       >
         <div className="product-box">
-          <label htmlFor="emri">Emri</label>
+          <label htmlFor="emri" className="input-label">Emri</label>
           <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emri" name="Emri"></input>
         </div>
 
         <div className="product-box">
-          <label htmlFor='cmimi'>Çmimi</label>
+          <label htmlFor='cmimi' className="input-label">Çmimi</label>
           <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj çmimin" id="cmimi" name="Cmimi"></input>
         </div>
 
         <div className="product-box">
-          <label htmlFor='valuta'>Valuta</label>
+          <label htmlFor='valuta' className="input-label">Valuta</label>
           <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj valutën" id="valuta" name="Valuta"></input>
         </div>
 
         <div className="product-box">
-          <label htmlFor='kategoria'>Kategoria</label>
+          <label htmlFor='kategoria' className="input-label">Kategoria</label>
           <input value={state.Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj kategorinë" id="kategoria" name="Kategoria"></input>
         </div>
         <div className="product-box">
-          <label htmlFor="detajet">Detajet</label>
-          <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
+          <label htmlFor="detajet" className="input-label">Detajet</label>
+          <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px", fontSize: "13px" }}></textarea>
         </div>
 
         <div className="product-box">
-          <label htmlFor="foto">Foto</label>
+          <label htmlFor="foto" className="input-label">Foto</label>
           <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
         </div>
 

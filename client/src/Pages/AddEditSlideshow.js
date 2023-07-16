@@ -73,10 +73,10 @@ const AddEditSlideshow = () => {
 
             // Pastrojme formen dhe shfaqim njoftimin per sukses
             setState(initialState);
-            toast.success(idslideshow ? "Slideshow Photo Updated Successfully" : "Slideshow Photo Added Successfully");
+            toast.success(idslideshow ? "Fotoja është perditësuar me sukses!" : "Fotoja është shtuar me sukses!");
 
             // Navigimi prapa ne faqen e Admin-it pasi perditesimi/shtimi perfundon
-            navigate("/Admin");
+            navigate('/Admin');
         } catch (error) {
             console.log("Error:", error);
             if (error.response && error.response.data) {
@@ -118,12 +118,12 @@ const AddEditSlideshow = () => {
                 onSubmit={handleSubmit}
             >
                 <div className="product-box">
-                    <label htmlFor="emrifoto">EmriFoto</label>
+                    <label htmlFor="emrifoto" className="input-label">EmriFoto</label>
                     <input value={state.EmriFoto || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emrifoto" name="EmriFoto"></input>
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor="foto">Foto</label>
+                    <label htmlFor="foto" className="input-label">Foto</label>
                     <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
                 </div>
 

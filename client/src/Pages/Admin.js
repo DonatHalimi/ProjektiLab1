@@ -105,7 +105,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-                toast.success("User deleted successfully");
+                toast.success("Përdoruesi është fshirë me sukses!");
                 setTimeout(() => loadData(), 500);
               } catch (error) {
                 toast.error(`Error deleting user: ${error.message}`);
@@ -139,7 +139,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/product/remove/${id}`);
-                toast.success("Product deleted successfully");
+                toast.success("Produkti është fshirë me sukses!");
                 setTimeout(() => loadDataProduct(), 500);
               } catch (error) {
                 toast.error(`Error deleting product: ${error.message}`);
@@ -160,7 +160,7 @@ function Admin() {
     const confirmDialog = () => {
       confirmAlert({
         title: 'Confirm Deletion',
-        message: 'Are you sure that you want to delete this?',
+        message: 'Are you sure that you want to delete this text?',
         buttons: [
           {
             label: 'Cancel',
@@ -173,7 +173,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
-                toast.success("Text deleted successfully");
+                toast.success("Teksti është fshirë me sukses!");
                 setTimeout(() => loadDataAboutUs(), 500);
               } catch (error) {
                 toast.error(`Error deleting text: ${error.message}`);
@@ -207,7 +207,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/slideshow/remove/${id}`);
-                toast.success("Photo deleted successfully");
+                toast.success("Fotoja është fshirë me sukses!");
 
                 setTimeout(() => loadDataSlideshow(), 500);
               } catch (error) {

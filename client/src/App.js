@@ -19,6 +19,8 @@ import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
 import ProductDetails from './components/ProductDetails';
 import './App.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
       <ShopContextProvider>
         <WishlistContextProvider>
           <BrowserRouter>
+            <ToastContainer />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/" element={<Product />} />

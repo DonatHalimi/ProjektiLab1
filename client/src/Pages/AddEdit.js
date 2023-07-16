@@ -42,39 +42,23 @@ const AddEdit = () => {
         if (!Name || !Surname || !Email || !Password || !Role) {
             toast.error("Please fill out all the fields");
         } else {
-            if (!id) {
-                // Nese perdoruesi nuk ekziston, kryejme nje post request per ta shtuar
-                axios.post(`http://localhost:6001/api/user/post`, {
-                    Name,
-                    Surname,
-                    Email,
-                    Password,
-                    Role
-                }).then(() => {
-                    setState({ ...state, Name: "", Surname: "", Email: "", Password: "", Role: "", })
+            // Dergojme kerkesen duke u bazuar ne ekzistencen e id
+            const requestPromise = id
+                ? axios.put(`http://localhost:6001/api/user/update/${id}`, { id, Name, Surname, Email, Password, Role })
+                : axios.post(`http://localhost:6001/api/user/post`, { Name, Surname, Email, Password, Role });
 
-                }).catch((err) => toast.error(err.response.data))
-                toast.success("User Added Successfully");
-            } else {
-                // Nese perdoruesi ekziston, kryejme nje put request per ta perditesuar
-                axios.put(`http://localhost:6001/api/user/update/${id}`, {
-                    id,
-                    Name,
-                    Surname,
-                    Email,
-                    Password,
-                    Role
-                }).then(() => {
-                    setState({ ...state, Name: "", Surname: "", Email: "", Password: "", Role: "", })
-
-                }).catch((err) => toast.error(err.response.data))
-                toast.success("User Added Successfully");
-            }
-
-            // Kalohet ne faqen Admin pasi qe id eshte shtuar ose perditesuar
-            setTimeout(() =>
-                navigate("/Admin")
-            )
+            // Ekzekutojme kerkesen
+            requestPromise
+                .then(() => {
+                    setState({ ...state, Name: "", Surname: "", Email: "", Password: "", Role: "" });
+                    if (id) {
+                        toast.success("Përdoruesi është perditësuar me sukses!");
+                    } else {
+                        toast.success("Përdoruesi është shtuar me sukses!");
+                    }
+                    setTimeout(() => navigate("/Admin"), 500); // Kalohet ne faqen Admin pasi qe id eshte shtuar ose perditesuar
+                })
+                .catch((err) => toast.error(err.response.data));
         }
     };
 
@@ -91,10 +75,11 @@ const AddEdit = () => {
             <form style={{
                 margin: "auto",
                 padding: "25px",
+                paddingTop: "50px",
                 paddingRight: "40px",
-                maxWidth: "400px",
+                maxWidth: "387px",
                 alignContent: "center",
-                backgroundColor: "#1e1f1e",
+                backgroundColor: "#222",
                 color: "white",
                 borderRadius: "10px"
             }}
@@ -102,28 +87,29 @@ const AddEdit = () => {
             >
 
                 <div className="user-box">
-                    <label htmlFor='Name'>Name</label>
+                    <label htmlFor='Name' className="input-label">Emri</label>
                     <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="name" name="Name"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor='Surname'>Surname</label>
+                    <label htmlFor='Surname' className="input-label">Mbiemri</label>
                     <input value={Surname || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj mbiemrin" id="surname" name="Surname"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor='Email'>Email</label>
+                    <label htmlFor='Email' className="input-label">E-mail</label>
                     <input value={Email || ""} onChange={handleInputChange} type="email" placeholder="Shkruaj e-mail" id="Email" name="Email"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor="Password">Password</label>
-                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Shkruaj password" id="Password" name="Password"></input>
+                    <label htmlFor="Password" className="input-label">Password</label>
+                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Shkruaj password" id="password" name="Password"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor="Role">Role</label>
+                    <label htmlFor="Role" className="input-label">Role</label>
                     <select value={Role || ""} onChange={handleInputChange} id="role" name="Role">
+                        <option value="" disabled selected hidden>Zgjedh rolin</option>
                         <option value="2">User</option>
                         <option value="1">Admin</option>
                     </select>

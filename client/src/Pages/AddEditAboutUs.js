@@ -37,35 +37,25 @@ const AddEditAboutUs = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
+
         // Kontrolli i plotesimit te te gjitha fushave te formes
         if (!teksti) {
             toast.error("Please fill out all the fields");
         } else {
-            if (!idaboutus) {
-                // Nese teksti nuk ekziston, kryejme nje post request per ta shtuar
-                axios.post('http://localhost:6001/api/aboutus/post', {
-                    teksti
-                }).then(() => {
-                    setState({ ...state, teksti: "", })
+            // Dergojme kerkesen bazuar ne ekzistencen e idaboutus
+            const requestPromise = idaboutus
+                ? axios.put(`http://localhost:6001/api/aboutus/update/${idaboutus}`, { idaboutus, teksti })
+                : axios.post('http://localhost:6001/api/aboutus/post', { teksti });
 
-                }).catch((err) => toast.error(err.response.data))
-                toast.success("Text Added Successfully");
-            } else {
-                // Nese teksti ekziston, kryejme nje put request per ta perditesuar
-                axios.put(`http://localhost:6001/api/aboutus/update/${idaboutus}`, {
-                    idaboutus,
-                    teksti
-                }).then(() => {
-                    setState({ ...state, teksti: "", })
-
-                }).catch((err) => toast.error(err.response.data))
-                toast.success("Text Added Successfully");
-            }
-
-            // Kalohet ne faqen Admin pasi qe teksti eshte shtuar ose perditesuar
-            setTimeout(() =>
-                navigate("/Admin")
-            )
+            // Ekzekutojme kerkesen
+            requestPromise
+                .then(() => {
+                    setState({ ...state, teksti: "" });
+                    const successMessage = idaboutus ? "Teksti është perditësuar me sukses!" : "Teksti është shtuar me sukses!";
+                    toast.success(successMessage);
+                    setTimeout(() => navigate("/Admin"), 500); // Kalohet ne faqen Admin pasi qe teksti eshte shtuar ose perditesuar
+                })
+                .catch((err) => toast.error(err.response.data));
         }
     };
 
@@ -84,6 +74,7 @@ const AddEditAboutUs = () => {
                 margin: "auto",
                 padding: "25px",
                 paddingRight: "40px",
+                paddingTop: "50px",
                 maxWidth: "400px",
                 alignContent: "center",
                 backgroundColor: "#1e1f1e",
@@ -94,8 +85,8 @@ const AddEditAboutUs = () => {
             >
 
                 <div className="user-box">
-                    <label htmlFor='teksti'>Teksti</label>
-                    <input value={teksti || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj tekstin" id="teksti" name="teksti" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></input>
+                    <label htmlFor="teksti" className="input-label">Teksti</label>
+                    <textarea value={teksti || ""} onChange={handleInputChange} placeholder="Shkruaj tekstin" id="teksti" name="teksti" rows={20} cols={100} style={{ marginLeft: "8px", textAlign: "justify", width: "340px" }}></textarea>
                 </div>
 
                 <input id="submit-button" type="submit" value={idaboutus ? "Update" : "Save"} />
