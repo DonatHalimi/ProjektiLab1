@@ -64,10 +64,23 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* Stilizimi i notification per admin dashboard */
+:root {
+  --toastify-color-light: #222;
+}
+
 .Toastify__toast-container {
   width: 400px;
 }
 
 .Toastify__toast-body {
+  color: white;
   white-space: pre-wrap;
+}
+
+.Toastify__close-button--light {
+  color: whitesmoke;
+}
+
+.Toastify__close-button:hover {
+  color: white;
 }

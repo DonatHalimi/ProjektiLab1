@@ -74,7 +74,7 @@
 
 .sidebar-menu-item-home {
     position: relative;
-    top: 60px;
+    top: 20px;
     left: 20px;
     width: 75%;
     text-decoration: none;
@@ -104,7 +104,7 @@
 
 .sidebar-toggle-btn {
     position: relative;
-    bottom: 882px;
+    bottom: 931px;
     left: 60px;
     background-color: transparent;
     color: white;

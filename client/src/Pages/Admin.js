@@ -14,6 +14,7 @@ function Admin() {
   const [productData, setProductData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
   const [slideshowData, setSlideshowData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
   const [activeTab, setActiveTab] = useState('users');
   const navigate = useNavigate();
 
@@ -77,12 +78,26 @@ function Admin() {
     }
   };
 
-  // UseEffect hook per te marre te dhenat e user-ave, produkteve, aboutus dhe slideshow
+  const loadDataCategory = async () => {
+    try {
+      const response = await axios.get('http://localhost:6001/api/category/get');
+      if (response && response.data) {
+        setCategoryData(response.data);
+      } else {
+        console.log('API endpoint did not return any data');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // UseEffect hook per te marre te dhenat e user-ave, produkteve, aboutus, slideshow dhe kategorive
   useEffect(() => {
     loadData();
     loadDataProduct();
     loadDataAboutUs();
     loadDataSlideshow();
+    loadDataCategory();
   }, []);
 
   console.log(data);
@@ -211,7 +226,42 @@ function Admin() {
 
                 setTimeout(() => loadDataSlideshow(), 500);
               } catch (error) {
-                toast.error(`Error deleting product: ${error.message}`);
+                toast.error(`Error deleting slideshow: ${error.message}`);
+              }
+            },
+            className: 'yes-btn'
+          }
+        ]
+      });
+    };
+
+    // Thirrja e confirm dialog custom
+    confirmDialog();
+  }
+
+  // Fshirja e kategorise
+  const deleteCategory = async (id) => {
+    const confirmDialog = () => {
+      confirmAlert({
+        title: 'Confirm Deletion',
+        message: 'Are you sure that you want to delete this category?',
+        buttons: [
+          {
+            label: 'Cancel',
+            onClick: () => { },
+            className: 'cancel-btn'
+          },
+          {
+            label: 'Yes',
+            onClick: async () => {
+              try {
+                // Dergojme kerkesen per fshirje ne server
+                await axios.delete(`http://localhost:6001/api/category/remove/${id}`);
+                toast.success("Kategoria është fshirë me sukses!");
+
+                setTimeout(() => loadDataCategory(), 500);
+              } catch (error) {
+                toast.error(`Error deleting category: ${error.message}`);
               }
             },
             className: 'yes-btn'
@@ -493,6 +543,68 @@ function Admin() {
     );
   };
 
+  const renderCategoryTable = () => {
+    return (
+      <div className='table-container' style={{position: "relative", top: "-20px"}}>
+        <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>EmriKategorise</th>
+              <th>FotoKategorise</th>
+              <th>
+                <Link to='/addCategory' className='clickable-header'>
+                  Insert
+                </Link>
+              </th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categoryData.map((category, indexcategory) => {
+              console.log(category.FotoKategori);
+              return (
+                <Fragment key={category.idcategory}>
+                  <tr>
+                    <th scope="row">{indexcategory + 1}</th>
+                    <td>{category.EmriKategorise}</td>
+                    <td>
+                      {category.FotoKategori && (
+                        <img src={`data:image/jpeg;base64,${category.FotoKategori.toString('base64')}`} alt="Category" id='fotoSizeCategory' />
+                      )}
+                    </td>
+                    <td>
+                      <Link to={"/addCategory"}>
+                        <button className="btn btn-User">
+                          <i className="fa-solid fa-cart-plus"></i>
+                        </button>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/updateCategory/${category.idcategory}`}>
+                        <button className="btn btn-edit">
+                          <i className="fa-solid fa-pen"></i>
+                        </button>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link>
+                        <button className="btn btn-delete" onClick={() => deleteCategory(category.idcategory)}>
+                          <i className="fa-solid fa-trash-can"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
 
   // Funksioni per dialogun e konfirmimit per te derguar adminin ne home page 
   const handleHomeButtonClick = () => {
@@ -523,10 +635,12 @@ function Admin() {
       return renderUsersTable();
     } else if (tabName === 'products') {
       return renderProductsTable();
-    } else if (tabName === 'aboutUs') {
-      return renderAboutUsTable();
+    } else if (tabName === 'category') {
+      return renderCategoryTable();
     } else if (tabName === 'slideshow') {
       return renderSlideshowTable();
+    } else if (tabName === 'aboutUs') {
+      return renderAboutUsTable();
     } else if (tabName === 'home') {
       return handleHomeButtonClick();
     } else {
@@ -545,12 +659,15 @@ function Admin() {
       case 'products':
         fallbackTab = 'products';
         return renderProductsTable();
-      case 'aboutUs':
-        fallbackTab = 'aboutUs';
-        return renderAboutUsTable();
+      case 'category':
+        fallbackTab = 'category'
+        return renderCategoryTable();
       case 'slideshow':
         fallbackTab = 'slideshow';
         return renderSlideshowTable();
+      case 'aboutUs':
+        fallbackTab = 'aboutUs';
+        return renderAboutUsTable();
       case 'home':
         fallbackTab = 'home';
         return handleHomeButtonClick();

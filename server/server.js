@@ -184,7 +184,7 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
     }
 
     // Retrieve form data
-    const { Emri, Cmimi, Valuta, Kategoria, Detajet } = req.body;
+    const { Emri, Cmimi, Valuta, Kategoria, Detajet, idcategory } = req.body;
 
     // Retrieve uploaded file path
     const filePath = req.file.path;
@@ -197,8 +197,8 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
         }
 
         // Insert into produktet table
-        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto) VALUES (?,?,?,?,?,?)";
-        const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fileData];
+        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idcategory) VALUES (?,?,?,?,?,?,?)";
+        const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fileData, idcategory];
 
         db.query(sqlInsert, values, (error, result) => {
             if (error) {
@@ -215,9 +215,9 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
-    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Kategoria=?, Detajet=?, Foto=? WHERE idproduct=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idproduct], (error, result) => {
+    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idcategory } = req.body;
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Kategoria=?, Detajet=?, Foto=?, idcategory=? WHERE idproduct=?";
+    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idcategory, idproduct], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -408,7 +408,7 @@ app.post("/api/slideshow/post", upload.single('Foto'), (req, res) => {
 app.put("/api/slideshow/update/:idslideshow", cors(), (req, res) => {
     const { idslideshow } = req.params;
     const { EmriFoto, Foto } = req.body;
-    const sqlUpdate = "UPDATE slideshow SET EmriFoto, Foto=? WHERE idslideshow=?";
+    const sqlUpdate = "UPDATE slideshow SET EmriFoto=?, Foto=? WHERE idslideshow=?";
     db.query(sqlUpdate, [EmriFoto, Foto, idslideshow], (error, result) => {
         if (error) {
             console.log(error);
@@ -433,6 +433,123 @@ app.delete("/api/slideshow/remove/:idslideshow", (req, res) => {
         }
     });
 });
+
+// CRUDAT PER KATEGORI TE PRODUKTEVE
+
+app.get("/api/category/get", cors(), (req, res) => {
+    const sqlGet = "SELECT * FROM kategoria";
+    db.query(sqlGet, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from the database" });
+        } else {
+            // Convert the image data to base64 strings
+            const categoryWithImageData = result.map((kategoria) => {
+                const base64Data = Buffer.from(kategoria.FotoKategori).toString("base64");
+                return { ...kategoria, FotoKategori: base64Data };
+            });
+
+            res.status(200).send(categoryWithImageData);
+        }
+    });
+});
+
+// Selektimi i slideshow sipas ID
+app.get("/api/category/get/:idcategory", cors(), (req, res) => {
+    const { idcategory } = req.params;
+    const sqlGet = "SELECT * FROM kategoria WHERE idcategory=?";
+    db.query(sqlGet, idcategory, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Set up multer configuration
+const storageCategory = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../client/src/img'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+var upload = multer({
+    storage: storageCategory
+});
+
+
+// Insertimi i kategorise
+app.post("/api/category/post", upload.single('FotoKategori'), (req, res) => {
+    console.log(req.file);
+    if (!req.file) {
+        console.log("No file upload");
+        return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    // Retrieve form data
+    const { EmriKategorise } = req.body;
+
+    // Retrieve uploaded file path
+    const filePath = req.file.path;
+
+    // Read file from path
+    fs.readFile(filePath, (error, fileData) => {
+        if (error) {
+            console.log("Error reading file:", error);
+            return res.status(500).json({ error: "Error reading file" });
+        }
+
+        // Insert into category table
+        const sqlInsert = "INSERT INTO kategoria (EmriKategorise, FotoKategori) VALUES (?,?)";
+        const values = [EmriKategorise, fileData];
+
+        db.query(sqlInsert, values, (error, result) => {
+            if (error) {
+                console.log("Database error:", error);
+                res.status(500).json({ error: "Error inserting data into the database" });
+            } else {
+                console.log("Database result:", result);
+                res.sendStatus(200);
+            }
+        });
+    });
+});
+
+// Update i kategorise
+app.put("/api/category/update/:idcategory", cors(), (req, res) => {
+    const { idcategory } = req.params;
+    const { EmriKategorise, FotoKategori } = req.body;
+    const sqlUpdate = "UPDATE kategoria SET EmriKategorise=?, FotoKategori=? WHERE idcategory=?";
+    db.query(sqlUpdate, [EmriKategorise, FotoKategori, idcategory], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from database" });
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+// Fshirja e kategorise
+app.delete("/api/category/remove/:idcategory", (req, res) => {
+    const idcategory = req.params.idcategory;
+    const sqlRemove = "DELETE FROM kategoria WHERE idcategory=?";
+    db.query(sqlRemove, idcategory, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error deleting data from database" });
+        } else {
+            console.log(result);
+            res.sendStatus(200);
+        }
+    });
+});
+
 
 // Insertimi i userave nga Register-formi
 app.post("/api/user/register", (req, res) => {

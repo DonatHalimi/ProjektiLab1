@@ -13,6 +13,7 @@ const initialState = {
   Kategoria: "",
   Detajet: "",
   Foto: undefined,
+  categories: [],
 };
 
 // Krijimi i funksionit AddEditProduct per te shtuar dhe perditesuar produkte
@@ -38,13 +39,30 @@ const AddEditProduct = () => {
     fetchProductData();
   }, [idproduct]);
 
+  // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e kategorive
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:6001/api/category/get");
+        setState((prevState) => ({
+          ...prevState,
+          categories: response.data,
+        }));
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []); // Empty dependency array to fetch categories only once when the component mounts
+
   // Funksioni qe thirret kur formulari dergohet (submit)
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("handleSubmit called");
 
     // Validimi ne ane te klientit
-    if (!state.Emri || !state.Cmimi || !state.Valuta || !state.Kategoria || !state.Detajet || !state.Foto) {
+    if (!state.Emri || !state.Cmimi || !state.Valuta || !state.Kategoria || !state.Detajet || !state.Foto || !state.idcategory) {
       toast.error("Please fill in all fields.");
       return;
     }
@@ -58,6 +76,7 @@ const AddEditProduct = () => {
       formData.append("Kategoria", state.Kategoria);
       formData.append("Detajet", state.Detajet);
       formData.append("Foto", state.Foto);
+      formData.append("idcategory", state.idcategory);
 
       // Krijimi i URL-se se kerkeses bazuar ne ekzistencen e idproduct (Nese ekziston behet update, nese jo shtohet nje produkt)
       const url = idproduct
@@ -149,6 +168,17 @@ const AddEditProduct = () => {
           <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
         </div>
 
+        <div className="product-box">
+          <label htmlFor="categoryDropdown" className="input-label">Zgjedh kategorinë</label>
+          <select id="categoryDropdown" value={state.idcategory} onChange={handleInputChange} name="idcategory">
+            <option value="" disabled selected hidden>Zgjedh kategorinë</option>
+            {state.categories.map((category) => (
+              <option key={category.idcategory} value={category.idcategory}>
+                {category.EmriKategorise}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
         <Link to="/Admin">

@@ -69,3 +69,15 @@
     width: 343px;
 }
 
+.product-box select {
+    background-color: #3b3b3b;
+    color: #fff;
+    position: relative;
+    right: 10px;
+    width: 343px;
+    border: none;
+}
+
+.product-box select option:hover {
+    background-color: rgb(29, 126, 122);
+}

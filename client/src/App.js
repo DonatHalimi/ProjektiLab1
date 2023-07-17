@@ -22,6 +22,7 @@ import CookiePopup from "./components/CookiePopup";
 import './App.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddEditCategory from "./Pages/AddEditCategory";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
               <Route path="/aboutus/update/:idaboutus" element={<AddEditAboutUs />} />
               <Route path="/addSlideshow" element={<AddEditSlideshow />} />
               <Route path="/updateSlideshow/:idslideshow" element={<AddEditSlideshow />} />
+              <Route path="/addCategory" element={<AddEditCategory />} />
+              <Route path="/updateCategory/:idcategory" element={<AddEditCategory />} />
             </Routes>
             <ToTop />
           </BrowserRouter>

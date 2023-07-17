@@ -175,3 +175,8 @@ button.btn.btn-delete {
     max-width: 500px;
     max-height: 500px;
 }
+
+#fotoSizeCategory {
+    max-width: 250px;
+    max-height: 250px;
+}
