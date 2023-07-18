@@ -349,9 +349,16 @@ function Admin() {
 
   // Funksioni per krijimin e tabelave per CRUD te produkteve
   const renderProductsTable = () => {
+
+    // Krijojme nje funksion i cili kthen emrin e kategorise ose nje string empty nese nuk gjindet emri
+    const getCategoryNameById = (categoryId) => {
+      const category = categoryData.find((cat) => cat.idcategory === categoryId);
+      return category ? category.EmriKategorise : "";
+    };
+
     return (
       <div className='table-container' style={{ position: 'fixed', top: '100px' }}>
-        <table className='styled-table' style={{ transform: 'scale(0.79)', position: 'relative', bottom: '590px', overflowY: 'auto', fontSize: '17px' }}>
+        <table className='styled-table' style={{ transform: 'scale(0.72)', position: 'relative', bottom: '590px', overflowY: 'auto', fontSize: '17px' }}>
           <thead>
             <tr>
               <th>ID</th>
@@ -380,7 +387,7 @@ function Admin() {
                     <td>{product.Emri}</td>
                     <td>{product.Cmimi}</td>
                     <td>{product.Valuta}</td>
-                    <td>{product.Kategoria}</td>
+                    <td>{getCategoryNameById(product.idcategory)}</td>
                     <td style={{ textAlign: 'justify' }}>{product.Detajet}</td>
                     <td>
                       {product.Foto && (
@@ -545,7 +552,7 @@ function Admin() {
 
   const renderCategoryTable = () => {
     return (
-      <div className='table-container' style={{position: "relative", top: "-20px"}}>
+      <div className='table-container' style={{ position: "relative", top: "-20px" }}>
         <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
           <thead>
             <tr>

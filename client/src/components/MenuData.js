@@ -11,7 +11,7 @@ export const MenuData = [
     },
     {
         title: "Categories",
-        url: "#",
+        url: "/Categories",
         cName: "nav-links",
         icon: "fa-solid fa-tshirt",
     },

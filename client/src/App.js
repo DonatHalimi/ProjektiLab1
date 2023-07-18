@@ -11,6 +11,7 @@ import AddEditProduct from "./Pages/AddEditProduct";
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import AddEditSlideshow from "./Pages/AddEditSlideshow";
 import Product from "./components/Product";
+import Categories from './components/Categories';
 import Cart from './components/Cart';
 import Wishlist from './components/Wishlist';
 import { ShopContextProvider } from "./context/shop-context";
@@ -35,10 +36,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/" element={<Product />} />
-              <Route path="/Success" element={<Success />} />
-              <Route path="/Cancel" element={<Cancel />} />
+              <Route path="/Categories" element={<Categories />} />
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Wishlist" element={<Wishlist />} />
+              <Route path="/Success" element={<Success />} />
+              <Route path="/Cancel" element={<Cancel />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/login" element={<Login />} />

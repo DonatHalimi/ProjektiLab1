@@ -7,7 +7,6 @@
     color: #fff;
     pointer-events: none;
     transition: .5s;
-    font-weight: bold;
 }
 
 .product-box {
@@ -46,6 +45,14 @@
 #cmimi {
     position: relative;
     right: 8px;
+}
+
+.detajet-label {
+    margin-top: 20px;
+}
+
+#detajet {
+    margin-top: 20px;
 }
 
 #foto {

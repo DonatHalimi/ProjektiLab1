@@ -10,9 +10,9 @@ const initialState = {
   Emri: "",
   Cmimi: "",
   Valuta: "",
-  Kategoria: "",
   Detajet: "",
   Foto: undefined,
+  idcategory: "",
   categories: [],
 };
 
@@ -62,7 +62,7 @@ const AddEditProduct = () => {
     console.log("handleSubmit called");
 
     // Validimi ne ane te klientit
-    if (!state.Emri || !state.Cmimi || !state.Valuta || !state.Kategoria || !state.Detajet || !state.Foto || !state.idcategory) {
+    if (!state.Emri || !state.Cmimi || !state.Valuta || !state.Detajet || !state.Foto || !state.idcategory) {
       toast.error("Please fill in all fields.");
       return;
     }
@@ -73,7 +73,6 @@ const AddEditProduct = () => {
       formData.append("Emri", state.Emri);
       formData.append("Cmimi", state.Cmimi);
       formData.append("Valuta", state.Valuta);
-      formData.append("Kategoria", state.Kategoria);
       formData.append("Detajet", state.Detajet);
       formData.append("Foto", state.Foto);
       formData.append("idcategory", state.idcategory);
@@ -123,7 +122,7 @@ const AddEditProduct = () => {
 
   // Renderimi i HTML formes per te shtuar ose perditesuar nje produkt
   return (
-    <div style={{ marginTop: "80px" }}>
+    <div style={{ marginTop: "80px", transform: 'scale(0.9)' }}>
       <h2>{idproduct ? "Edit" : "Add"}</h2>
       <form action="/" encType="multipart/form-data" method="post"
         style={{
@@ -155,29 +154,26 @@ const AddEditProduct = () => {
         </div>
 
         <div className="product-box">
-          <label htmlFor='kategoria' className="input-label">Kategoria</label>
-          <input value={state.Kategoria || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj kategorinë" id="kategoria" name="Kategoria"></input>
+          <label htmlFor="categoryDropdown" className="input-label">Kategoria</label>
+          <select id="categoryDropdown" value={state.idcategory} onChange={handleInputChange} name="idcategory">
+            <option value="" disabled selected hidden>Zgjedh kategorinë</option>
+            {state.categories && state.categories.length > 0 &&
+              state.categories.map((category) => (
+                <option key={category.idcategory} value={category.idcategory}>
+                  {category.EmriKategorise}
+                </option>
+              ))}
+          </select>
         </div>
+
         <div className="product-box">
-          <label htmlFor="detajet" className="input-label">Detajet</label>
-          <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px", fontSize: "13px" }}></textarea>
+          <label htmlFor="detajet" className="input-label detajet-label">Detajet</label>
+          <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
         </div>
 
         <div className="product-box">
           <label htmlFor="foto" className="input-label">Foto</label>
           <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
-        </div>
-
-        <div className="product-box">
-          <label htmlFor="categoryDropdown" className="input-label">Zgjedh kategorinë</label>
-          <select id="categoryDropdown" value={state.idcategory} onChange={handleInputChange} name="idcategory">
-            <option value="" disabled selected hidden>Zgjedh kategorinë</option>
-            {state.categories.map((category) => (
-              <option key={category.idcategory} value={category.idcategory}>
-                {category.EmriKategorise}
-              </option>
-            ))}
-          </select>
         </div>
 
         <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />

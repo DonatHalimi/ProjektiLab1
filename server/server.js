@@ -184,7 +184,7 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
     }
 
     // Retrieve form data
-    const { Emri, Cmimi, Valuta, Kategoria, Detajet, idcategory } = req.body;
+    const { Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
 
     // Retrieve uploaded file path
     const filePath = req.file.path;
@@ -197,8 +197,8 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
         }
 
         // Insert into produktet table
-        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idcategory) VALUES (?,?,?,?,?,?,?)";
-        const values = [Emri, Cmimi, Valuta, Kategoria, Detajet, fileData, idcategory];
+        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Detajet, Foto, idcategory) VALUES (?,?,?,?,?,?)";
+        const values = [Emri, Cmimi, Valuta, Detajet, fileData, idcategory];
 
         db.query(sqlInsert, values, (error, result) => {
             if (error) {
@@ -215,9 +215,9 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
 // Update i produkteve
 app.put("/api/product/update/:idproduct", cors(), (req, res) => {
     const { idproduct } = req.params;
-    const { Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idcategory } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Kategoria=?, Detajet=?, Foto=?, idcategory=? WHERE idproduct=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Kategoria, Detajet, Foto, idcategory, idproduct], (error, result) => {
+    const { Emri, Cmimi, Valuta, Detajet, Foto, idcategory } = req.body;
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE idproduct=?";
+    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Foto, idcategory, idproduct], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -550,6 +550,27 @@ app.delete("/api/category/remove/:idcategory", (req, res) => {
     });
 });
 
+// Route per me i marr produktet me te njejten kategori
+app.get("/api/product/get-by-category/:idcategory", cors(), (req, res) => {
+    const { idcategory } = req.params;
+    const sqlGetByCategory = "SELECT * FROM produktet WHERE idcategory=?";
+    db.query(sqlGetByCategory, idcategory, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: "Error retrieving data from the database" });
+        } else {
+            // Convert the image data to base64 strings
+            const productsWithImageData = result.map((product) => {
+                const base64Data = Buffer.from(product.Foto).toString("base64");
+                return { ...product, Foto: base64Data };
+            });
+
+            res.status(200).send(productsWithImageData);
+        }
+    });
+});
+
+
 
 // Insertimi i userave nga Register-formi
 app.post("/api/user/register", (req, res) => {
@@ -631,5 +652,5 @@ app.post('/checkout', async (req, res) => {
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
 app.listen(PORT, () => {
-    console.log('Server is running on port 6001');
+    console.log('Server is running on http://localhost:6001');
 });
