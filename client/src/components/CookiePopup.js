@@ -1,6 +1,6 @@
 import React from 'react';
 import CookieConsent from 'react-cookie-consent';
-import BittenCookieIcon from '../img/Cookie.png'; // Replace with the actual path to your SVG icon
+import BittenCookieIcon from '../img/Cookie.png';
 
 const CookiePopup = () => {
     return (

@@ -7,6 +7,7 @@ import "../styles/CategoriesStyle.css";
 const Categories = () => {
     const [categories, setCategories] = useState([]);
 
+    // Krijimi i nje useEffect per t'i marre kategorite nga databaza
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -28,6 +29,7 @@ const Categories = () => {
             <ul className="categories-list">
                 {categories.map((category) => (
                     <li key={category.idcategory} className="category-item">
+
                         <Link to={`/products/${category.idcategory}`} className="category-link">
                             <h3 className="category-name">{category.EmriKategorise}</h3>
                             {category.FotoKategori && (

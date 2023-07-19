@@ -6,6 +6,7 @@ function ToTop() {
     // Deklarimi i states nepermjet Hooks
     const [showButton, setShowButton] = useState(false);
 
+    // Krijojme funksionin handleScroll ku nese distanca e scroll-it nga fillimi i faqes eshte me e madhe se 300 piksela, shfaq butonin top-up, nese jo nuk e shfaq
     const handleScroll = () => {
         if (window.pageYOffset > 300) {
             setShowButton(true);
@@ -14,7 +15,7 @@ function ToTop() {
         }
     };
 
-    // Funksioni qe aktivizohet me klikimin e butonit to-top
+    // Krijojme funksionin i cili aktivizohet me klikimin e butonit to-top
     const handleClick = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }

@@ -6,16 +6,19 @@ import Navbar from '../components/Navbar';
 function Success() {
     const navigate = useNavigate();
 
+    // Krijojme nje useEffect ku pas 3 sekondave perdoruesi kthehet ne Home page
     useEffect(() => {
         const timeout = setTimeout(() => {
             navigate('/');
         }, 3000);
 
+        // UseEffect kryhet vetem nje here
         return () => {
             clearTimeout(timeout);
         };
     }, []);
 
+    // Renderimi i HTML per sukses ne porosi
     return (
         <>
             <Navbar />

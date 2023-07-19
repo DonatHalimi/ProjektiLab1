@@ -12,7 +12,7 @@ const initialState = {
     FotoFile: null,
 };
 
-// Krijimi i funksionit AddEditCategory per te shtuar dhe perditesuar kategorite
+// Krijimi i funksionit AddEditCategory per te shtuar ose perditesuar kategorite
 const AddEditCategory = () => {
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
@@ -35,6 +35,7 @@ const AddEditCategory = () => {
         fetchCategoryData();
     }, [idcategory]);
 
+    // Funksioni qe thirret kur formulari dergohet (submit)
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("handleSubmit called");

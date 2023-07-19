@@ -10,22 +10,14 @@ const initialState = {
     teksti: ""
 }
 
-// Krijimi i funksionit AddEditAboutUs duke perdorur React hooks
+// Krijimi i funksionit AddEditAboutUs per te shtuar ose perditesuar about us page
 const AddEditAboutUs = () => {
-
-    // Deklarimi i useState hook per ruajtjen e gjendjes se komponentit
     const [state, setState] = useState(initialState);
-
-    // Deklarimi i variablave teksti duke i dekonstuktuar nga gjendja e komponentit
     const { teksti } = state;
-
-    // Deklarimi i useNavigate hook per te kaluar ne nje faqe tjeter
     const navigate = useNavigate();
-
-    // Deklarimi i useParams hook per te marre nje parameter nga URL
     const { idaboutus } = useParams();
 
-    // Deklarimi i useEffect hook per te ekzekutuar nje kerkese pasi komponenti eshte renderizuar per here te pare
+    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e about us page nga databaza
     useEffect(() => {
         axios.get(`http://localhost:6001/api/aboutus/get/${idaboutus}`)
             .then((resp) => setState({ ...resp.data[0] }))
@@ -33,7 +25,7 @@ const AddEditAboutUs = () => {
     }, [idaboutus]);
 
 
-    // Deklarimi i funksionit handleSubmit per te shtuar ose perditesuar tekstin
+    // Funksioni qe thirret kur formulari dergohet (submit)
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handleSubmit called");

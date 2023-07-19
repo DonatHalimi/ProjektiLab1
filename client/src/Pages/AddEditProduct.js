@@ -55,7 +55,7 @@ const AddEditProduct = () => {
     };
 
     fetchCategories();
-  }, []); // Empty dependency array to fetch categories only once when the component mounts
+  }, []);
 
   // Funksioni qe thirret kur formulari dergohet (submit)
   const handleSubmit = async (e) => {

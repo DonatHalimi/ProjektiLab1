@@ -7,11 +7,9 @@ import "../styles/HomeStyle.css";
 
 // Deklarimi i funksionit Home
 function Home() {
-
-    // Deklarimi i variables products dhe funksionit setProducts si useState
     const [products, setProducts] = useState([]);
 
-    // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
+    // Krijimi i nje funksioni per te marr te dhenat e produkteve nga databaza
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -28,6 +26,7 @@ function Home() {
         fetchProducts();
     }, []);
 
+    // Renderimi i HTML per shfaqjen e Home
     return (
         <>
             {/* Thirrja e komponenteve te Navbar dhe Slider */}

@@ -34,6 +34,7 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
                             <hr className="sidebar-hr" />
                         </div>
                         <ul className="sidebar-menu">
+                            {/* Nese tab ne perdorim eshte users atehere shendrrohet ne active tab dhe ne klikim ndryshohet tab-i te tabela users */}
                             <li className={`sidebar-menu-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => handleTabChange('users')}>
                                 <i className="fa-solid fa-user"></i> Users
                             </li>

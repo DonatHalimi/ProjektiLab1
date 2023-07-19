@@ -18,7 +18,7 @@ const AddEditSlideshow = () => {
     const navigate = useNavigate();
     const { idslideshow } = useParams();
 
-    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e slideshow
+    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e slideshow nga databaza
     useEffect(() => {
         const fetchSlideshowData = async () => {
             if (idslideshow) {

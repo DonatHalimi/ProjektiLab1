@@ -16,7 +16,7 @@ const Cart = () => {
   // Krijojme funksionin per me llogarit numrin total te produkteve ne shporte
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
-  // Krijimi i nje funksioni per blerjen e produkteve
+  // Krijimi i nje funksionit checkout per blerjen e produkteve
   const checkout = async () => {
     await fetch(`http://localhost:6001/checkout`, {
       method: "POST",

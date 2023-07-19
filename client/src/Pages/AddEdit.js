@@ -16,16 +16,12 @@ const initialState = {
 
 // Krijimi i funksionit AddEdit per te shtuar dhe perditesuar perdorues
 const AddEdit = () => {
-
-    // Definimi i state me useState hook dhe destruktirimi i elementeve te states
     const [state, setState] = useState(initialState);
     const { Name, Surname, Email, Password, Role } = state;
-
-    // Definimi i hooks per te kaluar ne nje faqe tjeter dhe per te marrur ID
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e perdoruesit
+    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e perdoruesit nga databaza
     useEffect(() => {
         axios.get(`http://localhost:6001/api/user/get/${id}`)
             .then((resp) => setState({ ...resp.data[0] }))

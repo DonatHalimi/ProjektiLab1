@@ -488,6 +488,7 @@ function Admin() {
     );
   };
 
+  // Funksioni per krijimin e tabelave per CRUD te slideshow
   const renderSlideshowTable = () => {
     return (
       <div className='table-container' style={{ position: 'relative', top: '-90px' }}>
@@ -550,6 +551,7 @@ function Admin() {
     );
   };
 
+  // Funksioni per krijimin e tabelave per CRUD te kategorive
   const renderCategoryTable = () => {
     return (
       <div className='table-container' style={{ position: "relative", top: "-20px" }}>
@@ -683,7 +685,7 @@ function Admin() {
     }
   };
 
-  // Renderimi i HTML formes per faqen e Adminit
+  // Renderimi i HTML formes per shfaqjen e Adminit dashboard
   return (
     <div>
       <ToTop />
