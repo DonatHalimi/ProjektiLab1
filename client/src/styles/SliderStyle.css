@@ -14,7 +14,6 @@
     background-position: center;
     background-size: cover;
     transition: background-image 0.5s ease-in-out;
-    cursor: grabbing;
 }
 
 .slider .slider-content {
