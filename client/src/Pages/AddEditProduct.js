@@ -22,6 +22,7 @@ const AddEditProduct = () => {
   const navigate = useNavigate();
   const { idproduct } = useParams();
 
+
   // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e produktit
   useEffect(() => {
     const fetchProductData = async () => {

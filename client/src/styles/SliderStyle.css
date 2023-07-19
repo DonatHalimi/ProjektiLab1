@@ -14,132 +14,63 @@
     background-position: center;
     background-size: cover;
     transition: background-image 0.5s ease-in-out;
+    cursor: grabbing;
 }
 
-.slider .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    padding: 0.5rem;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: content-box;
-    width: 2.5rem;
-    height: 2.5rem;
-}
-
-.slider .arrow:hover {
-    color: #585656;
-}
-
-.slider .arrow.left,
-.slider .arrow.right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    padding: 0.5rem;
-    color: white;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    padding-right: 12px;
-}
-
-.slider:hover .arrow.left,
-.slider:hover .arrow.right {
-    opacity: 20;
-}
-
-.slider .arrow.left {
-    left: 5px;
-}
-
-.slider .arrow.right {
-    right: 5px;
-}
-
-.slider .dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 4px;
-    width: 100%;
-}
-
-.slider .dot {
-    font-size: 2rem;
-    cursor: pointer;
-    margin: 0 0.5rem;
-    color: rgba(0, 0, 0, 0.4);
-}
-
-.slider .dot.active {
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.slider-buttons {
+.slider .slider-content {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     bottom: -33px;
-    width: 104%;
+    width: 100%;
     z-index: 100;
 }
 
-.slider-button {
+.slider .slider-button {
     margin: 0 5px;
     font-size: 1.3rem;
-    color: hsl(0, 0%, 80%);
     cursor: pointer;
     transition: color 0.3s ease-in-out;
+    position: relative;
+    bottom: 40px;
 }
 
-.slider-button:hover {
-    color: #585656;
+.slider .slider-button .custom-dot {
+    display: block;
+    width: 100px;
+    height: 6px;
+    background-color: rgb(219, 219, 219);
+    border-radius: 200px;
+    position: relative;
+    overflow: hidden;
 }
 
-.slider-button.active {
-    color: #534a4a;
+.slider .slider-button .custom-dot.active {
+    background-color: rgb(29, 126, 122);
 }
 
-.rounded-rectangle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 16px;
-    border-radius: 8px;
-    background-color: #000;
-    color: #fff;
+:root {
+    --slide-duration: 5000ms;
 }
 
-@media (max-width: 768px) {
-    .slider {
-        height: 500px;
-        padding-top: 50px;
+.slider .slider-button .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: rgba(212, 213, 188, 1);
+    background-image: linear-gradient(90deg, rgba(212, 213, 188, 1) 0%, rgba(122, 178, 191, 1) 100%);
+    animation: moving-progress var(--slide-duration) linear infinite;
+}
+
+@keyframes moving-progress {
+    0% {
+        width: 0;
     }
 
-    .slider-buttons {
-        display: none;
-        bottom: -33px;
-    }
-
-    .slider .arrow {
-        top: 50%;
-    }
-
-    .slider .dots {
-        top: 5px;
+    100% {
+        width: 100%;
     }
 }

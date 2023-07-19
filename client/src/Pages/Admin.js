@@ -287,8 +287,8 @@ function Admin() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
-              <th>Surname</th>
+              <th>Emri</th>
+              <th>Mbiemri</th>
               <th>E-mail</th>
               <th>Password</th>
               <th>Role</th>
@@ -363,7 +363,7 @@ function Admin() {
             <tr>
               <th>ID</th>
               <th>Emri</th>
-              <th>Cmimi</th>
+              <th>Çmimi</th>
               <th>Valuta</th>
               <th>Kategoria</th>
               <th>Detajet</th>

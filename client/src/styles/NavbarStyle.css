@@ -66,7 +66,9 @@
 }
 
 .nav-links.active::after {
-    background-color: rgb(29, 126, 122);
+    /* background-color: rgb(29, 126, 122); */
+    background: rgba(122, 178, 191, 1);
+    background-image: linear-gradient(90deg, rgba(122, 178, 191, 1) 0%, rgba(212, 213, 188, 1) 100%);
     content: "";
     position: absolute;
     bottom: 0;
