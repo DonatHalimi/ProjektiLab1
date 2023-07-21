@@ -3,21 +3,22 @@ import { Link } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import "../styles/ProductStyle.css";
+import {  getProductData } from '../components/ProductData';
 
 function Product(props) {
   const product = props.product;
   const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
+  const [productsTable, setProductsTable] = useState([]);
 
   const [showAlertCart, setShowAlertCart] = useState(false);
   const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
-  // Merr sasine e produkteve nga shporta
-  const getProductQuantity = cart.getProductQuantity(product.id);
+
 
   // Funksioni qe shton nje produkt ne shporte
   const handleAddToCart = () => {
-    cart.addToCart(product.id);
+    cart.addOneToCart(product.id);
     setShowAlertCart(true);
 
     setTimeout(() => {
@@ -48,9 +49,9 @@ function Product(props) {
     <>
 
       {/* Karta e produkteve */}
-      <div className="product" key={product.idproduct}>
+      <div className="product" key={product.id}>
         <div className="card">
-          <Link to={`/product/${product.idproduct}`} className="product-details-link">
+          <Link to={`/product/${product.id}`} className="product-details-link">
             <div className="cardImg">
               <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
             </div>

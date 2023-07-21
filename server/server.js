@@ -147,10 +147,10 @@ app.get("/api/product/get", cors(), (req, res) => {
 });
 
 // Selektimi i produkteve sipas ID
-app.get("/api/product/get/:idproduct", cors(), (req, res) => {
-    const { idproduct } = req.params;
-    const sqlGet = "SELECT * FROM produktet WHERE idproduct=?";
-    db.query(sqlGet, idproduct, (error, result) => {
+app.get("/api/product/get/:id", cors(), (req, res) => {
+    const { id } = req.params;
+    const sqlGet = "SELECT * FROM produktet WHERE id=?";
+    db.query(sqlGet, id, (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -213,11 +213,11 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
 });
 
 // Update i produkteve
-app.put("/api/product/update/:idproduct", cors(), (req, res) => {
-    const { idproduct } = req.params;
+app.put("/api/product/update/:id", cors(), (req, res) => {
+    const { id } = req.params;
     const { Emri, Cmimi, Valuta, Detajet, Foto, idcategory } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE idproduct=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Foto, idcategory, idproduct], (error, result) => {
+    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
+    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Foto, idcategory, id], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -228,10 +228,10 @@ app.put("/api/product/update/:idproduct", cors(), (req, res) => {
 });
 
 // Fshirja e produkteve
-app.delete("/api/product/remove/:idproduct", (req, res) => {
-    const idproduct = req.params.idproduct;
-    const sqlRemove = "DELETE FROM produktet WHERE idproduct=?";
-    db.query(sqlRemove, idproduct, (error, result) => {
+app.delete("/api/product/remove/:id", (req, res) => {
+    const id = req.params.id;
+    const sqlRemove = "DELETE FROM produktet WHERE id=?";
+    db.query(sqlRemove, id, (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error deleting data from database" });

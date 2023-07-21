@@ -38,9 +38,13 @@ function CartItem(props) {
     return null;
   }
 
-  const Cmimi = parseFloat(product.Cmimi).toFixed(2);
+  const Cmimi = parseFloat(product.Cmimi);
   const totalCost = (quantity * Cmimi).toFixed(2);
+  
 
+ 
+
+ 
   return (
     <>
 
@@ -54,12 +58,12 @@ function CartItem(props) {
           <div className="cartCard_header">
             <h3>{product.Emri}</h3>
             <p>{quantity} Total</p>
-            <p>${totalCost}</p>
+            <p>${ (quantity * Cmimi).toFixed(2)}</p>
           </div>
 
           {/* Butonat per me ndryshu, largu, dhe fshi produkte prej cart */}
           <div className='editButtons'>
-            <button id='addButton' onClick={() => cart.addToCart(id)} title='Add'>
+            <button id='addButton' onClick={() => cart.addOneToCart(id)} title='Add'>
               <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
             <button id='removeButton' onClick={() => cart.removeOneFromCart(id)} title='Remove'>

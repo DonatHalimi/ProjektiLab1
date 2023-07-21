@@ -1,106 +1,116 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { PRODUCTS, getProductData } from '../components/ProductData';
+import {  getProductData } from '../components/ProductData';
 
 // Krijimi i nje instance te Context per kontekstin e dyqanit
 export const ShopContext = createContext({
     items: [],
-    getProductQuantity: () => { },
-    addToCart: () => { },
-    removeOneFromCart: () => { },
-    deleteFromCart: () => { },
-    getTotalCost: () => { },
+    getProductQuantity: () => {},
+    addOneToCart: () => {},
+    removeOneFromCart: () => {},
+    deleteFromCart: () => {},
+    getTotalCost: () => {},
 });
 
-export function ShopContextProvider({ children, id }) {
+export function ShopContextProvider({ children }) {
 
-    const [products, setProducts] = useState([]);
+
     const [cartProducts, setCartProducts] = useState([]);
-    const product = products.find((product) => product.id === id);
 
-    // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch("http://localhost:6001/api/product/get");
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                const data = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
+   
 
-        fetchProducts();
-    }, []);
-
-    const Cmimi = product ? parseFloat(product.Cmimi).toFixed(2) : 0;
 
     // Funksioni per te marrur sasine e produktit
     function getProductQuantity(id) {
-        const quantity = cartProducts.find(product => product.id === id)?.quantity
-
-        // Nese sasia eshte e paqarte (produkti nuk gjendet ne shporte), kthe 0
+        const quantity = cartProducts.find(
+          (product) => product.id === id
+        )?.quantity;
+    
         if (quantity === undefined) {
-            return 0;
+          return 0;
         }
+    
         return quantity;
-    }
-
+      }
+    
     // Krijimi i nje funksioni per te shtuar produkt ne Cart
-    function addToCart(id) {
+    function addOneToCart(id) {
         const quantity = getProductQuantity(id);
-
-        // Nese sasia eshte 0 (produkti nuk gjendet ne shporte), shto produktin me sasi 1
+    
         if (quantity === 0) {
-            setCartProducts([...cartProducts, { id: id, quantity: 1 }]);
+          // product is not in cart
+          setCartProducts([
+            ...cartProducts,
+            {
+              id: id,
+              quantity: 1,
+            },
+          ]);
         } else {
-            // Nese sasia eshte me shume se 0 (produkti gjendet ne shporte), shto nje sasi te re ne produkt
-            setCartProducts(cartProducts.map(product =>
-                product.id === id ? { ...product, quantity: product.quantity + 1 } : product)
+          // product is in cart
+         
+          setCartProducts(
+            cartProducts.map(
+              (product) =>
+                product.id === id // if condition
+                  ? { ...product, quantity: product.quantity + 1 } // if statement is true
+                  : product // if statement is false
             )
+          );
         }
-    }
+      }
 
     // Krijimi i nje funksioni per te larguar nje produkt nga Cart
     function removeOneFromCart(id) {
-        const quantity = getProductQuantity(id);
-
-        // Nese sasia eshte 1, largo produktin nga shporta
+        const quantity = getProductData(id);
+    
         if (quantity == 1) {
-            deleteFromCart(id);
+          deleteFromCart(id);
         } else {
-            // Nese sasia eshte me shume se 1, zvogelo sasine e produktit per nje
-            setCartProducts(cartProducts.map(product =>
-                product.id === id ? { ...product, quantity: product.quantity - 1 } : product)
+          setCartProducts(
+            cartProducts.map(
+              (product) =>
+                product.id === id // if condition
+                  ? { ...product, quantity: product.quantity - 1 } // if statement is true
+                  : product // if statement is false
             )
+          );
         }
-    }
-
+      }
     // Krijimi i nje funksioni per kthimin e kostose totale te shportes
     function getTotalCost() {
         let totalCost = 0;
-        cartProducts.map((cartItem) => {
-            totalCost += (Cmimi * cartItem.quantity)
-        });
+        console.log(cartProducts);
+        if (cartProducts && Array.isArray(cartProducts)) {
+          cartProducts.forEach((cartItem) => {
+            const productData = getProductData(cartItem.id);
+    
+            if (productData) {
+              totalCost += productData.Cmimi * cartItem.quantity;
+            }
+          });
+        }
+    
         return totalCost;
-    }
+      }
+    
 
     // Krijimi i nje funksioni per largimin e nje produkti nga shporta
     function deleteFromCart(id) {
-        setCartProducts(cartProducts =>
-            cartProducts.filter(currentProduct => {
-                return currentProduct.id != id;
-            })
-        )
-    }
+        // [] if an object meets a condition, add the object to array
+        // [product1, product2, product3]
+        // [product1, product3]
+        setCartProducts((cartProducts) =>
+          cartProducts.filter((currentProduct) => {
+            return currentProduct.id != id;
+          })
+        );
+      }
 
     // Krijimi i nje konteksti te shportes me vlerat e nevojshme
     const contextValue = {
         items: cartProducts,
         getProductQuantity,
-        addToCart,
+        addOneToCart,
         removeOneFromCart,
         deleteFromCart,
         getTotalCost,
