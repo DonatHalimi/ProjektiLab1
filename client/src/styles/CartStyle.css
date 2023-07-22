@@ -61,7 +61,6 @@ h1 {
     top: 60px;
 }
 
-
 #addButton,
 #deleteButton,
 #removeButton {
@@ -71,7 +70,7 @@ h1 {
     justify-content: space-between;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: rgb(98, 156, 170);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -80,7 +79,8 @@ h1 {
 #addButton:hover,
 #removeButton:hover,
 #deleteButton:hover {
-    background-color: #0069d9;
+    background-color: rgb(74, 127, 139);
+    transition: all 0.6s ease-in-out;
 }
 
 .noItemsInCart {
@@ -128,8 +128,7 @@ h1 {
     top: 53px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: rgba(122, 178, 191, 1);
-    background-image: linear-gradient(90deg, rgba(122, 178, 191, 1) 0%, rgba(212, 213, 188, 1) 100%);
+    background-color: rgb(98, 156, 170);
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -137,9 +136,8 @@ h1 {
 }
 
 #purchaseButton:hover {
-    transition: all 0.5s ease-in-out;
-    background-color: rgb(78, 135, 147);
-    background-image: linear-gradient(90deg, rgb(78, 135, 147) 0%, rgb(168, 169, 139) 100%);
+    background-color: rgb(74, 127, 139);
+    transition: all 0.6s ease-in-out;
 }
 
 @media (max-width: 768px) {
