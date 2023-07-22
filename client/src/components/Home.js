@@ -26,6 +26,8 @@ function Home() {
         fetchProducts();
     }, []);
 
+    console.log("Products:", products);
+
     // Renderimi i HTML per shfaqjen e Home
     return (
         <>
@@ -54,7 +56,7 @@ function Home() {
                 </div>
             </div>
 
-            <div style={{height: '100px'}}></div>
+            <div style={{ height: '100px' }}></div>
 
             <Footer />
         </>

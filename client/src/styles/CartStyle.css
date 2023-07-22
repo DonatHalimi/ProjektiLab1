@@ -110,11 +110,11 @@ h1 {
 .noItemsInCart img {
     position: relative;
     bottom: 320px;
-    left: 20px;
+    right: 200px;
     width: 510px;
     height: auto;
     position: relative;
-    left: 50%;
+    left: 45%;
     transform: translateX(-165%);
 }
 
@@ -128,7 +128,8 @@ h1 {
     top: 53px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: rgba(122, 178, 191, 1);
+    background-image: linear-gradient(90deg, rgba(122, 178, 191, 1) 0%, rgba(212, 213, 188, 1) 100%);
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -136,7 +137,9 @@ h1 {
 }
 
 #purchaseButton:hover {
-    background-color: #0069d9;
+    transition: all 0.5s ease-in-out;
+    background-color: rgb(78, 135, 147);
+    background-image: linear-gradient(90deg, rgb(78, 135, 147) 0%, rgb(168, 169, 139) 100%);
 }
 
 @media (max-width: 768px) {

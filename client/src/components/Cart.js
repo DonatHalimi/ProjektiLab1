@@ -62,7 +62,7 @@ const Cart = () => {
         </div>
       </div>
 
-      <div style={{ height: '600px' }}></div>
+      <div style={{ height: '500px' }}></div>
 
       <Footer />
     </>

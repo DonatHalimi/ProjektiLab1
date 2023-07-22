@@ -12,8 +12,6 @@ function CartItem(props) {
 
   const [products, setProducts] = useState([]);
 
-  const product = products.find((product) => product.id === id);
-
   // Krijimi i nje funksioni per me i marr te dhenat nga API i produktit
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,19 +30,16 @@ function CartItem(props) {
     fetchProducts();
   }, []);
 
+  const product = products.find((product) => product.id === id);
+
   // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
   if (!product) {
-    <div>Loading...</div>
-    return null;
+    return <div>Loading...</div>;
   }
 
   const Cmimi = parseFloat(product.Cmimi);
   const totalCost = (quantity * Cmimi).toFixed(2);
-  
 
- 
-
- 
   return (
     <>
 
@@ -58,7 +53,7 @@ function CartItem(props) {
           <div className="cartCard_header">
             <h3>{product.Emri}</h3>
             <p>{quantity} Total</p>
-            <p>${ (quantity * Cmimi).toFixed(2)}</p>
+            <p>${totalCost}</p>
           </div>
 
           {/* Butonat per me ndryshu, largu, dhe fshi produkte prej cart */}
