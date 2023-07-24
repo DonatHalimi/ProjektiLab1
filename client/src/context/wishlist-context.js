@@ -9,6 +9,7 @@ export const WishlistContext = createContext({
 export function WishlistContextProvider({ children }) {
   const [wishlistItems, setWishlistItems] = useState([]);
 
+  // Krijojme nje funksion per shtim te produktit ne wishlist
   function addItemToWishlist(id) {
     const itemExists = wishlistItems.find(item => item.id === id);
 
@@ -20,6 +21,7 @@ export function WishlistContextProvider({ children }) {
     }
   }
 
+  // Krijojme nje funksion per largim te produktit nga wishlist
   function removeItemFromWishlist(id) {
     setWishlistItems(prevItems =>
       prevItems.filter(item => item.id !== id)

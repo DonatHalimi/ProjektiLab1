@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { WishlistContext } from '../context/wishlist-context';
-// import { getProductData } from './ProductData';
+import { Link } from 'react-router-dom';
 import { ShopContext } from '../context/shop-context';
 import '../styles/WishlistItemsStyle.css';
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
     const cart = useContext(ShopContext);
-
     const [products, setProducts] = useState([]);
+
+    const [showAlertCart, setShowAlertCart] = useState(false);
+    const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
     const id = props.id;
     const product = products.find((product) => product.id === id);
@@ -36,9 +38,22 @@ function WishlistItem(props) {
         return null;
     }
 
+    const handleAddOneToCart = () => {
+        cart.addOneToCart(product.id);
+        setShowAlertCart(true);
+
+        setTimeout(() => {
+            setShowAlertCart(false);
+        }, 5000);
+    };
+
     const handleRemoveFromWishlist = () => {
-        wishlist.removeItemFromWishlist(id);
-        props.onRemoveFromWishlist();
+        wishlist.removeItemFromWishlist(product.id);
+        // setShowAlertWishlist(true);
+
+        // setTimeout(() => {
+        //     setShowAlertWishlist(false);
+        // }, 5000);
     };
 
     const Cmimi = parseFloat(product.Cmimi).toFixed(2);
@@ -61,26 +76,37 @@ function WishlistItem(props) {
 
                     {/* Butonat per me shtu produkt ne cart dhe me remove nje product nga wishlista */}
                     <div className="wishlistButtons">
-                        <button id='wishlistAddToCartButton' onClick={() => cart.addToCart(id)} title='Add To Cart'>
+                        <button id='wishlistAddToCartButton' onClick={handleAddOneToCart} title='Add To Cart'>
                             <i className="fa-solid fa-cart-shopping"></i>
                         </button>
-                        <button id="wishlistRemoveButton" onClick={() => wishlist.removeItemFromWishlist(id)} title='Remove'>
+                        <button id="wishlistRemoveButton" onClick={handleRemoveFromWishlist} title='Remove'>
                             <i className='fa-solid fa-trash-can'></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* {
-                showAlertCart && (
-                    <div className="alertCart">
+            {showAlertCart && (
+                <div className="alertCart">
+                    <Link to="/Cart" className="cartLink">
                         <p>Produkti është shtuar në cart me sukses! </p>
-                        <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                )
-            } */}
+                    </Link>
+                    <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            )}
+
+            {showAlertWishlist && (
+                <div className="alertWishlist">
+                    <Link to="/Wishlist" className="wishlistLink">
+                        <p>Produkti është larguar nga wishlist me sukses!</p>
+                    </Link>
+                    <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            )}
         </>
     );
 }

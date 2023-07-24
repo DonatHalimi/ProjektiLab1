@@ -28,7 +28,6 @@ const AddEdit = () => {
             .catch((err) => console.log(err));
     }, [id]);
 
-
     // Funksioni qe thirret kur formulari dergohet (submit)
     const handleSubmit = (e) => {
         e.preventDefault();

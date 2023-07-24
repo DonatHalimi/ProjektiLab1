@@ -13,6 +13,7 @@ const Wishlist = () => {
 
     const handleRemoveFromWishlist = (id) => {
         removeItemFromWishlist(id);
+
         setShowAlertRemove(true);
         setTimeout(() => {
             setShowAlertRemove(false);
@@ -38,8 +39,7 @@ const Wishlist = () => {
                     <ul>
                         {items.map((item) => (
                             <li key={item.id}>
-                                <WishlistItem id={item.id}
-                                    onRemoveFromWishlist={() => handleRemoveFromWishlist(item.id)} />
+                                <WishlistItem id={item.id} onRemoveFromWishlist={() => handleRemoveFromWishlist(item.id)} key={item.id} />
                             </li>
                         ))}
                     </ul>

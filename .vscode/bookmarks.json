@@ -1,0 +1,459 @@
+{
+	"files": [
+		{
+			"path": "server/server.js",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 9,
+					"label": "Lidhja e databazes"
+				},
+				{
+					"line": 49,
+					"column": 10,
+					"label": "USERS CRUD"
+				},
+				{
+					"line": 128,
+					"column": 1,
+					"label": "PRODUCTS CRUD"
+				},
+				{
+					"line": 245,
+					"column": 3,
+					"label": "ABOUTUS CRUD"
+				},
+				{
+					"line": 320,
+					"column": 9,
+					"label": "SLIDESHOW CRUD"
+				},
+				{
+					"line": 436,
+					"column": 1,
+					"label": "CATEGORY CRUD"
+				},
+				{
+					"line": 552,
+					"column": 0,
+					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
+				}
+			]
+		},
+		{
+			"path": "client/src/Pages/AddEditAboutUs.js",
+			"bookmarks": [
+				{
+					"line": 20,
+					"column": 4,
+					"label": "useEffect() per about us nga databaza "
+				},
+				{
+					"line": 28,
+					"column": 4,
+					"label": "handleSubmit() kur dergohet formulari"
+				},
+				{
+					"line": 54,
+					"column": 4,
+					"label": "handleInputChange() per ndryshime"
+				},
+				{
+					"line": 60,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/Pages/AddEditProduct.js",
+			"bookmarks": [
+				{
+					"line": 26,
+					"column": 2,
+					"label": "useEffect() per produkte nga databaza"
+				},
+				{
+					"line": 43,
+					"column": 2,
+					"label": "useEffect() per kategori nga databaza"
+				},
+				{
+					"line": 60,
+					"column": 2,
+					"label": "handleSubmit() kur dergohet formulari"
+				},
+				{
+					"line": 111,
+					"column": 2,
+					"label": "handleInputChange() kur ndryshon input fields"
+				},
+				{
+					"line": 124,
+					"column": 2,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/Pages/AddEditSlideshow.js",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 4,
+					"label": "useEffect() per foto nga databaza"
+				},
+				{
+					"line": 37,
+					"column": 4,
+					"label": "handleSubmit kur dergohet formulari"
+				},
+				{
+					"line": 90,
+					"column": 4,
+					"label": "handleInputChange() kur ka ndryshime"
+				},
+				{
+					"line": 103,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/cart-items.js",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 2,
+					"label": "useEffect() per produkte nga databaza"
+				},
+				{
+					"line": 42,
+					"column": 2,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/context/shop-context.js",
+			"bookmarks": [
+				{
+					"line": 18,
+					"column": 2,
+					"label": "Funksioni per sasine e produkteve"
+				},
+				{
+					"line": 31,
+					"column": 2,
+					"label": "Funksioni per shtimin e produktit"
+				},
+				{
+					"line": 57,
+					"column": 2,
+					"label": "Funksioni per largimin e produktit"
+				},
+				{
+					"line": 72,
+					"column": 2,
+					"label": "Funksioni per kthimin e kostos totale"
+				},
+				{
+					"line": 87,
+					"column": 2,
+					"label": "Funksioni per largimin e produkteve"
+				},
+				{
+					"line": 109,
+					"column": 2,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/context/wishlist-context.js",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 2,
+					"label": "Funksioni per shtimin e produktit"
+				},
+				{
+					"line": 24,
+					"column": 2,
+					"label": "Funksioni per largimin e produktit"
+				},
+				{
+					"line": 36,
+					"column": 2,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/Slider.js",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 4,
+					"label": "useEffect() per marrjen e fotove nga databaza"
+				},
+				{
+					"line": 26,
+					"column": 4,
+					"label": "Funksioni per next slide"
+				},
+				{
+					"line": 32,
+					"column": 4,
+					"label": "Funksioni per previous slide"
+				},
+				{
+					"line": 38,
+					"column": 4,
+					"label": "useEffect per levizje automatike"
+				},
+				{
+					"line": 44,
+					"column": 4,
+					"label": "Funksioni kur shtypet butoni i mausit"
+				},
+				{
+					"line": 50,
+					"column": 4,
+					"label": "Funksioni kur leviz butoni i mausit"
+				},
+				{
+					"line": 58,
+					"column": 4,
+					"label": "Funksioni kur lirohet butoni i mausit"
+				},
+				{
+					"line": 69,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/Pages/AddEditCategory.js",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 4,
+					"label": "useEffect() per kategori nga databaza"
+				},
+				{
+					"line": 38,
+					"column": 4,
+					"label": "handleSubmit() kur formulari dergohet"
+				},
+				{
+					"line": 102,
+					"column": 4,
+					"label": "handleInputChange() per ndryshime ne input fields"
+				},
+				{
+					"line": 118,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/Pages/Admin.js",
+			"bookmarks": [
+				{
+					"line": 26,
+					"column": 2,
+					"label": "loadData()"
+				},
+				{
+					"line": 40,
+					"column": 2,
+					"label": "loadDataProduct()"
+				},
+				{
+					"line": 54,
+					"column": 2,
+					"label": "loadDataAboutUs()"
+				},
+				{
+					"line": 67,
+					"column": 2,
+					"label": "loadDataSlideshow()"
+				},
+				{
+					"line": 80,
+					"column": 2,
+					"label": "loadDataCategory()"
+				},
+				{
+					"line": 94,
+					"column": 2,
+					"label": "useEffect() per mi marr te dhenat"
+				},
+				{
+					"line": 105,
+					"column": 2,
+					"label": "deleteUser()"
+				},
+				{
+					"line": 139,
+					"column": 2,
+					"label": "deleteProduct()"
+				},
+				{
+					"line": 173,
+					"column": 2,
+					"label": "deleteAboutUs()"
+				},
+				{
+					"line": 207,
+					"column": 2,
+					"label": "deleteSlideshow()"
+				},
+				{
+					"line": 242,
+					"column": 2,
+					"label": "deleteCategory()"
+				},
+				{
+					"line": 277,
+					"column": 2,
+					"label": "renderUsersTable()"
+				},
+				{
+					"line": 350,
+					"column": 2,
+					"label": "renderProductsTable()"
+				},
+				{
+					"line": 428,
+					"column": 2,
+					"label": "renderAboutUsTable()"
+				},
+				{
+					"line": 491,
+					"column": 2,
+					"label": "renderSlideshowTable()"
+				},
+				{
+					"line": 554,
+					"column": 2,
+					"label": "renderCategoryTable()"
+				},
+				{
+					"line": 618,
+					"column": 2,
+					"label": "handleHomeButtonClick()"
+				},
+				{
+					"line": 641,
+					"column": 2,
+					"label": "renderTableForTab()"
+				},
+				{
+					"line": 660,
+					"column": 2,
+					"label": "renderContent()"
+				},
+				{
+					"line": 688,
+					"column": 2,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/Pages/AdminSidebar.js",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 4,
+					"label": "useEffect() per Esc toggle"
+				},
+				{
+					"line": 26,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/Categories.js",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 4,
+					"label": "useEffect() per kategori nga databaza"
+				},
+				{
+					"line": 23,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/Product.js",
+			"bookmarks": [
+				{
+					"line": 17,
+					"column": 2,
+					"label": "handleAddToCart()"
+				},
+				{
+					"line": 27,
+					"column": 2,
+					"label": "handleAddToWishlist()"
+				},
+				{
+					"line": 45,
+					"column": 2,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/ToTop.js",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 4,
+					"label": "handleScroll()"
+				},
+				{
+					"line": 18,
+					"column": 4,
+					"label": "handleClick()"
+				},
+				{
+					"line": 26,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/wishlist-items.js",
+			"bookmarks": [
+				{
+					"line": 18,
+					"column": 4,
+					"label": "useEffect() per produkte nga databaza"
+				},
+				{
+					"line": 40,
+					"column": 4,
+					"label": "handleAddOneToCart()"
+				},
+				{
+					"line": 63,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		}
+	]
+}

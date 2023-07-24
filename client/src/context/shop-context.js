@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { getProductData } from '../components/ProductData';
+import React, { createContext, useState } from 'react';
+// import { getProductData } from '../components/ProductData';
 
 // Krijimi i nje instance te Context per kontekstin e dyqanit
 export const ShopContext = createContext({
@@ -84,14 +84,14 @@ export function ShopContextProvider({ children }) {
     return totalCost;
   }
 
-  // Krijimi i nje funksioni per largimin e nje produkti nga shporta
+  // Krijimi i nje funksioni per largimin e produkteve nga shporta
   function deleteFromCart(id) {
     // [] if an object meets a condition, add the object to array
     // [product1, product2, product3]
     // [product1, product3]
     setCartProducts((cartProducts) =>
       cartProducts.filter((currentProduct) => {
-        return currentProduct.id != id;
+        return currentProduct.id !== id;
       })
     );
   }

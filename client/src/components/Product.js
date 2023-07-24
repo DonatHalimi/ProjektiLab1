@@ -93,8 +93,7 @@ function Product(props) {
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-      )
-      }
+      )}
     </>
   );
 }
