@@ -37,6 +37,26 @@
 					"line": 552,
 					"column": 0,
 					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
+				},
+				{
+					"line": 574,
+					"column": 0,
+					"label": "Insertimi i userave nga Register form"
+				},
+				{
+					"line": 592,
+					"column": 0,
+					"label": "Autentifikimi i perdoruesit"
+				},
+				{
+					"line": 623,
+					"column": 0,
+					"label": "Checkout"
+				},
+				{
+					"line": 652,
+					"column": 0,
+					"label": "Server Port"
 				}
 			]
 		},
@@ -450,6 +470,21 @@
 				},
 				{
 					"line": 63,
+					"column": 4,
+					"label": "HTML Render"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/Home.js",
+			"bookmarks": [
+				{
+					"line": 12,
+					"column": 4,
+					"label": "useEffect() per produkte nga databaza"
+				},
+				{
+					"line": 31,
 					"column": 4,
 					"label": "HTML Render"
 				}

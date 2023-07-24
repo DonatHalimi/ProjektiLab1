@@ -1,137 +1,58 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
-import { Link, useParams } from 'react-router-dom';
-import { ShopContext } from "../context/shop-context";
-import { WishlistContext } from "../context/wishlist-context";
-import { getProductData } from "./ProductData";
-// import CartItem from './cart-items';
-// import Footer from '../Pages/Footer';
-import "../styles/ProductDetailsStyle.css";
+import Footer from './Footer';
 
-function ProductDetails() {
-    const { id } = useParams();
-    const product = getProductData(id);
-    const cart = useContext(ShopContext);
-    const wishlist = useContext(WishlistContext);
+function ProductDetails(props) {
+    const product = props.product;
+    const [products, setProducts] = useState([]);
 
-    const [fotoUrl, setFotoUrl] = useState("");
-    const [showAlertCart, setShowAlertCart] = useState(false);
-    const [showAlertWishlist, setShowAlertWishlist] = useState(false);
-
-    const [selectedSize, setSelectedSize] = useState("");
-
-    // Efekti qe ndryshon URL-ne e fotos bazuar ne llojin e thumbnail-it te produktit
     useEffect(() => {
-        if (product.thumb instanceof Blob) {
-            setFotoUrl(URL.createObjectURL(product.thumb));
-        } else if (typeof product.thumb === "string") {
-            setFotoUrl(product.thumb);
-        }
-    }, [product.thumb]);
+        const fetchProduct = async () => {
+            try {
+                const response = await fetch(`http://localhost:6001/api/product/get/${product.id}`);
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error("Error fetching product:", error);
+            }
+        };
+        fetchProduct();
+    }, [product.id]);
 
-    // Funksioni qe shton nje produkt ne shporte
-    const handleAddToCart = () => {
-        cart.addToCart(product.id);
-        setShowAlertCart(true);
-
-        setTimeout(() => {
-            setShowAlertCart(false);
-        }, 5000);
-    };
-
-    // Funksioni qe shton nje produkt ne listën e dëshirave
-    const handleAddToWishlist = () => {
-        wishlist.addItemToWishlist(product.id);
-
-        setShowAlertWishlist(true);
-
-        setTimeout(() => {
-            setShowAlertWishlist(false);
-        }, 5000);
-    };
-
-    if (!product) {
-        // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
+    if (!products) {
+        // Render loading state or error message if the product data is not available
         return <div>Loading...</div>;
     }
-
-    const handleSizeChange = (e) => {
-        setSelectedSize(e.target.value);
-    };
 
     return (
         <>
             <Navbar />
-
-            <div className="productDetails" key={product.id}>
-                <div className="product-details-container">
-                    <div className="cardImg product-details-image">
-                        <img className='foto' src={fotoUrl} alt="Product" />
-                    </div>
-                    <div className="product-details-content">
-                        <h1 className="product-details-name">{product.product_name}</h1>
-
-                        <div className="product-details-rating">
-                            <span>Rating: </span>
-                            <i className="fa-solid fa-star" style={{ color: '#ffea00' }}></i>
-                            <i className="fa-solid fa-star" style={{ color: '#ffea00' }}></i>
-                            <i className="fa-solid fa-star" style={{ color: '#ffea00' }}></i>
-                            <i className="fa-solid fa-star" style={{ color: '#ffea00' }}></i>
-                            <i class="fa-regular fa-star-half-stroke" style={{ color: '#ffea00' }}></i>
-                        </div>
-
-                        <p className="product-details-description">{product.description}</p>
-
-                        <p>{product.quantity}</p>
-                        <p className="product-details-price">{product.currency}{product.price}</p>
-
-                        <div className="product-details-size">
-                            <label htmlFor="size">Size:</label>
-                            <select id="size" value={selectedSize} onChange={handleSizeChange}>
-                                <option disabled value="">Select Size</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
-                            </select>
-                        </div>
-
-                        <div className="product-details-buttons">
-                            <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
-                                <i className="fa-solid fa-shopping-cart"></i>
-                            </button>
-                            <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-                                <i className="fa-solid fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
+            <div className='details-container'>
+                <div className="product-image">
+                    <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
+                </div>
+                <div className="product-info">
+                    <h2>{products.Emri}</h2>
+                    <p className="price">
+                        {products.Valuta}
+                        {products.Cmimi}
+                    </p>
+                    <p>{products.Detajet}</p>
+                </div>
+                <div className="product-buttons">
+                    <button className="cartButton">
+                        <i className="fa-solid fa-shopping-cart"></i> Add To Cart
+                    </button>
+                    <button className="wishlistButton">
+                        <i className="fa-solid fa-heart"></i> Add To Wishlist
+                    </button>
                 </div>
             </div>
-
-            {showAlertCart && (
-                <div className="alertCart">
-                    <Link to="/Cart" className="cartLink">
-                        <p>Produkti është shtuar në cart me sukses! </p>
-                    </Link>
-                    <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            )}
-
-            {showAlertWishlist && (
-                <div className="alertWishlist">
-                    <Link to="/Wishlist" className="wishlistLink">
-                        <p>Produkti është shtuar në wishlist me sukses! </p>
-                    </Link>
-                    <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            )}
-
-            {/* <Footer /> */}
+            <div style={{ height: "500px" }}></div>
+            <Footer />
         </>
     );
 }

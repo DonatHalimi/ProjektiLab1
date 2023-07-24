@@ -48,6 +48,10 @@
     text-decoration: none;
 }
 
+.product-details-link {
+    text-decoration: none;
+}
+
 .alertCart {
     position: fixed;
     bottom: 870px;
