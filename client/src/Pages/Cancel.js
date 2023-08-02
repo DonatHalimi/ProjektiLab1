@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/CancelStyle.css';
+import { ColorRing } from 'react-loader-spinner'
 import Navbar from '../components/Navbar';
+import '../styles/CancelStyle.css';
 
 function Cancel() {
     const navigate = useNavigate();
@@ -24,11 +25,17 @@ function Cancel() {
             <Navbar />
 
             <div className="cancel-container">
-                <div className="cancel-animation">
-                    <i className="fas fa-times-circle"></i>
-                </div>
-                <h1 className="cancel-heading">Na vjen keq qe e keni anuluar pagesen!</h1>
-                <p className="cancel-subtext">Ne vleresojme besimin tuaj.</p>
+                <h1 className="cancel-heading">Anulim i porosisë</h1>
+                <p className="cancel-subtext">Ju do të ridrejtoheni në faqen kryesore.</p>
+                <ColorRing
+                    visible={true}
+                    height="65"
+                    width="65"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={['#222', '#222', '#222', '#222', '#222']}
+                />
             </div>
         </>
     );

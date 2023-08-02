@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/SuccessStyle.css';
+import { ColorRing } from 'react-loader-spinner'
 import Navbar from '../components/Navbar';
+import '../styles/SuccessStyle.css';
 
 function Success() {
     const navigate = useNavigate();
@@ -24,12 +25,17 @@ function Success() {
             <Navbar />
 
             <div className="success-container">
-                <div className="success-animation">
-                    <i className="fas fa-check-circle"></i>
-                </div>
-                <h1 className="success-heading">Pagesa juaj është kryer me sukses!</h1>
+                <h1 className="success-heading">Pagesa është kryer me sukses!</h1>
                 <p className="success-subtext">Ne e vlerësojmë besimin tuaj.</p>
-                <p className='redirecting'>Redirecting...</p>
+                <ColorRing
+                    visible={true}
+                    height="55"
+                    width="55"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={['#222', '#222', '#222', '#222', '#222']}
+                />
             </div>
         </>
     );

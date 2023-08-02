@@ -19,7 +19,7 @@
   right: 50px;
 }
 
-.about-us p {
+.first-paragraph {
   position: relative;
   bottom: 500px;
   left: 290px;
@@ -29,10 +29,28 @@
   text-align: left;
 }
 
-.about-us-image {
+.second-paragraph {
+  position: relative;
+  bottom: 800px;
+  right: 360px;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.about-us-image-1 {
   position: relative;
   top: 130px;
   right: 350px;
+  width: 550px;
+  height: auto;
+}
+
+.about-us-image-2 {
+  position: relative;
+  bottom: 120px;
+  left: 600px;
   width: 550px;
   height: auto;
 }
@@ -46,9 +64,9 @@
   border-radius: 10px;
   font-size: 22px;
   cursor: pointer;
-  position: relative;
-  bottom: 500px;
-  left: 280px;
+  position: absolute;
+  bottom: 750px;
+  left: 500px;
   text-decoration: none;
 }
 
@@ -64,21 +82,45 @@
   font-size: 30px;
 }
 
-/* Responsive Styles */
 @media screen and (max-width: 768px) {
-  .about-us {
-    padding: 10px;
-  }
-
   .about-us h1 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    text-align: right;
+    position: relative;
+    bottom: 50px;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 70px;
   }
 
-  .about-us p {
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-align: right;
+  .first-paragraph {
+    position: relative;
+    bottom: 60px;
+    right: 100px;
+    font-size: 10px;
+  }
+
+  .second-paragraph {
+    position: relative;
+    font-size: 10px;
+  }
+
+  .about-us-image-1 {
+    position: relative;
+    right: 10px;
+    max-width: 60%;
+  }
+
+  .about-us-image-2 {
+    position: relative;
+    left: 150px;
+    margin-top: 50px;
+    max-width: 60%;
+  }
+
+  .gradient-button {
+    font-size: 16px;
+  }
+
+  .icon {
+    font-size: 22px;
   }
 }
