@@ -35,7 +35,7 @@ const AddEdit = () => {
 
         // Validimi ne ane te klientit
         if (!Name || !Surname || !Email || !Password || !Role) {
-            toast.error("Please fill out all the fields");
+            toast.error("Ju lutemi plotësoni të gjitha fushat");
         } else {
             // Dergojme kerkesen duke u bazuar ne ekzistencen e id
             const requestPromise = id

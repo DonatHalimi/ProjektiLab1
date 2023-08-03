@@ -239,19 +239,9 @@
 					"label": "Funksioni kur shtypet butoni i mausit"
 				},
 				{
-					"line": 50,
+					"line": 53,
 					"column": 4,
 					"label": "Funksioni kur leviz butoni i mausit"
-				},
-				{
-					"line": 58,
-					"column": 4,
-					"label": "Funksioni kur lirohet butoni i mausit"
-				},
-				{
-					"line": 69,
-					"column": 4,
-					"label": "HTML Render"
 				}
 			]
 		},

@@ -42,7 +42,7 @@ const AddEditCategory = () => {
 
         // Validimi ne ane te klientit
         if (!state.EmriKategorise || (!state.FotoKategori && !state.FotoFile)) {
-            toast.error("Please fill in all fields.");
+            toast.error("Ju lutemi plotësoni të gjitha fushat");
             return;
         }
 

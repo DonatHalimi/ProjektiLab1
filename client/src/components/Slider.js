@@ -73,11 +73,11 @@ function Slider() {
                 <div style={{ backgroundImage: `url(data:image/jpeg;base64,${slides[currentIndex].Foto})` }} className="slide" onMouseDown={handleMouseDown} ></div>
             )}
 
-            {/* Progress bar */}
             <div className="slider-content">
                 {slides.map((slide, slideIndex) => (
                     <div key={slide.idslideshow} onClick={() => setCurrentIndex(slideIndex)} className={`slider-button ${currentIndex === slideIndex ? "active" : ""}`}>
-                        <span className="custom-dot">
+                        {/* Progress bar */}
+                        <span className="custom-line">
                             {currentIndex === slideIndex && (
                                 <div className="progress-bar"></div>
                             )}

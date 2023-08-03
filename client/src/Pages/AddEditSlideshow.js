@@ -41,7 +41,7 @@ const AddEditSlideshow = () => {
 
         // Validimi ne ane te klientit
         if (!state.EmriFoto || (!state.Foto && !state.FotoFile)) {
-            toast.error("Please fill in all fields.");
+            toast.error("Ju lutemi plotësoni të gjitha fushat");
             return;
         }
 

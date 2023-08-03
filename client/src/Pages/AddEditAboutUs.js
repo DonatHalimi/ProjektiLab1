@@ -32,7 +32,7 @@ const AddEditAboutUs = () => {
 
         // Kontrolli i plotesimit te te gjitha fushave te formes
         if (!teksti) {
-            toast.error("Please fill out all the fields");
+            toast.error("Ju lutemi plotësoni të gjitha fushat");
         } else {
             // Dergojme kerkesen bazuar ne ekzistencen e idaboutus
             const requestPromise = idaboutus

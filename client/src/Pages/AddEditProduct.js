@@ -64,7 +64,7 @@ const AddEditProduct = () => {
 
     // Validimi ne ane te klientit
     if (!state.Emri || !state.Cmimi || !state.Valuta || !state.Detajet || !state.Foto || !state.idcategory) {
-      toast.error("Please fill in all fields.");
+      toast.error("Ju lutemi plotësoni të gjitha fushat");
       return;
     }
 
