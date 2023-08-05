@@ -102,7 +102,7 @@ body {
 } */
 
 .card .cartButton {
-  background-color: #28a745;
+  background-color: #e2e2e2;
   border: 0;
   border-radius: 10px;
   color: rgb(255, 255, 255);
@@ -126,7 +126,8 @@ body {
 }
 
 .card .wishlistButton {
-  background-color: #f01a1a;
+  background-color: #e2e2e2;
+  color: black;
   position: relative;
   bottom: 155px;
   left: -40px;

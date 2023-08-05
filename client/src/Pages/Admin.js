@@ -7,6 +7,7 @@ import ToTop from '../components/ToTop.js';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/AdminStyle.css";
+import { BsPersonAdd, BsPersonDash, BsPersonX, BsCartPlus, BsPencil, BsTrash3, BsPlusLg } from "react-icons/bs";
 
 function Admin() {
   // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus
@@ -317,7 +318,7 @@ function Admin() {
                     <td>
                       <Link to={`/user/addUser`}>
                         <button className="btn btn-User">
-                          <i class="fa-solid fa-user-plus"></i>
+                          <BsPersonAdd style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -325,7 +326,7 @@ function Admin() {
                     <td>
                       <Link to={`/user/update/${item.id}`}>
                         <button className="btn btn-edit">
-                          <i className="fa-solid fa-user-pen"></i>
+                          <BsPersonDash style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -333,7 +334,7 @@ function Admin() {
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteUser(item.id)}>
-                          <i class="fa-solid fa-user-minus"></i>
+                          <BsPersonX style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -391,27 +392,27 @@ function Admin() {
                     <td style={{ textAlign: 'justify' }}>{product.Detajet}</td>
                     <td>
                       {product.Foto && (
-                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='fotoSize' />
+                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='fotoSizeProduct' />
                       )}
                     </td>
                     <td>
                       <Link to={"/addProduct"}>
                         <button className="btn btn-User">
-                          <i className="fa-solid fa-cart-plus"></i>
+                          <BsCartPlus style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
                     <td>
                       <Link to={`/updateProduct/${product.idproduct}`}>
                         <button className="btn btn-edit">
-                          <i className="fa-solid fa-pen"></i>
+                          <BsPencil style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
-                          <i className="fa-solid fa-trash-can"></i>
+                          <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -458,7 +459,7 @@ function Admin() {
                     <td>
                       <Link to={"/aboutus/addAboutUs"}>
                         <button className="btn btn-User">
-                          <i className="fa-solid fa-plus"></i>
+                          <BsPlusLg style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -466,7 +467,7 @@ function Admin() {
                     <td>
                       <Link to={`/aboutus/update/${aboutus.idaboutus}`}>
                         <button className="btn btn-edit">
-                          <i className="fa-solid fa-pen"></i>
+                          <BsPencil style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -474,7 +475,7 @@ function Admin() {
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteAboutUs(aboutus.idaboutus)}>
-                          <i className="fa-solid fa-trash-can"></i>
+                          <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -523,21 +524,21 @@ function Admin() {
                     <td>
                       <Link to={"/addSlideshow"}>
                         <button className="btn btn-User">
-                          <i className="fa-solid fa-cart-plus"></i>
+                          <BsCartPlus style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
                     <td>
                       <Link to={`/updateSlideshow/${slideshow.idslideshow}`}>
                         <button className="btn btn-edit">
-                          <i className="fa-solid fa-pen"></i>
+                          <BsPencil style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteSlideshow(slideshow.idslideshow)}>
-                          <i className="fa-solid fa-trash-can"></i>
+                          <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
@@ -586,21 +587,21 @@ function Admin() {
                     <td>
                       <Link to={"/addCategory"}>
                         <button className="btn btn-User">
-                          <i className="fa-solid fa-cart-plus"></i>
+                          <BsCartPlus style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
                     <td>
                       <Link to={`/updateCategory/${category.idcategory}`}>
                         <button className="btn btn-edit">
-                          <i className="fa-solid fa-pen"></i>
+                          <BsPencil style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>
                     <td>
                       <Link>
                         <button className="btn btn-delete" onClick={() => deleteCategory(category.idcategory)}>
-                          <i className="fa-solid fa-trash-can"></i>
+                          <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
                     </td>

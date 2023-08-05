@@ -4,6 +4,8 @@ import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import "../styles/ProductStyle.css";
 import { getProductData } from '../components/ProductData';
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 
 function Product(props) {
   const product = props.product;
@@ -62,11 +64,11 @@ function Product(props) {
 
             {/* Butonat per me shtu produktin ne Cart & Wishlist */}
             <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
-              <i className="fa-solid fa-shopping-cart"></i>
+              <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
             </button>
 
             <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-              <i className="fa-solid fa-heart"></i>
+              <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
             </button>
           </div>
         </div>

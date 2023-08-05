@@ -161,27 +161,27 @@
 				{
 					"line": 18,
 					"column": 2,
-					"label": "Funksioni per sasine e produkteve"
+					"label": "getProductQuantity();"
 				},
 				{
 					"line": 31,
 					"column": 2,
-					"label": "Funksioni per shtimin e produktit"
+					"label": "addOneToCart();"
 				},
 				{
 					"line": 57,
 					"column": 2,
-					"label": "Funksioni per largimin e produktit"
+					"label": "removeOneFromCart();"
 				},
 				{
 					"line": 72,
 					"column": 2,
-					"label": "Funksioni per kthimin e kostos totale"
+					"label": "getTotalCost();"
 				},
 				{
 					"line": 87,
 					"column": 2,
-					"label": "Funksioni per largimin e produkteve"
+					"label": "deleteFromCart();"
 				},
 				{
 					"line": 109,
@@ -196,12 +196,12 @@
 				{
 					"line": 12,
 					"column": 2,
-					"label": "Funksioni per shtimin e produktit"
+					"label": "addItemToWishlist();"
 				},
 				{
 					"line": 24,
 					"column": 2,
-					"label": "Funksioni per largimin e produktit"
+					"label": "removeItemFromWishlist();"
 				},
 				{
 					"line": 36,
@@ -274,102 +274,102 @@
 			"path": "client/src/Pages/Admin.js",
 			"bookmarks": [
 				{
-					"line": 26,
+					"line": 27,
 					"column": 2,
 					"label": "loadData()"
 				},
 				{
-					"line": 40,
+					"line": 41,
 					"column": 2,
 					"label": "loadDataProduct()"
 				},
 				{
-					"line": 54,
+					"line": 55,
 					"column": 2,
 					"label": "loadDataAboutUs()"
 				},
 				{
-					"line": 67,
+					"line": 68,
 					"column": 2,
 					"label": "loadDataSlideshow()"
 				},
 				{
-					"line": 80,
+					"line": 81,
 					"column": 2,
 					"label": "loadDataCategory()"
 				},
 				{
-					"line": 94,
+					"line": 95,
 					"column": 2,
 					"label": "useEffect() per mi marr te dhenat"
 				},
 				{
-					"line": 105,
+					"line": 106,
 					"column": 2,
 					"label": "deleteUser()"
 				},
 				{
-					"line": 139,
+					"line": 140,
 					"column": 2,
 					"label": "deleteProduct()"
 				},
 				{
-					"line": 173,
+					"line": 174,
 					"column": 2,
 					"label": "deleteAboutUs()"
 				},
 				{
-					"line": 207,
+					"line": 208,
 					"column": 2,
 					"label": "deleteSlideshow()"
 				},
 				{
-					"line": 242,
+					"line": 243,
 					"column": 2,
 					"label": "deleteCategory()"
 				},
 				{
-					"line": 277,
+					"line": 278,
 					"column": 2,
 					"label": "renderUsersTable()"
 				},
 				{
-					"line": 350,
+					"line": 351,
 					"column": 2,
 					"label": "renderProductsTable()"
 				},
 				{
-					"line": 428,
+					"line": 429,
 					"column": 2,
 					"label": "renderAboutUsTable()"
 				},
 				{
-					"line": 491,
+					"line": 492,
 					"column": 2,
 					"label": "renderSlideshowTable()"
 				},
 				{
-					"line": 554,
+					"line": 555,
 					"column": 2,
 					"label": "renderCategoryTable()"
 				},
 				{
-					"line": 618,
+					"line": 619,
 					"column": 2,
 					"label": "handleHomeButtonClick()"
 				},
 				{
-					"line": 641,
+					"line": 642,
 					"column": 2,
 					"label": "renderTableForTab()"
 				},
 				{
-					"line": 660,
+					"line": 661,
 					"column": 2,
 					"label": "renderContent()"
 				},
 				{
-					"line": 688,
+					"line": 689,
 					"column": 2,
 					"label": "HTML Render"
 				}
@@ -409,17 +409,17 @@
 			"path": "client/src/components/Product.js",
 			"bookmarks": [
 				{
-					"line": 17,
+					"line": 19,
 					"column": 2,
 					"label": "handleAddToCart()"
 				},
 				{
-					"line": 27,
+					"line": 29,
 					"column": 2,
 					"label": "handleAddToWishlist()"
 				},
 				{
-					"line": 45,
+					"line": 47,
 					"column": 2,
 					"label": "HTML Render"
 				}

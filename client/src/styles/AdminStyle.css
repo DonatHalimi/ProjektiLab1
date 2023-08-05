@@ -43,80 +43,50 @@ body {
 }
 
 .btn {
-    color: white;
-    padding: 5px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    background-color: inherit;
 }
 
-.button-edit-product {
-    position: relative;
-    left: 240px;
+.btn.btn-User,
+.btn.btn-edit,
+.btn.btn-delete {
+    background-color: #e2e2e2;
+    margin-left: 20px;
+    padding: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-color: transparent;
+    border-radius: 10px;
 }
 
-.button-edit-aboutus {
-    position: relative;
-    left: 260px;
-}
-
-.btn-edit {
-    background-color: #008cba;
-}
-
-.btn-delete {
-    background-color: #f44336;
-}
-
-.btn.btn-User {
-    background-color: green;
-}
-
-.btn.btn-User:hover {
-    background-color: #006b07;
-    transition: all 0.8s ease-in-out;
-}
-
-.btn.btn-edit:hover {
-    background-color: #005d80;
-    transition: all 0.8s ease-in-out;
-}
-
-.btn.btn-edit:hover::after {
-    content: none;
-}
-
+.btn.btn-User:hover,
+.btn.btn-edit:hover,
 .btn.btn-delete:hover {
-    background: #b53636;
+    background-color: #ccc6c6;
     transition: all 0.8s ease-in-out;
 }
 
-.btn.btn-delete:hover::after {
-    content: none;
+.yes-btn,
+.cancel-btn {
+    background-color: #222;
+    padding: 10px 10px;
 }
 
-.btn:hover {
-    background-color: none;
+.yes-btn:hover,
+.cancel-btn:hover {
+    background-color: rgb(190, 190, 190);
+    transition: all 0.6s ease-in-out;
     color: black;
+    font-weight: 700;
 }
 
-button:hover {
-    background: none;
-}
-
-button:hover::after {
-    content: none;
-}
-
-.yes-btn {
-    margin-left: 5px;
-}
-
+.yes-btn,
 .yes-btn label {
+    margin-left: 5px;
     font-size: 20px;
 }
 
@@ -124,49 +94,12 @@ button:hover::after {
     margin-left: 200px;
 }
 
-.cancel-btn,
-.yes-btn {
-    padding: 20px 20px;
-}
-
-.cancel-btn:hover,
-.yes-btn:hover {
-    background-color: gray;
-}
-
-button.btn.btn-edit {
-    margin-left: 20px;
-    padding: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-color: transparent;
-    border-radius: 10px;
-}
-
-button.btn.btn-User {
-    margin-left: 20px;
-    padding: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-color: transparent;
-    border-radius: 10px;
-}
-
-button.btn.btn-delete {
-    margin-left: 20px;
-    padding: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-color: transparent;
-    border-radius: 10px;
-}
-
 .clickable-header {
-    color: inherit;
     text-decoration: none;
+    color: inherit;
 }
 
-#fotoSize {
+#fotoSizeProduct {
     max-width: 200px;
     max-height: 200px;
 }
