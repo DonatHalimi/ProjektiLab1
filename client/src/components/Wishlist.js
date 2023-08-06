@@ -4,6 +4,7 @@ import { WishlistContext } from '../context/wishlist-context';
 import Navbar from './Navbar';
 import WishlistItem from './wishlist-items';
 import Footer from '../components/Footer';
+import '../styles/WishlistItemsStyle.css';
 
 const Wishlist = () => {
 
@@ -45,7 +46,7 @@ const Wishlist = () => {
         <>
             <Navbar />
 
-            <div>
+            <div className='main-content'>
                 <h1>Wishlist</h1>
                 {items.length > 0 ? (
                     <ul>

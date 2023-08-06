@@ -452,11 +452,6 @@
 					"line": 24,
 					"column": 4,
 					"label": "handleAddOneToCart()"
-				},
-				{
-					"line": 48,
-					"column": 4,
-					"label": "HTML Render"
 				}
 			]
 		},
@@ -479,12 +474,12 @@
 			"path": "client/src/components/Wishlist.js",
 			"bookmarks": [
 				{
-					"line": 16,
+					"line": 17,
 					"column": 21,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 42,
+					"line": 43,
 					"column": 18,
 					"label": "HTML Render"
 				}

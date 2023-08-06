@@ -38,14 +38,7 @@ function Home() {
             {/* Krijimi i kartes se produkteve ne Home page */}
             <div>
                 <div
-                    className="main-content"
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                    }}
-                >
+                    className="main-content">
                     {/* Render a Product component for each item in the products array */}
                     {products.map((product) => (
                         <div className="products-container">

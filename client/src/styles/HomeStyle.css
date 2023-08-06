@@ -6,6 +6,17 @@ body {
   overflow-x: hidden;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px 100px 70px 70px;
+  margin-top: -60px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
 .home-container {
   margin: 0 auto;
   max-width: 1200px;

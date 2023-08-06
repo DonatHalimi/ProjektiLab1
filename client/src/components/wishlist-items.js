@@ -48,26 +48,28 @@ function WishlistItem(props) {
     // Renderimi i HTML formes per shfaqjen e Adminit dashboard
     return (
         <>
-            <div className="wishlistItem" key={product.idproduct}>
-                <div className="wishlistCard">
-                    <div className="wishlistCard_img">
-                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-                    </div>
+            <div className='main-content'>
+                <div className="wishlistItem" key={product.idproduct}>
+                    <div className="wishlistCard">
+                        <div className="wishlistCard_img">
+                            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
+                        </div>
 
-                    <div className="wishlistCard_header">
-                        <h3>{product.Emri}</h3>
-                        <p>${Cmimi}</p>
+                        <div className="wishlistCard_header">
+                            <h3>{product.Emri}</h3>
+                            <p>${Cmimi}</p>
+                        </div>
                     </div>
+                </div>
 
-                    {/* Butonat per me shtu produkt ne cart dhe me remove nje product nga wishlista */}
-                    <div className="wishlistButtons">
-                        <button id='wishlistAddToCartButton' onClick={handleAddOneToCart} title='Add To Cart'>
-                            <AiOutlineShoppingCart style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
-                        </button>
-                        <button id="wishlistRemoveButton" onClick={handleRemoveFromWishlist} title='Remove'>
-                            <BsTrash3 style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
-                        </button>
-                    </div>
+                {/* Place the buttons underneath the product card */}
+                <div className="wishlistButtons">
+                    <button id='wishlistAddToCartButton' onClick={handleAddOneToCart} title='Add To Cart'>
+                        <AiOutlineShoppingCart style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
+                    </button>
+                    <button id="wishlistRemoveButton" onClick={handleRemoveFromWishlist} title='Remove'>
+                        <BsTrash3 style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
+                    </button>
                 </div>
             </div>
 
@@ -80,7 +82,8 @@ function WishlistItem(props) {
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-            )}
+            )
+            }
 
             {showAlertWishlist && (
                 <div className="alertWishlist">
@@ -91,7 +94,8 @@ function WishlistItem(props) {
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-            )}
+            )
+            }
         </>
     );
 }
