@@ -1,6 +1,8 @@
 .wishlistItem {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 20px;
     position: relative;
@@ -55,28 +57,12 @@ ul {
     margin-top: 10px;
 }
 
-#wishlistRemoveButton {
-    position: relative;
-    left: 10px;
-    padding: 8px 20px;
-    font-size: 16px;
-    background-color: #ff5436;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#wishlistRemoveButton:hover {
-    background-color: #ff311e;
-}
-
 #wishlistAddToCartButton {
     position: relative;
     right: 10px;
     padding: 8px 20px;
     font-size: 16px;
-    background-color: #28a745;
+    background-color: #e2e2e2;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -84,7 +70,23 @@ ul {
 }
 
 #wishlistAddToCartButton:hover {
-    background-color: #187a2f;
+    border: 1px solid black
+}
+
+#wishlistRemoveButton {
+    position: relative;
+    left: 10px;
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #e2e2e2;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#wishlistRemoveButton:hover {
+    border: 1px solid black;
 }
 
 .noItemsInWishlist {

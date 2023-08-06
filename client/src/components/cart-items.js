@@ -1,9 +1,9 @@
 import React from 'react';
 import { ShopContext } from '../context/shop-context';
 import { useContext, useEffect, useState } from 'react';
-// import { getProductData } from './ProductData';
 import '../styles/CartItemsStyle.css'
-
+import { BsPlusLg, BsTrash3 } from "react-icons/bs";
+import { AiOutlineMinus } from "react-icons/ai";
 function CartItem(props) {
   const cart = useContext(ShopContext);
 
@@ -59,13 +59,13 @@ function CartItem(props) {
           {/* Butonat per me ndryshu, largu, dhe fshi produkte prej cart */}
           <div className='editButtons'>
             <button id='addButton' onClick={() => cart.addOneToCart(id)} title='Add'>
-              <i class="fa fa-plus" aria-hidden="true"></i>
+              <BsPlusLg style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
             </button>
             <button id='removeButton' onClick={() => cart.removeOneFromCart(id)} title='Remove'>
-              <i class='fa fa-minus'></i>
+              <AiOutlineMinus style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
             </button>
             <button id='deleteButton' onClick={() => cart.deleteFromCart(id)} title='Delete'>
-              <i class='fa fa-trash'></i>
+            <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
             </button>
           </div>
         </div>

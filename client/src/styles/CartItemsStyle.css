@@ -2,10 +2,6 @@
   flex-grow: 1;
 }
 
-.price {
-  font-weight: bold;
-}
-
 .card .btn {
   background-color: green;
   border-radius: 10px;

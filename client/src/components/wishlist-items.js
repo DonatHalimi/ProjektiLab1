@@ -3,35 +3,19 @@ import { WishlistContext } from '../context/wishlist-context';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../context/shop-context';
 import '../styles/WishlistItemsStyle.css';
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BsTrash3 } from "react-icons/bs";
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
     const cart = useContext(ShopContext);
-    const [products, setProducts] = useState([]);
+    const { products } = props; // Get products data from props
 
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
     const id = props.id;
     const product = products.find((product) => product.id === id);
-
-    // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch("http://localhost:6001/api/product/get");
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                const data = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
-
-        fetchProducts();
-    }, []);
 
     if (!product) {
         <div>Loading...</div>
@@ -49,11 +33,11 @@ function WishlistItem(props) {
 
     const handleRemoveFromWishlist = () => {
         wishlist.removeItemFromWishlist(product.id);
-        // setShowAlertWishlist(true);
+        setShowAlertWishlist(true);
 
-        // setTimeout(() => {
-        //     setShowAlertWishlist(false);
-        // }, 5000);
+        setTimeout(() => {
+            setShowAlertWishlist(false);
+        }, 5000);
     };
 
     const Cmimi = parseFloat(product.Cmimi).toFixed(2);
@@ -61,6 +45,7 @@ function WishlistItem(props) {
     console.log(products);
     console.log(typeof product.Cmimi);
 
+    // Renderimi i HTML formes per shfaqjen e Adminit dashboard
     return (
         <>
             <div className="wishlistItem" key={product.idproduct}>
@@ -77,10 +62,10 @@ function WishlistItem(props) {
                     {/* Butonat per me shtu produkt ne cart dhe me remove nje product nga wishlista */}
                     <div className="wishlistButtons">
                         <button id='wishlistAddToCartButton' onClick={handleAddOneToCart} title='Add To Cart'>
-                            <i className="fa-solid fa-cart-shopping"></i>
+                            <AiOutlineShoppingCart style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
                         </button>
                         <button id="wishlistRemoveButton" onClick={handleRemoveFromWishlist} title='Remove'>
-                            <i className='fa-solid fa-trash-can'></i>
+                            <BsTrash3 style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
                         </button>
                     </div>
                 </div>

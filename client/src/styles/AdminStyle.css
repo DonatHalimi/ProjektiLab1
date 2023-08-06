@@ -66,8 +66,7 @@ body {
 .btn.btn-User:hover,
 .btn.btn-edit:hover,
 .btn.btn-delete:hover {
-    background-color: #ccc6c6;
-    transition: all 0.8s ease-in-out;
+    border: 1.9px solid black;
 }
 
 .yes-btn,
