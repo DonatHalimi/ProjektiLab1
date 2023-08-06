@@ -274,102 +274,107 @@
 			"path": "client/src/Pages/Admin.js",
 			"bookmarks": [
 				{
-					"line": 27,
+					"line": 13,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 28,
 					"column": 2,
 					"label": "loadData()"
 				},
 				{
-					"line": 41,
+					"line": 42,
 					"column": 2,
 					"label": "loadDataProduct()"
 				},
 				{
-					"line": 55,
+					"line": 56,
 					"column": 2,
 					"label": "loadDataAboutUs()"
 				},
 				{
-					"line": 68,
+					"line": 70,
 					"column": 2,
 					"label": "loadDataSlideshow()"
 				},
 				{
-					"line": 81,
+					"line": 84,
 					"column": 2,
 					"label": "loadDataCategory()"
 				},
 				{
-					"line": 95,
+					"line": 98,
 					"column": 2,
 					"label": "useEffect() per mi marr te dhenat"
 				},
 				{
-					"line": 106,
+					"line": 109,
 					"column": 2,
 					"label": "deleteUser()"
 				},
 				{
-					"line": 140,
+					"line": 143,
 					"column": 2,
 					"label": "deleteProduct()"
 				},
 				{
-					"line": 174,
+					"line": 177,
 					"column": 2,
 					"label": "deleteAboutUs()"
 				},
 				{
-					"line": 208,
+					"line": 211,
 					"column": 2,
 					"label": "deleteSlideshow()"
 				},
 				{
-					"line": 243,
+					"line": 246,
 					"column": 2,
 					"label": "deleteCategory()"
 				},
 				{
-					"line": 278,
+					"line": 281,
 					"column": 2,
 					"label": "renderUsersTable()"
 				},
 				{
-					"line": 351,
+					"line": 354,
 					"column": 2,
 					"label": "renderProductsTable()"
 				},
 				{
-					"line": 429,
+					"line": 432,
 					"column": 2,
 					"label": "renderAboutUsTable()"
 				},
 				{
-					"line": 492,
+					"line": 493,
 					"column": 2,
 					"label": "renderSlideshowTable()"
 				},
 				{
-					"line": 555,
+					"line": 556,
 					"column": 2,
 					"label": "renderCategoryTable()"
 				},
 				{
-					"line": 619,
+					"line": 620,
 					"column": 2,
 					"label": "handleHomeButtonClick()"
 				},
 				{
-					"line": 642,
+					"line": 644,
 					"column": 2,
-					"label": "renderTableForTab()"
+					"label": "renderTableForTab();"
 				},
 				{
-					"line": 661,
+					"line": 663,
 					"column": 2,
 					"label": "renderContent()"
 				},
 				{
-					"line": 689,
+					"line": 691,
 					"column": 2,
 					"label": "HTML Render"
 				}

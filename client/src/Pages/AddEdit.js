@@ -102,7 +102,7 @@ const AddEdit = () => {
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor="Role" className="input-label">Role</label>
+                    <label htmlFor="Role" className="input-label">Roli</label>
                     <select value={Role || ""} onChange={handleInputChange} id="role" name="Role">
                         <option value="" disabled selected hidden>Zgjedh rolin</option>
                         <option value="2">User</option>

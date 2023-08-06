@@ -10,7 +10,8 @@ import "../styles/AdminStyle.css";
 import { BsPersonAdd, BsPersonDash, BsPersonX, BsCartPlus, BsPencil, BsTrash3, BsPlusLg } from "react-icons/bs";
 
 function Admin() {
-  // Shtojme dy variabla per te mbajtur te dhenat e user-ave, produkteve dhe aboutus
+
+  // Shtimi i variablave per usera, produkte, aboutus, slideshow, kategori etj.
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
@@ -66,6 +67,7 @@ function Admin() {
     }
   };
 
+  // Funksioni per te marre te dhenat e slideshow nga API
   const loadDataSlideshow = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/slideshow/get');
@@ -79,6 +81,7 @@ function Admin() {
     }
   };
 
+  // Funksioni per te marre te dhenat e kategorive nga API
   const loadDataCategory = async () => {
     try {
       const response = await axios.get('http://localhost:6001/api/category/get');
@@ -121,7 +124,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-                toast.success("Përdoruesi është fshirë me sukses!");
+                toast.success("Perdoruesi eshte fshire me sukses!");
                 setTimeout(() => loadData(), 500);
               } catch (error) {
                 toast.error(`Error deleting user: ${error.message}`);
@@ -155,7 +158,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/product/remove/${id}`);
-                toast.success("Produkti është fshirë me sukses!");
+                toast.success("Produkti eshte fshire me sukses!");
                 setTimeout(() => loadDataProduct(), 500);
               } catch (error) {
                 toast.error(`Error deleting product: ${error.message}`);
@@ -189,7 +192,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
-                toast.success("Teksti është fshirë me sukses!");
+                toast.success("Teksti eshte fshire me sukses!");
                 setTimeout(() => loadDataAboutUs(), 500);
               } catch (error) {
                 toast.error(`Error deleting text: ${error.message}`);
@@ -205,7 +208,7 @@ function Admin() {
     confirmDialog();
   };
 
-  // Fshirja e fotos nga slideshow
+  // Funksioni per te fshire slideshow nga API
   const deleteSlideshow = async (id) => {
     const confirmDialog = () => {
       confirmAlert({
@@ -223,7 +226,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/slideshow/remove/${id}`);
-                toast.success("Fotoja është fshirë me sukses!");
+                toast.success("Fotoja eshte fshire me sukses!");
 
                 setTimeout(() => loadDataSlideshow(), 500);
               } catch (error) {
@@ -240,7 +243,7 @@ function Admin() {
     confirmDialog();
   }
 
-  // Fshirja e kategorise
+  // Funksioni per te fshire kategorine nga API
   const deleteCategory = async (id) => {
     const confirmDialog = () => {
       confirmAlert({
@@ -258,7 +261,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/category/remove/${id}`);
-                toast.success("Kategoria është fshirë me sukses!");
+                toast.success("Kategoria eshte fshire me sukses!");
 
                 setTimeout(() => loadDataCategory(), 500);
               } catch (error) {
@@ -275,7 +278,7 @@ function Admin() {
     confirmDialog();
   }
 
-  // Funksioni per krijimin e tabelave per CRUD te user-ave
+  // Funksioni per renderimin e tabeles se user-ave
   const renderUsersTable = () => {
 
     const getRoleLabel = (roleId) => {
@@ -348,7 +351,7 @@ function Admin() {
     );
   };
 
-  // Funksioni per krijimin e tabelave per CRUD te produkteve
+  // Funksioni per renderimin e tabeles se produkteve
   const renderProductsTable = () => {
 
     // Krijojme nje funksion i cili kthen emrin e kategorise ose nje string empty nese nuk gjindet emri
@@ -426,14 +429,12 @@ function Admin() {
     );
   };
 
-  // Funksioni per krijimin e tabelave per CRUD te aboutUs
+  // Funksioni per renderimin e tabeles se about us
   const renderAboutUsTable = () => {
     return (
 
       <div className='table-container' style={{ position: 'fixed', top: '100px' }}>
         <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
-          {/* <div className='table-container'>
-        <table className='styled-table'> */}
           <thead>
             <tr>
               <th>ID</th>
@@ -489,7 +490,7 @@ function Admin() {
     );
   };
 
-  // Funksioni per krijimin e tabelave per CRUD te slideshow
+  // Funksioni per renderimin e tabeles se slideshow
   const renderSlideshowTable = () => {
     return (
       <div className='table-container' style={{ position: 'relative', top: '-90px' }}>
@@ -552,7 +553,7 @@ function Admin() {
     );
   };
 
-  // Funksioni per krijimin e tabelave per CRUD te kategorive
+  // Funksioni per renderimin e tabeles se kategorive
   const renderCategoryTable = () => {
     return (
       <div className='table-container' style={{ position: "relative", top: "-20px" }}>
@@ -640,6 +641,7 @@ function Admin() {
     });
   };
 
+  // Funksioni qe kthen tabelen per tab-in e caktuar varesisht prej tab-it
   const renderTableForTab = (tabName) => {
     if (tabName === 'users') {
       return renderUsersTable();
