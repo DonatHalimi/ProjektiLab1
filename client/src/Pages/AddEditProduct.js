@@ -125,6 +125,7 @@ const AddEditProduct = () => {
   return (
     <div style={{ marginTop: "80px", transform: 'scale(0.9)' }}>
       <h2>{idproduct ? "Edit" : "Add"}</h2>
+      {state &&(
       <form action="/" encType="multipart/form-data" method="post"
         style={{
           margin: "auto",
@@ -179,11 +180,13 @@ const AddEditProduct = () => {
 
         <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
         <Link to="/Admin">
-          <input id="goback-button" type="button" value="Go Back"></input>
+          <input id="goback-button" type="button" value="Go Back" />
         </Link>
-      </form>
-    </div>
-  );
+    
+       </form>
+       )}
+     </div>
+   );
 }
 
 export default AddEditProduct;

@@ -229,18 +229,24 @@ app.put("/api/product/update/:id", cors(), (req, res) => {
 
 // Fshirja e produkteve
 app.delete("/api/product/remove/:id", (req, res) => {
-    const id = req.params.id;
-    const sqlRemove = "DELETE FROM produktet WHERE id=?";
-    db.query(sqlRemove, id, (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: "Error deleting data from database" });
-        } else {
-            console.log(result);
-            res.sendStatus(200);
-        }
-    });
+  const id = req.params.id;
+  console.log("ID received from request:", id); // Add this line for debugging
+  if (id === undefined) {
+    return res.status(400).send("Invalid request. ID is missing.");
+  }
+
+  db.query("DELETE FROM produktet WHERE id=?", id, (error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Error deleting product");
+    } else {
+      console.log(`Deleted product with ID ${id}`);
+      res.status(200).send("Product deleted successfully");
+    }
+  });
 });
+  
+
 
 
 // CRUDAT PER ABOUTUS

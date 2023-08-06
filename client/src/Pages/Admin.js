@@ -104,7 +104,7 @@ function Admin() {
     loadDataCategory();
   }, []);
 
-  console.log(data);
+  
 
   // Funksioni per te fshire user-in nga API
   const deleteUser = async (id) => {
@@ -142,7 +142,7 @@ function Admin() {
 
   // Funksioni per te fshire produktin nga API
   const deleteProduct = async (id) => {
-    const confirmDialog = () => {
+    const confirmDialogg = () => {
       confirmAlert({
         title: 'Confirm Deletion',
         message: 'Are you sure that you want to delete this product?',
@@ -171,7 +171,7 @@ function Admin() {
     };
 
     // Thirrja e confirm dialog custom
-    confirmDialog();
+    confirmDialogg();
   }
 
   // Funksioni per te fshire tekstin nga API
@@ -383,9 +383,9 @@ function Admin() {
           </thead>
           <tbody>
             {productData.map((product, indexproduct) => {
-              console.log(product.Foto);
+            
               return (
-                <Fragment key={product.idproduct}>
+                <Fragment key={product.id}>
                   <tr>
                     <th scope="row">{indexproduct + 1}</th>
                     <td>{product.Emri}</td>
@@ -406,7 +406,7 @@ function Admin() {
                       </Link>
                     </td>
                     <td>
-                      <Link to={`/updateProduct/${product.idproduct}`}>
+                      <Link to={`/updateProduct/${product.id}`}>
                         <button className="btn btn-edit">
                           <BsPencil style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
@@ -414,7 +414,7 @@ function Admin() {
                     </td>
                     <td>
                       <Link>
-                        <button className="btn btn-delete" onClick={() => deleteProduct(product.idproduct)}>
+                        <button className="btn btn-delete" onClick={() => deleteProduct(product.id)}>
                           <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
                         </button>
                       </Link>
