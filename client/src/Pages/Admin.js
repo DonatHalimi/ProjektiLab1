@@ -104,7 +104,7 @@ function Admin() {
     loadDataCategory();
   }, []);
 
-  
+
 
   // Funksioni per te fshire user-in nga API
   const deleteUser = async (id) => {
@@ -362,7 +362,7 @@ function Admin() {
 
     return (
       <div className='table-container' style={{ position: 'fixed', top: '100px' }}>
-        <table className='styled-table' style={{ transform: 'scale(0.72)', position: 'relative', bottom: '590px', overflowY: 'auto', fontSize: '17px' }}>
+        <table className='styled-table' style={{ transform: 'scale(0.72)', position: 'relative', bottom: '530px', overflowY: 'auto', fontSize: '17px', marginTop: "5px", marginBottom: "200px" }}>
           <thead>
             <tr>
               <th>ID</th>
@@ -383,7 +383,7 @@ function Admin() {
           </thead>
           <tbody>
             {productData.map((product, indexproduct) => {
-            
+
               return (
                 <Fragment key={product.id}>
                   <tr>
@@ -556,7 +556,7 @@ function Admin() {
   // Funksioni per renderimin e tabeles se kategorive
   const renderCategoryTable = () => {
     return (
-      <div className='table-container' style={{ position: "relative", top: "-20px" }}>
+      <div className='table-container' style={{ position: "relative", top: "-60px" }}>
         <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
           <thead>
             <tr>
