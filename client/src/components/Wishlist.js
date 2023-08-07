@@ -47,7 +47,7 @@ const Wishlist = () => {
             <Navbar />
 
             <div className='main-content'>
-                <h1>Wishlist</h1>
+                <h1 style={{ position: "relative", bottom: "700px" }}>Wishlist</h1>
                 {items.length > 0 ? (
                     <ul>
                         {items.map((item) => (

@@ -42,7 +42,7 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
                                 <i className="fa-solid fa-shirt"></i> Products
                             </li>
                             <li className={`sidebar-menu-item ${activeTab === 'category' ? 'active' : ''}`} onClick={() => handleTabChange('category')}>
-                                <i class="fa-solid fa-box"></i> Categories
+                                <i className="fa-solid fa-box"></i> Categories
                             </li>
                             <li className={`sidebar-menu-item ${activeTab === 'slideshow' ? 'active' : ''}`} onClick={() => handleTabChange('slideshow')}>
                                 <i className="fa-solid fa-image"></i> Slideshow

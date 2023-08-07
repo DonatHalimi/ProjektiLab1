@@ -60,6 +60,19 @@
     font-size: 14px;
 }
 
+.product-box select {
+    background-color: #3b3b3b;
+    color: #fff;
+    position: relative;
+    right: 10px;
+    width: 343px;
+    border: none;
+}
+
+.product-box select option:hover {
+    background-color: rgb(29, 126, 122);
+}
+
 #submit-button {
     background-color: #33b249;
     margin-left: 7px;
@@ -74,17 +87,4 @@
     position: relative;
     right: 7px;
     width: 343px;
-}
-
-.product-box select {
-    background-color: #3b3b3b;
-    color: #fff;
-    position: relative;
-    right: 10px;
-    width: 343px;
-    border: none;
-}
-
-.product-box select option:hover {
-    background-color: rgb(29, 126, 122);
 }

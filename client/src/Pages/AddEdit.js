@@ -112,7 +112,7 @@ const AddEdit = () => {
 
                 <input id="submit-button" type="submit" value={id ? "Update" : "Save"} />
                 <Link to="/Admin">
-                    <input id="goback-button" type="button" value="Go Back"></input>
+                    <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>
         </div>

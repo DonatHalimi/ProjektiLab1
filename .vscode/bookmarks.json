@@ -104,12 +104,7 @@
 					"label": "handleSubmit() kur dergohet formulari"
 				},
 				{
-					"line": 111,
-					"column": 2,
-					"label": "handleInputChange() kur ndryshon input fields"
-				},
-				{
-					"line": 124,
+					"line": 127,
 					"column": 2,
 					"label": "HTML Render"
 				}
@@ -364,17 +359,17 @@
 					"label": "handleHomeButtonClick()"
 				},
 				{
-					"line": 644,
+					"line": 645,
 					"column": 2,
 					"label": "renderTableForTab();"
 				},
 				{
-					"line": 663,
+					"line": 664,
 					"column": 2,
 					"label": "renderContent()"
 				},
 				{
-					"line": 691,
+					"line": 692,
 					"column": 2,
 					"label": "HTML Render"
 				}

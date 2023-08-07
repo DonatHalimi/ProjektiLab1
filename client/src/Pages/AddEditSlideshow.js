@@ -109,6 +109,7 @@ const AddEditSlideshow = () => {
                     margin: "auto",
                     padding: "25px",
                     paddingRight: "40px",
+                    paddingTop: "30px",
                     maxWidth: "400px",
                     alignContent: "center",
                     backgroundColor: "#1e1f1e",
@@ -130,7 +131,7 @@ const AddEditSlideshow = () => {
 
                 <input id="submit-button" type="submit" value={idslideshow ? "Update" : "Save"} />
                 <Link to="/Admin">
-                    <input id="goback-button" type="button" value="Go Back"></input>
+                    <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>
         </div>
