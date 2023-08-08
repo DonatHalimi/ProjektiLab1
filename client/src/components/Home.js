@@ -41,7 +41,7 @@ function Home() {
                     {/* Render a Product component for each item in the products array */}
                     {products.map((product) => (
                         <div className="products-container">
-                            <Product key={product.id} product={product} />
+                            <Product  product={product} />
                         </div>
                     ))}
 

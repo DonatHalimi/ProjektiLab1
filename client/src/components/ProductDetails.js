@@ -1,46 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useParams } from 'react-router-dom';
 
-function ProductDetails(props) {
-    const product = props.product;
-    const [products, setProducts] = useState([]);
+function ProductDetails() {
+    const { id } = useParams();
+    const [product, setProduct] = useState(null);
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:6001/api/product/get/${product.id}`);
+                const response = await fetch(`http://localhost:6001/api/product/get/${id}`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
-                setProducts(data);
+                setProduct(data);
             } catch (error) {
                 console.error("Error fetching product:", error);
             }
         };
         fetchProduct();
-    }, [product.id]);
+    }, [id]);
 
-    if (!products) {
-        // Render loading state or error message if the product data is not available
+    if (!product) {
+        // Render loading state if the product data is not available yet
         return <div>Loading...</div>;
     }
+
+    const imageSrc = product.Foto && product.Foto.data ? `data:image/jpeg;base64,${product.Foto.data.toString('base64')}` : '';
 
     return (
         <>
             <Navbar />
             <div className='details-container'>
                 <div className="product-image">
-                    <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
+                    {imageSrc && (
+                        <img src={imageSrc} alt="Product" id='photo' />
+                    )}
                 </div>
                 <div className="product-info">
-                    <h2>{products.Emri}</h2>
+                    <h2>{product.Emri}</h2>
                     <p className="price">
-                        {products.Valuta}
-                        {products.Cmimi}
+                        {product.Valuta} {product.Cmimi}
                     </p>
-                    <p>{products.Detajet}</p>
+                    <p>{product.Detajet}</p>
                 </div>
                 <div className="product-buttons">
                     <button className="cartButton">

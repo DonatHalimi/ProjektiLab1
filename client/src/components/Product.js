@@ -51,7 +51,8 @@ function Product(props) {
       <div className="product-container">
         <div className="product" key={product.id}>
           <div className="card">
-            <Link to={`/product/${product.id}`} className="product-details-link">
+          <Link to={`/product/${product.id}`} className="product-details-link">
+
               <div className="cardImg">
                 <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
               </div>
