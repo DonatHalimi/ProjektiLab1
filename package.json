@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "eslint": "^8.41.0",
     "eslint-plugin-jest": "^27.2.1",
     "tailwindcss": "^3.3.2"
@@ -24,5 +25,10 @@
     "react-spring": "^9.7.1",
     "stream-browserify": "^3.0.0",
     "yup": "^1.2.0"
+  },
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   }
 }
