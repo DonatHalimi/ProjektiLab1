@@ -15,6 +15,7 @@ function ProductDetails() {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
+                console.log("Fetched product data:", data);
                 setProduct(data);
             } catch (error) {
                 console.error("Error fetching product:", error);
@@ -29,6 +30,7 @@ function ProductDetails() {
     }
 
     const imageSrc = product.Foto && product.Foto.data ? `data:image/jpeg;base64,${product.Foto.data.toString('base64')}` : '';
+    console.log('imageSrc:', imageSrc);
 
     return (
         <>

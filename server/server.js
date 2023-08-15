@@ -149,8 +149,9 @@ app.get("/api/product/get", cors(), (req, res) => {
 // Selektimi i produkteve sipas ID
 app.get("/api/product/get/:id", cors(), (req, res) => {
     const { id } = req.params;
+    const numericId = id.replace('price_', '');
     const sqlGet = "SELECT * FROM produktet WHERE id=?";
-    db.query(sqlGet, id, (error, result) => {
+    db.query(sqlGet, numericId, (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
@@ -229,23 +230,23 @@ app.put("/api/product/update/:id", cors(), (req, res) => {
 
 // Fshirja e produkteve
 app.delete("/api/product/remove/:id", (req, res) => {
-  const id = req.params.id;
-  console.log("ID received from request:", id); // Add this line for debugging
-  if (id === undefined) {
-    return res.status(400).send("Invalid request. ID is missing.");
-  }
-
-  db.query("DELETE FROM produktet WHERE id=?", id, (error, result) => {
-    if (error) {
-      console.error(error);
-      res.status(500).send("Error deleting product");
-    } else {
-      console.log(`Deleted product with ID ${id}`);
-      res.status(200).send("Product deleted successfully");
+    const id = req.params.id;
+    console.log("ID received from request:", id); // Add this line for debugging
+    if (id === undefined) {
+        return res.status(400).send("Invalid request. ID is missing.");
     }
-  });
+
+    db.query("DELETE FROM produktet WHERE id=?", id, (error, result) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send("Error deleting product");
+        } else {
+            console.log(`Deleted product with ID ${id}`);
+            res.status(200).send("Product deleted successfully");
+        }
+    });
 });
-  
+
 
 
 
