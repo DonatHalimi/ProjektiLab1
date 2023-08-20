@@ -54,11 +54,11 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
                                 <i className='fa-solid fa-house'></i> Home
                             </li>
                         </ul>
-                        <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
-                            <GiHamburgerMenu />
-                        </button>
                     </>
                 )}
+                <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
+                    <GiHamburgerMenu />
+                </button>
             </div>
             {!sidebarVisible && (
                 <button className="sidebar-toggle-btn-alt" onClick={toggleSidebar}>

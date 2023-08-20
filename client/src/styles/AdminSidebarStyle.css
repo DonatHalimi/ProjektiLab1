@@ -44,6 +44,10 @@
     transform: translateX(-100%);
 }
 
+.sidebar-menu-item {
+    margin-top: 15px;
+}
+
 .sidebar-menu-item,
 .sidebar-menu-item-home {
     position: relative;
@@ -74,7 +78,7 @@
 
 .sidebar-menu-item-home {
     position: relative;
-    top: 20px;
+    bottom: 20px;
     left: 20px;
     width: 75%;
     text-decoration: none;
@@ -104,7 +108,7 @@
 
 .sidebar-toggle-btn {
     position: relative;
-    bottom: 931px;
+    bottom: 973px;
     left: 60px;
     background-color: transparent;
     color: white;
@@ -139,5 +143,49 @@
 .sidebar-toggle-title {
     color: black;
     margin-left: 8px;
-  }
-  
+}
+
+.sidebar-menu-item:hover:not(.active) {
+    background: rgb(29, 126, 122);
+    border-radius: 10px;
+}
+
+.sidebar-menu-item.active {
+    position: relative;
+    transition: all 0.8s ease-in-out;
+    border-radius: 5px;
+    max-width: 100%;
+    size-adjust: initial;
+    /* transition: border-bottom 1s ease-in-out; */
+}
+
+.sidebar-menu-item.active:hover {
+    content: none;
+    border-radius: 10px;
+    transition: all 1s ease-in-out;
+}
+
+
+.sidebar-menu-item.active::after {
+    background: rgba(122, 178, 191, 1);
+    background-image: linear-gradient(90deg, rgba(122, 178, 191, 1) 0%, rgba(212, 213, 188, 1) 100%);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    border-radius: 5px;
+    transition: height 2s ease-in-out;
+}
+
+.sidebar-menu-item.active:hover {
+    background: none;
+    transform: translateX(0);
+}
+
+.sidebar-menu-item.active:hover::after {
+    content: none;
+    height: 0;
+}

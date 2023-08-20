@@ -149,9 +149,8 @@ app.get("/api/product/get", cors(), (req, res) => {
 // Selektimi i produkteve sipas ID
 app.get("/api/product/get/:id", cors(), (req, res) => {
     const { id } = req.params;
-    const numericId = id.replace('price_', '');
     const sqlGet = "SELECT * FROM produktet WHERE id=?";
-    db.query(sqlGet, numericId, (error, result) => {
+    db.query(sqlGet, id, (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from database" });
