@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
@@ -83,26 +84,51 @@ function ProductDetails() {
             <div className='details-container'>
                 <div className="product-image">
                     <div className="cardImg">
-                        <img src={`data:image/jpeg;base64,${base64String}`} alt="Product" id='photo' />
+                        <img src={`data:image/jpeg;base64,${base64String}`} alt="Product" id='product-photo' />
                     </div>
                 </div>
                 <div className="product-info">
-                    <h2>{Emri}</h2>
-                    <p className="price">
-                        {Valuta} {Cmimi}
+                    <h2 id='product-name'>{Emri}</h2>
+                    <p id="product-price">
+                        {Valuta}{Cmimi}
                     </p>
-                    <p>{Detajet}</p>
+                    <p id='product-details'>{Detajet}</p>
                 </div>
                 <div className="product-buttons">
                     <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-                        <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
+                        <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal", position: "relative", top: "2.3px" }} />
                     </button>
                     <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
-                        <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
+                        <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px", position: "relative", top: "2.3px" }} />
                     </button>
                 </div>
             </div>
-            <div style={{ height: "500px" }}></div>
+
+            {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
+            {showAlertCart && (
+                <div className="alertCart">
+                    <Link to="/Cart" className="cartLink">
+                        <p>Produkti është shtuar në shportë me sukses!</p>
+                    </Link>
+                    <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            )}
+
+            {showAlertWishlist && (
+                <div className="alertWishlist">
+                    <Link to="/Wishlist" className="wishlistLink">
+                        <p>Produkti është shtuar në wishlist me sukses!</p>
+                    </Link>
+                    <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            )}
+
+            <div style={{ height: "250px" }}></div>
+
             <Footer />
         </>
     );
