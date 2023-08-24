@@ -1,19 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
 import "../styles/ProductDetailsStyle.css";
+import { ShopContext } from "../context/shop-context";
+import { WishlistContext } from "../context/wishlist-context";
+import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
-    const [Emri,setEmri]=useState("");
-    const [Cmimi,setCmimi]=useState(null);
-    const [Valuta,setValuta]=useState("");
-    const [Detajet,setDetajet]=useState("");
-    const [Foto,setFoto]=useState("");
+    const [Emri, setEmri] = useState("");
+    const [Cmimi, setCmimi] = useState(null);
+    const [Valuta, setValuta] = useState("");
+    const [Detajet, setDetajet] = useState("");
+    const [Foto, setFoto] = useState("");
+    const cart = useContext(ShopContext);
+    const wishlist = useContext(WishlistContext);
+    const [showAlertCart, setShowAlertCart] = useState(false);
+    const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
+    const handleAddToCart = () => {
+        cart.addOneToCart(id);
+        setShowAlertCart(true);
 
+        setTimeout(() => {
+            setShowAlertCart(false);
+        }, 5000);
+    };
+
+    const handleAddToWishlist = () => {
+        wishlist.addItemToWishlist(id);
+
+        setShowAlertWishlist(true);
+
+        setTimeout(() => {
+            setShowAlertWishlist(false);
+        }, 5000);
+    };
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -23,7 +47,7 @@ function ProductDetails() {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
-                const product=data[0];
+                const product = data[0];
                 console.log("Fetched product data:", data);
                 setProduct(data);
                 setEmri(product.Emri)
@@ -36,7 +60,7 @@ function ProductDetails() {
                 console.log(Valuta);
                 console.log(Detajet);
                 console.log(Foto);
-               
+
             } catch (error) {
                 console.error("Error fetching product:", error);
             }
@@ -53,44 +77,33 @@ function ProductDetails() {
     const binaryString = byteArray.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
     const base64String = btoa(binaryString);
 
-
-    
- 
-
     return (
         <>
-            
-            <Navbar/>
-           
+            <Navbar />
             <div className='details-container'>
                 <div className="product-image">
-                <div className="cardImg">
-                <img src={`data:image/jpeg;base64,${base64String}`} alt="Product" id='photo' />
-
-
-
-              </div>
+                    <div className="cardImg">
+                        <img src={`data:image/jpeg;base64,${base64String}`} alt="Product" id='photo' />
+                    </div>
                 </div>
                 <div className="product-info">
                     <h2>{Emri}</h2>
-                   
                     <p className="price">
                         {Valuta} {Cmimi}
                     </p>
                     <p>{Detajet}</p>
                 </div>
                 <div className="product-buttons">
-                    <button className="cartButton">
-                        <i className="fa-solid fa-shopping-cart"></i> Add To Cart
+                    <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
+                        <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
                     </button>
-                    <button className="wishlistButton">
-                        <i className="fa-solid fa-heart"></i> Add To Wishlist
+                    <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
+                        <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
                     </button>
                 </div>
             </div>
             <div style={{ height: "500px" }}></div>
             <Footer />
-            
         </>
     );
 }
