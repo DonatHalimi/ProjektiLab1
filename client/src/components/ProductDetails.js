@@ -2,10 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
+import "../styles/ProductDetailsStyle.css";
 
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const [Emri,setEmri]=useState("");
+    const [Cmimi,setCmimi]=useState(null);
+    const [Valuta,setValuta]=useState("");
+    const [Detajet,setDetajet]=useState("");
+    const [Foto,setFoto]=useState("");
+
+
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -15,8 +23,20 @@ function ProductDetails() {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
+                const product=data[0];
                 console.log("Fetched product data:", data);
                 setProduct(data);
+                setEmri(product.Emri)
+                setCmimi(product.Cmimi);
+                setValuta(product.Valuta);
+                setDetajet(product.Detajet);
+                setFoto(product.Foto)
+                console.log(Emri);
+                console.log(Cmimi);
+                console.log(Valuta);
+                console.log(Detajet);
+                console.log(Foto);
+               
             } catch (error) {
                 console.error("Error fetching product:", error);
             }
@@ -29,24 +49,35 @@ function ProductDetails() {
         return <div>Loading...</div>;
     }
 
-    const imageSrc = product.Foto && product.Foto.data ? `data:image/jpeg;base64,${product.Foto.data.toString('base64')}` : '';
-    console.log('imageSrc:', imageSrc);
+    const byteArray = new Uint8Array(Foto.data);
+    const binaryString = byteArray.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
+    const base64String = btoa(binaryString);
+
+
+    
+ 
 
     return (
         <>
-            <Navbar />
+            
+            <Navbar/>
+           
             <div className='details-container'>
                 <div className="product-image">
-                    {imageSrc && (
-                        <img src={imageSrc} alt="Product" id='photo' />
-                    )}
+                <div className="cardImg">
+                <img src={`data:image/jpeg;base64,${base64String}`} alt="Product" id='photo' />
+
+
+
+              </div>
                 </div>
                 <div className="product-info">
-                    <h2>{product.Emri}</h2>
+                    <h2>{Emri}</h2>
+                   
                     <p className="price">
-                        {product.Valuta} {product.Cmimi}
+                        {Valuta} {Cmimi}
                     </p>
-                    <p>{product.Detajet}</p>
+                    <p>{Detajet}</p>
                 </div>
                 <div className="product-buttons">
                     <button className="cartButton">
@@ -59,6 +90,7 @@ function ProductDetails() {
             </div>
             <div style={{ height: "500px" }}></div>
             <Footer />
+            
         </>
     );
 }
