@@ -1,32 +1,22 @@
-.main-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+* {
+    padding: 0;
+    margin: 0;
 }
 
-.wishlistItem {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-    top: 40px;
-    left: 100px;
+.main-content{
     margin-top: 20px;
 }
 
 .wishlistCard {
-    width: 80%;
-    height: 120%;
+    width: 75%;
+    height: 360px;
     position: relative;
     top: 200px;
     right: 600px;
     border: 1px solid #ccc;
     background-color: rgb(242, 242, 242);
     border-radius: 10px;
+    margin-top: 10px;
 }
 
 .wishlistCard_img {
@@ -34,6 +24,7 @@
     position: relative;
     left: 100px;
     text-align: center;
+    aspect-ratio: 0.5/0.5;
 }
 
 .wishlistCard_img img {
@@ -65,42 +56,30 @@ ul {
     justify-content: center;
     margin-top: 10px;
     position: relative;
-    top: 220px;
-    right: 550px;
+    top: 140px;
+    right: 670px;
     height: 50%;
     width: 75%;
+    padding: 0 60px;
 }
 
-#wishlistAddToCartButton {
+#wishlistAddToCartButton,
+#wishlistRemoveButton {
     position: relative;
     right: 10px;
-    padding: 8px 20px;
+    padding: 8px 18px;
     font-size: 16px;
     background-color: #e2e2e2;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
-#wishlistAddToCartButton:hover {
-    border: 1px solid black
-}
-
-#wishlistRemoveButton {
-    position: relative;
-    left: 10px;
-    padding: 8px 20px;
-    font-size: 16px;
-    background-color: #e2e2e2;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
+#wishlistAddToCartButton:hover,
 #wishlistRemoveButton:hover {
-    border: 1px solid black;
+    border: 1px solid black
 }
 
 .noItemsInWishlist {

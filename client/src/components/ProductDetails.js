@@ -16,8 +16,10 @@ function ProductDetails() {
     const [Valuta, setValuta] = useState("");
     const [Detajet, setDetajet] = useState("");
     const [Foto, setFoto] = useState("");
+
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
+
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
@@ -56,11 +58,11 @@ function ProductDetails() {
                 setValuta(product.Valuta);
                 setDetajet(product.Detajet);
                 setFoto(product.Foto)
-                console.log(Emri);
-                console.log(Cmimi);
-                console.log(Valuta);
-                console.log(Detajet);
-                console.log(Foto);
+                // console.log(Emri);
+                // console.log(Cmimi);
+                // console.log(Valuta);
+                // console.log(Detajet);
+                // console.log(Foto);
 
             } catch (error) {
                 console.error("Error fetching product:", error);

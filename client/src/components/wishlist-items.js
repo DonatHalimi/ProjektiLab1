@@ -62,7 +62,6 @@ function WishlistItem(props) {
                     </div>
                 </div>
 
-                {/* Place the buttons underneath the product card */}
                 <div className="wishlistButtons">
                     <button id='wishlistAddToCartButton' onClick={handleAddOneToCart} title='Add To Cart'>
                         <AiOutlineShoppingCart style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
@@ -82,8 +81,7 @@ function WishlistItem(props) {
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-            )
-            }
+            )}
 
             {showAlertWishlist && (
                 <div className="alertWishlist">
@@ -94,8 +92,7 @@ function WishlistItem(props) {
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-            )
-            }
+            )}
         </>
     );
 }
