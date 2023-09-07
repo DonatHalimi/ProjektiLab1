@@ -557,10 +557,10 @@ app.delete("/api/category/remove/:idcategory", (req, res) => {
 });
 
 // Route per me i marr produktet me te njejten kategori
-app.get("/api/product/get-by-category/:idcategory", cors(), (req, res) => {
-    const { idcategory } = req.params;
+app.get("/api/products/get-by-category/:categoryId", cors(), (req, res) => {
+    const { categoryId } = req.params;
     const sqlGetByCategory = "SELECT * FROM produktet WHERE idcategory=?";
-    db.query(sqlGetByCategory, idcategory, (error, result) => {
+    db.query(sqlGetByCategory, [categoryId], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send({ error: "Error retrieving data from the database" });
@@ -571,11 +571,10 @@ app.get("/api/product/get-by-category/:idcategory", cors(), (req, res) => {
                 return { ...product, Foto: base64Data };
             });
 
-            res.status(200).send(productsWithImageData);
+            res.status(200).json(productsWithImageData);
         }
     });
 });
-
 
 
 // Insertimi i userave nga Register-formi

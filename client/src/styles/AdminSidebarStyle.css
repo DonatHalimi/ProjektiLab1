@@ -184,8 +184,3 @@
     background: none;
     transform: translateX(0);
 }
-
-.sidebar-menu-item.active:hover::after {
-    content: none;
-    height: 0;
-}

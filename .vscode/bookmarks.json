@@ -39,22 +39,22 @@
 					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
 				},
 				{
-					"line": 574,
+					"line": 575,
 					"column": 0,
 					"label": "Insertimi i userave nga Register form"
 				},
 				{
-					"line": 592,
+					"line": 591,
 					"column": 0,
 					"label": "Autentifikimi i perdoruesit"
 				},
 				{
-					"line": 623,
+					"line": 622,
 					"column": 0,
 					"label": "Checkout"
 				},
 				{
-					"line": 652,
+					"line": 651,
 					"column": 0,
 					"label": "Server Port"
 				}

@@ -1,29 +1,30 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./Pages/Login";
-import { Register } from "./Pages/Register";
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css'
 import Home from './components/Home';
 import ToTop from "./components/ToTop";
 import AboutUs from "./components/AboutUs";
+import Product from "./components/Product";
+import Categories from './components/Categories';
+import Cart from './components/Cart';
+import Wishlist from './components/Wishlist';
+import ProductDetails from './components/ProductDetails';
+import CookiePopup from "./components/CookiePopup";
+import ProductList from './components/ProductList';
+import { ShopContextProvider } from "./context/shop-context";
+import { WishlistContextProvider } from "./context/wishlist-context";
+import Login from "./Pages/Login";
+import { Register } from "./Pages/Register";
 import Admin from "./Pages/Admin";
 import AddEdit from "./Pages/AddEdit";
 import AddEditProduct from "./Pages/AddEditProduct";
 import AddEditAboutUs from "./Pages/AddEditAboutUs";
 import AddEditSlideshow from "./Pages/AddEditSlideshow";
-import Product from "./components/Product";
-import Categories from './components/Categories';
-import Cart from './components/Cart';
-import Wishlist from './components/Wishlist';
-import { ShopContextProvider } from "./context/shop-context";
-import { WishlistContextProvider } from "./context/wishlist-context";
+import AddEditCategory from "./Pages/AddEditCategory";
 import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
-import ProductDetails from './components/ProductDetails';
-import CookiePopup from "./components/CookiePopup";
-import './App.css'
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import AddEditCategory from "./Pages/AddEditCategory";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
               <Route path="/updateSlideshow/:idslideshow" element={<AddEditSlideshow />} />
               <Route path="/addCategory" element={<AddEditCategory />} />
               <Route path="/updateCategory/:idcategory" element={<AddEditCategory />} />
+              <Route path="/products/:categoryId" element={<ProductList />} />
             </Routes>
             <ToTop />
           </BrowserRouter>
