@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import "../styles/CategoriesStyle.css";
+import Footer from "./Footer";
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
@@ -33,16 +34,17 @@ const Categories = () => {
                         <Link to={`/products/${category.idcategory}`} className="category-link">
                             <h3 className="category-name">{category.EmriKategorise}</h3>
                             {category.FotoKategori && (
-                                <img
-                                    src={`data:image/jpeg;base64,${category.FotoKategori}`}
-                                    alt={category.EmriKategorise}
-                                    className="category-image"
+                                <img src={`data:image/jpeg;base64,${category.FotoKategori}`} alt={category.EmriKategorise} className="category-image"
                                 />
                             )}
                         </Link>
                     </li>
                 ))}
             </ul>
+
+            <div style={{height: "400px"}}></div>
+
+            <Footer />
         </div>
     );
 };

@@ -209,32 +209,32 @@
 			"path": "client/src/components/Slider.js",
 			"bookmarks": [
 				{
-					"line": 12,
+					"line": 13,
 					"column": 4,
 					"label": "useEffect() per marrjen e fotove nga databaza"
 				},
 				{
-					"line": 26,
+					"line": 31,
 					"column": 4,
 					"label": "Funksioni per next slide"
 				},
 				{
-					"line": 32,
+					"line": 37,
 					"column": 4,
 					"label": "Funksioni per previous slide"
 				},
 				{
-					"line": 38,
+					"line": 43,
 					"column": 4,
 					"label": "useEffect per levizje automatike"
 				},
 				{
-					"line": 44,
+					"line": 49,
 					"column": 4,
 					"label": "Funksioni kur shtypet butoni i mausit"
 				},
 				{
-					"line": 53,
+					"line": 58,
 					"column": 4,
 					"label": "Funksioni kur leviz butoni i mausit"
 				}
@@ -394,12 +394,12 @@
 			"path": "client/src/components/Categories.js",
 			"bookmarks": [
 				{
-					"line": 10,
+					"line": 11,
 					"column": 4,
 					"label": "useEffect() per kategori nga databaza"
 				},
 				{
-					"line": 23,
+					"line": 24,
 					"column": 4,
 					"label": "HTML Render"
 				}
