@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
-import "../styles/ProductDetailsStyle.css";
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
+import { BsArrowsAngleContract } from "react-icons/bs";
+import "../styles/ProductDetailsStyle.css";
 
 function ProductDetails() {
     const { id } = useParams();
@@ -16,6 +17,7 @@ function ProductDetails() {
     const [Valuta, setValuta] = useState("");
     const [Detajet, setDetajet] = useState("");
     const [Foto, setFoto] = useState("");
+    const [isImageEnlarged, setIsImageEnlarged] = useState(false);
 
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
@@ -84,26 +86,57 @@ function ProductDetails() {
         <>
             <Navbar />
             <div className='details-container'>
-                <div className="product-image">
-                    <div className="cardImg">
-                        <img src={`data:image/jpeg;base64,${base64String}`} alt="Product" id='product-photo' />
+                {isImageEnlarged ? (
+                    <div className="product-image">
+                        <div className="cardImg">
+                            <img
+                                src={`data:image/jpeg;base64,${base64String}`}
+                                alt="Product"
+                                id="product-photo"
+                                className="enlarged-image"
+                                onClick={() => setIsImageEnlarged(!isImageEnlarged)}
+                            />
+                            <div className="close-icon" onClick={() => setIsImageEnlarged(false)}>
+                                <BsArrowsAngleContract />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className="product-info">
-                    <h2 id='product-name'>{Emri}</h2>
-                    <p id="product-price">
-                        {Valuta}{Cmimi}
-                    </p>
-                    <p id='product-details'>{Detajet}</p>
-                </div>
-                <div className="product-buttons">
-                    <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-                        <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal", position: "relative", top: "2.3px" }} />
-                    </button>
-                    <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
-                        <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px", position: "relative", top: "2.3px" }} />
-                    </button>
-                </div>
+                ) : (
+                    <div className="product-image">
+                        <div className="cardImg">
+                            <img
+                                src={`data:image/jpeg;base64,${base64String}`}
+                                alt="Product"
+                                id="product-photo"
+                                className={isImageEnlarged ? 'enlarged-image' : ''}
+                                onClick={() => setIsImageEnlarged(!isImageEnlarged)}
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqen infot e produktit */}
+                {!isImageEnlarged && (
+                    <div className="product-info">
+                        <h2 id='product-name'>{Emri}</h2>
+                        <p id="product-price">
+                            {Valuta}{Cmimi}
+                        </p>
+                        <p id='product-details'>{Detajet}</p>
+                    </div>
+                )}
+
+                {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqen butonat */}
+                {!isImageEnlarged && (
+                    <div className="product-buttons">
+                        <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
+                            <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal", position: "relative", top: "2.3px" }} />
+                        </button>
+                        <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
+                            <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px", position: "relative", top: "2.3px" }} />
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
@@ -131,7 +164,11 @@ function ProductDetails() {
 
             <div style={{ height: "250px" }}></div>
 
-            <Footer />
+            {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqet footeri */}
+            {!isImageEnlarged && (
+                <Footer />
+            )}
+
         </>
     );
 }

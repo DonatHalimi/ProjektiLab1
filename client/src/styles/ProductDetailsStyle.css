@@ -16,6 +16,10 @@
   aspect-ratio: 2/2.4;
 }
 
+#product-photo:hover {
+  cursor: pointer;
+}
+
 #product-name {
   position: relative;
   right: 4%;
@@ -65,16 +69,32 @@
   border: 1px solid black;
 }
 
-/* .cartButton:hover {
-  background-color: #218838;
-}
-
-.wishlistButton:hover {
-  background-color: #e63d26;
-} */
-
 .cartLink,
 .wishlistLink {
   text-decoration: none;
   color: white;
+}
+
+.cardImg:hover {
+  cursor: pointer;
+}
+
+.enlarged-image {
+  transform: scale(2.2) translateX(40%) translateY(10%);
+  transition: transform 0.9s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  top: 50%;
+  right: 120%;
+  z-index: 9999;
+}
+
+.close-icon {
+  transform: scale(1.5) translate(0, 0);
+  transition: transform 0.9s ease-in-out;
+  position: relative;
+  bottom: 340px;
+  left: 850px;
+  cursor: pointer;
+  fill: white;
 }
