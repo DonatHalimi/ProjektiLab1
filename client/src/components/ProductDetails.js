@@ -84,7 +84,10 @@ function ProductDetails() {
 
     return (
         <>
-            <Navbar />
+            {!isImageEnlarged && (
+                <Navbar />
+            )}
+
             <div className='details-outer-container'>
                 <div className='details-container'>
                     {isImageEnlarged ? (
