@@ -85,35 +85,38 @@ function ProductDetails() {
     return (
         <>
             <Navbar />
-            <div className='details-container'>
-                {isImageEnlarged ? (
-                    <div className="product-image">
-                        <div className="cardImg">
-                            <img
-                                src={`data:image/jpeg;base64,${base64String}`}
-                                alt="Product"
-                                id="product-photo"
-                                className="enlarged-image"
-                                onClick={() => setIsImageEnlarged(!isImageEnlarged)}
-                            />
-                            <div className="close-icon" onClick={() => setIsImageEnlarged(false)}>
-                                <BsArrowsAngleContract />
+            <div className='details-outer-container'>
+                <div className='details-container'>
+                    {isImageEnlarged ? (
+                        <div className="product-image">
+                            <div className="cardImg">
+                                <img
+                                    src={`data:image/jpeg;base64,${base64String}`}
+                                    alt="Product"
+                                    id="product-photo"
+                                    className="enlarged-image"
+                                    onClick={() => setIsImageEnlarged(!isImageEnlarged)}
+                                />
+                                <div className="close-icon" onClick={() => setIsImageEnlarged(false)}>
+                                    <BsArrowsAngleContract />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ) : (
-                    <div className="product-image">
-                        <div className="cardImg">
-                            <img
-                                src={`data:image/jpeg;base64,${base64String}`}
-                                alt="Product"
-                                id="product-photo"
-                                className={isImageEnlarged ? 'enlarged-image' : ''}
-                                onClick={() => setIsImageEnlarged(!isImageEnlarged)}
-                            />
+                    ) : (
+                        <div className="product-image">
+                            <div className="cardImg">
+                                <img
+                                    src={`data:image/jpeg;base64,${base64String}`}
+                                    alt="Product"
+                                    id="product-photo"
+                                    className={isImageEnlarged ? 'enlarged-image' : ''}
+                                    onClick={() => setIsImageEnlarged(!isImageEnlarged)}
+                                />
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
+
 
                 {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqen infot e produktit */}
                 {!isImageEnlarged && (
@@ -162,7 +165,7 @@ function ProductDetails() {
                 </div>
             )}
 
-            <div style={{ height: "250px" }}></div>
+            <div style={{ height: "100px" }}></div>
 
             {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqet footeri */}
             {!isImageEnlarged && (
