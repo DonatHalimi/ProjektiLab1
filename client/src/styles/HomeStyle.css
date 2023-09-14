@@ -134,14 +134,27 @@ body {
   border: 1px solid black;
 }
 
+.empty-div {
+  height: 100px;
+}
+
 @media only screen and (max-width: 768px) {
   .main-content {
     justify-content: space-between;
   }
 
+  .products-container {
+    margin-top: 600px;
+    margin-bottom: -200px;
+  }
+
   .product {
+    position: relative;
+    right: 50%;
     width: 100%;
     max-width: 300px;
+    max-height: 105%;
+    margin-top: -990px;
   }
 
   .card {
@@ -162,12 +175,36 @@ body {
     height: 100%;
   }
 
+  #photo {
+    position: relative;
+    bottom: 110px;
+  }
+
+  .card_header {
+    font-size: 30px;
+  }
+
   .card .butonat {
     flex-direction: column;
   }
 
-  .card .btn,
-  .card .buton {
+  .card .cartButton {
+    position: relative;
+    right: 80%;
+    bottom: 30%;
+  }
+
+  .card .wishlistButton {
+    position: relative;
+    bottom: 41.7%;
+  }
+
+  .card .btn {
+    margin-left: 20px;
     width: 100%;
+  }
+
+  .empty-div {
+    height: auto;
   }
 }

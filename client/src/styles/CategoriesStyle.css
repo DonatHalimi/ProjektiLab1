@@ -68,3 +68,21 @@ body {
     font-weight: bold;
     margin-top: 50px;
 }
+
+@media only screen and (max-width: 768px) {
+    .category-link {
+        max-width: 290px;
+        max-height: 370px;
+    }
+
+    .category-image {
+        position: relative;
+        bottom: 70px;
+    }
+
+    .category-name {
+        position: relative;
+        top: 240px;
+        font-size: 22px;
+    }
+}

@@ -79,3 +79,31 @@
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 768px) {
+
+    .slider {
+        margin: 0;
+        padding: 0;
+        margin-top: 140px;
+    }
+
+    .slider .slide {
+        width: 105%;
+        height: 50%;
+        margin-left: -10px;
+    }
+
+    .custom-line {
+        position: relative;
+        bottom: 500px;
+        width: 10%;
+        height: 50%;
+        gap: -22px;
+    }
+
+    .progress-bar {
+        position: relative;
+        width: 30%;
+    }
+}
