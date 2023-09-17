@@ -14,6 +14,7 @@ const ProductList = () => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(`http://localhost:6001/api/products/get-by-category/${categoryId}`);
+                console.log("Response:", response.data); // Log the response data
                 setProducts(response.data);
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -23,17 +24,26 @@ const ProductList = () => {
         fetchProducts();
     }, [categoryId]);
 
+    useEffect(() => {
+        console.log("Products Length:", products.length); // Log the length of products array
+    }, [products]);
+
     return (
         <div>
             <h2 id="header">Products in this Category</h2>
             <Navbar />
             <ul>
                 {products.map((product) => (
-                    <li key={product.id}>{product.name}</li>
+                    <li key={product.id}>
+                        {product.Emri}
+                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
+                    </li>
                 ))}
             </ul>
         </div>
-    );
-};
 
+)
+                }
 export default ProductList;
+
+                
