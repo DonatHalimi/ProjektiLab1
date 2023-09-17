@@ -1,4 +1,37 @@
-#header {
+.product-container-category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 100px;
+    margin-top: -50px;
+    gap: 50px;
+}
+
+.card {
+    max-width: 100%;
+}
+
+.card_header {
     position: relative;
-    top: 200px;
+    bottom: 40px;
+    flex-grow: 1;
+}
+
+.cardImg {
+    max-width: 100%;
+}
+
+.product-category {
+    width: 250px;
+    height: 350px;
+    padding: 90px;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+#header {
+    font-size: 30px;
+    position: relative;
+    top: -30px;
 }

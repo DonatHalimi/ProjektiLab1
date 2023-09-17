@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { WishlistContext } from '../context/wishlist-context';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../context/shop-context';
-import '../styles/WishlistItemsStyle.css';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash3 } from "react-icons/bs";
+import '../styles/WishlistItemsStyle.css';
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
     const cart = useContext(ShopContext);
-    const { products } = props; // Get products data from props
+    const { products } = props;
 
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);

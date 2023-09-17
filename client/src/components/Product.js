@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
-import "../styles/ProductStyle.css";
 import { getProductData } from '../components/ProductData';
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
+import "../styles/ProductStyle.css";
 
 function Product(props) {
   const product = props.product;
@@ -51,7 +51,7 @@ function Product(props) {
       <div className="product-container">
         <div className="product" key={product.id}>
           <div className="card">
-          <Link to={`/product/${product.id}`} className="product-details-link">
+            <Link to={`/product/${product.id}`} className="product-details-link">
 
               <div className="cardImg">
                 <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
