@@ -45,7 +45,6 @@ const Wishlist = () => {
     return (
         <>
             <Navbar />
-
             <div className='main-content'>
                 <h1 style={{ position: "relative", bottom: "700px" }}>Wishlist</h1>
                 {items.length > 0 ? (
@@ -74,7 +73,7 @@ const Wishlist = () => {
                 </div>
             )}
 
-            <div style={{ height: '600px' }}></div>
+            <div style={{ height: '550px' }}></div>
 
             <Footer />
         </>

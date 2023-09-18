@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LogInStyle from "../styles/Login.module.css";
 import Navbar from "../components/Navbar";
+import { basicSchema } from "../schemas";
 import axios from "axios";
 import { useFormik } from "formik";
-import { basicSchema } from "../schemas";
 
 const Login = () => {
   const navigate = useNavigate();

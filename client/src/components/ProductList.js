@@ -83,28 +83,34 @@ function ProductList(props) {
 
                 <Navbar />
                 <div className="product-container-category">
-                    {products.map((product) => (
-                        <div className="product" key={product.id}>
-                            <div className="card">
-                                <Link to={`/product/${product.id}`} className="product-details-link">
-                                    <div className="cardImg">
-                                        <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
-                                    </div>
-                                    <div className="card_header">
-                                        <h3>{product.Emri}</h3>
-                                        <p className="price">{product.Valuta}{product.Cmimi}</p>
-                                    </div>
-                                </Link>
-                                {/* Buttons for adding to Cart and Wishlist */}
-                                <button className="cartButton" onClick={() => handleAddToCart(product.id)} title='Add To Cart'>
-                                <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
-                            </button>
-                               <button className="wishlistButton" onClick={() => handleAddToWishlist(product.id)} title='Add To Wishlist'>
-                                <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
-                            </button>
+                    {products.length > 0 ? (
+                        products.map((product) => (
+                            <div className="product" key={product.id}>
+                                <div className="card">
+                                    <Link to={`/product/${product.id}`} className="product-details-link">
+                                        <div className="cardImg">
+                                            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
+                                        </div>
+                                        <div className="card_header">
+                                            <h3>{product.Emri}</h3>
+                                            <p className="price">{product.Valuta}{product.Cmimi}</p>
+                                        </div>
+                                    </Link>
+                                    <button className="cartButton" onClick={() => handleAddToCart(product.id)} title='Add To Cart'>
+                                        <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
+                                    </button>
+                                    <button className="wishlistButton" onClick={() => handleAddToWishlist(product.id)} title='Add To Wishlist'>
+                                        <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
+                                    </button>
+                                </div>
                             </div>
+                        ))
+                    ) : (
+                        <div className='noItemsInCategory'>
+                            <p>Nuk ka produkte të disponueshme për këtë kategori.</p>
+                            <Link to="/">Kthehu në faqen kryesore</Link>
                         </div>
-                    ))}
+                    )}
                 </div>
 
                 {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}

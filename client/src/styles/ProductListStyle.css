@@ -35,3 +35,21 @@
     position: relative;
     top: -30px;
 }
+
+.noItemsInCategory {
+    position: relative;
+    top: 50px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.noItemsInCategory a {
+    color: #007bff;
+    text-decoration: none;
+    transition: all 0.6s ease-in-out;
+}
+
+.noItemsInCategory a:hover {
+    text-decoration: none;
+    color: #015bba;
+}
