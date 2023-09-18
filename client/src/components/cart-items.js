@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import '../styles/CartItemsStyle.css'
 import { BsPlusLg, BsTrash3 } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
+
 function CartItem(props) {
   const cart = useContext(ShopContext);
 

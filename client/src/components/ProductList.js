@@ -9,7 +9,7 @@ import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import '../styles/ProductListStyle.css';
 
-const ProductList = () => {
+function ProductList(props) {
     const { categoryId } = useParams();
     const [products, setProducts] = useState([]);
 
@@ -96,12 +96,12 @@ const ProductList = () => {
                                     </div>
                                 </Link>
                                 {/* Buttons for adding to Cart and Wishlist */}
-                                <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
-                                    <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
-                                </button>
-                                <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-                                    <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
-                                </button>
+                                <button className="cartButton" onClick={() => handleAddToCart(product.id)} title='Add To Cart'>
+                                <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
+                            </button>
+                               <button className="wishlistButton" onClick={() => handleAddToWishlist(product.id)} title='Add To Wishlist'>
+                                <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
+                            </button>
                             </div>
                         </div>
                     ))}
