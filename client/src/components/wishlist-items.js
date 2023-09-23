@@ -5,6 +5,7 @@ import { ShopContext } from '../context/shop-context';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash3 } from "react-icons/bs";
 import '../styles/WishlistItemsStyle.css';
+import '../styles/ProductStyle.css'
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
@@ -47,50 +48,60 @@ function WishlistItem(props) {
 
     // Renderimi i HTML formes per shfaqjen e Adminit dashboard
     return (
-        <div className='wishlistItem' key={product.idproduct}>
-            <div className="wishlistCard">
-                <div className="wishlistCard_img">
-                    <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-                </div>
+        <>
+            <div className="product-container" style={{ marginBottom: "-250px", marginRight: "10px" }}>
+                <div className="product" key={product.id}>
+                    <div className="card">
+                        <Link to={`/product/${product.id}`} className="product-details-link">
 
-                <div className="wishlistCard_header">
-                    <h3>{product.Emri}</h3>
-                    <p>${Cmimi}</p>
-                </div>
+                            <div className="cardImg">
+                                <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
+                            </div>
+                            <div className="card_header">
+                                <h3>{product.Emri}</h3>
+                                <p className="price">{product.Valuta}{product.Cmimi}</p>
+                            </div>
+                        </Link>
 
-                <div className="wishlistButtons">
-                    <button id='wishlistAddToCartButton' onClick={handleAddOneToCart} title='Add To Cart'>
-                        <AiOutlineShoppingCart style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
-                    </button>
-                    <button id="wishlistRemoveButton" onClick={handleRemoveFromWishlist} title='Remove'>
-                        <BsTrash3 style={{ color: "black", position: "relative", top: "2px", fontSize: "18px", fontWeight: "normal" }} />
-                    </button>
-                </div>
-            </div>
+                        {/* Butonat per me shtu produktin ne Cart & Wishlist */}
+                        <button className="cartButton" onClick={handleAddOneToCart} title='Add To Cart'>
+                            <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
+                        </button>
 
-
-            {showAlertCart && (
-                <div className="alertCart">
-                    <Link to="/Cart" className="cartLink">
-                        <p>Produkti është shtuar në cart me sukses! </p>
-                    </Link>
-                    <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                        <button className="wishlistButton" onClick={handleRemoveFromWishlist} title='Remove From Wishlist'>
+                            <BsTrash3 style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
+                        </button>
+                    </div>
                 </div>
-            )}
+            </div >
 
-            {showAlertWishlist && (
-                <div className="alertWishlist">
-                    <Link to="/Wishlist" className="wishlistLink">
-                        <p>Produkti është larguar nga wishlist me sukses!</p>
-                    </Link>
-                    <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            )}
-        </div>
+            {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
+            {
+                showAlertCart && (
+                    <div className="alertCart">
+                        <Link to="/Cart" className="cartLink">
+                            <p>Produkti është shtuar në shportë me sukses!</p>
+                        </Link>
+                        <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                )
+            }
+
+            {
+                showAlertWishlist && (
+                    <div className="alertWishlist">
+                        <Link to="/Wishlist" className="wishlistLink">
+                            <p>Produkti është shtuar në wishlist me sukses!</p>
+                        </Link>
+                        <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                )
+            }
+        </>
     );
 }
 

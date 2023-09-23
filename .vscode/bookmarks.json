@@ -449,7 +449,7 @@
 			"path": "client/src/components/wishlist-items.js",
 			"bookmarks": [
 				{
-					"line": 24,
+					"line": 25,
 					"column": 4,
 					"label": "handleAddOneToCart()"
 				}

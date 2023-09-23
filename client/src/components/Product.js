@@ -46,7 +46,6 @@ function Product(props) {
 
   return (
     <>
-
       {/* Karta e produkteve */}
       <div className="product-container">
         <div className="product" key={product.id}>

@@ -45,10 +45,10 @@ const Wishlist = () => {
     return (
         <>
             <Navbar />
-            <div className='main-content'>
+            <div className='main-content-wishlist'>
                 <h1 style={{ position: "relative", top: "50px", opacity: "0" }}>Wishlist</h1>
                 {items.length > 0 ? (
-                    <div className='wishlist-items'>
+                    <div className='wishlist-items' style={{ paddingTop: "50px", paddingBottom: "200px", marginTop: "140px", marginBottom: "200px", gap: "100px" }}>
                         {items.map((item) => (
                             <div key={item.id} className='wishlist-item'>
                                 <WishlistItem id={item.id} products={products} onRemoveFromWishlist={() => handleRemoveFromWishlist(item.id)} key={item.id} />
