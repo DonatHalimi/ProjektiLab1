@@ -47,19 +47,15 @@ function WishlistItem(props) {
 
     // Renderimi i HTML formes per shfaqjen e Adminit dashboard
     return (
-        <>
-            <div className='main-content'>
-                <div className="wishlistItem" key={product.idproduct}>
-                    <div className="wishlistCard">
-                        <div className="wishlistCard_img">
-                            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-                        </div>
+        <div className='wishlistItem' key={product.idproduct}>
+            <div className="wishlistCard">
+                <div className="wishlistCard_img">
+                    <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
+                </div>
 
-                        <div className="wishlistCard_header">
-                            <h3>{product.Emri}</h3>
-                            <p>${Cmimi}</p>
-                        </div>
-                    </div>
+                <div className="wishlistCard_header">
+                    <h3>{product.Emri}</h3>
+                    <p>${Cmimi}</p>
                 </div>
 
                 <div className="wishlistButtons">
@@ -71,6 +67,7 @@ function WishlistItem(props) {
                     </button>
                 </div>
             </div>
+
 
             {showAlertCart && (
                 <div className="alertCart">
@@ -93,7 +90,7 @@ function WishlistItem(props) {
                     </button>
                 </div>
             )}
-        </>
+        </div>
     );
 }
 

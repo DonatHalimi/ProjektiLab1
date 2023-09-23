@@ -46,15 +46,15 @@ const Wishlist = () => {
         <>
             <Navbar />
             <div className='main-content'>
-                <h1 style={{ position: "relative", bottom: "700px" }}>Wishlist</h1>
+                <h1 style={{ position: "relative", top: "50px", opacity: "0" }}>Wishlist</h1>
                 {items.length > 0 ? (
-                    <ul>
+                    <div className='wishlist-items'>
                         {items.map((item) => (
-                            <li key={item.id}>
+                            <div key={item.id} className='wishlist-item'>
                                 <WishlistItem id={item.id} products={products} onRemoveFromWishlist={() => handleRemoveFromWishlist(item.id)} key={item.id} />
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 ) : (
                     <div className='noItemsInWishlist'>
                         <img src="https://elegantjewelersli.com/assets/images/empty-wishlist.png" alt="Empty Wishlist" />
