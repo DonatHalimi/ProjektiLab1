@@ -47,9 +47,9 @@ const Cart = () => {
                 <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
               ))}
 
-              {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes 
-              <h1 className='cart-total'>Total: ${cart.getTotalCost().toFixed(2)}</h1>
-*/}
+              {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes  */}
+              {/* <h1 className='cart-total'>Total: ${cart.getTotalCost().toFixed(2)}</h1> */}
+
               <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>
             </>
             :

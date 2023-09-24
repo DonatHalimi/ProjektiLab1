@@ -12,20 +12,6 @@
   width: 30%;
 }
 
-/* .card .cartButton {
-  position: relative;
-  right: 50px;
-  top: 1px;
-  background-color: #28a745;
-  border: 0ch;
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  margin-top: 5px;
-  padding: 12px;
-  height: 44px;
-  width: 50%;
-} */
-
 .card .cartButton:hover {
   cursor: pointer;
   color: rgb(226, 226, 226);

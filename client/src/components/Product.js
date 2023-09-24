@@ -51,7 +51,6 @@ function Product(props) {
         <div className="product" key={product.id}>
           <div className="card">
             <Link to={`/product/${product.id}`} className="product-details-link">
-
               <div className="cardImg">
                 <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
               </div>
@@ -80,7 +79,7 @@ function Product(props) {
             <p>Produkti është shtuar në shportë me sukses!</p>
           </Link>
           <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-            <i class="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
       )}
@@ -91,7 +90,7 @@ function Product(props) {
             <p>Produkti është shtuar në wishlist me sukses!</p>
           </Link>
           <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-            <i class="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
       )}

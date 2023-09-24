@@ -9,8 +9,8 @@
     height: 450px;
     position: relative;
     left: 400px;
-    top: 90px;
-    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.1)
+    top: 120px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1)
 }
 
 .cartCard_img img {
@@ -19,6 +19,7 @@
     margin-right: 1500px;
     position: relative;
     top: 60px;
+    aspect-ratio: 0.5 / 0.56;
 }
 
 .cartCard_header {
@@ -125,7 +126,7 @@ h1 {
 
 #purchaseButton {
     position: relative;
-    top: 53px;
+    top: 110px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: rgb(98, 156, 170);

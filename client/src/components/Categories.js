@@ -13,6 +13,7 @@ const Categories = () => {
         const fetchCategories = async () => {
             try {
                 const response = await axios.get("http://localhost:6001/api/category/get");
+
                 setCategories(response.data);
             } catch (error) {
                 console.error("Error fetching categories:", error);
@@ -21,6 +22,8 @@ const Categories = () => {
 
         fetchCategories();
     }, []);
+
+    console.log("Categories:", categories);
 
     return (
         <div className="categories-container">
@@ -34,15 +37,14 @@ const Categories = () => {
                         <Link to={`/products/${category.idcategory}`} className="category-link">
                             <h3 className="category-name">{category.EmriKategorise}</h3>
                             {category.FotoKategori && (
-                                <img src={`data:image/jpeg;base64,${category.FotoKategori}`} alt={category.EmriKategorise} className="category-image"
-                                />
+                                <img src={`data:image/jpeg;base64,${category.FotoKategori}`} alt={category.EmriKategorise} className="category-image" />
                             )}
                         </Link>
                     </li>
                 ))}
             </ul>
 
-            <div style={{height: "400px"}}></div>
+            <div style={{ height: "400px" }}></div>
 
             <Footer />
         </div>

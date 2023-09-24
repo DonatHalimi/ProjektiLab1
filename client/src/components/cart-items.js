@@ -1,9 +1,10 @@
 import React from 'react';
 import { ShopContext } from '../context/shop-context';
 import { useContext, useEffect, useState } from 'react';
-import '../styles/CartItemsStyle.css'
 import { BsPlusLg, BsTrash3 } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
+import { Link } from 'react-router-dom';
+import '../styles/CartItemsStyle.css'
 
 function CartItem(props) {
   const cart = useContext(ShopContext);
@@ -47,9 +48,11 @@ function CartItem(props) {
       {/* Cart card per produkte */}
       <div className="cartItem">
         <div className="cartCard">
-          <div className="cartCard_img">
-            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-          </div>
+          <Link to={`/product/${product.id}`} className="product-details-link">
+            <div className="cartCard_img">
+              <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
+            </div>
+          </Link>
 
           <div className="cartCard_header">
             <h3>{product.Emri}</h3>
@@ -66,7 +69,7 @@ function CartItem(props) {
               <AiOutlineMinus style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
             </button>
             <button id='deleteButton' onClick={() => cart.deleteFromCart(id)} title='Delete'>
-            <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
+              <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
             </button>
           </div>
         </div>

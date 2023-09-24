@@ -139,12 +139,12 @@
 			"path": "client/src/components/cart-items.js",
 			"bookmarks": [
 				{
-					"line": 15,
+					"line": 16,
 					"column": 2,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 42,
+					"line": 43,
 					"column": 2,
 					"label": "HTML Render"
 				}
@@ -172,11 +172,6 @@
 					"line": 72,
 					"column": 2,
 					"label": "getTotalCost();"
-				},
-				{
-					"line": 87,
-					"column": 2,
-					"label": "deleteFromCart();"
 				},
 				{
 					"line": 109,
@@ -399,7 +394,7 @@
 					"label": "useEffect() per kategori nga databaza"
 				},
 				{
-					"line": 24,
+					"line": 27,
 					"column": 4,
 					"label": "HTML Render"
 				}
