@@ -18,6 +18,7 @@ function Admin() {
   const [slideshowData, setSlideshowData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [activeTab, setActiveTab] = useState('users');
+
   const navigate = useNavigate();
 
   // Perditesimi i tab-it aktiv kur ndryshohet prej admin-it
@@ -105,7 +106,6 @@ function Admin() {
   }, []);
 
 
-
   // Funksioni per te fshire user-in nga API
   const deleteUser = async (id) => {
     const confirmDialog = () => {
@@ -124,7 +124,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-                toast.success("Perdoruesi eshte fshire me sukses!");
+                toast.success("Përdoruesi është fshirë me sukses!");
                 setTimeout(() => loadData(), 500);
               } catch (error) {
                 toast.error(`Error deleting user: ${error.message}`);
@@ -158,7 +158,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/product/remove/${id}`);
-                toast.success("Produkti eshte fshire me sukses!");
+                toast.success("Produkti është fshirë me sukses!");
                 setTimeout(() => loadDataProduct(), 500);
               } catch (error) {
                 toast.error(`Error deleting product: ${error.message}`);
@@ -192,7 +192,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/aboutus/remove/${id}`);
-                toast.success("Teksti eshte fshire me sukses!");
+                toast.success("Teksti është fshirë me sukses!");
                 setTimeout(() => loadDataAboutUs(), 500);
               } catch (error) {
                 toast.error(`Error deleting text: ${error.message}`);
@@ -226,7 +226,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/slideshow/remove/${id}`);
-                toast.success("Fotoja eshte fshire me sukses!");
+                toast.success("Fotoja është fshirë me sukses!");
 
                 setTimeout(() => loadDataSlideshow(), 500);
               } catch (error) {
@@ -261,7 +261,7 @@ function Admin() {
               try {
                 // Dergojme kerkesen per fshirje ne server
                 await axios.delete(`http://localhost:6001/api/category/remove/${id}`);
-                toast.success("Kategoria eshte fshire me sukses!");
+                toast.success("Kategoria është fshirë me sukses!");
 
                 setTimeout(() => loadDataCategory(), 500);
               } catch (error) {
@@ -278,6 +278,7 @@ function Admin() {
     confirmDialog();
   }
 
+  
   // Funksioni per renderimin e tabeles se user-ave
   const renderUsersTable = () => {
 

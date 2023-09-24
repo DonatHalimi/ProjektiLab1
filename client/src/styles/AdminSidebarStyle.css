@@ -156,7 +156,6 @@
     border-radius: 5px;
     max-width: 100%;
     size-adjust: initial;
-    /* transition: border-bottom 1s ease-in-out; */
 }
 
 .sidebar-menu-item.active:hover {

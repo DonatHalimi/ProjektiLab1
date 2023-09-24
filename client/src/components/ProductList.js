@@ -9,6 +9,7 @@ import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import '../styles/ProductListStyle.css';
 
+// Funksioni per shfaqjen e produkteve per nje kategori te caktuar
 function ProductList(props) {
     const { categoryId } = useParams();
     const [products, setProducts] = useState([]);

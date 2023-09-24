@@ -269,32 +269,32 @@
 					"label": ""
 				},
 				{
-					"line": 28,
+					"line": 29,
 					"column": 2,
 					"label": "loadData()"
 				},
 				{
-					"line": 42,
+					"line": 43,
 					"column": 2,
 					"label": "loadDataProduct()"
 				},
 				{
-					"line": 56,
+					"line": 57,
 					"column": 2,
 					"label": "loadDataAboutUs()"
 				},
 				{
-					"line": 70,
+					"line": 71,
 					"column": 2,
 					"label": "loadDataSlideshow()"
 				},
 				{
-					"line": 84,
+					"line": 85,
 					"column": 2,
 					"label": "loadDataCategory()"
 				},
 				{
-					"line": 98,
+					"line": 99,
 					"column": 2,
 					"label": "useEffect() per mi marr te dhenat"
 				},
@@ -324,47 +324,47 @@
 					"label": "deleteCategory()"
 				},
 				{
-					"line": 281,
+					"line": 282,
 					"column": 2,
 					"label": "renderUsersTable()"
 				},
 				{
-					"line": 354,
+					"line": 355,
 					"column": 2,
 					"label": "renderProductsTable()"
 				},
 				{
-					"line": 432,
+					"line": 433,
 					"column": 2,
 					"label": "renderAboutUsTable()"
 				},
 				{
-					"line": 493,
+					"line": 494,
 					"column": 2,
 					"label": "renderSlideshowTable()"
 				},
 				{
-					"line": 556,
+					"line": 557,
 					"column": 2,
 					"label": "renderCategoryTable()"
 				},
 				{
-					"line": 620,
+					"line": 621,
 					"column": 2,
 					"label": "handleHomeButtonClick()"
 				},
 				{
-					"line": 645,
+					"line": 646,
 					"column": 2,
 					"label": "renderTableForTab();"
 				},
 				{
-					"line": 664,
+					"line": 665,
 					"column": 2,
 					"label": "renderContent()"
 				},
 				{
-					"line": 692,
+					"line": 693,
 					"column": 2,
 					"label": "HTML Render"
 				}
