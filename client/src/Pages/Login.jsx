@@ -65,7 +65,7 @@ const Login = () => {
         <Navbar />
 
         <div className={LogInStyle["login-box"]}>
-          <p>Log in</p>
+          <p>Log In</p>
           <pre></pre>
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <div className={LogInStyle["user-box"]}>
@@ -117,16 +117,17 @@ const Login = () => {
               )}
             </div>
 
-            <button disabled={formik.isSubmitting} className={LogInStyle["btn"]} type="submit"> Log in{" "}</button>
+            <button disabled={formik.isSubmitting} className={LogInStyle["btn"]} type="submit"> Log In{" "}</button>
           </form>
           <p id={LogInStyle["account-text"]}>
             Nuk keni llogari?{" "}
             <a href="/register" className={LogInStyle["a2"]}>
-              Sign up!
+              Sign Up!
             </a>
           </p>
           <p>{loginStatus}</p>
         </div>
+
       </div>
     </>
   );

@@ -60,12 +60,6 @@ function ProductDetails() {
                 setValuta(product.Valuta);
                 setDetajet(product.Detajet);
                 setFoto(product.Foto)
-                // console.log(Emri);
-                // console.log(Cmimi);
-                // console.log(Valuta);
-                // console.log(Detajet);
-                // console.log(Foto);
-
             } catch (error) {
                 console.error("Error fetching product:", error);
             }
@@ -74,7 +68,6 @@ function ProductDetails() {
     }, [id]);
 
     if (!product) {
-        // Render loading state if the product data is not available yet
         return <div>Loading...</div>;
     }
 
@@ -135,11 +128,11 @@ function ProductDetails() {
                 {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqen butonat */}
                 {!isImageEnlarged && (
                     <div className="product-buttons">
-                        <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-                            <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal", position: "relative", top: "2.3px" }} />
-                        </button>
                         <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
                             <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px", position: "relative", top: "2.3px" }} />
+                        </button>
+                        <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
+                            <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal", position: "relative", top: "2.3px" }} />
                         </button>
                     </div>
                 )}

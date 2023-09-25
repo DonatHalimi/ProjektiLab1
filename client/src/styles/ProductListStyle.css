@@ -33,7 +33,7 @@
 #header {
     font-size: 30px;
     position: relative;
-    top: -30px;
+    top: 10px;
 }
 
 .noItemsInCategory {
@@ -52,4 +52,8 @@
 .noItemsInCategory a:hover {
     text-decoration: none;
     color: #015bba;
+}
+
+.no-product-found {
+    color: black;
 }

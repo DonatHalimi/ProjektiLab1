@@ -7,11 +7,11 @@
   background-color: #f2f0f0;
   margin: auto 450px 100px 350px;
   position: relative;
-  top: 50px;
+  top: 30px;
   left: 50px;
   height: 600px;
-  margin-top: 200px;
-  border-radius: 12px;
+  margin-top: 190px;
+  border-radius: 13px;
   border: 1px solid #f2f0f0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flexbox;
@@ -48,7 +48,7 @@
 
 #product-price {
   position: relative;
-  right: 5.5%;
+  right: 6%;
   bottom: 300px;
   font-size: 20px;
   font-weight: bold;
@@ -56,8 +56,8 @@
 
 .product-buttons {
   position: relative;
-  bottom: 490px;
-  right: 0.4%;
+  bottom: 460px;
+  right: 1.4%;
   margin-bottom: 50px;
 }
 
@@ -104,7 +104,7 @@
   transform: scale(1.5) translate(0, 0);
   transition: transform 0.9s ease-in-out;
   position: relative;
-  bottom: 690px;
+  bottom: 680px;
   left: 900px;
   cursor: pointer;
   fill: white;

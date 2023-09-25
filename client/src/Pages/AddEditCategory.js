@@ -141,7 +141,7 @@ const AddEditCategory = () => {
 
                 <div className="product-box">
                     <label htmlFor="fotokategori" className="input-label">Foto</label>
-                    <input onChange={handleInputChange} type="file" id="fotokategori" name="FotoKategori" accept="image/*" />
+                    <input onChange={handleInputChange} type="file" id="foto" name="FotoKategori" accept="image/*" />
                 </div>
 
 

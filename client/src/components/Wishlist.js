@@ -4,6 +4,7 @@ import { WishlistContext } from '../context/wishlist-context';
 import Navbar from './Navbar';
 import WishlistItem from './wishlist-items';
 import Footer from '../components/Footer';
+import EmptyWishlist from "../img/empty-wishlist.png";
 import '../styles/WishlistItemsStyle.css';
 
 const Wishlist = () => {
@@ -57,7 +58,7 @@ const Wishlist = () => {
                     </div>
                 ) : (
                     <div className='noItemsInWishlist'>
-                        <img src="https://elegantjewelersli.com/assets/images/empty-wishlist.png" alt="Empty Wishlist" />
+                        <img src={EmptyWishlist} alt="Empty Wishlist" />
                         <p>Ju nuk keni ndonjë produkt në listën e dëshirave.</p>
                         <Link to="/">Kthehu në faqen kryesore</Link>
                     </div>

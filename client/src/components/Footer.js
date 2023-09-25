@@ -18,7 +18,7 @@ const Footer = () => {
                     <a href="/Wishlist">Wishlist</a>
                     <a href="/Cart">Cart</a>
                     <a href="/AboutUs">About</a>
-                    <a href="Log in">Log in</a>
+                    <a href="Log in">Log In</a>
                 </p>
                 <p className="footer-company-name">Ruby © 2023</p>
             </div>

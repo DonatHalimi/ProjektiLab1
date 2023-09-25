@@ -32,7 +32,7 @@ body {
 }
 
 .category-link {
-    background-color: #f2f0f0;
+    background-color: #f5f5f5;
     text-decoration: none;
     color: #333;
     transition: all 0.3s ease;
@@ -44,15 +44,16 @@ body {
     height: 600px;
     width: 500px;
     border-radius: 10px;
-    border: 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .category-link:hover {
     transform: scale(1.007);
     transition: all 0.5s ease-in-out;
     box-shadow: 0 7px 8px rgba(0, 0, 0, 0.2);
-    color: #55575a;
+    color: #2e2f2f;
+    font-weight: bold;
 }
 
 .category-image {

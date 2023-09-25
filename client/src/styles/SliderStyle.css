@@ -50,7 +50,7 @@
 }
 
 .slider .slider-button .custom-line:hover {
-    background-color: rgb(155, 190, 198);
+    background-color: rgb(179, 189, 191);
     opacity: 5;
     transition: all 1s ease-in-out;
 }

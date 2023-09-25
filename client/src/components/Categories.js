@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
-import "../styles/CategoriesStyle.css";
 import Footer from "./Footer";
+import "../styles/CategoriesStyle.css";
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
@@ -44,7 +44,7 @@ const Categories = () => {
                 ))}
             </ul>
 
-            <div style={{ height: "400px" }}></div>
+            <div style={{ height: "350px" }}></div>
 
             <Footer />
         </div>

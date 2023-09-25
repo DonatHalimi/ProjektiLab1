@@ -469,12 +469,12 @@
 			"path": "client/src/components/Wishlist.js",
 			"bookmarks": [
 				{
-					"line": 17,
+					"line": 18,
 					"column": 21,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 43,
+					"line": 44,
 					"column": 18,
 					"label": "HTML Render"
 				}
