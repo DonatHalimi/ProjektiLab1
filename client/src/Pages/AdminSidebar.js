@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import "../styles/AdminSidebarStyle.css";
+import { FaUserCog } from 'react-icons/fa';
+import { AdminData } from './AdminData';
+import '../styles/AdminSidebarStyle.css';
 
 const Sidebar = ({ activeTab, handleTabChange }) => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
+    const location = useLocation();
 
     const toggleSidebar = () => {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('toggled');
         setSidebarVisible(!sidebarVisible);
     };
 
-    // Use effect per me mujt me toggle sidebar me Esc ne tastiere
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'Escape') {
                 toggleSidebar();
             }
         };
-
         document.addEventListener('keydown', handleKeyDown);
 
         return () => {
@@ -26,44 +30,58 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
 
     return (
         <div className="sidebar-container">
-            <div className={`sidebar ${sidebarVisible ? '' : 'hidden'}`}>
-                {sidebarVisible && (
-                    <>
-                        <div className="sidebar-header">
-                            Admin Panel
-                            <hr className="sidebar-hr" />
-                        </div>
+            {sidebarVisible ? (
+                <div className="sidebar">
+                    <div className="sidebar-header">Admin Panel</div>
+                    <hr className="sidebar-hr" />
+                    <ul className="sidebar-menu">
+                        {AdminData.map((item) => (
+                            <Link to={item.url} key={item.slug} className={`sidebar-menu-item ${location.pathname === item.url ? 'active' : ''}`} onClick={() => handleTabChange(item.slug)}>
+                                <li>
+                                    <i className={`fa-solid ${item.icon}`}></i> {item.label}
+                                </li>
+                            </Link>
+                        ))}
+                    </ul>
+
+                    <Link to={"/"} className={`home-link ${location.pathname === '/' ? 'active' : ''}`}>
+                        <li>
+                            <i className='fa-solid fa-home'></i> Home
+                        </li>
+                    </Link>
+
+                    <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
+                        <GiHamburgerMenu />
+                    </button>
+                </div>
+            ) : (
+                <div className="sidebar">
+                    <div className="sidebar-header">
+                        <FaUserCog style={{ position: "relative", top: "2px", left: "14px" }} />
+                    </div>
+                    <hr className="sidebar-hr" />
+                    <div className="sidebar-content">
                         <ul className="sidebar-menu">
-                            {/* Nese tab ne perdorim eshte users atehere shendrrohet ne active tab dhe ne klikim ndryshohet tab-i te tabela users */}
-                            <li className={`sidebar-menu-item ${activeTab === 'users' ? 'active' : ''}`} onClick={() => handleTabChange('users')}>
-                                <i className="fa-solid fa-user"></i> Users
-                            </li>
-                            <li className={`sidebar-menu-item ${activeTab === 'products' ? 'active' : ''}`} onClick={() => handleTabChange('products')}>
-                                <i className="fa-solid fa-shirt"></i> Products
-                            </li>
-                            <li className={`sidebar-menu-item ${activeTab === 'category' ? 'active' : ''}`} onClick={() => handleTabChange('category')}>
-                                <i className="fa-solid fa-box"></i> Categories
-                            </li>
-                            <li className={`sidebar-menu-item ${activeTab === 'slideshow' ? 'active' : ''}`} onClick={() => handleTabChange('slideshow')}>
-                                <i className="fa-solid fa-image"></i> Slideshow
-                            </li>
-                            <li className={`sidebar-menu-item ${activeTab === 'aboutUs' ? 'active' : ''}`} onClick={() => handleTabChange('aboutUs')}>
-                                <i className="fa-solid fa-circle-info"></i> About Us
-                            </li>
-                            <li className={`sidebar-menu-item-home ${activeTab === 'home' ? 'active' : ''}`} onClick={() => handleTabChange('home')}>
-                                <i className='fa-solid fa-house'></i> Home
-                            </li>
+                            {AdminData.map((item) => (
+                                <Link to={item.url} key={item.slug} className={`sidebar-menu-item ${location.pathname === item.url ? 'active' : ''}`} onClick={() => handleTabChange(item.slug)}>
+                                    <li>
+                                        <i className={`fa-solid ${item.icon}`}></i>
+                                    </li>
+                                </Link>
+                            ))}
                         </ul>
-                    </>
-                )}
-                <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
-                    <GiHamburgerMenu />
-                </button>
-            </div>
-            {!sidebarVisible && (
-                <button className="sidebar-toggle-btn-alt" onClick={toggleSidebar}>
-                    <GiHamburgerMenu />
-                </button>
+                    </div>
+
+                    <Link to={"/"} className={`home-link ${location.pathname === '/' ? 'active' : ''}`}>
+                        <li>
+                            <i className='fa-solid fa-home'></i>
+                        </li>
+                    </Link>
+
+                    <button className="sidebar-toggle-btn-clicked" onClick={toggleSidebar}>
+                        <GiHamburgerMenu />
+                    </button>
+                </div>
             )}
         </div>
     );

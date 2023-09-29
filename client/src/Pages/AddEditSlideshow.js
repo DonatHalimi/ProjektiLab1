@@ -134,6 +134,8 @@ const AddEditSlideshow = () => {
                     <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>
+
+            <div style={{height: "460px"}}></div>
         </div>
     );
 }

@@ -19,42 +19,42 @@
 					"label": "PRODUCTS CRUD"
 				},
 				{
-					"line": 251,
+					"line": 327,
 					"column": 0,
 					"label": "ABOUTUS CRUD"
 				},
 				{
-					"line": 326,
+					"line": 402,
 					"column": 0,
 					"label": "SLIDESHOW CRUD"
 				},
 				{
-					"line": 442,
+					"line": 518,
 					"column": 0,
 					"label": "CATEGORY CRUD"
 				},
 				{
-					"line": 558,
+					"line": 634,
 					"column": 0,
 					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
 				},
 				{
-					"line": 575,
+					"line": 651,
 					"column": 0,
 					"label": "Insertimi i userave nga Register form"
 				},
 				{
-					"line": 591,
+					"line": 667,
 					"column": 0,
 					"label": "Autentifikimi i perdoruesit"
 				},
 				{
-					"line": 622,
+					"line": 698,
 					"column": 0,
 					"label": "Checkout"
 				},
 				{
-					"line": 651,
+					"line": 727,
 					"column": 0,
 					"label": "Server Port"
 				}
@@ -77,11 +77,6 @@
 					"line": 54,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime"
-				},
-				{
-					"line": 60,
-					"column": 4,
-					"label": "HTML Render"
 				}
 			]
 		},
@@ -102,11 +97,6 @@
 					"line": 60,
 					"column": 2,
 					"label": "handleSubmit() kur dergohet formulari"
-				},
-				{
-					"line": 127,
-					"column": 2,
-					"label": "HTML Render"
 				}
 			]
 		},
@@ -252,136 +242,6 @@
 					"line": 102,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime ne input fields"
-				},
-				{
-					"line": 118,
-					"column": 4,
-					"label": "HTML Render"
-				}
-			]
-		},
-		{
-			"path": "client/src/Pages/Admin.js",
-			"bookmarks": [
-				{
-					"line": 13,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 29,
-					"column": 2,
-					"label": "loadData()"
-				},
-				{
-					"line": 43,
-					"column": 2,
-					"label": "loadDataProduct()"
-				},
-				{
-					"line": 57,
-					"column": 2,
-					"label": "loadDataAboutUs()"
-				},
-				{
-					"line": 71,
-					"column": 2,
-					"label": "loadDataSlideshow()"
-				},
-				{
-					"line": 85,
-					"column": 2,
-					"label": "loadDataCategory()"
-				},
-				{
-					"line": 99,
-					"column": 2,
-					"label": "useEffect() per mi marr te dhenat"
-				},
-				{
-					"line": 109,
-					"column": 2,
-					"label": "deleteUser()"
-				},
-				{
-					"line": 143,
-					"column": 2,
-					"label": "deleteProduct()"
-				},
-				{
-					"line": 177,
-					"column": 2,
-					"label": "deleteAboutUs()"
-				},
-				{
-					"line": 211,
-					"column": 2,
-					"label": "deleteSlideshow()"
-				},
-				{
-					"line": 246,
-					"column": 2,
-					"label": "deleteCategory()"
-				},
-				{
-					"line": 282,
-					"column": 2,
-					"label": "renderUsersTable()"
-				},
-				{
-					"line": 355,
-					"column": 2,
-					"label": "renderProductsTable()"
-				},
-				{
-					"line": 433,
-					"column": 2,
-					"label": "renderAboutUsTable()"
-				},
-				{
-					"line": 494,
-					"column": 2,
-					"label": "renderSlideshowTable()"
-				},
-				{
-					"line": 557,
-					"column": 2,
-					"label": "renderCategoryTable()"
-				},
-				{
-					"line": 621,
-					"column": 2,
-					"label": "handleHomeButtonClick()"
-				},
-				{
-					"line": 646,
-					"column": 2,
-					"label": "renderTableForTab();"
-				},
-				{
-					"line": 665,
-					"column": 2,
-					"label": "renderContent()"
-				},
-				{
-					"line": 693,
-					"column": 2,
-					"label": "HTML Render"
-				}
-			]
-		},
-		{
-			"path": "client/src/Pages/AdminSidebar.js",
-			"bookmarks": [
-				{
-					"line": 12,
-					"column": 4,
-					"label": "useEffect() per Esc toggle"
-				},
-				{
-					"line": 26,
-					"column": 4,
-					"label": "HTML Render"
 				}
 			]
 		},

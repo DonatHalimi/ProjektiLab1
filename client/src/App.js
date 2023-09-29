@@ -26,6 +26,12 @@ import Success from "./Pages/Success";
 import Cancel from "./Pages/Cancel";
 import { ToastContainer } from 'react-toastify';
 
+import UsersTable from './Pages/Tables/UsersTable';
+import ProductsTable from './Pages/Tables/ProductsTable';
+import CategoryTable from './Pages/Tables/CategoryTable';
+import SlideshowTable from './Pages/Tables/SlideshowTable';
+import AboutUsTable from './Pages/Tables/AboutUsTable';
+
 function App() {
   return (
     <div className="App">
@@ -58,6 +64,12 @@ function App() {
               <Route path="/addCategory" element={<AddEditCategory />} />
               <Route path="/updateCategory/:idcategory" element={<AddEditCategory />} />
               <Route path="/products/:categoryId" element={<ProductList />} />
+
+              <Route path="/admin/users" element={<UsersTable />} />
+              <Route path="/admin/products" element={<ProductsTable />} />
+              <Route path="/admin/categories" element={<CategoryTable />} />
+              <Route path="/admin/slideshow" element={<SlideshowTable />} />
+              <Route path="/admin/aboutus" element={<AboutUsTable />} />
             </Routes>
             <ToTop />
           </BrowserRouter>

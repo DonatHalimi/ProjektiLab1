@@ -110,6 +110,22 @@ const AddEditProduct = () => {
   };
 
   // Funksioni qe thirret kur ndodh ndryshimi ne input fields
+  // handleInputChange I VJETER
+  // const handleInputChange = (e) => {
+  //   const { name, value, files } = e.target;
+  //   console.log("Input changed - Name:", name, "Value:", value);
+
+  //   // Nese ndryshimi eshte per foton, ruajme foton si file ne state
+  //   if (name === "Foto") {
+  //     console.log("Changing Foto - Files:", files);
+  //     setState((prevState) => ({ ...prevState, Foto: files[0] }));
+  //   } else {
+  //     // Perndryshe, ruajme te dhenat e tjera te input fields ne state
+  //     setState((prevState) => ({ ...prevState, [name]: value }));
+  //   }
+  // };
+
+  // Funksioni qe thirret kur ndodh ndryshimi ne input fields
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     console.log("Input changed - Name:", name, "Value:", value);
@@ -117,7 +133,33 @@ const AddEditProduct = () => {
     // Nese ndryshimi eshte per foton, ruajme foton si file ne state
     if (name === "Foto") {
       console.log("Changing Foto - Files:", files);
-      setState((prevState) => ({ ...prevState, Foto: files[0] }));
+
+      if (files.length > 0) {
+        // Merre file-in e pare prej listes se file-ave
+        const file = files[0];
+
+        // Lexoje file-in edhe konvertoje ne base64 string
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+          // Beje update state me te dhenat base64 te foto-se
+          setState((prevState) => ({
+            ...prevState,
+            Foto: reader.result, // Ketu ruhen te dhenat e fotos base64
+          }));
+        };
+
+        reader.onerror = (error) => {
+          console.error("Error reading file:", error);
+        };
+      } else {
+        // Nese nuk zgjedhet asnje file, fshije state
+        setState((prevState) => ({
+          ...prevState,
+          Foto: null,
+        }));
+      }
     } else {
       // Perndryshe, ruajme te dhenat e tjera te input fields ne state
       setState((prevState) => ({ ...prevState, [name]: value }));
@@ -126,72 +168,72 @@ const AddEditProduct = () => {
 
   // Renderimi i HTML formes per te shtuar ose perditesuar nje produkt
   return (
-    <div style={{ marginTop: "10px", transform: 'scale(0.9)' }}>
-      <h2>{idproduct ? "Edit" : "Add"}</h2>
-      {state && (
-        <form action="/" encType="multipart/form-data" method="post"
-          style={{
-            margin: "auto",
-            padding: "25px",
-            paddingRight: "30px",
-            paddingTop: "30px",
-            maxWidth: "387px",
-            alignContent: "center",
-            backgroundColor: "#1e1f1e",
-            color: "white",
-            borderRadius: "10px",
-          }}
-          onSubmit={handleSubmit}
-        >
-          <div className="product-box">
-            <label htmlFor="id" className="input-label">ID</label>
-            <input value={state.id || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj id" id="id" name="id"></input>
-          </div>
-          <div className="product-box">
-            <label htmlFor="emri" className="input-label">Emri</label>
-            <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emri" name="Emri"></input>
-          </div>
+        <div style={{ marginTop: "10px", transform: 'scale(0.9)' }}>
+          <h2>{idproduct ? "Edit" : "Add"}</h2>
+          {state && (
+            <form action="/" encType="multipart/form-data" method="post"
+              style={{
+                margin: "auto",
+                padding: "25px",
+                paddingRight: "30px",
+                paddingTop: "30px",
+                maxWidth: "387px",
+                alignContent: "center",
+                backgroundColor: "#1e1f1e",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              onSubmit={handleSubmit}
+            >
+              <div className="product-box">
+                <label htmlFor="id" className="input-label">ID</label>
+                <input value={state.id || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj id" id="id" name="id"></input>
+              </div>
+              <div className="product-box">
+                <label htmlFor="emri" className="input-label">Emri</label>
+                <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emri" name="Emri"></input>
+              </div>
 
-          <div className="product-box">
-            <label htmlFor='cmimi' className="input-label">Çmimi</label>
-            <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj çmimin" id="cmimi" name="Cmimi"></input>
-          </div>
+              <div className="product-box">
+                <label htmlFor='cmimi' className="input-label">Çmimi</label>
+                <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj çmimin" id="cmimi" name="Cmimi"></input>
+              </div>
 
-          <div className="product-box">
-            <label htmlFor='valuta' className="input-label">Valuta</label>
-            <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj valutën" id="valuta" name="Valuta"></input>
-          </div>
+              <div className="product-box">
+                <label htmlFor='valuta' className="input-label">Valuta</label>
+                <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj valutën" id="valuta" name="Valuta"></input>
+              </div>
 
-          <div className="product-box">
-            <label htmlFor="categoryDropdown" className="input-label">Kategoria</label>
-            <select id="categoryDropdown" value={state.idcategory} onChange={handleInputChange} name="idcategory">
-              <option value="" disabled selected hidden>Zgjedh kategorinë</option>
-              {state.categories && state.categories.length > 0 &&
-                state.categories.map((category) => (
-                  <option key={category.idcategory} value={category.idcategory}>
-                    {category.EmriKategorise}
-                  </option>
-                ))}
-            </select>
-          </div>
+              <div className="product-box">
+                <label htmlFor="categoryDropdown" className="input-label">Kategoria</label>
+                <select id="categoryDropdown" value={state.idcategory} onChange={handleInputChange} name="idcategory">
+                  <option value="" disabled selected hidden>Zgjedh kategorinë</option>
+                  {state.categories && state.categories.length > 0 &&
+                    state.categories.map((category) => (
+                      <option key={category.idcategory} value={category.idcategory}>
+                        {category.EmriKategorise}
+                      </option>
+                    ))}
+                </select>
+              </div>
 
-          <div className="product-box">
-            <label htmlFor="detajet" className="input-label detajet-label">Detajet</label>
-            <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
-          </div>
+              <div className="product-box">
+                <label htmlFor="detajet" className="input-label detajet-label">Detajet</label>
+                <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
+              </div>
 
-          <div className="product-box">
-            <label htmlFor="foto" className="input-label">Foto</label>
-            <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
-          </div>
+              <div className="product-box">
+                <label htmlFor="foto" className="input-label">Foto</label>
+                <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" value={state.Foto ? state.Foto.name : ''} />
+              </div>
 
-          <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
-          <Link to="/Admin">
-            <input id="goback-button" type="button" value="Cancel" />
-          </Link>
-        </form>
-      )}
-    </div>
+              <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
+              <Link to="/Admin">
+                <input id="goback-button" type="button" value="Cancel" />
+              </Link>
+            </form>
+          )}
+        </div>
   );
 }
 

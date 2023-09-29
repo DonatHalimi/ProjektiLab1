@@ -213,39 +213,115 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
 });
 
 // Update i produkteve
-app.put("/api/product/update/:id", cors(), (req, res) => {
+// CRUDI I VJETER PER UPDATE
+// app.put("/api/product/update/:id", cors(), (req, res) => {
+//     const { id } = req.params;
+//     const { Emri, Cmimi, Valuta, Detajet, Foto, idcategory } = req.body;
+//     const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
+//     db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Foto, idcategory, id], (error, result) => {
+//         if (error) {
+//             console.log(error);
+//             res.status(500).send({ error: "Error retrieving data from database" });
+//         } else {
+//             res.status(200).send(result);
+//         }
+//     });
+// });
+
+app.put("/api/product/update/:id", upload.single('Foto'), (req, res) => {
     const { id } = req.params;
-    const { Emri, Cmimi, Valuta, Detajet, Foto, idcategory } = req.body;
-    const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
-    db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Foto, idcategory, id], (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: "Error retrieving data from database" });
-        } else {
-            res.status(200).send(result);
-        }
-    });
+    const { Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
+
+    // Kontrollo nese eshte bere upload nje foto e re
+    if (req.file) {
+        const filePath = req.file.path;
+        fs.readFile(filePath, (error, fileData) => {
+            if (error) {
+                console.log("Error reading file:", error);
+                return res.status(500).json({ error: "Error reading file" });
+            }
+
+            // Beje update produktin me foton e re
+            const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
+            const values = [Emri, Cmimi, Valuta, Detajet, fileData, idcategory, id];
+
+            db.query(sqlUpdate, values, (error, result) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).send({ error: "Error updating data in the database" });
+                } else {
+                    console.log("Produkti eshte perditesuar me sukses!");
+                    res.status(200).send(result);
+                }
+            });
+        });
+    } else {
+        // Nese nuk ndryshohet fotoja, behet update pa e ndrru foton
+        const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, idcategory=? WHERE id=?";
+        const values = [Emri, Cmimi, Valuta, Detajet, idcategory, id];
+
+        db.query(sqlUpdate, values, (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send({ error: "Error updating data in the database" });
+            } else {
+                console.log("Product updated successfully");
+                res.status(200).send(result);
+            }
+        });
+    }
 });
 
+
 // Fshirja e produkteve
+// CRUDI I VJETER PER FSHIRJE
+// app.delete("/api/product/remove/:id", (req, res) => {
+//     const id = req.params.id;
+//     console.log("ID received from request:", id); // Add this line for debugging
+//     if (id === undefined) {
+//         return res.status(400).send("Invalid request. ID is missing.");
+//     }
+
+//     db.query("DELETE FROM produktet WHERE id=?", id, (error, result) => {
+//         if (error) {
+//             console.error(error);
+//             res.status(500).send("Error deleting product");
+//         } else {
+//             console.log(`Deleted product with ID ${id}`);
+//             res.status(200).send("Product deleted successfully");
+//         }
+//     });
+// });
+
 app.delete("/api/product/remove/:id", (req, res) => {
     const id = req.params.id;
-    console.log("ID received from request:", id); // Add this line for debugging
+    console.log("ID received from request:", id);
+
     if (id === undefined) {
         return res.status(400).send("Invalid request. ID is missing.");
     }
 
-    db.query("DELETE FROM produktet WHERE id=?", id, (error, result) => {
+    // Kontrollo nese produkti me ID e dhene ekziston para se me fshi
+    db.query("SELECT * FROM produktet WHERE id=?", id, (error, result) => {
         if (error) {
             console.error(error);
-            res.status(500).send("Error deleting product");
+            res.status(500).send("Error checking if the product exists");
+        } else if (result.length === 0) {
+            res.status(404).send(`Produkti me ID ${id} nuk eshte gjetur`);
         } else {
-            console.log(`Deleted product with ID ${id}`);
-            res.status(200).send("Product deleted successfully");
+            // Nese produkti ekziston, fshije ate produkt
+            db.query("DELETE FROM produktet WHERE id=?", id, (deleteError) => {
+                if (deleteError) {
+                    console.error(deleteError);
+                    res.status(500).send("Error deleting product");
+                } else {
+                    console.log(`Eshte fshire produkti me id: ${id}`);
+                    res.status(200).send("Produkti eshte fshire me sukses");
+                }
+            });
         }
     });
 });
-
 
 
 

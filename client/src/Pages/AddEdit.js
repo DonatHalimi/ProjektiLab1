@@ -115,6 +115,8 @@ const AddEdit = () => {
                     <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>
+
+            <div style={{ height: "250px" }}></div>
         </div>
     );
 };
