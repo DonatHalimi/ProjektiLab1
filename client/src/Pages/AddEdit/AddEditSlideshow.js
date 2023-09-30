@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/AddEditSlideshowStyle.css";
+import "../../styles/AddEditSlideshowStyle.css";
 
 // Krijojme nje objekt qe permban te dhenat fillestare te fotove te slideshow
 const initialState = {
@@ -130,7 +130,7 @@ const AddEditSlideshow = () => {
 
 
                 <input id="submit-button" type="submit" value={idslideshow ? "Update" : "Save"} />
-                <Link to="/Admin">
+                <Link to="/admin/slideshow">
                     <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>

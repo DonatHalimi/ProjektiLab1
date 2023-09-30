@@ -98,6 +98,14 @@ body {
     color: inherit;
 }
 
+.clickable-header-user{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    top: 12px;
+}
+
 #fotoSizeProduct {
     max-width: 200px;
     max-height: 200px;

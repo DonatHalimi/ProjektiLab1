@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "../styles/AddEditAboutUsStyle.css";
+import "../../styles/AddEditAboutUsStyle.css";
 
 // Inicializimi i nje objekti i cili ka fushat per shtimin e nje teksti te ri
 const initialState = {
@@ -83,7 +83,7 @@ const AddEditAboutUs = () => {
 
                 <input id="submit-button" type="submit" value={idaboutus ? "Update" : "Save"} />
 
-                <Link to="/Admin">
+                <Link to="/admin/aboutus">
                     <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>

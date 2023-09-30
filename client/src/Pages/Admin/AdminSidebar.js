@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaUserCog } from 'react-icons/fa';
 import { AdminData } from './AdminData';
-import '../styles/AdminSidebarStyle.css';
+import '../../styles/AdminSidebarStyle.css';
 
-const Sidebar = ({ activeTab, handleTabChange }) => {
+const Sidebar = ({ handleTabChange }) => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const location = useLocation();
 
@@ -57,7 +57,7 @@ const Sidebar = ({ activeTab, handleTabChange }) => {
             ) : (
                 <div className="sidebar">
                     <div className="sidebar-header">
-                        <FaUserCog style={{ position: "relative", top: "2px", left: "14px" }} />
+                        <FaUserCog style={{ position: "relative", top: "4px", left: "14px" }} />
                     </div>
                     <hr className="sidebar-hr" />
                     <div className="sidebar-content">

@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/AddEditCategoryStyle.css";
+import "../../styles/AddEditCategoryStyle.css";
 
 // Krijojme nje objekt qe permban te dhenat fillestare te kategorive
 const initialState = {
@@ -146,7 +146,7 @@ const AddEditCategory = () => {
 
 
                 <input id="submit-button" type="submit" value={idcategory ? "Update" : "Save"} />
-                <Link to="/Admin">
+                <Link to="/admin/categories">
                     <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>

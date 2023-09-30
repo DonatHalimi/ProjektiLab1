@@ -61,7 +61,7 @@
 			]
 		},
 		{
-			"path": "client/src/Pages/AddEditAboutUs.js",
+			"path": "client/src/Pages/AddEdit/AddEditAboutUs.js",
 			"bookmarks": [
 				{
 					"line": 20,
@@ -81,7 +81,7 @@
 			]
 		},
 		{
-			"path": "client/src/Pages/AddEditProduct.js",
+			"path": "client/src/Pages/AddEdit/AddEditProduct.js",
 			"bookmarks": [
 				{
 					"line": 26,
@@ -101,7 +101,7 @@
 			]
 		},
 		{
-			"path": "client/src/Pages/AddEditSlideshow.js",
+			"path": "client/src/Pages/AddEdit/AddEditSlideshow.js",
 			"bookmarks": [
 				{
 					"line": 21,
@@ -226,7 +226,7 @@
 			]
 		},
 		{
-			"path": "client/src/Pages/AddEditCategory.js",
+			"path": "client/src/Pages/AddEdit/AddEditCategory.js",
 			"bookmarks": [
 				{
 					"line": 21,

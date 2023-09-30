@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "../styles/AddEditStyle.css";
+import "../../styles/AddEditStyle.css";
 
 // Krijojme nje objekt qe permban te dhenat fillestare te perdoruesit
 const initialState = {
@@ -14,8 +14,8 @@ const initialState = {
     Role: ""
 }
 
-// Krijimi i funksionit AddEdit per te shtuar dhe perditesuar perdorues
-const AddEdit = () => {
+// Krijimi i funksionit AddEditUser per te shtuar dhe perditesuar perdorues
+const AddEditUser = () => {
     const [state, setState] = useState(initialState);
     const { Name, Surname, Email, Password, Role } = state;
     const navigate = useNavigate();
@@ -111,7 +111,7 @@ const AddEdit = () => {
                 </div>
 
                 <input id="submit-button" type="submit" value={id ? "Update" : "Save"} />
-                <Link to="/Admin">
+                <Link to="/admin/users">
                     <input id="goback-button" type="button" value="Cancel"></input>
                 </Link>
             </form>
@@ -121,4 +121,4 @@ const AddEdit = () => {
     );
 };
 
-export default AddEdit;
+export default AddEditUser;

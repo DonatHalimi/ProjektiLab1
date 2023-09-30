@@ -5,7 +5,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
 import { BsCartPlus, BsPencil, BsTrash3 } from 'react-icons/bs';
-import AdminSidebar from '../AdminSidebar';
+import AdminSidebar from '../Admin/AdminSidebar';
 
 const ProductsTable = () => {
     const [productData, setProductData] = useState([]);

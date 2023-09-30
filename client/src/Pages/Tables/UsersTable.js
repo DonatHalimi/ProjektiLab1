@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Add this line to import Link
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import AdminSidebar from '../AdminSidebar';
 import { BsPersonAdd, BsPersonDash, BsPersonX } from 'react-icons/bs';
+import "../../styles/AdminStyle.css"
+import AdminSidebar from '../Admin/AdminSidebar';
 
 const UsersTable = () => {
     const [usersData, setUsersData] = useState([]);
@@ -76,7 +77,9 @@ const UsersTable = () => {
                             <th>Email</th>
                             <th>Password</th>
                             <th>Role</th>
-                            <th>Insert</th>
+                            <Link to='/user/addUser' className='clickable-header-user'>
+                                Insert
+                            </Link>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -91,9 +94,11 @@ const UsersTable = () => {
                                 <td>●●●●●●</td>
                                 <td>{user.Role === 1 ? 'Admin' : 'User'}</td>
                                 <td>
-                                    <button className="btn btn-User">
-                                        <BsPersonAdd style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
-                                    </button>
+                                    <Link to='/user/addUser'>
+                                        <button className="btn btn-User">
+                                            <BsPersonAdd style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td>
                                     <Link to={`/user/update/${user.id}`}>

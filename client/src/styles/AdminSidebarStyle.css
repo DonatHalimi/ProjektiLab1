@@ -48,7 +48,7 @@ body {
 
 .sidebar-menu-item:hover {
     background-color: #444;
-    border-left: 4px solid #E2E2E2;
+    border-left: 4px solid #95BBBB;
 }
 
 .sidebar-menu-item-home {
@@ -60,9 +60,16 @@ body {
 }
 
 .sidebar-menu-item.active {
-    background-color: #444;
-    border-left: 4px solid #E2E2E2;
+    background-color: #292929;
+    border-left: 4px solid #95BBBB;
     font-weight: bold;
+    cursor: default;
+    border-radius: 4px;
+}
+
+.sidebar-menu-item:not(.active):hover {
+    background-color: #444;
+    border-left: 4px solid #95BBBB;
 }
 
 .sidebar-toggle-btn,
@@ -119,10 +126,11 @@ body {
 
 .home-link:hover {
     background-color: #444;
+    border-left: 4px solid #95BBBB;
 }
 
 .home-link.active {
     background-color: #444;
-    border-left: 4px solid #f0f0f0;
+    border-left: 4px solid #95BBBB;
     font-weight: bold;
 }

@@ -5,7 +5,8 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { BsCartPlus, BsPencil, BsTrash3 } from 'react-icons/bs';
-import AdminSidebar from '../AdminSidebar';
+import "../../styles/AddEditStyle.css"
+import AdminSidebar from '../Admin/AdminSidebar';
 
 const SlideshowTable = () => {
     const [slideshowData, setSlideshowData] = useState([]);

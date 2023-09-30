@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AdminSidebar from './AdminSidebar';
-import UsersTable from './Tables/UsersTable';
-import ProductsTable from './Tables/ProductsTable';
-import CategoryTable from './Tables/CategoryTable';
-import SlideshowTable from './Tables/SlideshowTable';
-import AboutUsTable from './Tables/AboutUsTable';
-import '../styles/AdminStyle.css'
+import UsersTable from '../Tables/UsersTable';
+import ProductsTable from '../Tables/ProductsTable';
+import CategoryTable from '../Tables/CategoryTable';
+import SlideshowTable from '../Tables/SlideshowTable';
+import AboutUsTable from '../Tables/AboutUsTable';
+import '../../styles/AdminStyle.css'
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('users');

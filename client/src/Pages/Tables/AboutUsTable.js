@@ -5,7 +5,7 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { BsPlusLg, BsPencil, BsTrash3 } from 'react-icons/bs';
-import AdminSidebar from '../AdminSidebar';
+import AdminSidebar from '../Admin/AdminSidebar';
 
 const AboutUsTable = () => {
     // State for About Us data

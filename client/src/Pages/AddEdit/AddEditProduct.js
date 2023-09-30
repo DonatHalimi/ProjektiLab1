@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/AddEditProductStyle.css";
+import "../../styles/AddEditProductStyle.css";
 
 // Krijojme nje objekt qe permban te dhenat fillestare te produktit
 const initialState = {
@@ -228,7 +228,7 @@ const AddEditProduct = () => {
               </div>
 
               <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
-              <Link to="/Admin">
+              <Link to="/admin/products">
                 <input id="goback-button" type="button" value="Cancel" />
               </Link>
             </form>

@@ -2,9 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
+import { ToastContainer } from 'react-toastify';
+
+import AboutUs from "./components/AboutUs";
 import Home from './components/Home';
 import ToTop from "./components/ToTop";
-import AboutUs from "./components/AboutUs";
 import Product from "./components/Product";
 import Categories from './components/Categories';
 import Cart from './components/Cart';
@@ -12,25 +14,25 @@ import Wishlist from './components/Wishlist';
 import ProductDetails from './components/ProductDetails';
 import CookiePopup from "./components/CookiePopup";
 import ProductList from './components/ProductList';
+
 import { ShopContextProvider } from "./context/shop-context";
 import { WishlistContextProvider } from "./context/wishlist-context";
-import Login from "./Pages/Login";
-import { Register } from "./Pages/Register";
-import Admin from "./Pages/Admin";
-import AddEdit from "./Pages/AddEdit";
-import AddEditProduct from "./Pages/AddEditProduct";
-import AddEditAboutUs from "./Pages/AddEditAboutUs";
-import AddEditSlideshow from "./Pages/AddEditSlideshow";
-import AddEditCategory from "./Pages/AddEditCategory";
-import Success from "./Pages/Success";
-import Cancel from "./Pages/Cancel";
-import { ToastContainer } from 'react-toastify';
 
+import AddEditAboutUs from "./Pages/AddEdit/AddEditAboutUs";
+import AddEditCategory from "./Pages/AddEdit/AddEditCategory";
+import AddEditProduct from "./Pages/AddEdit/AddEditProduct";
+import AddEditSlideshow from "./Pages/AddEdit/AddEditSlideshow";
+import AddEditUser from "./Pages/AddEdit/AddEditUser";
+import Admin from "./Pages/Admin/Admin";
 import UsersTable from './Pages/Tables/UsersTable';
 import ProductsTable from './Pages/Tables/ProductsTable';
 import CategoryTable from './Pages/Tables/CategoryTable';
 import SlideshowTable from './Pages/Tables/SlideshowTable';
 import AboutUsTable from './Pages/Tables/AboutUsTable';
+import Cancel from "./Pages/Cancel";
+import Success from "./Pages/Success";
+import Login from "./Pages/Login";
+import { Register } from "./Pages/Register";
 
 function App() {
   return (
@@ -53,8 +55,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/Admin" element={<Admin />} />
-              <Route path="/user/addUser" element={<AddEdit />} />
-              <Route path="/user/update/:id" element={<AddEdit />} />
+              <Route path="/user/addUser" element={<AddEditUser />} />
+              <Route path="/user/update/:id" element={<AddEditUser />} />
               <Route path="/addProduct" element={<AddEditProduct />} />
               <Route path="/updateProduct/:idproduct" element={<AddEditProduct />} />
               <Route path="/aboutus/addAboutUs" element={<AddEditAboutUs />} />
