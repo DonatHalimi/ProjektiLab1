@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { BsPlusLg, BsTrash3 } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
 import { Link } from 'react-router-dom';
-import '../styles/CartItemsStyle.css'
+import '../styles/CartItemsStyle.css';
 
 function CartItem(props) {
   const cart = useContext(ShopContext);
@@ -14,7 +14,6 @@ function CartItem(props) {
 
   const [products, setProducts] = useState([]);
 
-  // Krijimi i nje funksioni per me i marr te dhenat nga API i produktit
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -34,48 +33,42 @@ function CartItem(props) {
 
   const product = products.find((product) => product.id === id);
 
-  // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
   if (!product) {
     return <div>Loading...</div>;
   }
 
-  const Cmimi = parseFloat(product.Cmimi);
-  const totalCost = (quantity * Cmimi).toFixed(2);
+  const price = parseFloat(product.Cmimi);
+  const totalCost = (quantity * price).toFixed(2);
 
   return (
-    <>
-
-      {/* Cart card per produkte */}
-      <div className="cartItem">
-        <div className="cartCard">
-          <Link to={`/product/${product.id}`} className="product-details-link">
-            <div className="cartCard_img">
-              <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-            </div>
-          </Link>
-
-          <div className="cartCard_header">
-            <h3>{product.Emri}</h3>
-            <p>{quantity} Total</p>
-            <p>${totalCost}</p>
+    <div className="cart-item">
+      <div className="cart-card">
+        <Link to={`/product/${product.id}`} className="product-details-link">
+          <div className="cart-card-image">
+            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
           </div>
+        </Link>
 
-          {/* Butonat per me ndryshu, largu, dhe fshi produkte prej cart */}
-          <div className='editButtons'>
-            <button id='addButton' onClick={() => cart.addOneToCart(id)} title='Add'>
-              <BsPlusLg style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
-            </button>
-            <button id='removeButton' onClick={() => cart.removeOneFromCart(id)} title='Remove'>
-              <AiOutlineMinus style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
-            </button>
-            <button id='deleteButton' onClick={() => cart.deleteFromCart(id)} title='Delete'>
-              <BsTrash3 style={{ color: "black", fontSize: "20px", fontWeight: "600" }} />
-            </button>
-          </div>
+        <div className="cart-card-details">
+          <h3 className="product-name">{product.Emri}</h3>
+          <p className="quantity">{quantity} Total</p>
+          <p className="total-cost">${totalCost}</p>
+        </div>
+
+        <div className='edit-buttons'>
+          <button className='add-button' onClick={() => cart.addOneToCart(id)} title='Add'>
+            <BsPlusLg />
+          </button>
+          <button className='remove-button' onClick={() => cart.removeOneFromCart(id)} title='Remove'>
+            <AiOutlineMinus />
+          </button>
+          <button className='delete-button' onClick={() => cart.deleteFromCart(id)} title='Delete'>
+            <BsTrash3 />
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default CartItem;

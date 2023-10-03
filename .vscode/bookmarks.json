@@ -129,12 +129,12 @@
 			"path": "client/src/components/cart-items.js",
 			"bookmarks": [
 				{
-					"line": 16,
+					"line": 2,
 					"column": 2,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 43,
+					"line": 29,
 					"column": 2,
 					"label": "HTML Render"
 				}

@@ -134,6 +134,7 @@ h1 {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    margin-top: 130px;
 }
 
 #purchaseButton:hover {
