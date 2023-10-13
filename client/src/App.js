@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 import { ToastContainer } from 'react-toastify';
@@ -54,7 +54,7 @@ function App() {
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/Admin" element={<Admin />} />
+              <Route path="/Admin" element={<Navigate replace to="/admin/users" />} />
               <Route path="/user/addUser" element={<AddEditUser />} />
               <Route path="/user/update/:id" element={<AddEditUser />} />
               <Route path="/addProduct" element={<AddEditProduct />} />

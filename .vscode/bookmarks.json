@@ -19,42 +19,42 @@
 					"label": "PRODUCTS CRUD"
 				},
 				{
-					"line": 327,
+					"line": 333,
 					"column": 0,
 					"label": "ABOUTUS CRUD"
 				},
 				{
-					"line": 402,
+					"line": 408,
 					"column": 0,
 					"label": "SLIDESHOW CRUD"
 				},
 				{
-					"line": 518,
+					"line": 524,
 					"column": 0,
 					"label": "CATEGORY CRUD"
 				},
 				{
-					"line": 634,
+					"line": 640,
 					"column": 0,
 					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
 				},
 				{
-					"line": 651,
+					"line": 657,
 					"column": 0,
 					"label": "Insertimi i userave nga Register form"
 				},
 				{
-					"line": 667,
+					"line": 673,
 					"column": 0,
 					"label": "Autentifikimi i perdoruesit"
 				},
 				{
-					"line": 698,
+					"line": 704,
 					"column": 0,
 					"label": "Checkout"
 				},
 				{
-					"line": 727,
+					"line": 733,
 					"column": 0,
 					"label": "Server Port"
 				}

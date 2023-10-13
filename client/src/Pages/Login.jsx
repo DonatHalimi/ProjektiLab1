@@ -31,7 +31,7 @@ const Login = () => {
         navigate("/");
         setLoginStatus(response.data[0].Name);
       } else if (response.data[0].Role === 1) {
-        navigate("/Admin");
+        navigate("/admin/users");
         setLoginStatus(response.data[0].Name);
       } else {
         setLoginStatus("Invalid email or password");

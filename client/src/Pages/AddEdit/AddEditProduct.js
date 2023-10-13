@@ -129,27 +129,28 @@ const AddEditProduct = () => {
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     console.log("Input changed - Name:", name, "Value:", value);
-
+  
     // Nese ndryshimi eshte per foton, ruajme foton si file ne state
     if (name === "Foto") {
       console.log("Changing Foto - Files:", files);
-
+  
       if (files.length > 0) {
         // Merre file-in e pare prej listes se file-ave
         const file = files[0];
-
+  
         // Lexoje file-in edhe konvertoje ne base64 string
         const reader = new FileReader();
         reader.readAsDataURL(file);
-
+  
         reader.onload = () => {
           // Beje update state me te dhenat base64 te foto-se
           setState((prevState) => ({
             ...prevState,
-            Foto: reader.result, // Ketu ruhen te dhenat e fotos base64
+            Foto: file, // This should store the file object
+            fotoName: file.name, // Add a property to store the file name
           }));
         };
-
+  
         reader.onerror = (error) => {
           console.error("Error reading file:", error);
         };
@@ -158,6 +159,7 @@ const AddEditProduct = () => {
         setState((prevState) => ({
           ...prevState,
           Foto: null,
+          fotoName: '', // Clear the file name
         }));
       }
     } else {

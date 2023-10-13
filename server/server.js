@@ -228,48 +228,54 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
 //     });
 // });
 
-app.put("/api/product/update/:id", upload.single('Foto'), (req, res) => {
+const updateProductStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../client/src/img'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const updateProductUpload = multer({ storage: updateProductStorage });
+
+app.put("/api/product/update/:id", updateProductUpload.single('Foto'), (req, res) => {
     const { id } = req.params;
     const { Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
 
-    // Kontrollo nese eshte bere upload nje foto e re
+    let sqlUpdate;
+    let values;
+
+    if (!Emri || !Cmimi || !Valuta || !Detajet || !idcategory) {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
     if (req.file) {
         const filePath = req.file.path;
-        fs.readFile(filePath, (error, fileData) => {
-            if (error) {
-                console.log("Error reading file:", error);
-                return res.status(500).json({ error: "Error reading file" });
-            }
 
-            // Beje update produktin me foton e re
-            const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
-            const values = [Emri, Cmimi, Valuta, Detajet, fileData, idcategory, id];
-
-            db.query(sqlUpdate, values, (error, result) => {
-                if (error) {
-                    console.log(error);
-                    res.status(500).send({ error: "Error updating data in the database" });
-                } else {
-                    console.log("Produkti eshte perditesuar me sukses!");
-                    res.status(200).send(result);
-                }
-            });
-        });
+        // Update product with the new file path
+        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
+        values = [Emri, Cmimi, Valuta, Detajet, filePath, idcategory, id];
     } else {
-        // Nese nuk ndryshohet fotoja, behet update pa e ndrru foton
-        const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, idcategory=? WHERE id=?";
-        const values = [Emri, Cmimi, Valuta, Detajet, idcategory, id];
-
-        db.query(sqlUpdate, values, (error, result) => {
-            if (error) {
-                console.log(error);
-                res.status(500).send({ error: "Error updating data in the database" });
-            } else {
-                console.log("Product updated successfully");
-                res.status(200).send(result);
-            }
-        });
+        // Update product without changing the photo
+        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, idcategory=? WHERE id=?";
+        values = [Emri, Cmimi, Valuta, Detajet, idcategory, id];
     }
+
+    // Execute the query with error handling
+    db.query(sqlUpdate, values, (error, result) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ error: "Error updating data in the database" });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        const successMessage = req.file ? "Product updated with a new photo" : "Product updated without changing the photo";
+        res.status(200).json({ message: successMessage, updatedProduct: { id, Emri, Cmimi, Valuta, Detajet, idcategory } });
+    });
 });
 
 
