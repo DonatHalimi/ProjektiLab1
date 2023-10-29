@@ -8,6 +8,9 @@ import axios from "axios";
 import { useFormik } from "formik";
 
 const Login = () => {
+
+  document.title = "Ruby | Log in";
+
   const navigate = useNavigate();
 
   const [passwordVisible, setPasswordVisible] = useState(false);

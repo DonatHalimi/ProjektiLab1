@@ -25,6 +25,8 @@ function ProductDetails() {
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
+    document.title = Emri + " Details";
+
     const handleAddToCart = () => {
         cart.addOneToCart(id);
         setShowAlertCart(true);

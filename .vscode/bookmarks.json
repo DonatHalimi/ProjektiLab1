@@ -199,27 +199,22 @@
 					"label": "useEffect() per marrjen e fotove nga databaza"
 				},
 				{
-					"line": 31,
+					"line": 35,
 					"column": 4,
 					"label": "Funksioni per next slide"
 				},
 				{
-					"line": 37,
-					"column": 4,
-					"label": "Funksioni per previous slide"
-				},
-				{
-					"line": 43,
+					"line": 41,
 					"column": 4,
 					"label": "useEffect per levizje automatike"
 				},
 				{
-					"line": 49,
+					"line": 47,
 					"column": 4,
 					"label": "Funksioni kur shtypet butoni i mausit"
 				},
 				{
-					"line": 58,
+					"line": 56,
 					"column": 4,
 					"label": "Funksioni kur leviz butoni i mausit"
 				}
@@ -254,7 +249,7 @@
 					"label": "useEffect() per kategori nga databaza"
 				},
 				{
-					"line": 27,
+					"line": 29,
 					"column": 4,
 					"label": "HTML Render"
 				}
@@ -314,12 +309,12 @@
 			"path": "client/src/components/Home.js",
 			"bookmarks": [
 				{
-					"line": 12,
+					"line": 31,
 					"column": 4,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 31,
+					"line": 53,
 					"column": 4,
 					"label": "HTML Render"
 				}
@@ -334,7 +329,7 @@
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 44,
+					"line": 46,
 					"column": 18,
 					"label": "HTML Render"
 				}

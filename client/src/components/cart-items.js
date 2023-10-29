@@ -29,6 +29,8 @@ function CartItem(props) {
     };
 
     fetchProducts();
+
+    document.title = "Ruby | Cart";
   }, []);
 
   const product = products.find((product) => product.id === id);

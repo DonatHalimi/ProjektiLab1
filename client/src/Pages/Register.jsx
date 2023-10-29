@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 export const Register = () => {
+
+  document.title = "Ruby | Register";
+
   const navigate = useNavigate();
 
   const [passwordVisible, setPasswordVisible] = useState(false);

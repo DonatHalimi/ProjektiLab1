@@ -21,6 +21,8 @@ const Categories = () => {
         };
 
         fetchCategories();
+
+        document.title = "Ruby | Categories";
     }, []);
 
     console.log("Categories:", categories);

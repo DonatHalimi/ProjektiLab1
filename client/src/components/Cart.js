@@ -10,6 +10,8 @@ import "../styles/CartStyle.css"
 // Krijimi i funksionit per Cart
 const Cart = () => {
 
+  document.title = "Ruby | Cart";
+
   // Merr kontekstin e dyqanit nga komponenti ShopContext
   const cart = useContext(ShopContext);
 
@@ -38,7 +40,7 @@ const Cart = () => {
       <Navbar />
 
       <div>
-        <h1 className='cart-name'></h1>
+        {/* <h1 className='cart-name'></h1> */}
         <div className="cart-items">
           {productsCount > 0 ?
             <>

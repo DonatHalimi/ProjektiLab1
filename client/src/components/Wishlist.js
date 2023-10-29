@@ -31,6 +31,8 @@ const Wishlist = () => {
         };
 
         fetchProducts();
+
+        document.title = "Ruby | Wishlist";
     }, []);
 
     const handleRemoveFromWishlist = (id) => {

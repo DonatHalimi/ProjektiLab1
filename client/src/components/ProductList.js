@@ -75,6 +75,12 @@ function ProductList(props) {
         }
     };
 
+    // useEffect per me shfaq emrin e kategorise ne chrome tab 
+    useEffect(() => {
+        const category = getCategoryNameById(categoryId);
+        document.title = "Ruby | " + category;
+    }, [categoryId]);
+
     return (
         <>
 

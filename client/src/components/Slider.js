@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "../styles/SliderStyle.css";
 
@@ -23,23 +23,21 @@ function Slider() {
         fetchSlideshowData();
     }, []);
 
-    // Funksioni per me shku ne slide-in e ardhshem
-    const nextSlide = () => {
+    const nextSlide = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
         setOffsetX(0);
-    };
+    }, [slides]);
 
-    // Funksioni per kthimin ne slide-in paraprak
-    const prevSlide = () => {
+    const prevSlide = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
         setOffsetX(0);
-    };
+    }, [slides]);
 
     // Krijojme nje useEffect per levizjen automatike te slideshow-it duke u bazuar ne zgjatjen e --slide-duration
     useEffect(() => {
         const intervalId = setInterval(nextSlide, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--slide-duration'))); // --slide-duration gjendet ne file-in SliderStyle.css
         return () => clearInterval(intervalId);
-    }, [currentIndex]);
+    }, [currentIndex, nextSlide]);
 
     // Krijojme nje funksion i cili thirret kur shtypet butoni i mausit ne komponentin e slider-it, e vendos variablen dragging ne true per me tregu se dragging ka filluar
     const handleMouseDown = (e) => {

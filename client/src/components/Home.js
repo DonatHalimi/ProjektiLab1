@@ -5,9 +5,24 @@ import Slider from "./Slider";
 import Footer from "../components/Footer";
 import "../styles/HomeStyle.css";
 
+async function fetchSliderData(setSliderData) {
+    try {
+        const response = await fetch("http://localhost:6001/api/slider/get");
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setSliderData(data);
+    } catch (error) {
+        console.error("Error fetching slider data:", error);
+    }
+}
+
 // Deklarimi i funksionit Home
 function Home() {
     const [products, setProducts] = useState([]);
+    const [sliderData, setSliderData] = useState([]);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     // Krijimi i nje funksioni per te marr te dhenat e produkteve nga databaza
     useEffect(() => {
@@ -21,19 +36,27 @@ function Home() {
                 setProducts(data);
             } catch (error) {
                 console.error("Error fetching products:", error);
+            } finally {
+                setLoading(false); // Mark loading as false when data is loaded or error occurs
             }
         };
+
         fetchProducts();
+        fetchSliderData(setSliderData);
+
+        document.title = "Ruby | Home";
     }, []);
 
-    console.log("Products:", products);
+    // Conditional rendering based on loading state
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
-    // Renderimi i HTML per shfaqjen e Home
     return (
         <>
             {/* Thirrja e komponenteve te Navbar dhe Slider */}
             <Navbar />
-            <Slider />
+            <Slider data={sliderData} />
 
             {/* Krijimi i kartes se produkteve ne Home page */}
             <div>
@@ -44,7 +67,6 @@ function Home() {
                             <Product product={product} />
                         </div>
                     ))}
-
                 </div>
             </div>
 
@@ -53,7 +75,6 @@ function Home() {
             <Footer />
         </>
     );
-
 }
 
 export default Home;

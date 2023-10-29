@@ -9,6 +9,9 @@ import Footer from "./Footer";
 import "../styles/AboutUsStyle.css";
 
 const AboutUs = () => {
+
+    document.title = "Ruby | About Us";
+
     return (
         <>
             <Navbar />
