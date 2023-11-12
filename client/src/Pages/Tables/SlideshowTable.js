@@ -7,9 +7,17 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { BsCartPlus, BsPencil, BsTrash3 } from 'react-icons/bs';
 import "../../styles/AddEditStyle.css"
 import AdminSidebar from '../Admin/AdminSidebar';
+import ReactPaginate from 'react-paginate';
+import '../../styles/SlideshowTableStyle.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SlideshowTable = () => {
     const [slideshowData, setSlideshowData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 2;
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Funksioni per mi marr te dhenat e slideshow nga API
     const loadSlideshowData = async () => {
@@ -60,15 +68,30 @@ const SlideshowTable = () => {
     useEffect(() => {
         loadSlideshowData();
 
-        document.title = `Slideshow Table`;
-    }, []);
+        // Per mu shfaq "?page={pageNumber}" ne URL
+        const urlSearchParams = new URLSearchParams(location.search);
+        const pageParam = urlSearchParams.get('page');
+
+        if (!pageParam) {
+            navigate(`${location.pathname}?page=1`);
+        }
+
+        document.title = `Slideshow Table | Page ${pageParam || 1}`;
+    }, [location.pathname, location.search, navigate]);
+
+    const offset = currentPage * itemsPerPage;
+
+    const handlePageClick = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+        navigate(`?page=${selectedPage.selected + 1}`);
+    };
 
     return (
         <div className="admin-page">
             <AdminSidebar />
 
             <div className='table-container' style={{ position: 'relative', top: '-90px' }}>
-                <table className='styled-table' style={{ transform: 'scale(0.60)', fontSize: '20px' }}>
+                <table className='styled-table' style={{ transform: 'scale(0.60)', position: "relative", top: "10px", fontSize: '20px' }}>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -84,41 +107,61 @@ const SlideshowTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {slideshowData.map((slideshow, indexslideshow) => {
-                            return (
-                                <Fragment key={slideshow.idslideshow}>
-                                    <tr>
-                                        <th scope='row'>{indexslideshow + 1}</th>
-                                        <td>{slideshow.EmriFoto}</td>
-                                        <td>
-                                            {slideshow.Foto && (
-                                                <img src={`data:image/jpeg;base64,${slideshow.Foto.toString('base64')}`} alt='Slideshow' id='fotoSizeSlideshow' />
-                                            )}
-                                        </td>
-                                        <td>
-                                            <Link to='/addSlideshow'>
-                                                <button className='btn btn-User'>
-                                                    <BsCartPlus style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
-                                                </button>
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            <Link to={`/updateSlideshow/${slideshow.idslideshow}`}>
-                                                <button className='btn btn-edit'>
-                                                    <BsPencil style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
-                                                </button>
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            <button className='btn btn-delete' onClick={() => deleteSlideshow(slideshow.idslideshow)}>
-                                                <BsTrash3 style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                        {slideshowData.slice(offset, offset + itemsPerPage).map((slideshow, indexslideshow) => (
+                            <Fragment key={slideshow.idslideshow}>
+                                <tr>
+                                    <th scope='row'>{indexslideshow + 1}</th>
+                                    <td>{slideshow.EmriFoto}</td>
+                                    <td>
+                                        {slideshow.Foto && (
+                                            <img src={`data:image/jpeg;base64,${slideshow.Foto.toString('base64')}`} alt='Slideshow' id='fotoSizeSlideshow' />
+                                        )}
+                                    </td>
+                                    <td>
+                                        <Link to='/addSlideshow'>
+                                            <button className='btn btn-User'>
+                                                <BsCartPlus style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
-                                        </td>
-                                    </tr>
-                                </Fragment>
-                            );
-                        })}
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={`/updateSlideshow/${slideshow.idslideshow}`}>
+                                            <button className='btn btn-edit'>
+                                                <BsPencil style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                            </button>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <button className='btn btn-delete' onClick={() => deleteSlideshow(slideshow.idslideshow)}>
+                                            <BsTrash3 style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </Fragment>
+                        ))}
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colSpan="10">
+                                <div className="pagination-container">
+                                    <ReactPaginate
+                                        previousLabel={'Previous'}
+                                        nextLabel={'Next'}
+                                        breakLabel={'...'}
+                                        pageCount={Math.ceil(slideshowData.length / itemsPerPage)}
+                                        marginPagesDisplayed={2}
+                                        pageRangeDisplayed={5}
+                                        onPageChange={handlePageClick}
+                                        containerClassName={'pagination'}
+                                        activeClassName={'active'}
+                                        initialPage={currentPage}
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+
                 </table>
             </div>
         </div>
