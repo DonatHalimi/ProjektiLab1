@@ -59,7 +59,7 @@ function Home() {
             navigate(`${location.pathname}?page=1`);
         }
 
-        document.title = `Ruby | Home | Page ${pageParam || 1}`;
+        document.title = `Home | Page ${pageParam || 1}`;
     }, [location.pathname, location.search, navigate]);
 
     const offset = currentPage * itemsPerPage;
