@@ -60,6 +60,8 @@ const AboutUsTable = () => {
 
     useEffect(() => {
         loadAboutUsData();
+
+        document.title = `About Us Table`;
     }, []);
 
     return (

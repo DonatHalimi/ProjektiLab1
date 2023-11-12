@@ -67,7 +67,7 @@ const CategoryTable = () => {
             <AdminSidebar />
 
             <div className='table-container' style={{ position: 'relative', top: '-60px' }}>
-                <table className='styled-table' style={{ transform: 'scale(0.79)', fontSize: '20px' }}>
+                <table className='styled-table' style={{ transform: 'scale(0.60)', fontSize: '20px' }}>
                     <thead>
                         <tr>
                             <th>ID</th>

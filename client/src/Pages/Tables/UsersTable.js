@@ -60,6 +60,8 @@ const UsersTable = () => {
 
     useEffect(() => {
         loadUsersData();
+
+        document.title = `Users Table`;
     }, []);
 
     return (

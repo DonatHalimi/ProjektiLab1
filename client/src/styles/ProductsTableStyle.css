@@ -1,0 +1,58 @@
+/* Add your styles here */
+.table-container.products-table {
+    margin-bottom: 200px;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.products-table {
+    transform: scale(0.8);
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+    bottom: 30px;
+    right: 60px;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    text-decoration: none;
+    padding: 8px 15px 7px;
+    border: 0.1px solid #222222;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.pagination .active a {
+    background-color: #272727;
+    color: #fff;
+    font-size: 18px;
+}
+
+.pagination a:hover {
+    background-color: #555555;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}

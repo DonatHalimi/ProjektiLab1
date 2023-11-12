@@ -98,7 +98,7 @@ body {
     color: inherit;
 }
 
-.clickable-header-user{
+.clickable-header-user {
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -119,4 +119,19 @@ body {
 #fotoSizeCategory {
     max-width: 250px;
     max-height: 250px;
+}
+
+.products-table {
+    position: relative;
+    bottom: 200px;
+    width: 100%;
+    transform: scale(0.8);
+    max-width: 1600px;
+    margin-bottom: 200px;
+    /* Adjust the margin for the desired spacing */
+}
+
+.products-table td {
+    padding: 15px 10px;
+    text-align: center;
 }

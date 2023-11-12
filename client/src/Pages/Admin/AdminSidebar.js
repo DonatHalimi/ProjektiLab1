@@ -4,6 +4,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaUserCog } from 'react-icons/fa';
 import { AdminData } from './AdminData';
 import '../../styles/AdminSidebarStyle.css';
+import { confirmAlert } from 'react-confirm-alert'; // Import confirmAlert
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Sidebar = ({ handleTabChange }) => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
@@ -28,6 +30,26 @@ const Sidebar = ({ handleTabChange }) => {
         };
     }, [sidebarVisible]);
 
+    const showHomeConfirmation = () => {
+        confirmAlert({
+            title: 'Confirm Action',
+            message: 'Are you sure you want to go to the home page?',
+            buttons: [
+                {
+                    label: 'Cancel',
+                    onClick: () => { }
+                },
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        // Redirect to the home page
+                        window.location.href = '/';
+                    }
+                }
+            ]
+        });
+    };
+
     return (
         <div className="sidebar-container">
             {sidebarVisible ? (
@@ -44,11 +66,11 @@ const Sidebar = ({ handleTabChange }) => {
                         ))}
                     </ul>
 
-                    <Link to={"/"} className={`home-link ${location.pathname === '/' ? 'active' : ''}`}>
+                    <div to="/" className={`home-link ${location.pathname === '/' ? 'active' : ''}`} onClick={showHomeConfirmation}>
                         <li>
                             <i className='fa-solid fa-home'></i> Home
                         </li>
-                    </Link>
+                    </div>
 
                     <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
                         <GiHamburgerMenu />
@@ -72,11 +94,11 @@ const Sidebar = ({ handleTabChange }) => {
                         </ul>
                     </div>
 
-                    <Link to={"/"} className={`home-link ${location.pathname === '/' ? 'active' : ''}`}>
+                    <div className={`home-link ${location.pathname === '/' ? 'active' : ''}`} onClick={showHomeConfirmation}>
                         <li>
                             <i className='fa-solid fa-home'></i>
                         </li>
-                    </Link>
+                    </div>
 
                     <button className="sidebar-toggle-btn-clicked" onClick={toggleSidebar}>
                         <GiHamburgerMenu />

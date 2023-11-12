@@ -6,10 +6,20 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
 import { BsCartPlus, BsPencil, BsTrash3 } from 'react-icons/bs';
 import AdminSidebar from '../Admin/AdminSidebar';
+import ReactPaginate from 'react-paginate';
+import '../../styles/ProductsTableStyle.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ProductsTable = () => {
     const [productData, setProductData] = useState([]);
     const [categoryData, setCategoryData] = useState([]);
+
+    // useState per pagination
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5;
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Funksioni per mi marr te dhenat e produkteve nga API
     const loadProductsData = async () => {
@@ -80,14 +90,31 @@ const ProductsTable = () => {
     useEffect(() => {
         loadProductsData();
         fetchCategoryData();
-    }, []);
+
+        // Per mu shfaq "?page={pageNumber}" ne URL
+        const urlSearchParams = new URLSearchParams(location.search);
+        const pageParam = urlSearchParams.get('page');
+
+        if (!pageParam) {
+            navigate(`${location.pathname}?page=1`);
+        }
+
+        document.title = `Products Table | Page ${pageParam || 1}`;
+    }, [location.pathname, location.search, navigate]);
+
+    const offset = currentPage * itemsPerPage;
+
+    const handlePageClick = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+        navigate(`?page=${selectedPage.selected + 1}`);
+    };
 
     return (
         <div className="admin-page">
             <AdminSidebar />
 
-            <div className="table-container">
-                <table className='styled-table' style={{ transform: 'scale(0.70)', position: 'relative', bottom: '560px', overflowY: 'auto', fontSize: '17px', marginBottom: "300px" }}>
+            <div className="table-container products-table">
+                <table className='styled-table products-table'>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -97,17 +124,13 @@ const ProductsTable = () => {
                             <th>Kategoria</th>
                             <th>Detajet</th>
                             <th>Foto</th>
-                            <th>
-                                <Link to="/addProduct" className="clickable-header">
-                                    Insert
-                                </Link>
-                            </th>
+                            <th>Insert</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {productData.map((product, indexproduct) => {
+                        {productData.slice(offset, offset + itemsPerPage).map((product, indexproduct) => {
                             return (
                                 <Fragment key={product.id}>
                                     <tr>
@@ -147,11 +170,34 @@ const ProductsTable = () => {
                                                 </button>
                                             </Link>
                                         </td>
+
                                     </tr>
                                 </Fragment>
                             );
                         })}
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colSpan="10">
+                                <div className="pagination-container">
+                                    <ReactPaginate
+                                        previousLabel={'Previous'}
+                                        nextLabel={'Next'}
+                                        breakLabel={'...'}
+                                        pageCount={Math.ceil(productData.length / itemsPerPage)}
+                                        marginPagesDisplayed={2}
+                                        pageRangeDisplayed={5}
+                                        onPageChange={handlePageClick}
+                                        containerClassName={'pagination'}
+                                        activeClassName={'active'}
+                                        initialPage={currentPage}
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+
                 </table>
             </div>
         </div>
