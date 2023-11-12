@@ -60,6 +60,8 @@ const CategoryTable = () => {
 
     useEffect(() => {
         loadCategoryData();
+
+        document.title = `Categories Table`;
     }, []);
 
     return (
