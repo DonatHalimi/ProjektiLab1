@@ -309,12 +309,12 @@
 			"path": "client/src/components/Home.js",
 			"bookmarks": [
 				{
-					"line": 31,
+					"line": 64,
 					"column": 4,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 53,
+					"line": 88,
 					"column": 4,
 					"label": "HTML Render"
 				}

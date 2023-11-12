@@ -7,27 +7,30 @@ import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import Footer from "./Footer";
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
+import { useLocation, useNavigate } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import '../styles/ProductListStyle.css';
 
-// Funksioni per shfaqjen e produkteve per nje kategori te caktuar
 function ProductList(props) {
     const { categoryId } = useParams();
     const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5;
 
-    // const product = props.product;
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
 
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
-    useEffect(() => {
-        console.log("Category ID:", categoryId);
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(`http://localhost:6001/api/products/get-by-category/${categoryId}`);
-                console.log("Response:", response.data);
                 setProducts(response.data);
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -37,7 +40,9 @@ function ProductList(props) {
         fetchProducts();
     }, [categoryId]);
 
-    // Funksioni qe shton nje produkt ne shporte
+    const offset = currentPage * itemsPerPage;
+    const currentProducts = products.slice(offset, offset + itemsPerPage);
+
     const handleAddToCart = (productID) => {
         cart.addOneToCart(productID);
         setShowAlertCart(true);
@@ -47,7 +52,6 @@ function ProductList(props) {
         }, 5000);
     };
 
-    // Funksioni qe shton nje produkt ne listen e deshirave
     const handleAddToWishlist = (productID) => {
         wishlist.addItemToWishlist(productID);
 
@@ -75,23 +79,28 @@ function ProductList(props) {
         }
     };
 
-    // useEffect per me shfaq emrin e kategorise ne chrome tab 
     useEffect(() => {
         const category = getCategoryNameById(categoryId);
         document.title = "Ruby | " + category;
     }, [categoryId]);
 
+    const pageCount = Math.ceil(products.length / itemsPerPage);
+
+    const handlePageClick = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+
+        navigate(`?page=${selectedPage.selected + 1}`);
+    };
+
     return (
         <>
-
             <Slider />
             <div>
                 <h2 id="header">{getCategoryNameById(categoryId)}</h2>
-
                 <Navbar />
                 <div className="product-container-category">
-                    {products.length > 0 ? (
-                        products.map((product) => (
+                    {currentProducts.length > 0 ? (
+                        currentProducts.map((product) => (
                             <div className="product" key={product.id}>
                                 <div className="card">
                                     <Link to={`/product/${product.id}`} className="product-details-link">
@@ -120,7 +129,22 @@ function ProductList(props) {
                     )}
                 </div>
 
-                {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
+                <div className="pagination-container" style={{ marginTop: "-25px" }}>
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        activeClassName={"active"}
+                        initialPage={currentPage}
+                        forcePage={currentPage}
+                    />
+                </div>
+
                 {showAlertCart && (
                     <div className="alertCart">
                         <Link to="/Cart" className="cartLink">
@@ -145,10 +169,10 @@ function ProductList(props) {
 
                 <div style={{ height: "300px" }}></div>
 
-
                 <Footer />
-            </div>
+            </div >
         </>
-    )
+    );
 }
+
 export default ProductList;

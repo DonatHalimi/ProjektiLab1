@@ -36,23 +36,17 @@
 }
 
 .pagination a {
-    color: black;
+    color: #222222;
     text-decoration: none;
     padding: 8px 15px 7px;
-    border: 0.1px solid #222222;
+    border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
     font-size: 18px;
 }
 
 .pagination .active a {
-    background-color: #272727;
+    background-color: #37393b;
     color: #fff;
     font-size: 18px;
-}
-
-.pagination a:hover {
-    background-color: #555555;
-    color: #fff;
-    transition: all 0.5s ease-in-out;
 }

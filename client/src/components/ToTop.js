@@ -8,7 +8,7 @@ function ToTop() {
 
     // Krijojme funksionin handleScroll ku nese distanca e scroll-it nga fillimi i faqes eshte me e madhe se 300 piksela, shfaq butonin top-up, nese jo nuk e shfaq
     const handleScroll = () => {
-        if (window.pageYOffset > 300) {
+        if (window.scrollY > 300) {
             setShowButton(true);
         } else {
             setShowButton(false);
