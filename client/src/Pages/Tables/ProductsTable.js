@@ -71,7 +71,7 @@ const ProductsTable = () => {
     const fetchCategoryData = async () => {
         try {
             const response = await axios.get('http://localhost:6001//api/categories/get');
-            console.log('Category Data:', response.data); // Add this line
+            console.log('Category Data:', response.data);
             if (response && response.data) {
                 setCategoryData(response.data);
             } else {

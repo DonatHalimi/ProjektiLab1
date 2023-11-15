@@ -11,10 +11,10 @@ body {
 .main-content {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 10px 100px 70px 70px;
-  margin: -60px 100px 0 100px;
+  justify-content: flex-start;
+  padding: 20px 30px 50px 60px;
+  margin: -60px 100px 60px 175px;
 }
 
 .home-container {

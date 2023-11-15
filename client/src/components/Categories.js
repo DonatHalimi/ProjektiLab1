@@ -31,7 +31,6 @@ const Categories = () => {
         <div className="categories-container">
             <Navbar />
 
-            <h2 className="categories-heading">Categories</h2>
             <ul className="categories-list">
                 {categories.map((category) => (
                     <li key={category.idcategory} className="category-item">

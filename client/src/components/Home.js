@@ -89,7 +89,7 @@ function Home() {
                 </div>
 
                 {/* Pagination */}
-                <div className="pagination-container" style={{ marginTop: "50px" }}>
+                <div className="pagination-container" style={{ marginTop: "30px" }}>
                     <ReactPaginate
                         previousLabel={"Previous"}
                         nextLabel={"Next"}
