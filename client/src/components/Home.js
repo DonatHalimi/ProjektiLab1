@@ -12,7 +12,7 @@ function Home() {
     const [products, setProducts] = useState([]);
     const [sliderData, setSliderData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 12;
+    const itemsPerPage = 15;
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
     const location = useLocation();

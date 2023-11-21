@@ -9,52 +9,52 @@
 					"label": "Lidhja e databazes"
 				},
 				{
-					"line": 55,
+					"line": 50,
 					"column": 10,
 					"label": "USERS CRUD"
 				},
 				{
-					"line": 133,
+					"line": 128,
 					"column": 1,
 					"label": "PRODUCTS CRUD"
 				},
 				{
-					"line": 341,
+					"line": 336,
 					"column": 0,
 					"label": "ABOUTUS CRUD"
 				},
 				{
-					"line": 416,
+					"line": 411,
 					"column": 0,
 					"label": "SLIDESHOW CRUD"
 				},
 				{
-					"line": 532,
+					"line": 527,
 					"column": 0,
 					"label": "CATEGORY CRUD"
 				},
 				{
-					"line": 648,
+					"line": 643,
 					"column": 0,
 					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
 				},
 				{
-					"line": 665,
+					"line": 660,
 					"column": 0,
 					"label": "Insertimi i userave nga Register form"
 				},
 				{
-					"line": 681,
+					"line": 676,
 					"column": 0,
 					"label": "Autentifikimi i perdoruesit"
 				},
 				{
-					"line": 712,
+					"line": 707,
 					"column": 0,
 					"label": "Checkout"
 				},
 				{
-					"line": 741,
+					"line": 736,
 					"column": 0,
 					"label": "Server Port"
 				}

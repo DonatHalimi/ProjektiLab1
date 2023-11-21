@@ -3,8 +3,8 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 25px 25px 25px 22px;
-    margin: 0px 0px -50px -20px;
-    gap: 2000px;
+    margin: -2vh -10vh 1vh 3.2vw;
+    width: 80%;
 }
 
 .product {
