@@ -14,12 +14,19 @@ const stripe = require('stripe')('sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoE
 
 // Krijimi i nje lidhje me bazen e te dhenave MySQL duke perdorur te dhenat e qasjes
 const db = mysql.createPool({
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'projektilab1',
+    port: process.env.DB_PORT || 3307
+});
+
+console.log('MySQL Connection Configuration:', {
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'projektilab1'
-})
-
+});
 // Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
     origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
