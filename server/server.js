@@ -28,6 +28,15 @@ console.log('MySQL Connection Configuration:', {
     database: 'projektilab1'
 });
 
+<<<<<<< Updated upstream
+=======
+/* Definimi i nje route per root endpoint
+app.get('/', (req, res) => {
+    res.send('Hello, this is the root endpoint!');
+});
+*/
+
+>>>>>>> Stashed changes
 // Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
     origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
@@ -192,7 +201,7 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
     }
 
     // Retrieve form data
-    const { Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
+    const {id, Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
 
     // Retrieve uploaded file path
     const filePath = req.file.path;
@@ -205,8 +214,8 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
         }
 
         // Insert into produktet table
-        const sqlInsert = "INSERT INTO produktet (Emri, Cmimi, Valuta, Detajet, Foto, idcategory) VALUES (?,?,?,?,?,?)";
-        const values = [Emri, Cmimi, Valuta, Detajet, fileData, idcategory];
+        const sqlInsert = "INSERT INTO produktet (id,Emri, Cmimi, Valuta, Detajet, Foto, idcategory) VALUES (?,?,?,?,?,?,?)";
+        const values = [id,Emri, Cmimi, Valuta, Detajet, fileData, idcategory];
 
         db.query(sqlInsert, values, (error, result) => {
             if (error) {
@@ -748,6 +757,11 @@ app.post('/checkout', async (req, res) => {
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
+<<<<<<< Updated upstream
 app.listen(PORT, () => {
     console.log('Server is running on port ${PORT}');
+=======
+    app.listen(PORT, () => {
+        console.log('Server is running on http://localhost:6001');
+>>>>>>> Stashed changes
 });

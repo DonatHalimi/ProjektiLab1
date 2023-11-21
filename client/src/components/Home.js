@@ -35,7 +35,7 @@ function Home() {
 
         const fetchSlider = async () => {
             try {
-                const response = await fetch("http://localhost:6001/api/slider/get");
+                const response = await fetch("http://localhost:6001/api/slideshow/get");
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
