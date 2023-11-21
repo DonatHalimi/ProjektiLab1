@@ -37,7 +37,7 @@ export const MenuData = [
     },
     {
         title: "Log In",
-        url: "/login",
+        url: "/Login",
         cName: "nav-links",
         icon: "fas fa-user",
     },

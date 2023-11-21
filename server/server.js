@@ -27,6 +27,12 @@ console.log('MySQL Connection Configuration:', {
     password: '',
     database: 'projektilab1'
 });
+
+// Definimi i nje route per root endpoint
+app.get('/', (req, res) => {
+    res.send('Hello, this is the root endpoint!');
+});
+
 // Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
     origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
@@ -101,7 +107,6 @@ app.post("/api/user/post", (req, res) => {
 }
 )
 
-
 // Fshirja e userave
 app.delete("/api/user/remove/:id", (req, res) => {
     const id = req.params.id;
@@ -135,6 +140,7 @@ app.put("/api/user/update/:id", cors(), (req, res) => {
 
 // CRUDAT PER PRODUKTE
 
+// Selektimi i produkteve
 app.get("/api/product/get", cors(), (req, res) => {
     const sqlGet = "SELECT * FROM produktet";
     db.query(sqlGet, (error, result) => {
@@ -246,6 +252,7 @@ const updateProductStorage = multer.diskStorage({
 
 const updateProductUpload = multer({ storage: updateProductStorage });
 
+// Update produktet
 app.put("/api/product/update/:id", updateProductUpload.single('Foto'), (req, res) => {
     const { id } = req.params;
     const { Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
@@ -306,6 +313,7 @@ app.put("/api/product/update/:id", updateProductUpload.single('Foto'), (req, res
 //     });
 // });
 
+// Remove produkte
 app.delete("/api/product/remove/:id", (req, res) => {
     const id = req.params.id;
     console.log("ID received from request:", id);
@@ -745,6 +753,7 @@ app.post('/checkout', async (req, res) => {
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
-app.listen(PORT, () => {
-    console.log('Server is running on http://localhost:6001');
+app.listen(PORT, (res) => {
+    res.send('Hello, this is the root endpoint!');
+    console.log('Server is running on port ${PORT}');
 });

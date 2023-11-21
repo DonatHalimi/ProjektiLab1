@@ -7,25 +7,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 import "../styles/HomeStyle.css";
 
-async function fetchSliderData(setSliderData) {
-    try {
-        const response = await fetch("http://localhost:6001/api/slider/get");
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setSliderData(data);
-    } catch (error) {
-        console.error("Error fetching slider data:", error);
-    }
-}
-
 // Deklarimi i funksionit Home
 function Home() {
     const [products, setProducts] = useState([]);
     const [sliderData, setSliderData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 15;
+    const itemsPerPage = 12;
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
     const location = useLocation();
@@ -46,8 +33,24 @@ function Home() {
             }
         };
 
+        const fetchSlider = async () => {
+            try {
+                const response = await fetch("http://localhost:6001/api/slider/get");
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const data = await response.json();
+                setSliderData(data);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+
         fetchProducts();
-        fetchSliderData(setSliderData);
+        fetchSlider();
+        
+        console.log("sliderData length:", sliderData.length);
+        console.log("sliderData content:", sliderData);
 
         document.title = "Ruby | Home";
 
@@ -75,34 +78,49 @@ function Home() {
         <>
             {/* Thirrja e komponenteve te Navbar dhe Slider */}
             <Navbar />
-            <Slider data={sliderData} />
+
+            {/* {sliderData.length > 0 ? ( */}
+            <div className="slider-content">
+                <div key={sliderData.id} className="slider-container">
+                    <Slider sliderData={sliderData} />
+                </div>
+            </div>
+            {/* ) : (
+                <p>Sorry, there are no available sliders at the moment.</p>
+            )} */}
 
             {/* Krijimi i kartes se produkteve ne Home page */}
             <div>
-                <div className="main-content">
-                    {/* Render a Product component for each item in the currentProducts array */}
-                    {currentProducts.map((product) => (
-                        <div key={product.id} className="products-container">
-                            <Product product={product} />
-                        </div>
-                    ))}
-                </div>
+                {products.length > 0 ? (
+                    <div className="main-content">
+                        {/* Render a Product component for each item in the currentProducts array */}
+                        {currentProducts.map((product) => (
+                            <div key={product.id} className="products-container">
+                                <Product product={product} />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>Sorry, there are no available products at the moment.</p>
+                )}
 
                 {/* Pagination */}
-                <div className="pagination-container" style={{ marginTop: "30px" }}>
-                    <ReactPaginate
-                        previousLabel={"Previous"}
-                        nextLabel={"Next"}
-                        breakLabel={"..."}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        activeClassName={"active"}
-                        initialPage={currentPage}
-                    />
-                </div>
+                {products.length > 0 && (
+                    <div className="pagination-container" style={{ marginTop: "30px" }}>
+                        <ReactPaginate
+                            previousLabel={"Previous"}
+                            nextLabel={"Next"}
+                            breakLabel={"..."}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination"}
+                            activeClassName={"active"}
+                            initialPage={currentPage}
+                        />
+                    </div>
+                )}
             </div>
 
             <div className="empty-div"></div>

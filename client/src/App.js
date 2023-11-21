@@ -52,8 +52,8 @@ function App() {
               <Route path="/Cancel" element={<Cancel />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/AboutUs" element={<AboutUs />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Register" element={<Register />} />
               <Route path="/Admin" element={<Navigate replace to="/admin/users" />} />
               <Route path="/user/addUser" element={<AddEditUser />} />
               <Route path="/user/update/:id" element={<AddEditUser />} />

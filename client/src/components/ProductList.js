@@ -130,19 +130,21 @@ function ProductList(props) {
                 </div>
 
                 <div className="pagination-container" style={{ marginTop: "-25px" }}>
-                    <ReactPaginate
-                        previousLabel={"Previous"}
-                        nextLabel={"Next"}
-                        breakLabel={"..."}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        activeClassName={"active"}
-                        initialPage={currentPage}
-                        forcePage={currentPage}
-                    />
+                    {currentProducts.length > 0 && (
+                        < ReactPaginate
+                            previousLabel={"Previous"}
+                            nextLabel={"Next"}
+                            breakLabel={"..."}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination"}
+                            activeClassName={"active"}
+                            initialPage={currentPage}
+                            forcePage={currentPage}
+                        />
+                    )}
                 </div>
 
                 {showAlertCart && (
