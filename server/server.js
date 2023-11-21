@@ -28,12 +28,6 @@ console.log('MySQL Connection Configuration:', {
     database: 'projektilab1'
 });
 
-/* Definimi i nje route per root endpoint
-app.get('/', (req, res) => {
-    res.send('Hello, this is the root endpoint!');
-});
-*/
-
 // Konfigurimi i middleware per me kriju CORS, JSON
 app.use(cors({
     origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
@@ -754,6 +748,9 @@ app.post('/checkout', async (req, res) => {
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
-app.listen(PORT, () => {
-    console.log('Server is running on http://localhost:6001');
-});
+
+
+    app.listen(PORT, () => {
+        console.log('Server is running on http://localhost:6001');
+
+})
