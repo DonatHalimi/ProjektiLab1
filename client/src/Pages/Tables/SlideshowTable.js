@@ -50,7 +50,7 @@ const SlideshowTable = () => {
                         onClick: async () => {
                             try {
                                 await axios.delete(`http://localhost:6001/api/slideshow/remove/${idslideshow}`);
-                                toast.success('Slideshow entry deleted successfully!');
+                                toast.success('Slideshow është fshirë me sukses!');
                                 setTimeout(() => loadSlideshowData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting Slideshow entry: ${error.message}`);

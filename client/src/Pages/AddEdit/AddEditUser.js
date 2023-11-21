@@ -51,7 +51,7 @@ const AddEditUser = () => {
                     } else {
                         toast.success("Përdoruesi është shtuar me sukses!");
                     }
-                    setTimeout(() => navigate("/Admin"), 500); // Kalohet ne faqen Admin pasi qe id eshte shtuar ose perditesuar
+                    navigate('/admin/users');
                 })
                 .catch((err) => toast.error(err.response.data));
         }

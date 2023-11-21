@@ -43,9 +43,11 @@ const AddEditAboutUs = () => {
             requestPromise
                 .then(() => {
                     setState({ ...state, teksti: "" });
+
                     const successMessage = idaboutus ? "Teksti është perditësuar me sukses!" : "Teksti është shtuar me sukses!";
                     toast.success(successMessage);
-                    setTimeout(() => navigate("/Admin"), 500); // Kalohet ne faqen Admin pasi qe teksti eshte shtuar ose perditesuar
+
+                    navigate('/admin/aboutus');
                 })
                 .catch((err) => toast.error(err.response.data));
         }

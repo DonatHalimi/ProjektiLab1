@@ -9,52 +9,52 @@
 					"label": "Lidhja e databazes"
 				},
 				{
-					"line": 50,
+					"line": 47,
 					"column": 10,
 					"label": "USERS CRUD"
 				},
 				{
-					"line": 128,
+					"line": 125,
 					"column": 1,
 					"label": "PRODUCTS CRUD"
 				},
 				{
-					"line": 336,
+					"line": 333,
 					"column": 0,
 					"label": "ABOUTUS CRUD"
 				},
 				{
-					"line": 411,
+					"line": 408,
 					"column": 0,
 					"label": "SLIDESHOW CRUD"
 				},
 				{
-					"line": 527,
+					"line": 524,
 					"column": 0,
 					"label": "CATEGORY CRUD"
 				},
 				{
-					"line": 643,
+					"line": 640,
 					"column": 0,
 					"label": "ROUTE FOR GETTING PRODUCTS WITH THE SAME CATEGORY"
 				},
 				{
-					"line": 660,
+					"line": 657,
 					"column": 0,
 					"label": "Insertimi i userave nga Register form"
 				},
 				{
-					"line": 676,
+					"line": 673,
 					"column": 0,
 					"label": "Autentifikimi i perdoruesit"
 				},
 				{
-					"line": 707,
+					"line": 704,
 					"column": 0,
 					"label": "Checkout"
 				},
 				{
-					"line": 736,
+					"line": 733,
 					"column": 0,
 					"label": "Server Port"
 				}
@@ -74,7 +74,7 @@
 					"label": "handleSubmit() kur dergohet formulari"
 				},
 				{
-					"line": 54,
+					"line": 56,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime"
 				}
@@ -104,22 +104,12 @@
 			"path": "client/src/Pages/AddEdit/AddEditSlideshow.js",
 			"bookmarks": [
 				{
-					"line": 21,
-					"column": 4,
-					"label": "useEffect() per foto nga databaza"
-				},
-				{
-					"line": 37,
+					"line": 64,
 					"column": 4,
 					"label": "handleSubmit kur dergohet formulari"
 				},
 				{
-					"line": 90,
-					"column": 4,
-					"label": "handleInputChange() kur ka ndryshime"
-				},
-				{
-					"line": 103,
+					"line": 182,
 					"column": 4,
 					"label": "HTML Render"
 				}
@@ -224,17 +214,12 @@
 			"path": "client/src/Pages/AddEdit/AddEditCategory.js",
 			"bookmarks": [
 				{
-					"line": 21,
-					"column": 4,
-					"label": "useEffect() per kategori nga databaza"
-				},
-				{
-					"line": 38,
+					"line": 64,
 					"column": 4,
 					"label": "handleSubmit() kur formulari dergohet"
 				},
 				{
-					"line": 102,
+					"line": 146,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime ne input fields"
 				}

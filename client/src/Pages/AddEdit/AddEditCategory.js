@@ -21,21 +21,47 @@ const AddEditCategory = () => {
     // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e kategorive
     useEffect(() => {
         const fetchCategoryData = async () => {
-            if (idcategory) {
-                try {
+            try {
+                if (idcategory) {
                     const response = await axios.get(`http://localhost:6001/api/category/get/${idcategory}`);
-                    const { EmriKategorise, FotoKategori } = response.data[0];
-                    setState({ EmriKategorise, FotoKategori, FotoFile: null });
-                } catch (error) {
-                    console.log("Error:", error);
+                    const categoryData = response.data[0];
+
+                    // Check if the product has a photo
+                    if (categoryData.FotoKategori) {
+                        const fileReader = new FileReader();
+
+                        fileReader.onloadend = () => {
+                            // Convert the result to base64
+                            const base64String = fileReader.result.split(',')[1];
+
+                            // If yes, set the fotoName property in the state
+                            setState((prevState) => ({
+                                ...prevState,
+                                ...categoryData,
+                                fotoName: categoryData.FotoKategori.name,
+                                existingFoto: base64String, // Save the existingFoto separately
+                            }));
+                        };
+
+                        fileReader.readAsDataURL(new Blob([categoryData.FotoKategori]));
+                    } else {
+                        // If not, set the state without fotoName and existingFoto
+                        setState((prevState) => ({
+                            ...prevState,
+                            ...categoryData,
+                            fotoName: '',
+                            existingFoto: '', // No existing photo
+                        }));
+                    }
                 }
+            } catch (error) {
+                console.error("Error fetching product data:", error);
             }
         };
 
         fetchCategoryData();
-    }, [idcategory]);
+    }, [idcategory]);    // Funksioni qe thirret kur formulari dergohet (submit)
 
-    // Funksioni qe thirret kur formulari dergohet (submit)
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("handleSubmit called");
@@ -88,7 +114,7 @@ const AddEditCategory = () => {
             toast.success(idcategory ? "Kategoria është perditësuar me sukses!" : "Kategoria është shtuar me sukses!");
 
             // Navigimi prapa ne faqen e Admin-it pasi perditesimi/shtimi perfundon
-            navigate('/Admin');
+            navigate('/admin/categories');
         } catch (error) {
             console.log("Error:", error);
             if (error.response && error.response.data) {
@@ -103,17 +129,34 @@ const AddEditCategory = () => {
     const handleInputChange = (e) => {
         const { name, value, files } = e.target;
 
-        // Nese ndryshimi eshte per foton, ruajme foton si file ne state
         if (name === "FotoKategori") {
-            // Kontrollon nese eshte zgjedh nje foto e re, nese jo e mban vleren ekzistuese
-            const newFile = files.length > 0 ? files[0] : state.FotoKategori;
-            setState((prevState) => ({ ...prevState, FotoKategori: newFile }));
+            if (files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+
+                reader.onloadend = () => {
+                    const base64String = reader.result.split(',')[1];
+                    setState((prevState) => ({
+                        ...prevState,
+                        FotoKategori: file,
+                        existingFoto: base64String,
+                    }));
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                setState((prevState) => ({
+                    ...prevState,
+                    FotoKategori: undefined,
+                    existingFoto: '',
+                }));
+            }
         } else {
-            // Perndryshe, ruajme te dhenat e tjera te input fields ne state
             setState((prevState) => ({ ...prevState, [name]: value }));
         }
     };
 
+    const imageUrl = `data:image/jpeg;base64,${state.FotoKategori}`;
 
     // Renderimi i HTML formes per te shtuar ose perditesuar nje kategori
     return (
@@ -140,10 +183,14 @@ const AddEditCategory = () => {
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor="fotokategori" className="input-label">Foto</label>
+                    <label htmlFor="foto" className="input-label">
+                        Foto
+                    </label>
                     <input onChange={handleInputChange} type="file" id="foto" name="FotoKategori" accept="image/*" />
+                    {state.existingFoto && (
+                        <img src={`data:image/jpeg;base64,${state.existingFoto}`} alt="Existing Product" style={{ maxWidth: '100%', height: 'auto' }} />
+                    )}
                 </div>
-
 
                 <input id="submit-button" type="submit" value={idcategory ? "Update" : "Save"} />
                 <Link to="/admin/categories">

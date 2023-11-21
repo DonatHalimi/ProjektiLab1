@@ -21,14 +21,41 @@ const AddEditSlideshow = () => {
     // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e slideshow nga databaza
     useEffect(() => {
         const fetchSlideshowData = async () => {
-            if (idslideshow) {
-                try {
+            try {
+                if (idslideshow) {
                     const response = await axios.get(`http://localhost:6001/api/slideshow/get/${idslideshow}`);
-                    const { EmriFoto, Foto } = response.data[0];
-                    setState({ EmriFoto, Foto, FotoFile: null });
-                } catch (error) {
-                    console.log("Error:", error);
+                    const slideshowData = response.data[0];
+
+                    // Check if the product has a photo
+                    if (slideshowData.Foto) {
+                        const fileReader = new FileReader();
+
+                        fileReader.onloadend = () => {
+                            // Convert the result to base64
+                            const base64String = fileReader.result.split(',')[1];
+
+                            // If yes, set the fotoName property in the state
+                            setState((prevState) => ({
+                                ...prevState,
+                                ...slideshowData,
+                                fotoName: slideshowData.Foto.name,
+                                existingFoto: base64String, // Save the existingFoto separately
+                            }));
+                        };
+
+                        fileReader.readAsDataURL(new Blob([slideshowData.Foto]));
+                    } else {
+                        // If not, set the state without fotoName and existingFoto
+                        setState((prevState) => ({
+                            ...prevState,
+                            ...slideshowData,
+                            fotoName: '',
+                            existingFoto: '', // No existing photo
+                        }));
+                    }
                 }
+            } catch (error) {
+                console.error("Error fetching product data:", error);
             }
         };
 
@@ -76,7 +103,7 @@ const AddEditSlideshow = () => {
             toast.success(idslideshow ? "Fotoja është perditësuar me sukses!" : "Fotoja është shtuar me sukses!");
 
             // Navigimi prapa ne faqen e Admin-it pasi perditesimi/shtimi perfundon
-            navigate('/Admin');
+            navigate(`/admin/slideshow`);
         } catch (error) {
             console.log("Error:", error);
             if (error.response && error.response.data) {
@@ -91,14 +118,34 @@ const AddEditSlideshow = () => {
     const handleInputChange = (e) => {
         const { name, value, files } = e.target;
 
-        // Nese ndryshimi eshte per foton, ruajme foton si file ne state
         if (name === "Foto") {
-            setState((prevState) => ({ ...prevState, Foto: files[0], FotoFile: files[0] }));
+            if (files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+
+                reader.onloadend = () => {
+                    const base64String = reader.result.split(',')[1];
+                    setState((prevState) => ({
+                        ...prevState,
+                        Foto: file,
+                        existingFoto: base64String,
+                    }));
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                setState((prevState) => ({
+                    ...prevState,
+                    Foto: undefined,
+                    existingFoto: '',
+                }));
+            }
         } else {
-            // Perndryshe, ruajme te dhenat e tjera te input fields ne state
             setState((prevState) => ({ ...prevState, [name]: value }));
         }
     };
+
+    const imageUrl = `data:image/jpeg;base64,${state.Foto}`;
 
     // Renderimi i HTML formes per te shtuar ose perditesuar nje slideshow foto
     return (
@@ -124,10 +171,14 @@ const AddEditSlideshow = () => {
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor="foto" className="input-label">Foto</label>
+                    <label htmlFor="foto" className="input-label">
+                        Foto
+                    </label>
                     <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
+                    {state.existingFoto && (
+                        <img src={`data:image/jpeg;base64,${state.existingFoto}`} alt="Existing Product" style={{ maxWidth: '100%', height: 'auto' }} />
+                    )}
                 </div>
-
 
                 <input id="submit-button" type="submit" value={idslideshow ? "Update" : "Save"} />
                 <Link to="/admin/slideshow">
@@ -135,7 +186,7 @@ const AddEditSlideshow = () => {
                 </Link>
             </form>
 
-            <div style={{height: "460px"}}></div>
+            <div style={{ height: "460px" }}></div>
         </div>
     );
 }

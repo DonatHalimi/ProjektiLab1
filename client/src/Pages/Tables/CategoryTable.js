@@ -50,7 +50,7 @@ const CategoryTable = () => {
                             try {
                                 // Send delete request to the server
                                 await axios.delete(`http://localhost:6001/api/category/remove/${idcategory}`);
-                                toast.success('Category entry deleted successfully!');
+                                toast.success('Kategoria është fshirë me sukses!');
                                 setTimeout(() => loadCategoryData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting Category entry: ${error.message}`);
