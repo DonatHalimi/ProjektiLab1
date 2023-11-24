@@ -43,7 +43,7 @@ const UsersTable = () => {
                             try {
                                 // Send delete request to the server
                                 await axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-                                toast.success('User është fshirë me sukses!');
+                                toast.success('Përdoruesi është fshirë me sukses!');
                                 setTimeout(() => loadUsersData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting user: ${error.message}`);

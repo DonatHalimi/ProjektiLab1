@@ -37,7 +37,7 @@ const CategoryTable = () => {
         const confirmDialog = () => {
             confirmAlert({
                 title: 'Confirm Deletion',
-                message: 'Are you sure that you want to delete this Category entry?',
+                message: 'Are you sure that you want to delete this category?',
                 buttons: [
                     {
                         label: 'Cancel',

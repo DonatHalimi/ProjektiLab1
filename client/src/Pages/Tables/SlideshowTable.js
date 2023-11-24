@@ -38,7 +38,7 @@ const SlideshowTable = () => {
         const confirmDialog = () => {
             confirmAlert({
                 title: 'Confirm Deletion',
-                message: 'Are you sure that you want to delete this Slideshow entry?',
+                message: 'Are you sure that you want to delete this photo?',
                 buttons: [
                     {
                         label: 'Cancel',
@@ -50,7 +50,7 @@ const SlideshowTable = () => {
                         onClick: async () => {
                             try {
                                 await axios.delete(`http://localhost:6001/api/slideshow/remove/${idslideshow}`);
-                                toast.success('Slideshow është fshirë me sukses!');
+                                toast.success('Fotoja është fshirë me sukses!');
                                 setTimeout(() => loadSlideshowData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting Slideshow entry: ${error.message}`);

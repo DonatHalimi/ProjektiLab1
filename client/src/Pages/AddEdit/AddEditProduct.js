@@ -43,7 +43,7 @@ const AddEditProduct = () => {
                 ...prevState,
                 ...productData,
                 fotoName: productData.Foto.name,
-                existingFoto: base64String, // Save the existingFoto separately
+                existingFoto: base64String,
               }));
             };
 
@@ -54,7 +54,7 @@ const AddEditProduct = () => {
               ...prevState,
               ...productData,
               fotoName: '',
-              existingFoto: '', // No existing photo
+              existingFoto: '',
             }));
           }
         }

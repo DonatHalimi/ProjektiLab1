@@ -43,7 +43,7 @@ const AboutUsTable = () => {
                             try {
                                 // Send delete request to the server
                                 await axios.delete(`http://localhost:6001/api/aboutus/remove/${idaboutus}`);
-                                toast.success('About Us entry deleted successfully!');
+                                toast.success('Teksti i About Us është fshirë me sukses!');
                                 setTimeout(() => loadAboutUsData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting About Us entry: ${error.message}`);

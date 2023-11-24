@@ -39,7 +39,7 @@ const AddEditSlideshow = () => {
                                 ...prevState,
                                 ...slideshowData,
                                 fotoName: slideshowData.Foto.name,
-                                existingFoto: base64String, // Save the existingFoto separately
+                                existingFoto: base64String,
                             }));
                         };
 
@@ -50,7 +50,7 @@ const AddEditSlideshow = () => {
                             ...prevState,
                             ...slideshowData,
                             fotoName: '',
-                            existingFoto: '', // No existing photo
+                            existingFoto: '',
                         }));
                     }
                 }
