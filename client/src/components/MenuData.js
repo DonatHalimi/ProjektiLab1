@@ -5,7 +5,7 @@ import Wishlist from "./Wishlist";
 export const MenuData = [
     {
         title: "Home",
-        url: "/",
+        url: "/Home",
         cName: "nav-links",
         icon: "fa-solid fa-house",
     },

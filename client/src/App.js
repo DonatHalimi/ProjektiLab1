@@ -23,7 +23,6 @@ import AddEditCategory from "./Pages/AddEdit/AddEditCategory";
 import AddEditProduct from "./Pages/AddEdit/AddEditProduct";
 import AddEditSlideshow from "./Pages/AddEdit/AddEditSlideshow";
 import AddEditUser from "./Pages/AddEdit/AddEditUser";
-import Admin from "./Pages/Admin/Admin";
 import UsersTable from './Pages/Tables/UsersTable';
 import ProductsTable from './Pages/Tables/ProductsTable';
 import CategoryTable from './Pages/Tables/CategoryTable';
@@ -44,6 +43,7 @@ function App() {
             <ToastContainer />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/Home" element={<Home />} />
               <Route path="/" element={<Product />} />
               <Route path="/Categories" element={<Categories />} />
               <Route path="/Cart" element={<Cart />} />

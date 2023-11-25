@@ -25,6 +25,7 @@ const AddEditProduct = () => {
 
   useEffect(() => {
     const fetchProductData = async () => {
+      let fileReader;
       try {
         if (idproduct) {
           const response = await axios.get(`http://localhost:6001/api/product/get/${idproduct}`);
@@ -32,22 +33,41 @@ const AddEditProduct = () => {
 
           // Check if the product has a photo
           if (productData.Foto) {
-            const fileReader = new FileReader();
+            console.log("productData.Foto:", productData.Foto);
+            fileReader = new FileReader();
 
             fileReader.onloadend = () => {
-              // Convert the result to base64
-              const base64String = fileReader.result.split(',')[1];
+              console.log("fileReader.onloadend called");
+              // Check if the result is a valid base64 string
+              if (fileReader.result && fileReader.result.split(',')[1]) {
+                const base64String = fileReader.result.split(',')[1];
 
-              // If yes, set the fotoName property in the state
-              setState((prevState) => ({
-                ...prevState,
-                ...productData,
-                fotoName: productData.Foto.name,
-                existingFoto: base64String,
-              }));
+                // Set the fotoName property in the state
+                setState((prevState) => ({
+                  ...prevState,
+                  ...productData,
+                  fotoName: productData.Foto.name,
+                  existingFoto: base64String,
+                }));
+
+                // Append to formData
+                let formData = new FormData();
+                formData.append("id", productData.id);
+                formData.append("Emri", productData.Emri);
+                formData.append("Cmimi", productData.Cmimi);
+                formData.append("Valuta", productData.Valuta);
+                formData.append("Detajet", productData.Detajet);
+                formData.append("Foto", productData.Foto);
+                formData.append("idcategory", productData.idcategory);
+
+                // Log formData after append inside the callback
+                console.log("FormData:", formData);
+              } else {
+                console.error("Invalid file type. Expected base64 string.");
+              }
             };
 
-            fileReader.readAsDataURL(new Blob([productData.Foto]));
+            fileReader.readAsDataURL(new Blob([new Uint8Array(productData.Foto.data)]));
           } else {
             // If not, set the state without fotoName and existingFoto
             setState((prevState) => ({
@@ -65,7 +85,6 @@ const AddEditProduct = () => {
 
     fetchProductData();
   }, [idproduct]);
-
 
   // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e kategorive
   useEffect(() => {
@@ -97,7 +116,10 @@ const AddEditProduct = () => {
 
     try {
       // Krijimi i nje objekti FormData per te derguar te dhenat e produktit dhe foton (nese ka) si form-data
-      const formData = new FormData();
+      console.log("State Before FormData Append:", state);
+      let formData = new FormData();
+
+      // Append to formData
       formData.append("id", state.id);
       formData.append("Emri", state.Emri);
       formData.append("Cmimi", state.Cmimi);
@@ -106,10 +128,15 @@ const AddEditProduct = () => {
       formData.append("Foto", state.Foto);
       formData.append("idcategory", state.idcategory);
 
+      // Log formData after append inside the callback
+      console.log("FormData:", formData);
+
       // Krijimi i URL-se se kerkeses bazuar ne ekzistencen e id-se (Nese ekziston behet update, nese jo shtohet nje produkt)
-      const url = idproduct
-        ? `http://localhost:6001/api/product/update/${idproduct}`
+      const url = state.idproduct
+        ? `http://localhost:6001/api/product/update/${state.id}`
         : "http://localhost:6001/api/product/post";
+
+      console.log("Request URL:", url);
 
       // Dergimi i te dhenave per ruajtjen e produktit ne server
       const response = await axios.post(url, formData, {
@@ -125,7 +152,7 @@ const AddEditProduct = () => {
       toast.success(idproduct ? "Produkti është perditësuar me sukses!" : "Produkti është shtuar me sukses!");
 
       // Navigimi prapa ne faqen e Admin-it pasi perditesimi/shtimi perfundon
-      navigate('/admin/products');
+      navigate("/admin/products");
     } catch (error) {
       console.log("Error:", error);
       if (error.response && error.response.data) {
@@ -232,6 +259,10 @@ const AddEditProduct = () => {
           <div className="product-box">
             <label htmlFor="foto" className="input-label">Foto</label>
             <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
+            {state.Foto && (
+              <span className="file-name">{state.Foto.name}</span>
+            )}
+
             {state.existingFoto && (
               <img src={`data:image/jpeg;base64,${state.existingFoto}`} alt="Existing Product" style={{ maxWidth: '100%', height: 'auto' }} />
             )}

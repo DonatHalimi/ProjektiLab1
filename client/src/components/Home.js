@@ -48,7 +48,7 @@ function Home() {
 
         fetchProducts();
         fetchSlider();
-        
+
         console.log("sliderData length:", sliderData.length);
         console.log("sliderData content:", sliderData);
 

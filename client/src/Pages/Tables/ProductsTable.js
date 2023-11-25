@@ -70,7 +70,7 @@ const ProductsTable = () => {
 
     const fetchCategoryData = async () => {
         try {
-            const response = await axios.get('http://localhost:6001//api/categories/get');
+            const response = await axios.get('http://localhost:6001/api/categories/get');
             console.log('Category Data:', response.data);
             if (response && response.data) {
                 setCategoryData(response.data);
@@ -124,7 +124,9 @@ const ProductsTable = () => {
                             <th>Kategoria</th>
                             <th>Detajet</th>
                             <th>Foto</th>
-                            <th>Insert</th>
+                            <Link to="/addProduct" className='clickable-header'>
+                                <th>Insert</th>
+                            </Link>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>

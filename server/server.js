@@ -221,21 +221,6 @@ app.post("/api/product/post", upload.single('Foto'), (req, res) => {
 });
 
 // Update i produkteve
-// CRUDI I VJETER PER UPDATE
-// app.put("/api/product/update/:id", cors(), (req, res) => {
-//     const { id } = req.params;
-//     const { Emri, Cmimi, Valuta, Detajet, Foto, idcategory } = req.body;
-//     const sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
-//     db.query(sqlUpdate, [Emri, Cmimi, Valuta, Detajet, Foto, idcategory, id], (error, result) => {
-//         if (error) {
-//             console.log(error);
-//             res.status(500).send({ error: "Error retrieving data from database" });
-//         } else {
-//             res.status(200).send(result);
-//         }
-//     });
-// });
-
 const updateProductStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path.join(__dirname, '../client/src/img'));
@@ -289,26 +274,6 @@ app.put("/api/product/update/:id", updateProductUpload.single('Foto'), (req, res
 
 
 // Fshirja e produkteve
-// CRUDI I VJETER PER FSHIRJE
-// app.delete("/api/product/remove/:id", (req, res) => {
-//     const id = req.params.id;
-//     console.log("ID received from request:", id); // Add this line for debugging
-//     if (id === undefined) {
-//         return res.status(400).send("Invalid request. ID is missing.");
-//     }
-
-//     db.query("DELETE FROM produktet WHERE id=?", id, (error, result) => {
-//         if (error) {
-//             console.error(error);
-//             res.status(500).send("Error deleting product");
-//         } else {
-//             console.log(`Deleted product with ID ${id}`);
-//             res.status(200).send("Product deleted successfully");
-//         }
-//     });
-// });
-
-// Remove produkte
 app.delete("/api/product/remove/:id", (req, res) => {
     const id = req.params.id;
     console.log("ID received from request:", id);
@@ -748,11 +713,7 @@ app.post('/checkout', async (req, res) => {
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
-
-
-
-
-    app.listen(PORT, () => {
-        console.log('Server is running on http://localhost:6001');
+app.listen(PORT, () => {
+    console.log('Server is running on http://localhost:6001');
 
 })
