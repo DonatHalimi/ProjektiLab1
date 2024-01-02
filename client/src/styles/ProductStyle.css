@@ -2,9 +2,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 25px 25px 25px 22px;
+    padding: 45px 32px 20px 40px;
     margin: -2vh -10vh 1vh 3.2vw;
     width: 80%;
+}
+
+@media screen and (min-width: 1200px) {
+    .product-container {
+        width: 100%;
+    }
 }
 
 .product {

@@ -124,7 +124,7 @@
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 29,
+					"line": 30,
 					"column": 2,
 					"label": "HTML Render"
 				}
@@ -244,17 +244,12 @@
 			"path": "client/src/components/Product.js",
 			"bookmarks": [
 				{
-					"line": 18,
-					"column": 2,
-					"label": "handleAddToCart()"
-				},
-				{
-					"line": 28,
+					"line": 49,
 					"column": 2,
 					"label": "handleAddToWishlist()"
 				},
 				{
-					"line": 46,
+					"line": 61,
 					"column": 2,
 					"label": "HTML Render"
 				}
@@ -284,7 +279,7 @@
 			"path": "client/src/components/wishlist-items.js",
 			"bookmarks": [
 				{
-					"line": 25,
+					"line": 29,
 					"column": 4,
 					"label": "handleAddOneToCart()"
 				}
@@ -294,12 +289,12 @@
 			"path": "client/src/components/Wishlist.js",
 			"bookmarks": [
 				{
-					"line": 18,
+					"line": 21,
 					"column": 21,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 46,
+					"line": 57,
 					"column": 18,
 					"label": "HTML Render"
 				}

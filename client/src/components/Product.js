@@ -5,35 +5,49 @@ import { WishlistContext } from "../context/wishlist-context";
 import { getProductData } from '../components/ProductData';
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import "../styles/ProductStyle.css";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function Product(props) {
   const product = props.product;
   const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
-  const [productsTable, setProductsTable] = useState([]);
+  // const [productsTable, setProductsTable] = useState([]);
 
-  const [showAlertCart, setShowAlertCart] = useState(false);
-  const [showAlertWishlist, setShowAlertWishlist] = useState(false);
+  const navigate = useNavigate();
 
-  // Funksioni qe shton nje produkt ne shporte
   const handleAddToCart = () => {
     cart.addOneToCart(product.id);
-    setShowAlertCart(true);
 
-    setTimeout(() => {
-      setShowAlertCart(false);
-    }, 5000);
+    toast.success('Produkti është shtuar në shportë!', {
+      position: 'top-right',
+      style: {
+        marginTop: '70px',
+        cursor: 'pointer',
+        transition: 'opacity 2s ease-in',
+      },
+      onClick: () => {
+        navigate('/Cart');
+      },
+    }, 50);
   };
 
-  // Funksioni qe shton nje produkt ne listen e deshirave
   const handleAddToWishlist = () => {
     wishlist.addItemToWishlist(product.id);
 
-    setShowAlertWishlist(true);
-
     setTimeout(() => {
-      setShowAlertWishlist(false);
-    }, 5000);
+      toast.success('Produkti është shtuar në wishlist!', {
+        position: 'top-right',
+        style: {
+          marginTop: '70px',
+          cursor: 'pointer',
+          transition: 'opacity 2s ease-in',
+        },
+        onClick: () => {
+          navigate('/Wishlist');
+        },
+      });
+    }, 50);
   };
 
   if (!product) {
@@ -71,29 +85,6 @@ function Product(props) {
           </div>
         </div>
       </div>
-
-      {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
-      {showAlertCart && (
-        <div className="alertCart">
-          <Link to="/Cart" className="cartLink">
-            <p>Produkti është shtuar në shportë me sukses!</p>
-          </Link>
-          <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      )}
-
-      {showAlertWishlist && (
-        <div className="alertWishlist">
-          <Link to="/Wishlist" className="wishlistLink">
-            <p>Produkti është shtuar në wishlist me sukses!</p>
-          </Link>
-          <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      )}
     </>
   );
 }

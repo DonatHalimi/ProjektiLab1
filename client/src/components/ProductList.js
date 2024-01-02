@@ -10,6 +10,7 @@ import { WishlistContext } from "../context/wishlist-context";
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import '../styles/ProductListStyle.css';
+import { toast } from 'react-toastify';
 
 function ProductList(props) {
     const { categoryId } = useParams();
@@ -23,8 +24,6 @@ function ProductList(props) {
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
-
-    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,24 +42,41 @@ function ProductList(props) {
     const offset = currentPage * itemsPerPage;
     const currentProducts = products.slice(offset, offset + itemsPerPage);
 
-    const handleAddToCart = (productID) => {
-        cart.addOneToCart(productID);
-        setShowAlertCart(true);
-
+    const handleAddToCart = (productId) => {
+        cart.addOneToCart(productId);
+    
         setTimeout(() => {
-            setShowAlertCart(false);
-        }, 5000);
-    };
-
-    const handleAddToWishlist = (productID) => {
-        wishlist.addItemToWishlist(productID);
-
-        setShowAlertWishlist(true);
-
+            toast.success('Produkti është shtuar në shportë!', {
+                position: 'top-right',
+            style: {
+              marginTop: '70px',
+              cursor: 'pointer',
+              transition: 'opacity 2s ease-in',
+            },
+            onClick: () => {
+              navigate('/Cart');
+            },
+          });
+        }, 50);
+      };
+    
+      const handleAddToWishlist = (productId) => {
+        wishlist.addItemToWishlist(productId);
+    
         setTimeout(() => {
-            setShowAlertWishlist(false);
-        }, 5000);
-    };
+            toast.success('Produkti është shtuar në wishlist!', {
+                position: 'top-right',
+            style: {
+              marginTop: '70px',
+              cursor: 'pointer',
+              transition: 'opacity 2s ease-in', 
+            },
+            onClick: () => {
+              navigate('/Wishlist');
+            },
+          });
+        }, 50);
+      };
 
     const getCategoryNameById = (categoryId) => {
         switch (categoryId) {
@@ -146,28 +162,6 @@ function ProductList(props) {
                         />
                     )}
                 </div>
-
-                {showAlertCart && (
-                    <div className="alertCart">
-                        <Link to="/Cart" className="cartLink">
-                            <p>Produkti është shtuar në shportë me sukses!</p>
-                        </Link>
-                        <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                )}
-
-                {showAlertWishlist && (
-                    <div className="alertWishlist">
-                        <Link to="/Wishlist" className="wishlistLink">
-                            <p>Produkti është shtuar në wishlist me sukses!</p>
-                        </Link>
-                        <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                )}
 
                 <div style={{ height: "300px" }}></div>
 

@@ -5,6 +5,7 @@ import { BsPlusLg, BsTrash3 } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import '../styles/CartItemsStyle.css';
+import { toast } from 'react-toastify';
 
 function CartItem(props) {
   const cart = useContext(ShopContext);
@@ -33,44 +34,74 @@ function CartItem(props) {
     document.title = "Ruby | Cart";
   }, []);
 
-  const product = products.find((product) => product.id === id);
+  const handleRemoveOneFromCart = () => {
+    cart.removeOneFromCart(id);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+    setTimeout(() => {
+      toast.success('Produkti është larguar nga shporta!', {
+        position: 'top-right',
+        style: {
+          marginTop: '70px',
+          cursor: 'pointer',
+          transition: 'opacity 2s ease-in',
+        },
+      });
+    }, 50);
+  };
 
-  const price = parseFloat(product.Cmimi);
-  const totalCost = (quantity * price).toFixed(2);
+  const handleRemoveFromCart = () => {
+    cart.deleteFromCart(id);
 
-  return (
-    <div className="cart-item">
-      <div className="cart-card">
-        <Link to={`/product/${product.id}`} className="product-details-link">
-          <div className="cart-card-image">
-            <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-          </div>
-        </Link>
+    setTimeout(() => {
+      toast.success('Produkti është larguar nga shporta!', {
+        position: 'top-right',
+        style: {
+          marginTop: '70px',
+          cursor: 'pointer',
+          transition: 'opacity 2s ease-in',
+        },
+      });
+    }, 50);
+  };
 
-        <div className="cart-card-details">
-          <h3 className="product-name">{product.Emri}</h3>
-          <p className="quantity">{quantity} Total</p>
-          <p className="total-cost">${totalCost}</p>
+const product = products.find((product) => product.id === id);
+
+if (!product) {
+  return <div>Loading...</div>;
+}
+
+const price = parseFloat(product.Cmimi);
+const totalCost = (quantity * price).toFixed(2);
+
+return (
+  <div className="cart-item">
+    <div className="cart-card">
+      <Link to={`/product/${product.id}`} className="product-details-link">
+        <div className="cart-card-image">
+          <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
         </div>
+      </Link>
 
-        <div className='edit-buttons'>
-          <button className='add-button' onClick={() => cart.addOneToCart(id)} title='Add'>
-            <BsPlusLg />
-          </button>
-          <button className='remove-button' onClick={() => cart.removeOneFromCart(id)} title='Remove'>
-            <AiOutlineMinus />
-          </button>
-          <button className='delete-button' onClick={() => cart.deleteFromCart(id)} title='Delete'>
-            <BsTrash3 />
-          </button>
-        </div>
+      <div className="cart-card-details">
+        <h3 className="product-name">{product.Emri}</h3>
+        <p className="quantity">{quantity} Total</p>
+        <p className="total-cost">${totalCost}</p>
+      </div>
+
+      <div className='edit-buttons'>
+        <button className='add-button' onClick={() => cart.addOneToCart(id)} title='Add'>
+          <BsPlusLg />
+        </button>
+        <button className='remove-button' onClick={() => handleRemoveOneFromCart()} title='Remove'>
+          <AiOutlineMinus />
+        </button>
+        <button className='delete-button' onClick={() => handleRemoveFromCart()} title='Delete'>
+          <BsTrash3 />
+        </button>
       </div>
     </div>
-  );
-}
+  </div>
+);
+};
 
 export default CartItem;

@@ -10,7 +10,7 @@ function Cancel() {
     // Krijojme nje useEffect ku pas 3 sekondave perdoruesi kthehet ne Home page
     useEffect(() => {
         const timeout = setTimeout(() => {
-            navigate('/');
+            navigate('/Home');
         }, 3000);
 
         // UseEffect kryhet vetem nje here

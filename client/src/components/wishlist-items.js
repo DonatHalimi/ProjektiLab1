@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { WishlistContext } from '../context/wishlist-context';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/shop-context';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash3 } from "react-icons/bs";
 import '../styles/WishlistItemsStyle.css';
 import '../styles/ProductStyle.css'
+import { toast } from 'react-toastify';
+import { navigate } from 'react-router-dom';
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
@@ -14,6 +16,8 @@ function WishlistItem(props) {
 
     const [showAlertCart, setShowAlertCart] = useState(false);
     const [showAlertWishlist, setShowAlertWishlist] = useState(false);
+
+    const navigate = useNavigate();
 
     const id = props.id;
     const product = products.find((product) => product.id === id);
@@ -25,20 +29,31 @@ function WishlistItem(props) {
 
     const handleAddOneToCart = () => {
         cart.addOneToCart(product.id);
-        setShowAlertCart(true);
 
-        setTimeout(() => {
-            setShowAlertCart(false);
-        }, 5000);
+        toast.success('Produkti është shtuar në shportë!', {
+            position: 'top-right',
+            style: {
+                marginTop: '70px',
+                cursor: 'pointer',
+                transition: 'opacity 2s ease-in',
+            },
+            onClick() {
+                navigate("/Cart");
+            }
+        }, 50);
     };
 
     const handleRemoveFromWishlist = () => {
         wishlist.removeItemFromWishlist(product.id);
-        setShowAlertWishlist(true);
 
-        setTimeout(() => {
-            setShowAlertWishlist(false);
-        }, 5000);
+        toast.success('Produkti është larguar nga wishlist!', {
+            position: 'top-right',
+            style: {
+                marginTop: '70px',
+                cursor: 'pointer',
+                transition: 'opacity 2s ease-in',
+            },
+        }, 50);
     };
 
     const Cmimi = parseFloat(product.Cmimi).toFixed(2);
@@ -74,33 +89,6 @@ function WishlistItem(props) {
                     </div>
                 </div>
             </div >
-
-            {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
-            {
-                showAlertCart && (
-                    <div className="alertCart">
-                        <Link to="/Cart" className="cartLink">
-                            <p>Produkti është shtuar në shportë me sukses!</p>
-                        </Link>
-                        <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                )
-            }
-
-            {
-                showAlertWishlist && (
-                    <div className="alertWishlist">
-                        <Link to="/Wishlist" className="wishlistLink">
-                            <p>Produkti është shtuar në wishlist me sukses!</p>
-                        </Link>
-                        <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                )
-            }
         </>
     );
 }

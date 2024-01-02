@@ -6,6 +6,8 @@ import WishlistItem from './wishlist-items';
 import Footer from '../components/Footer';
 import EmptyWishlist from "../img/empty-wishlist.png";
 import '../styles/WishlistItemsStyle.css';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Wishlist = () => {
 
@@ -14,6 +16,7 @@ const Wishlist = () => {
     const [showAlertRemove, setShowAlertRemove] = useState(false);
 
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     // Krijimi i nje funksioni per te kerkuar te dhenat nga API i produktit
     useEffect(() => {
@@ -33,15 +36,23 @@ const Wishlist = () => {
         fetchProducts();
 
         document.title = "Ruby | Wishlist";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
 
     const handleRemoveFromWishlist = (id) => {
         removeItemFromWishlist(id);
 
-        setShowAlertRemove(true);
-        setTimeout(() => {
-            setShowAlertRemove(false);
-        }, 5000);
+        toast.success('Produkti është shtuar në shportë!', {
+            position: 'top-right',
+            style: {
+                marginTop: '70px',
+                cursor: 'pointer',
+                transition: 'opacity 2s ease-in',
+            },
+            onClick: () => {
+                navigate('/Cart');
+            },
+        }, 50);
     };
 
     // Renderimi i HTML formes per shfaqjen e Wishlist
@@ -66,15 +77,6 @@ const Wishlist = () => {
                     </div>
                 )}
             </div>
-
-            {showAlertRemove && (
-                <div className="alertRemove">
-                    <p>Produkti është larguar nga wishlist me sukses!</p>
-                    <button className="cancelPopupButtonRemove" onClick={() => setShowAlertRemove(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            )}
 
             <div style={{ height: '550px' }}></div>
 
