@@ -104,12 +104,12 @@
 			"path": "client/src/Pages/AddEdit/AddEditSlideshow.js",
 			"bookmarks": [
 				{
-					"line": 64,
+					"line": 75,
 					"column": 4,
 					"label": "handleSubmit kur dergohet formulari"
 				},
 				{
-					"line": 182,
+					"line": 193,
 					"column": 4,
 					"label": "HTML Render"
 				}
@@ -214,12 +214,12 @@
 			"path": "client/src/Pages/AddEdit/AddEditCategory.js",
 			"bookmarks": [
 				{
-					"line": 64,
+					"line": 77,
 					"column": 4,
 					"label": "handleSubmit() kur formulari dergohet"
 				},
 				{
-					"line": 146,
+					"line": 159,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime ne input fields"
 				}
@@ -259,19 +259,9 @@
 			"path": "client/src/components/ToTop.js",
 			"bookmarks": [
 				{
-					"line": 9,
+					"line": 35,
 					"column": 4,
 					"label": "handleScroll()"
-				},
-				{
-					"line": 18,
-					"column": 4,
-					"label": "handleClick()"
-				},
-				{
-					"line": 26,
-					"column": 4,
-					"label": "HTML Render"
 				}
 			]
 		},

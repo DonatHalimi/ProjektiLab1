@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaUserCog } from 'react-icons/fa';
 import { AdminData } from './AdminData';
 import '../../styles/AdminSidebarStyle.css';
-import { confirmAlert } from 'react-confirm-alert'; // Import confirmAlert
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Sidebar = ({ handleTabChange }) => {
@@ -14,7 +14,14 @@ const Sidebar = ({ handleTabChange }) => {
     const toggleSidebar = () => {
         const sidebar = document.querySelector('.sidebar');
         sidebar.classList.toggle('toggled');
-        setSidebarVisible(!sidebarVisible);
+
+        if (sidebar.classList.contains('toggled')) {
+            // Close the sidebar explicitly if it's opened when switching tables
+            setSidebarVisible(false);
+        } else {
+            // Toggle the sidebar state
+            setSidebarVisible(!sidebarVisible);
+        }
     };
 
     useEffect(() => {
@@ -28,7 +35,7 @@ const Sidebar = ({ handleTabChange }) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [sidebarVisible]);
+    }, [sidebarVisible, toggleSidebar]);
 
     const showHomeConfirmation = () => {
         confirmAlert({
@@ -43,7 +50,7 @@ const Sidebar = ({ handleTabChange }) => {
                     label: 'Yes',
                     onClick: () => {
                         // Redirect to the home page
-                        window.location.href = '/';
+                        window.location.href = '/Home';
                     }
                 }
             ]

@@ -21,6 +21,7 @@ const AddEditSlideshow = () => {
     // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e slideshow nga databaza
     useEffect(() => {
         const fetchSlideshowData = async () => {
+            let fileReader;
             try {
                 if (idslideshow) {
                     const response = await axios.get(`http://localhost:6001/api/slideshow/get/${idslideshow}`);
@@ -28,22 +29,32 @@ const AddEditSlideshow = () => {
 
                     // Check if the product has a photo
                     if (slideshowData.Foto) {
-                        const fileReader = new FileReader();
+                        console.log("slideshowData.Foto:", slideshowData.Foto);
+                        fileReader = new FileReader();
 
                         fileReader.onloadend = () => {
-                            // Convert the result to base64
-                            const base64String = fileReader.result.split(',')[1];
+                            console.log("fileReader.onloadend called");
+                            if (fileReader.result && fileReader.result.split(',')[1]) {
 
-                            // If yes, set the fotoName property in the state
-                            setState((prevState) => ({
-                                ...prevState,
-                                ...slideshowData,
-                                fotoName: slideshowData.Foto.name,
-                                existingFoto: base64String,
-                            }));
+                                const base64String = fileReader.result.split(',')[1];
+
+                                // If yes, set the fotoName property in the state
+                                setState((prevState) => ({
+                                    ...prevState,
+                                    ...slideshowData,
+                                    fotoName: slideshowData.Foto.name,
+                                    existingFoto: base64String,
+                                }));
+                                let formData = new FormData();
+                                formData.append("EmriFoto", slideshowData.EmriFoto);
+                                formData.append("Foto", slideshowData.Foto);
+
+                                console.log("FormData:", formData);
+                            } else {
+                                console.error("Invalid file type. Expected base64 string.");
+                            }
                         };
-
-                        fileReader.readAsDataURL(new Blob([slideshowData.Foto]));
+                        fileReader.readAsDataURL(new Blob([new Uint8Array(slideshowData.Foto.data)]));
                     } else {
                         // If not, set the state without fotoName and existingFoto
                         setState((prevState) => ({

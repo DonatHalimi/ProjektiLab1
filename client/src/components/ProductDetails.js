@@ -27,6 +27,23 @@ function ProductDetails() {
 
     document.title = Emri + " Details";
 
+    const toggleEnlargedPicture = () => {
+        setIsImageEnlarged(!isImageEnlarged);
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape' && isImageEnlarged) {
+                toggleEnlargedPicture();
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isImageEnlarged, toggleEnlargedPicture]);
+
     const handleAddToCart = () => {
         cart.addOneToCart(id);
         setShowAlertCart(true);

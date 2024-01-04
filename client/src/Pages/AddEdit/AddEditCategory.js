@@ -21,6 +21,7 @@ const AddEditCategory = () => {
     // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e kategorive
     useEffect(() => {
         const fetchCategoryData = async () => {
+            let fileReader;
             try {
                 if (idcategory) {
                     const response = await axios.get(`http://localhost:6001/api/category/get/${idcategory}`);
@@ -28,39 +29,51 @@ const AddEditCategory = () => {
 
                     // Check if the product has a photo
                     if (categoryData.FotoKategori) {
-                        const fileReader = new FileReader();
+                        console.log("categoryData.FotoKategori:", categoryData.FotoKategori);
+                        fileReader = new FileReader();
 
                         fileReader.onloadend = () => {
-                            // Convert the result to base64
-                            const base64String = fileReader.result.split(',')[1];
+                            console.log("fileReader.onloadend called");
 
-                            // If yes, set the fotoName property in the state
-                            setState((prevState) => ({
-                                ...prevState,
-                                ...categoryData,
-                                fotoName: categoryData.FotoKategori.name,
-                                existingFoto: base64String, // Save the existingFoto separately
-                            }));
+                            if (fileReader.result && fileReader.result.split(',')[1]) {
+                                const base64String = fileReader.result.split(',')[1];
+
+                                // If yes, set the fotoName property in the state
+                                setState((prevState) => ({
+                                    ...prevState,
+                                    ...categoryData,
+                                    fotoName: categoryData.FotoKategori.name,
+                                    existingFoto: base64String,
+                                }));
+
+                                let formData = new FormData();
+                                formData.append("EmriKategorise", categoryData.EmriKategorise);
+                                formData.append("FotoKategori", categoryData.FotoKategori);
+
+                                console.log("FormData:", formData);
+                            } else {
+                                console.error("Invalid file type. Expected base64 string.");
+                            }
                         };
 
-                        fileReader.readAsDataURL(new Blob([categoryData.FotoKategori]));
+                        fileReader.readAsDataURL(new Blob([new Uint8Array(categoryData.FotoKategori.data)]));
                     } else {
                         // If not, set the state without fotoName and existingFoto
                         setState((prevState) => ({
                             ...prevState,
                             ...categoryData,
                             fotoName: '',
-                            existingFoto: '', // No existing photo
+                            existingFoto: '',
                         }));
                     }
                 }
             } catch (error) {
-                console.error("Error fetching product data:", error);
+                console.error("Error fetching category data:", error);
             }
         };
 
         fetchCategoryData();
-    }, [idcategory]);    // Funksioni qe thirret kur formulari dergohet (submit)
+    }, [idcategory]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -174,6 +187,7 @@ const AddEditCategory = () => {
                     backgroundColor: "#1e1f1e",
                     color: "white",
                     borderRadius: "10px",
+                    height: "auto",
                 }}
                 onSubmit={handleSubmit}
             >
@@ -183,10 +197,12 @@ const AddEditCategory = () => {
                 </div>
 
                 <div className="product-box">
-                    <label htmlFor="foto" className="input-label">
-                        Foto
-                    </label>
+                    <label htmlFor="foto" className="input-label">Foto</label>
                     <input onChange={handleInputChange} type="file" id="foto" name="FotoKategori" accept="image/*" />
+                    {state.Foto && (
+                        <span className="file-name">{state.Foto.name}</span>
+                    )}
+
                     {state.existingFoto && (
                         <img src={`data:image/jpeg;base64,${state.existingFoto}`} alt="Existing Product" style={{ maxWidth: '100%', height: 'auto' }} />
                     )}

@@ -1,37 +1,55 @@
-import React, { useState } from "react";
-import { FaArrowUp } from "react-icons/fa";
-import "../styles/ToTopStyle.css";
+import React, { useState, useEffect } from "react";
 
-function ToTop() {
-    // Deklarimi i states nepermjet Hooks
+const ToTop = () => {
     const [showButton, setShowButton] = useState(false);
 
-    // Krijojme funksionin handleScroll ku nese distanca e scroll-it nga fillimi i faqes eshte me e madhe se 300 piksela, shfaq butonin top-up, nese jo nuk e shfaq
-    const handleScroll = () => {
-        if (window.scrollY > 300) {
-            setShowButton(true);
-        } else {
-            setShowButton(false);
-        }
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowButton(true);
+            } else {
+                setShowButton(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const handleClick = () => {
+        const scrollToTop = () => {
+            const currentPosition = window.scrollY;
+            if (currentPosition > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, currentPosition - currentPosition / 10);
+            }
+        };
+        scrollToTop();
     };
 
-    // Krijojme funksionin i cili aktivizohet me klikimin e butonit to-top
-    const handleClick = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    const buttonStyle = {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        backgroundColor: "#33383b",
+        color: "#fff",
+        padding: "10px",
+        border: "none",
+        borderRadius: "5px",
+        display: showButton ? "block" : "none",
+        cursor: "pointer",
+        width: "60px",
+        height: "42px",
+    };
 
-    // Event listener per scroll (Pret qe useri te bej scroll ne faqe)
-    window.addEventListener("scroll", handleScroll);
-
-    // Renderimi i HTML per shfaqjen e ToTop button
     return (
-        <>
-            <div className="home"></div>
-            {showButton && (
-                <button className="to-top-button" onClick={handleClick}><FaArrowUp /></button>
-            )}
-        </>
+        <button style={buttonStyle} onClick={handleClick}>
+            <i className="fas fa-arrow-up"></i>
+        </button>
     );
-}
+};
 
 export default ToTop;
