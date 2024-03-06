@@ -30,4 +30,4 @@ export const AdminData = [
         label: 'About Us',
         url: '/admin/aboutus',
     },
-];
+]

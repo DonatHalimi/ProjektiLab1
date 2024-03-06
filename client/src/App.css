@@ -1,3 +1,9 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+
 .App {
   text-align: center;
 }
@@ -83,4 +89,24 @@ body::-webkit-scrollbar-thumb:hover {
 
 .Toastify__close-button:hover {
   color: white;
+}
+
+.categories {
+  margin-top: 80px;
+  padding-left: 200px;
+  padding-right: 200px;
+  text-decoration: none;
+}
+
+.category-item {
+  border: 1px solid #D8CACA;
+  margin: 8px;
+  border-radius: 5px;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.category-name {
+  color: #222;
+  text-decoration: underline #F6F4F4;
 }

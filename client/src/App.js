@@ -1,37 +1,37 @@
-import React from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react"
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify'
 
-import AboutUs from "./components/AboutUs";
-import Home from './components/Home';
-import ToTop from "./components/ToTop";
-import Product from "./components/Product";
-import Categories from './components/Categories';
-import Cart from './components/Cart';
-import Wishlist from './components/Wishlist';
-import ProductDetails from './components/ProductDetails';
-import CookiePopup from "./components/CookiePopup";
-import ProductList from './components/ProductList';
+import AboutUs from "./components/AboutUs"
+import Home from './components/Home'
+import ToTop from "./components/ToTop"
+import Product from "./components/Product"
+import Categories from './components/Categories'
+import Cart from './components/Cart'
+import Wishlist from './components/Wishlist'
+import ProductDetails from './components/ProductDetails'
+import CookiePopup from "./components/CookiePopup"
+import ProductList from './components/ProductList'
 
-import { ShopContextProvider } from "./context/shop-context";
-import { WishlistContextProvider } from "./context/wishlist-context";
+import { ShopContextProvider } from "./context/shop-context"
+import { WishlistContextProvider } from "./context/wishlist-context"
 
-import AddEditAboutUs from "./Pages/AddEdit/AddEditAboutUs";
-import AddEditCategory from "./Pages/AddEdit/AddEditCategory";
-import AddEditProduct from "./Pages/AddEdit/AddEditProduct";
-import AddEditSlideshow from "./Pages/AddEdit/AddEditSlideshow";
-import AddEditUser from "./Pages/AddEdit/AddEditUser";
-import UsersTable from './Pages/Tables/UsersTable';
-import ProductsTable from './Pages/Tables/ProductsTable';
-import CategoryTable from './Pages/Tables/CategoryTable';
-import SlideshowTable from './Pages/Tables/SlideshowTable';
-import AboutUsTable from './Pages/Tables/AboutUsTable';
-import Cancel from "./Pages/Cancel";
-import Success from "./Pages/Success";
-import Login from "./Pages/Login";
-import { Register } from "./Pages/Register";
+import AddEditAboutUs from "./Pages/AddEdit/AddEditAboutUs"
+import AddEditCategory from "./Pages/AddEdit/AddEditCategory"
+import AddEditProduct from "./Pages/AddEdit/AddEditProduct"
+import AddEditSlideshow from "./Pages/AddEdit/AddEditSlideshow"
+import AddEditUser from "./Pages/AddEdit/AddEditUser"
+import UsersTable from './Pages/Tables/UsersTable'
+import ProductsTable from './Pages/Tables/ProductsTable'
+import CategoryTable from './Pages/Tables/CategoryTable'
+import SlideshowTable from './Pages/Tables/SlideshowTable'
+import AboutUsTable from './Pages/Tables/AboutUsTable'
+import Cancel from "./Pages/Cancel"
+import Success from "./Pages/Success"
+import Login from "./Pages/Login"
+import { Register } from "./Pages/Register"
 
 function App() {
   return (
@@ -78,7 +78,7 @@ function App() {
         </WishlistContextProvider>
       </ShopContextProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

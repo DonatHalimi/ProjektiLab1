@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/SliderStyle.css";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 function Slider() {
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [slides, setSlides] = useState([]);
-    const [dragging, setDragging] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [offsetX, setOffsetX] = useState(0);
 
-    // Krijojme nje useEffect per te marr te dhenat e slideshow prej databazes
     useEffect(() => {
         const fetchSlideshowData = async () => {
             try {
@@ -23,67 +19,21 @@ function Slider() {
         fetchSlideshowData();
     }, []);
 
-    const nextSlide = useCallback(() => {
-        setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
-        setOffsetX(0);
-    }, [slides]);
-
-    const prevSlide = useCallback(() => {
-        setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
-        setOffsetX(0);
-    }, [slides]);
-
-    // Krijojme nje useEffect per levizjen automatike te slideshow-it duke u bazuar ne zgjatjen e --slide-duration
-    useEffect(() => {
-        const intervalId = setInterval(nextSlide, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--slide-duration'))); // --slide-duration gjendet ne file-in SliderStyle.css
-        return () => clearInterval(intervalId);
-    }, [currentIndex, nextSlide]);
-
-    // Krijojme nje funksion i cili thirret kur shtypet butoni i mausit ne komponentin e slider-it, e vendos variablen dragging ne true per me tregu se dragging ka filluar
-    const handleMouseDown = (e) => {
-        setDragging(true);
-        setStartX(e.clientX);
+    const slideStyle = {
+        width: "100%",
+        height: "800px",
+        objectFit: "cover",
+        marginTop: "50px",
     };
 
-    // Krijojme nje funksion i cili thirret kur leviz butoni i mausit ne komponentin e slider-it, dhe pastaj kalkulon distancen e levizjes duke zbritur vleren fillestare te x me vleren e tanishme
-    const handleMouseMove = (e) => {
-        if (!dragging) return;
-        const currentX = e.clientX;
-        const deltaX = currentX - startX;
-        setOffsetX(deltaX);
-    };
-
-    // Krijojme nje funksion i cili thirret kur butoni i mausit lirohet, e vendos variablen dragging ne false per me tregu se nuk eshte duke ndodhur me dragging, dhe pastaj nese offsetX eshte < -50 shkon ne slide-in e ardhshem dhe e kunderta kur eshte > 50
-    const handleMouseUp = () => {
-        setDragging(false);
-        if (offsetX < -50) {
-            nextSlide();
-        } else if (offsetX > 50) {
-            prevSlide();
-        }
-        setOffsetX(0);
-    };
-
-    // Renderimi i HTML per shfaqjen e Slider-it
     return (
-        <div className="slider" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
-            {slides.length > 0 && (
-                <div style={{ backgroundImage: `url(data:image/jpeg;base64,${slides[currentIndex].Foto})` }} className="slide" onMouseDown={handleMouseDown} ></div>
-            )}
-
-            <div className="slider-content">
-                {slides.map((slide, slideIndex) => (
-                    <div key={slide.idslideshow} onClick={() => setCurrentIndex(slideIndex)} className={`slider-button ${currentIndex === slideIndex ? "active" : ""}`}>
-                        {/* Progress bar */}
-                        <span className="custom-line">
-                            {currentIndex === slideIndex && (
-                                <div className="progress-bar"></div>
-                            )}
-                        </span>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <Splide>
+            {slides.map((slide) => (
+                <SplideSlide key={slide.idslideshow}>
+                    <img style={slideStyle} src={`data:image/jpeg;base64,${slide.Foto}`} alt={`Slide ${slide.idslideshow}`} />
+                </SplideSlide>
+            ))}
+        </Splide>
     );
 }
 

@@ -12,7 +12,6 @@ function Product(props) {
   const product = props.product;
   const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
-  // const [productsTable, setProductsTable] = useState([]);
 
   const navigate = useNavigate();
 
@@ -61,27 +60,29 @@ function Product(props) {
   return (
     <>
       {/* Karta e produkteve */}
-      <div className="product-container">
-        <div className="product" key={product.id}>
-          <div className="card">
-            <Link to={`/product/${product.id}`} className="product-details-link">
-              <div className="cardImg">
-                <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id='photo' />
-              </div>
-              <div className="card_header">
-                <h3>{product.Emri}</h3>
-                <p className="price">{product.Valuta}{product.Cmimi}</p>
-              </div>
-            </Link>
+      <div className="container mx-auto p-4">
+        <div className="bg-white shadow-md rounded-md overflow-hidden mb-10 gap-5">
+          <div className="product" key={product.id}>
+            <div className="card">
+              <Link to={`/product/${product.id}`} className="product-details-link">
+                <div className="cardImg">
+                  <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Product" id="photo" />
+                </div>
+                <div className="card_header">
+                  <h3>{product.Emri}</h3>
+                  <p className="price">{product.Valuta}{product.Cmimi}</p>
+                </div>
+              </Link>
 
-            {/* Butonat per me shtu produktin ne Cart & Wishlist */}
-            <button className="cartButton" onClick={handleAddToCart} title='Add To Cart'>
-              <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
-            </button>
+              {/* Butonat per me shtu produktin ne Cart & Wishlist */}
+              <button className="cartButton" onClick={handleAddToCart} title="Add To Cart">
+                <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
+              </button>
 
-            <button className="wishlistButton" onClick={handleAddToWishlist} title='Add To Wishlist'>
-              <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
-            </button>
+              <button className="wishlistButton" onClick={handleAddToWishlist} title="Add To Wishlist">
+                <AiOutlineHeart style={{ color: "black", fontSize: "18px", fontWeight: "normal" }} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -181,36 +181,6 @@
 			]
 		},
 		{
-			"path": "client/src/components/Slider.js",
-			"bookmarks": [
-				{
-					"line": 13,
-					"column": 4,
-					"label": "useEffect() per marrjen e fotove nga databaza"
-				},
-				{
-					"line": 35,
-					"column": 4,
-					"label": "Funksioni per next slide"
-				},
-				{
-					"line": 41,
-					"column": 4,
-					"label": "useEffect per levizje automatike"
-				},
-				{
-					"line": 47,
-					"column": 4,
-					"label": "Funksioni kur shtypet butoni i mausit"
-				},
-				{
-					"line": 56,
-					"column": 4,
-					"label": "Funksioni kur leviz butoni i mausit"
-				}
-			]
-		},
-		{
 			"path": "client/src/Pages/AddEdit/AddEditCategory.js",
 			"bookmarks": [
 				{
@@ -226,32 +196,12 @@
 			]
 		},
 		{
-			"path": "client/src/components/Categories.js",
-			"bookmarks": [
-				{
-					"line": 17,
-					"column": 4,
-					"label": "useEffect() per kategori nga databaza"
-				},
-				{
-					"line": 50,
-					"column": 4,
-					"label": "HTML Render"
-				}
-			]
-		},
-		{
 			"path": "client/src/components/Product.js",
 			"bookmarks": [
 				{
-					"line": 49,
+					"line": 48,
 					"column": 2,
 					"label": "handleAddToWishlist()"
-				},
-				{
-					"line": 61,
-					"column": 2,
-					"label": "HTML Render"
 				}
 			]
 		},

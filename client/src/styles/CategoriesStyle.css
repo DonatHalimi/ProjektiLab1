@@ -57,9 +57,7 @@ body {
 }
 
 .category-image {
-    max-width: 60%;
-    height: auto;
-    aspect-ratio: 6/8;
+    max-width: 20%;
 }
 
 .category-name {

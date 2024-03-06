@@ -1,5 +1,5 @@
-import Cart from "./Cart";
-import Wishlist from "./Wishlist";
+import Cart from "./Cart"
+import Wishlist from "./Wishlist"
 
 // Definimi i nje vargu te te dhenave te menyse per navbar
 export const MenuData = [
@@ -8,12 +8,6 @@ export const MenuData = [
         url: "/Home",
         cName: "nav-links",
         icon: "fa-solid fa-house",
-    },
-    {
-        title: "Categories",
-        url: "/Categories",
-        cName: "nav-links",
-        icon: "fa-solid fa-tshirt",
     },
     {
         title: "Wishlist",
@@ -41,4 +35,4 @@ export const MenuData = [
         cName: "nav-links",
         icon: "fas fa-user",
     },
-];
+]

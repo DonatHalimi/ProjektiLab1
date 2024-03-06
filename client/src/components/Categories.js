@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "./Navbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Footer from "./Footer";
-import ReactPaginate from "react-paginate";
-import "../styles/CategoriesStyle.css";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 6;
-    const pageCount = Math.ceil(categories.length / itemsPerPage);
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Krijimi i nje useEffect per t'i marre kategorite nga databaza
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const response = await axios.get("http://localhost:6001/api/category/get");
-
                 setCategories(response.data);
             } catch (error) {
                 console.error("Error fetching categories:", error);
@@ -29,62 +24,49 @@ const Categories = () => {
         fetchCategories();
 
         const urlSearchParams = new URLSearchParams(location.search);
-        const pageParam = urlSearchParams.get('page');
+        const pageParam = urlSearchParams.get("page");
 
         if (!pageParam) {
             navigate(`${location.pathname}?page=1`);
         }
 
-        // Set document title with page number
         document.title = `Ruby | Categories | Page ${pageParam || 1}`;
     }, [location.pathname, location.search, navigate]);
-
-    console.log("Categories:", categories);
 
     const offset = currentPage * itemsPerPage;
     const currentCategories = categories.slice(offset, offset + itemsPerPage);
 
-    const handlePageClick = (selectedPage) => {
-        setCurrentPage(selectedPage.selected);
-    };
-
     return (
-        <div className="categories-container">
-            <Navbar />
+        <div className="categories container mx-auto flex flex-col items-center">
 
-            <ul className="categories-list">
+            <Splide
+                options={{
+                    fixedWidth: 200,
+                    isNavigation: true,
+                    gap: 10,
+                    pagination: false,
+                    breakpoints: {
+                        600: {
+                            fixedWidth: 66,
+                            fixedHeight: 40,
+                        },
+                    },
+                }}>
                 {currentCategories.map((category) => (
-                    <li key={category.idcategory} className="category-item">
-                        <Link to={`/products/${category.idcategory}`} className="category-link">
-                            <h3 className="category-name">{category.EmriKategorise}</h3>
-                            {category.FotoKategori && (
-                                <img src={`data:image/jpeg;base64,${category.FotoKategori}`} alt={category.EmriKategorise} className="category-image" />
-                            )}
+                    <SplideSlide key={category.idcategory} className="category-item" style={{ border: '1px solid #D8CACA', margin: '8px', borderRadius: '5px', padding: '8px', textDecoration: 'none' }}>
+                        <Link
+                            to={`/products/${category.idcategory}`}
+                            className="flex items-center p-4 border rounded-lg shadow-md transition duration-300 hover:bg-gray-100 text-black"
+                        >
+                            <div className="relative group bg-gray-800 rounded-md overflow-hidden shadow-lg h-full w-48">
+                                <div className="h-full w-48 object-cover bg-gray-800 py-2 px-2 text-center">
+                                    <h3 className="category-name">{category.EmriKategorise}</h3>
+                                </div>
+                            </div>
                         </Link>
-                    </li>
+                    </SplideSlide>
                 ))}
-            </ul>
-
-            {categories.length > 0 && (
-                <div className="pagination-container" style={{ marginTop: "30px" }}>
-                    <ReactPaginate
-                        previousLabel={"Previous"}
-                        nextLabel={"Next"}
-                        breakLabel={"..."}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        activeClassName={"active"}
-                        initialPage={currentPage}
-                    />
-                </div>
-            )}
-
-            <div style={{ height: "350px" }}></div>
-
-            <Footer />
+            </Splide>
         </div>
     );
 };

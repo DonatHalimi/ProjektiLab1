@@ -20,9 +20,7 @@ function ProductList(props) {
 
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
-
-    const [showAlertCart, setShowAlertCart] = useState(false);
-    const [showAlertWishlist, setShowAlertWishlist] = useState(false);
+    const [categoryNames, setCategoryNames] = useState({});
 
     const navigate = useNavigate();
 
@@ -36,63 +34,61 @@ function ProductList(props) {
             }
         };
 
+        const fetchCategoryNames = async () => {
+            try {
+                const categoryResponse = await axios.get("http://localhost:6001/api/category/get");
+                const categoryNamesData = categoryResponse.data.reduce((acc, category) => {
+                    acc[category.idcategory] = category.EmriKategorise;
+                    return acc;
+                }, {});
+                setCategoryNames(categoryNamesData);
+            } catch (error) {
+                console.error("Error fetching category names:", error);
+            }
+        };
+
+        fetchCategoryNames();
         fetchProducts();
     }, [categoryId]);
 
-    const offset = currentPage * itemsPerPage;
-    const currentProducts = products.slice(offset, offset + itemsPerPage);
-
     const handleAddToCart = (productId) => {
         cart.addOneToCart(productId);
-    
+
         setTimeout(() => {
             toast.success('Produkti është shtuar në shportë!', {
                 position: 'top-right',
-            style: {
-              marginTop: '70px',
-              cursor: 'pointer',
-              transition: 'opacity 2s ease-in',
-            },
-            onClick: () => {
-              navigate('/Cart');
-            },
-          });
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+                onClick: () => {
+                    navigate('/Cart');
+                },
+            });
         }, 50);
-      };
-    
-      const handleAddToWishlist = (productId) => {
+    };
+
+    const handleAddToWishlist = (productId) => {
         wishlist.addItemToWishlist(productId);
-    
+
         setTimeout(() => {
             toast.success('Produkti është shtuar në wishlist!', {
                 position: 'top-right',
-            style: {
-              marginTop: '70px',
-              cursor: 'pointer',
-              transition: 'opacity 2s ease-in', 
-            },
-            onClick: () => {
-              navigate('/Wishlist');
-            },
-          });
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+                onClick: () => {
+                    navigate('/Wishlist');
+                },
+            });
         }, 50);
-      };
+    };
 
     const getCategoryNameById = (categoryId) => {
-        switch (categoryId) {
-            case "5":
-                return "Jeans";
-            case "6":
-                return "T-Shirts";
-            case "7":
-                return "Hoodies";
-            case "8":
-                return "Jackets";
-            case "9":
-                return "Sweatshirts";
-            default:
-                return "Unknown Category";
-        }
+        return categoryNames[categoryId] || "Unknown Category";
     };
 
     useEffect(() => {
@@ -108,9 +104,13 @@ function ProductList(props) {
         navigate(`?page=${selectedPage.selected + 1}`);
     };
 
+    const offset = currentPage * itemsPerPage;
+    const currentProducts = products.slice(offset, offset + itemsPerPage);
+
     return (
         <>
             <Slider />
+            
             <div>
                 <h2 id="header">{getCategoryNameById(categoryId)}</h2>
                 <Navbar />

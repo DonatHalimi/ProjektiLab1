@@ -6,8 +6,8 @@ import Footer from "../components/Footer";
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 import "../styles/HomeStyle.css";
+import Categories from "./Categories";
 
-// Deklarimi i funksionit Home
 function Home() {
     const [products, setProducts] = useState([]);
     const [sliderData, setSliderData] = useState([]);
@@ -18,7 +18,6 @@ function Home() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Krijimi i nje funksioni per te marr te dhenat e produkteve nga databaza
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -49,12 +48,8 @@ function Home() {
         fetchProducts();
         fetchSlider();
 
-        console.log("sliderData length:", sliderData.length);
-        console.log("sliderData content:", sliderData);
-
         document.title = "Ruby | Home";
 
-        // Per mu shfaq "?page={pageNumber}" ne URL
         const urlSearchParams = new URLSearchParams(location.search);
         const pageParam = urlSearchParams.get('page');
 
@@ -70,41 +65,34 @@ function Home() {
 
     const handlePageClick = (selectedPage) => {
         setCurrentPage(selectedPage.selected);
-
         navigate(`?page=${selectedPage.selected + 1}`);
     };
 
     return (
         <>
-            {/* Thirrja e komponenteve te Navbar dhe Slider */}
             <Navbar />
 
-            {/* {sliderData.length > 0 ? ( */}
             <div className="slider-content">
                 <div key={sliderData.id} className="slider-container">
                     <Slider sliderData={sliderData} />
                 </div>
             </div>
-            {/* ) : (
-                <p>Sorry, there are no available sliders at the moment.</p>
-            )} */}
 
-            {/* Krijimi i kartes se produkteve ne Home page */}
+            <div className="container mx-auto px-4 pb-16 flex flex-col items-center">
+                <Categories />
+            </div>
+
             <div>
                 {products.length > 0 ? (
                     <div className="main-content">
-                        {/* Render a Product component for each item in the currentProducts array */}
                         {currentProducts.map((product) => (
-                            <div key={product.id} className="products-container">
-                                <Product product={product} />
-                            </div>
+                            <Product key={product.id} product={product} />
                         ))}
                     </div>
                 ) : (
                     <p>Sorry, there are no available products at the moment.</p>
                 )}
 
-                {/* Pagination */}
                 {products.length > 0 && (
                     <div className="pagination-container" style={{ marginTop: "30px" }}>
                         <ReactPaginate

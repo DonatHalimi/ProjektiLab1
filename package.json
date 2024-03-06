@@ -3,17 +3,21 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.41.0",
     "eslint-plugin-jest": "^27.2.1",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.4.1"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@react-spring/web": "^9.7.2",
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
+    "autoprefixer": "^10.4.18",
     "browserify-zlib": "^0.2.0",
     "font-awesome": "^4.7.0",
     "formik": "^2.4.2",
     "https-browserify": "^1.0.0",
     "multer": "^1.4.5-lts.1",
+    "postcss": "^8.4.35",
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",
     "react-cookie-consent": "^8.0.1",
