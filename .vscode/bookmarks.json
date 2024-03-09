@@ -196,7 +196,7 @@
 			]
 		},
 		{
-			"path": "client/src/components/Product.js",
+			"path": "client/src/components/ProductItem.js",
 			"bookmarks": [
 				{
 					"line": 48,

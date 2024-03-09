@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import AboutUs from "./components/AboutUs"
 import Home from './components/Home'
 import ToTop from "./components/ToTop"
-import Product from "./components/Product"
+import ProductItem from "./components/ProductItem"
 import Categories from './components/Categories'
 import Cart from './components/Cart'
 import Wishlist from './components/Wishlist'
@@ -44,7 +44,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Home" element={<Home />} />
-              <Route path="/" element={<Product />} />
+              <Route path="/" element={<ProductItem />} />
               <Route path="/Categories" element={<Categories />} />
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Wishlist" element={<Wishlist />} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Product from "./Product";
+import ProductItem from "./ProductItem";
 import Navbar from "./Navbar";
 import Slider from "./Slider";
 import Footer from "../components/Footer";
@@ -12,6 +12,7 @@ function Home() {
     const [products, setProducts] = useState([]);
     const [sliderData, setSliderData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
+    const [sortOrder, setSortOrder] = useState("relevance");
     const itemsPerPage = 15;
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
@@ -68,6 +69,36 @@ function Home() {
         navigate(`?page=${selectedPage.selected + 1}`);
     };
 
+    useEffect(() => {
+        if (sortOrder !== null) {
+            sortProducts();
+        }
+    }, [sortOrder]);
+
+    const handleSortOrderChange = (event) => {
+        setSortOrder(event.target.value);
+    };
+
+    const sortProducts = () => {
+        let sortedProducts;
+
+        const productsArray = [...products];
+
+        if (sortOrder === "titleAsc") {
+            sortedProducts = productsArray.sort((a, b) => a.Emri.localeCompare(b.Emri));
+        } else if (sortOrder === "titleDesc") {
+            sortedProducts = productsArray.sort((a, b) => b.Emri.localeCompare(a.Emri));
+        } else if (sortOrder === "priceAsc") {
+            sortedProducts = productsArray.sort((a, b) => a.Cmimi - b.Cmimi);
+        } else if (sortOrder === "priceDesc") {
+            sortedProducts = productsArray.sort((a, b) => b.Cmimi - a.Cmimi);
+        } else if (sortOrder === "relevance") {
+            sortedProducts = productsArray;
+        }
+
+        setProducts(sortedProducts);
+    };
+
     return (
         <>
             <Navbar />
@@ -80,13 +111,29 @@ function Home() {
 
             <div className="container mx-auto px-4 pb-16 flex flex-col items-center">
                 <Categories />
+
+                <div className="sort-container">
+                    <select
+                        className="select-box appearance-none focus:outline-none cursor-pointer"
+                        style={{ marginTop: '60px', marginBottom: '-70px', marginLeft: '1100px', width: '230px', }}
+                        value={sortOrder}
+                        onChange={handleSortOrderChange}
+                    >
+                        <option selected hidden>Sort by</option>
+                        <option value="titleAsc">Title: A-Z</option>
+                        <option value="titleDesc">Title: Z-A</option>
+                        <option value="priceAsc">Price: Lowest to Highest</option>
+                        <option value="priceDesc">Price: Highest to Lowest</option>
+                    </select>
+                </div>
             </div>
 
             <div>
+                <h1 className="products-header">Products</h1>
                 {products.length > 0 ? (
                     <div className="main-content">
                         {currentProducts.map((product) => (
-                            <Product key={product.id} product={product} />
+                            <ProductItem key={product.id} product={product} />
                         ))}
                     </div>
                 ) : (

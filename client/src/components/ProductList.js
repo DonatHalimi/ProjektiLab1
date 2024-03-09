@@ -7,16 +7,21 @@ import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import Footer from "./Footer";
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import '../styles/ProductListStyle.css';
 import { toast } from 'react-toastify';
+import { FaArrowLeft } from "react-icons/fa";
 
 function ProductList(props) {
     const { categoryId } = useParams();
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
+    const [sortOrder, setSortOrder] = useState("relevance");
+    const [category, setCategory] = useState("Unknown Category");
     const itemsPerPage = 5;
+    // ... (your existing code)
+
 
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
@@ -28,12 +33,13 @@ function ProductList(props) {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(`http://localhost:6001/api/products/get-by-category/${categoryId}`);
-                setProducts(response.data);
+                let products = response.data;
+
+                setProducts(products);
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
         };
-
         const fetchCategoryNames = async () => {
             try {
                 const categoryResponse = await axios.get("http://localhost:6001/api/category/get");
@@ -42,6 +48,7 @@ function ProductList(props) {
                     return acc;
                 }, {});
                 setCategoryNames(categoryNamesData);
+                setCategory(categoryNamesData[categoryId] || "Unknown Category");
             } catch (error) {
                 console.error("Error fetching category names:", error);
             }
@@ -87,21 +94,48 @@ function ProductList(props) {
         }, 50);
     };
 
-    const getCategoryNameById = (categoryId) => {
-        return categoryNames[categoryId] || "Unknown Category";
-    };
+    useEffect(() => {
+        document.title = `Ruby | ${category}`;
+    }, [category]);
 
     useEffect(() => {
-        const category = getCategoryNameById(categoryId);
-        document.title = "Ruby | " + category;
-    }, [categoryId]);
+        if (sortOrder !== null) {
+            sortProducts();
+        }
+    }, [sortOrder]);
+
+    const handleSortOrderChange = (event) => {
+        setSortOrder(event.target.value);
+    };
+
+    const sortProducts = () => {
+        let sortedProducts;
+
+        const productsArray = [...products];
+
+        if (sortOrder === "titleAsc") {
+            sortedProducts = productsArray.sort((a, b) => a.Emri.localeCompare(b.Emri));
+        } else if (sortOrder === "titleDesc") {
+            sortedProducts = productsArray.sort((a, b) => b.Emri.localeCompare(a.Emri));
+        } else if (sortOrder === "priceAsc") {
+            sortedProducts = productsArray.sort((a, b) => a.Cmimi - b.Cmimi);
+        } else if (sortOrder === "priceDesc") {
+            sortedProducts = productsArray.sort((a, b) => b.Cmimi - a.Cmimi);
+        } else if (sortOrder === "relevance") {
+            sortedProducts = productsArray;
+        }
+
+        setProducts(sortedProducts);
+    };
+
+    const handleGoBack = () => {
+        navigate(-1);
+    };
 
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
     const handlePageClick = (selectedPage) => {
         setCurrentPage(selectedPage.selected);
-
-        navigate(`?page=${selectedPage.selected + 1}`);
     };
 
     const offset = currentPage * itemsPerPage;
@@ -110,10 +144,31 @@ function ProductList(props) {
     return (
         <>
             <Slider />
-            
-            <div>
-                <h2 id="header">{getCategoryNameById(categoryId)}</h2>
+
+            <div className="container mx-auto px-4">
+                <div className="mt-4">
+                    <button onClick={handleGoBack} className="goBack">
+                        <FaArrowLeft />
+                    </button>
+                </div>
+                <h2 className="text-3xl font-bold mt-4" id="header">{category}</h2>
                 <Navbar />
+
+                <div className="sort-container">
+                    <select
+                        className="select-box appearance-none focus:outline-none cursor-pointer"
+                        style={{ marginBottom: '-100px', marginLeft: '1100px', width: '230px', }}
+                        value={sortOrder}
+                        onChange={handleSortOrderChange}
+                    >
+                        <option selected hidden>Sort by</option>
+                        <option value="titleAsc">Title: A-Z</option>
+                        <option value="titleDesc">Title: Z-A</option>
+                        <option value="priceAsc">Price: Lowest to Highest</option>
+                        <option value="priceDesc">Price: Highest to Lowest</option>
+                    </select>
+                </div>
+
                 <div className="product-container-category">
                     {currentProducts.length > 0 ? (
                         currentProducts.map((product) => (

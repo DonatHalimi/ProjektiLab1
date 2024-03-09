@@ -107,6 +107,38 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .category-name {
-  color: #222;
+  color: #0F0000;
   text-decoration: underline #F6F4F4;
+}
+
+.sort-container {
+  margin-bottom: -30px;
+}
+
+.select-box {
+  background-color: #F5F5F5;
+  position: relative;
+  top: 10px;
+  padding-left: -80px;
+}
+
+.products-header {
+  position: relative;
+  right: 590px;
+  top: 15px;
+  font-size: 25px;
+}
+
+.goBack{
+  position: relative;
+  top: 50px;
+  right: 630px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: #F6F4F4;
+}
+
+.goBack:hover{
+  cursor: pointer;
 }

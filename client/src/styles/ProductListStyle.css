@@ -33,14 +33,16 @@
 }
 
 #header {
-    font-size: 30px;
+    font-size: 25px;
     position: relative;
-    top: 10px;
+    top: 65px;
+    right: 600px;
 }
 
 .noItemsInCategory {
     position: relative;
     top: 50px;
+    left: 400px;
     text-align: center;
     font-size: 24px;
 }

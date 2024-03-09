@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { MenuData } from "./MenuData";
-import { Link, useLocation } from 'react-router-dom';
-import "./Cart";
-import LogoImage from '../img/Logo.png';
-import "../styles/NavbarStyle.css";
+import React, { useState } from "react"
+import { MenuData } from "./MenuData"
+import { Link, useLocation } from 'react-router-dom'
+import "./Cart"
+import LogoImage from '../img/Logo.png'
+import "../styles/NavbarStyle.css"
 
 // Krijimi i komponentit Navbar
 const Navbar = (props) => {
 
   // Krijimi i state 'clicked' dhe funksioni 'setClicked' duke perdorur useState
-  const [clicked, setClicked] = useState(false);
-  const location = useLocation();
+  const [clicked, setClicked] = useState(false)
+  const location = useLocation()
 
   // Krijimi i funksionit 'handleClick' per ndryshimin e gjendjes se 'clicked'
   const handleClick = () => {
-    setClicked(!clicked);
-  };
+    setClicked(!clicked)
+  }
 
   // Renderimi i HTML per Navbar
   return (
@@ -34,8 +34,8 @@ const Navbar = (props) => {
       <ul className={clicked ? "nav-menu active" : "nav-menu"}>
         {MenuData.map((item, index) => {
 
-          const isActive = location.pathname === item.url;
-          const linkClass = isActive ? `${item.cName} active` : item.cName;
+          const isActive = location.pathname === item.url
+          const linkClass = isActive ? `${item.cName} active` : item.cName
 
           return (
             <li key={index}>
@@ -44,11 +44,11 @@ const Navbar = (props) => {
                 {item.title}
               </Link>
             </li>
-          );
+          )
         })}
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

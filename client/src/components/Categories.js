@@ -56,10 +56,10 @@ const Categories = () => {
                     <SplideSlide key={category.idcategory} className="category-item" style={{ border: '1px solid #D8CACA', margin: '8px', borderRadius: '5px', padding: '8px', textDecoration: 'none' }}>
                         <Link
                             to={`/products/${category.idcategory}`}
-                            className="flex items-center p-4 border rounded-lg shadow-md transition duration-300 hover:bg-gray-100 text-black"
+                            className="flex items-center p-4 border rounded-lg shadow-md transition duration-300 hover:bg-gray-100"
                         >
-                            <div className="relative group bg-gray-800 rounded-md overflow-hidden shadow-lg h-full w-48">
-                                <div className="h-full w-48 object-cover bg-gray-800 py-2 px-2 text-center">
+                            <div className="relative group rounded-md overflow-hidden shadow-lg h-full w-48">
+                                <div className="h-full w-48 object-cover  py-2 px-2 text-center">
                                     <h3 className="category-name">{category.EmriKategorise}</h3>
                                 </div>
                             </div>

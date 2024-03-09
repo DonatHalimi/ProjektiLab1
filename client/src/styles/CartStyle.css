@@ -111,11 +111,10 @@ h1 {
 .noItemsInCart img {
     position: relative;
     bottom: 320px;
-    right: 150px;
+    left: 45%;
     width: 460px;
     height: auto;
     position: relative;
-    left: 38%;
     transform: translateX(-165%);
 }
 
