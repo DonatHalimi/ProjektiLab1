@@ -20,19 +20,16 @@ function ProductList(props) {
     const [sortOrder, setSortOrder] = useState("relevance");
     const [category, setCategory] = useState("Unknown Category");
     const itemsPerPage = 5;
-    // ... (your existing code)
-
 
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
-    const [categoryNames, setCategoryNames] = useState({});
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:6001/api/products/get-by-category/${categoryId}`);
+                const response = await axios.get(`http://localhost:6001/api/product/get-by-category/${categoryId}`);
                 let products = response.data;
 
                 setProducts(products);
@@ -40,6 +37,7 @@ function ProductList(props) {
                 console.error("Error fetching products:", error);
             }
         };
+
         const fetchCategoryNames = async () => {
             try {
                 const categoryResponse = await axios.get("http://localhost:6001/api/category/get");
@@ -47,7 +45,6 @@ function ProductList(props) {
                     acc[category.idcategory] = category.EmriKategorise;
                     return acc;
                 }, {});
-                setCategoryNames(categoryNamesData);
                 setCategory(categoryNamesData[categoryId] || "Unknown Category");
             } catch (error) {
                 console.error("Error fetching category names:", error);
