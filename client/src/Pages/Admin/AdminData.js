@@ -19,6 +19,24 @@ export const AdminData = [
         url: '/admin/categories',
     },
     {
+        slug: 'suppliers',
+        icon: 'fa-solid fa-truck-fast',
+        label: 'Suppliers',
+        url: '/admin/suppliers',
+    },
+    {
+        slug: 'brands',
+        icon: 'fa-solid fa-vest',
+        label: 'Brands',
+        url: '/admin/brands',
+    },
+    {
+        slug: 'countries',
+        icon: 'fa-solid fa-flag',
+        label: 'Country',
+        url: '/admin/countries',
+    },
+    {
         slug: 'slideshow',
         icon: 'fa-solid fa-image',
         label: 'Slideshow',

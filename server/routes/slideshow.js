@@ -3,6 +3,8 @@ const router = express.Router()
 const pool = require('../db/db')
 const cors = require("cors");
 const multer = require("multer"); 
+const path = require('path');
+const fs = require('fs');
 
 router.get("/get", cors(), (req, res) => {
     const sqlGet = "SELECT * FROM slideshow";
@@ -39,7 +41,7 @@ router.get("/get/:idslideshow", cors(), (req, res) => {
 // Set up multer configuration
 const storageSlideshow = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../client/src/img'));
+        cb(null, path.join(__dirname, '../../client/src/img'));
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));

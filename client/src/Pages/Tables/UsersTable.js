@@ -87,9 +87,9 @@ const UsersTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {usersData.map((user, index) => (
+                        {usersData.map((user) => (
                             <tr key={user.id}>
-                                <th scope="row">{index + 1}</th>
+                                <th>{user.id}</th>
                                 <td>{user.Name}</td>
                                 <td>{user.Surname}</td>
                                 <td>{user.Email}</td>

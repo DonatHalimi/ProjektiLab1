@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const pool = require('../db/db')
 const cors = require("cors");
-const multer = require("multer"); 
+const multer = require("multer");
+const path = require('path');
+const fs = require('fs');
 
 // Selektimi i produkteve
 router.get("/get", cors(), (req, res) => {
@@ -40,7 +42,7 @@ router.get("/get/:id", cors(), (req, res) => {
 // Set up multer configuration
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../client/src/img'));
+        cb(null, path.join(__dirname, '../../client/src/img'));
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -61,7 +63,7 @@ router.post("/post", upload.single('Foto'), (req, res) => {
     }
 
     // Retrieve form data
-    const { id, Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
+    const { id, Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand } = req.body;
 
     // Retrieve uploaded file path
     const filePath = req.file.path;
@@ -74,8 +76,8 @@ router.post("/post", upload.single('Foto'), (req, res) => {
         }
 
         // Insert into produktet table
-        const sqlInsert = "INSERT INTO produktet (id,Emri, Cmimi, Valuta, Detajet, Foto, idcategory) VALUES (?,?,?,?,?,?,?)";
-        const values = [id, Emri, Cmimi, Valuta, Detajet, fileData, idcategory];
+        const sqlInsert = "INSERT INTO produktet (id, Emri, Cmimi, Valuta, Detajet, Foto, idcategory, idsupplier, idbrand) VALUES (?,?,?,?,?,?,?,?,?)";
+        const values = [id, Emri, Cmimi, Valuta, Detajet, fileData, idcategory, idsupplier, idbrand];
 
         pool.query(sqlInsert, values, (error, result) => {
             if (error) {
@@ -92,7 +94,7 @@ router.post("/post", upload.single('Foto'), (req, res) => {
 // Update i produkteve
 const updateProductStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../client/src/img'));
+        cb(null, path.join(__dirname, '../../client/src/img'));
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -104,12 +106,12 @@ const updateProductUpload = multer({ storage: updateProductStorage });
 // Update produktet
 router.put("/update/:id", updateProductUpload.single('Foto'), (req, res) => {
     const { id } = req.params;
-    const { Emri, Cmimi, Valuta, Detajet, idcategory } = req.body;
+    const { Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand } = req.body;
 
     let sqlUpdate;
     let values;
 
-    if (!Emri || !Cmimi || !Valuta || !Detajet || !idcategory) {
+    if (!Emri || !Cmimi || !Valuta || !Detajet || !idcategory || !idsupplier || !idbrand) {
         return res.status(400).json({ error: "All fields are required." });
     }
 
@@ -117,12 +119,12 @@ router.put("/update/:id", updateProductUpload.single('Foto'), (req, res) => {
         const filePath = req.file.path;
 
         // Update product with the new file path
-        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=? WHERE id=?";
-        values = [Emri, Cmimi, Valuta, Detajet, filePath, idcategory, id];
+        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=?, idsupplier=?, idbrand=? WHERE id=?";
+        values = [Emri, Cmimi, Valuta, Detajet, filePath, idcategory, idsupplier, idbrand, id];
     } else {
         // Update product without changing the photo
-        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, idcategory=? WHERE id=?";
-        values = [Emri, Cmimi, Valuta, Detajet, idcategory, id];
+        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, idcategory=?, idsupplier=?, idbrand=? WHERE id=?";
+        values = [Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand, id];
     }
 
     // Execute the query with error handling
@@ -137,7 +139,7 @@ router.put("/update/:id", updateProductUpload.single('Foto'), (req, res) => {
         }
 
         const successMessage = req.file ? "Product updated with a new photo" : "Product updated without changing the photo";
-        res.status(200).json({ message: successMessage, updatedProduct: { id, Emri, Cmimi, Valuta, Detajet, idcategory } });
+        res.status(200).json({ message: successMessage, updatedProduct: { id, Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand } });
     });
 });
 

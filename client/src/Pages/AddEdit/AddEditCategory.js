@@ -169,12 +169,10 @@ const AddEditCategory = () => {
         }
     };
 
-    const imageUrl = `data:image/jpeg;base64,${state.FotoKategori}`;
-
     // Renderimi i HTML formes per te shtuar ose perditesuar nje kategori
     return (
         <div style={{ marginTop: "150px" }}>
-            <h2>{idcategory ? "Edit" : "Add"}</h2>
+            <h2>{idcategory ? "Edit" : "Add"} Category</h2>
             <form action="/" encType="multipart/form-data" method="post"
                 style={{
                     margin: "auto",
@@ -182,7 +180,6 @@ const AddEditCategory = () => {
                     paddingTop: "30px",
                     paddingRight: "40px",
                     maxWidth: "400px",
-                    height: "350px",
                     alignContent: "center",
                     backgroundColor: "#1e1f1e",
                     color: "white",

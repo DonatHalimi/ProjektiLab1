@@ -4,19 +4,9 @@
 			"path": "server/server.js",
 			"bookmarks": [
 				{
-					"line": 15,
-					"column": 9,
-					"label": "Lidhja e databazes"
-				},
-				{
-					"line": 37,
+					"line": 22,
 					"column": 10,
 					"label": "USERS CRUD"
-				},
-				{
-					"line": 75,
-					"column": 0,
-					"label": "Server Port"
 				}
 			]
 		},
@@ -44,17 +34,17 @@
 			"path": "client/src/Pages/AddEdit/AddEditProduct.js",
 			"bookmarks": [
 				{
-					"line": 86,
+					"line": 92,
 					"column": 2,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 112,
+					"line": 150,
 					"column": 2,
 					"label": "useEffect() per kategori nga databaza"
 				},
 				{
-					"line": 130,
+					"line": 170,
 					"column": 2,
 					"label": "handleSubmit() kur dergohet formulari"
 				}

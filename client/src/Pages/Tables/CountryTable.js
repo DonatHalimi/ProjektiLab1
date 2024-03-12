@@ -1,29 +1,31 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { BsCartPlus, BsPencil, BsTrash3 } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import { BsPersonAdd, BsPersonDash, BsPersonX } from 'react-icons/bs';
 import AdminSidebar from '../Admin/AdminSidebar';
 import ReactPaginate from 'react-paginate';
-import '../../styles/CategoryTableStyle.css';
+import '../../styles/ProductsTableStyle.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const CategoryTable = () => {
-    const [categoryData, setCategoryData] = useState([]);
+const CountryTable = () => {
+    const [countryData, setCountryData] = useState([]);
+
+    // useState per pagination
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 3;
+    const itemsPerPage = 5;
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Funksioni per mi marr te dhenat e kategorive nga API
-    const loadCategoryData = async () => {
+    // Funksioni per mi marr te dhenat e produkteve nga API
+    const loadCountryData = async () => {
         try {
-            const response = await axios.get('http://localhost:6001/api/category/get');
+            const response = await axios.get('http://localhost:6001/api/countries/get');
             if (response && response.data) {
-                setCategoryData(response.data);
+                setCountryData(response.data);
             } else {
                 console.log('API endpoint did not return any data');
             }
@@ -32,41 +34,41 @@ const CategoryTable = () => {
         }
     };
 
-    // Funksioni per te fshire nje kategori
-    const deleteCategory = async (CategoryId) => {
+    // Funksioni per te fshire nje produkt
+    const deleteCountry = async (id) => {
         const confirmDialog = () => {
             confirmAlert({
                 title: 'Confirm Deletion',
-                message: 'Are you sure that you want to delete this category?',
+                message: 'Are you sure that you want to delete this country?',
                 buttons: [
                     {
                         label: 'Cancel',
                         onClick: () => { },
-                        className: 'cancel-btn',
+                        className: 'cancel-btn'
                     },
                     {
                         label: 'Yes',
                         onClick: async () => {
                             try {
-                                // Send delete request to the server
-                                await axios.delete(`http://localhost:6001/api/category/remove/${CategoryId}`);
-                                toast.success('Kategoria është fshirë me sukses!');
-                                setTimeout(() => loadCategoryData(), 500);
+                                // Dergojme kerkesen per fshirje ne server
+                                await axios.delete(`http://localhost:6001/api/countries/remove/${id}`);
+                                toast.success("Country është fshirë me sukses!");
+                                setTimeout(() => loadCountryData(), 500);
                             } catch (error) {
-                                toast.error(`Error deleting Category entry: ${error.message}`);
+                                toast.error(`Error deleting supplier: ${error.message}`);
                             }
                         },
-                        className: 'yes-btn',
-                    },
-                ],
+                        className: 'yes-btn'
+                    }
+                ]
             });
         };
 
         confirmDialog();
-    };
+    }
 
     useEffect(() => {
-        loadCategoryData();
+        loadCountryData();
 
         // Per mu shfaq "?page={pageNumber}" ne URL
         const urlSearchParams = new URLSearchParams(location.search);
@@ -76,7 +78,7 @@ const CategoryTable = () => {
             navigate(`${location.pathname}?page=1`);
         }
 
-        document.title = `Categories Table | Page ${pageParam || 1}`;
+        document.title = `Country Table | Page ${pageParam || 1}`;
     }, [location.pathname, location.search, navigate]);
 
     const offset = currentPage * itemsPerPage;
@@ -90,55 +92,50 @@ const CategoryTable = () => {
         <div className="admin-page">
             <AdminSidebar />
 
-            <div className='table-container' style={{ position: 'relative', top: '-60px' }}>
-                <table className='styled-table' style={{ transform: 'scale(0.65)', position: "relative", bottom: "10px", fontSize: '20px' }}>
+            <div className="table-container products-table">
+                <table className='styled-table'>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>EmriKategorise</th>
-                            <th>FotoKategorise</th>
-                            <th>
-                                <Link to='/addCategory' className='clickable-header'>
-                                    Insert
-                                </Link>
-                            </th>
+                            <th>Name</th>
+                            <Link to="/addCountry" className='clickable-header'>
+                                <th>Insert</th>
+                            </Link>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {categoryData.slice(offset, offset + itemsPerPage).map((category) => (
-                            <Fragment key={category.CategoryId}>
+                        {countryData.slice(offset, offset + itemsPerPage).map((country) => (
+                            <Fragment key={country.CountryId}>
                                 <tr>
-                                    <th scope='row'>{category.CategoryId}</th>
-                                    <td>{category.EmriKategorise}</td>
+                                    <th scope="row">{country.CountryId}</th>
+                                    <td>{country.Name}</td>
                                     <td>
-                                        {category.FotoKategori && (
-                                            <img src={`data:image/jpeg;base64,${category.FotoKategori.toString('base64')}`} alt='Category' id='fotoSizeCategory' />
-                                        )}
-                                    </td>
-                                    <td>
-                                        <Link to='/addCategory'>
-                                            <button className='btn btn-User'>
-                                                <BsCartPlus style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                        <Link to="/addCountry" className='clickable-header'>
+                                            <button className="btn btn-User">
+                                                <BsPersonAdd style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
                                         </Link>
                                     </td>
                                     <td>
-                                        <Link to={`/updateCategory/${category.CategoryId}`}>
-                                            <button className='btn btn-edit'>
-                                                <BsPencil style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                        <Link to={`/updateCountry/${country.CountryId}`}>
+                                            <button className="btn btn-edit">
+                                                <BsPersonDash style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
                                         </Link>
                                     </td>
                                     <td>
-                                        <button className='btn btn-delete' onClick={() => deleteCategory(category.CategoryId)}>
-                                            <BsTrash3 style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
-                                        </button>
+                                        <Link>
+                                            <button className="btn btn-delete" onClick={() => deleteCountry(country.CountryId)}>
+                                                <BsPersonX style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                            </button>
+                                        </Link>
                                     </td>
                                 </tr>
                             </Fragment>
                         ))}
+
                     </tbody>
 
                     <tfoot>
@@ -149,7 +146,7 @@ const CategoryTable = () => {
                                         previousLabel={'Previous'}
                                         nextLabel={'Next'}
                                         breakLabel={'...'}
-                                        pageCount={Math.ceil(categoryData.length / itemsPerPage)}
+                                        pageCount={Math.ceil(countryData.length / itemsPerPage)}
                                         marginPagesDisplayed={2}
                                         pageRangeDisplayed={5}
                                         onPageChange={handlePageClick}
@@ -165,8 +162,7 @@ const CategoryTable = () => {
                 </table>
             </div>
         </div>
-
     );
 };
 
-export default CategoryTable;
+export default CountryTable;

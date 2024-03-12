@@ -15,6 +15,10 @@ const initialState = {
   Foto: undefined,
   idcategory: "",
   categories: [],
+  idsupplier: "",
+  suppliers: [],
+  idbrand: "",
+  brands: [],
 };
 
 // Krijimi i funksionit AddEditProduct per te shtuar dhe perditesuar produkte
@@ -59,6 +63,8 @@ const AddEditProduct = () => {
                 formData.append("Detajet", productData.Detajet);
                 formData.append("Foto", productData.Foto);
                 formData.append("idcategory", productData.idcategory);
+                formData.append("idsupplier", productData.idsupplier);
+                formData.append("idbrand", productData.idbrand);
 
                 // Log formData after append inside the callback
                 console.log("FormData:", formData);
@@ -103,13 +109,45 @@ const AddEditProduct = () => {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    const fetchSuppliers = async () => {
+      try {
+        const response = await axios.get("http://localhost:6001/api/suppliers/get");
+        setState((prevState) => ({
+          ...prevState,
+          suppliers: response.data,
+        }));
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchSuppliers();
+  }, []);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const response = await axios.get("http://localhost:6001/api/brands/get");
+        setState((prevState) => ({
+          ...prevState,
+          brands: response.data,
+        }));
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
   // Funksioni qe thirret kur formulari dergohet (submit)
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("handleSubmit called");
 
     // Validimi ne ane te klientit
-    if (!state.id || !state.Emri || !state.Cmimi || !state.Valuta || !state.Detajet || !state.Foto || !state.idcategory) {
+    if (!state.id || !state.Emri || !state.Cmimi || !state.Valuta || !state.Detajet || !state.Foto || !state.idcategory || !state.idsupplier || !state.idbrand) {
       toast.error("Ju lutemi plotësoni të gjitha fushat");
       return;
     }
@@ -127,6 +165,8 @@ const AddEditProduct = () => {
       formData.append("Detajet", state.Detajet);
       formData.append("Foto", state.Foto);
       formData.append("idcategory", state.idcategory);
+      formData.append("idsupplier", state.idsupplier);
+      formData.append("idbrand", state.idbrand);
 
       // Log formData after append inside the callback
       console.log("FormData:", formData);
@@ -201,11 +241,12 @@ const AddEditProduct = () => {
   // Renderimi i HTML formes per te shtuar ose perditesuar nje produkt
   return (
     <div style={{ marginTop: "10px", transform: 'scale(0.9)' }}>
-      <h2>{idproduct ? "Edit" : "Add"}</h2>
+      <h2>{idproduct ? "Edit" : "Add"} Product</h2>
       {state && (
         <form action="/" encType="multipart/form-data" method="post"
           style={{
             margin: "auto",
+            marginTop: "20px",
             padding: "25px",
             paddingRight: "30px",
             paddingTop: "30px",
@@ -248,7 +289,6 @@ const AddEditProduct = () => {
                   </option>
                 ))}
             </select>
-
           </div>
 
           <div className="product-box">
@@ -266,6 +306,32 @@ const AddEditProduct = () => {
             {state.existingFoto && (
               <img src={`data:image/jpeg;base64,${state.existingFoto}`} alt="Existing Product" style={{ maxWidth: '100%', height: 'auto' }} />
             )}
+          </div>
+
+          <div className="product-box">
+            <label htmlFor="supplierDropdown" className="input-label">Supplier</label>
+            <select value={state.idsupplier} onChange={handleInputChange} name="idsupplier">
+              <option value="" disabled hidden>Select a supplier</option>
+              {state.suppliers && state.suppliers.length > 0 &&
+                state.suppliers.map((supplier) => (
+                  <option key={supplier.SupplierId} value={supplier.SupplierId}>
+                    {supplier.Name}
+                  </option>
+                ))}
+            </select>
+          </div>
+
+          <div className="product-box">
+            <label htmlFor="brandDropdown" className="input-label">Brand</label>
+            <select value={state.idbrand} onChange={handleInputChange} name="idbrand">
+              <option value="" disabled hidden>Select a brand</option>
+              {state.brands && state.brands.length > 0 &&
+                state.brands.map((brand) => (
+                  <option key={brand.BrandId} value={brand.BrandId}>
+                    {brand.Name}
+                  </option>
+                ))}
+            </select>
           </div>
 
           <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />

@@ -1,25 +1,10 @@
 const express = require("express");
 const app = express();
-const mysql = require('mysql');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const bcrypt = require("bcrypt");
 const session = require("express-session");
-const saltRounds = 10;
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 const stripe = require('stripe')('sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax');
-
-// Krijimi i nje lidhje me bazen e te dhenave MySQL duke perdorur te dhenat e qasjes
-const db = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'projektilab1',
-    port: process.env.DB_PORT || 3307
-});
 
 console.log('MySQL Connection Configuration:', {
     host: 'localhost',
@@ -54,51 +39,6 @@ app.use(
         },
     },)
 )
-
-// Insertimi i userave nga Register-formi
-app.post("/api/user/register", (req, res) => {
-
-    const { Name, Surname, Email, Password, Role } = req.body;
-    const sqlInsert = "INSERT INTO userat (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)";
-    bcrypt.hash(Password, saltRounds, (err, hash) => {
-        db.query(sqlInsert, [Name, Surname, Email, hash, Role], (error, result) => {
-            if (error) {
-                console.log(error);
-                res.status(500).send({ error: "Error inserting data into database" });
-            } else {
-                console.log(result);
-                res.sendStatus(200);
-            }
-        });
-    })
-});
-
-// Krijojme nje API POST per kerkesa te lidhura me autentifikimin e perdoruesit ne aplikacion
-app.post('/api/user/login', (req, res) => {
-    const { Email, Password } = req.body;
-
-    const sqlGet = "SELECT * FROM userat WHERE Email = ?";
-    db.query(sqlGet, Email, (error, result) => {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        }
-        console.log("Result:", result);
-        if (result && result.length > 0) {
-            bcrypt.compare(Password, result[0].Password, (error, response) => {
-                if (response) {
-                    req.session.user = result;
-                    console.log(req.session.user);
-                    res.send(result);
-                } else {
-                    res.send({ message: "Wrong username/password combination" });
-                }
-            });
-        } else {
-            res.send({ message: "User not found" });
-        }
-    });
-});
 
 // Secret key: sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax
 // Maic:price_1NDESDHB8rLE0wX1TGxQmkVO
@@ -137,6 +77,9 @@ const productRoutes = require('./routes/products');
 const aboutusRoutes = require('./routes/aboutus');
 const slideshowRoutes = require('./routes/slideshow');
 const categoryRoutes = require('./routes/category');
+const supplierRoutes = require('./routes/suppliers');
+const brandRoutes = require('./routes/brands');
+const countryRoutes = require('./routes/country');
 
 // Assigning specific route modules to corresponding API paths
 app.use('/api/user', userRoutes);
@@ -144,6 +87,9 @@ app.use('/api/product', productRoutes);
 app.use('/api/aboutus', aboutusRoutes);
 app.use('/api/slideshow', slideshowRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/suppliers', supplierRoutes);
+app.use('/api/brands', brandRoutes);
+app.use('/api/countries', countryRoutes);
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;

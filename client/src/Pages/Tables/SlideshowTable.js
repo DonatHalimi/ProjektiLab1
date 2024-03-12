@@ -110,7 +110,7 @@ const SlideshowTable = () => {
                         {slideshowData.slice(offset, offset + itemsPerPage).map((slideshow, indexslideshow) => (
                             <Fragment key={slideshow.idslideshow}>
                                 <tr>
-                                    <th scope='row'>{indexslideshow + 1}</th>
+                                    <th scope='row'>{slideshow.idslideshow}</th>
                                     <td>{slideshow.EmriFoto}</td>
                                     <td>
                                         {slideshow.Foto && (

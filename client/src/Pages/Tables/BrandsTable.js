@@ -10,11 +10,9 @@ import ReactPaginate from 'react-paginate';
 import '../../styles/ProductsTableStyle.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const ProductsTable = () => {
-    const [productData, setProductData] = useState([]);
-    const [categoryData, setCategoryData] = useState([]);
-    const [supplierData, setSupplierData] = useState([]);
-    const [brandData, setBrandData] = useState([]);
+const BrandsTable = () => {
+    const [brandsData, setBrandsData] = useState([]);
+    const [countryData, setCountryData] = useState([]);
 
     // useState per pagination
     const [currentPage, setCurrentPage] = useState(0);
@@ -24,11 +22,11 @@ const ProductsTable = () => {
     const navigate = useNavigate();
 
     // Funksioni per mi marr te dhenat e produkteve nga API
-    const loadProductsData = async () => {
+    const loadBrandsData = async () => {
         try {
-            const response = await axios.get('http://localhost:6001/api/product/get');
+            const response = await axios.get('http://localhost:6001/api/brands/get');
             if (response && response.data) {
-                setProductData(response.data);
+                setBrandsData(response.data);
             } else {
                 console.log('API endpoint did not return any data');
             }
@@ -38,11 +36,11 @@ const ProductsTable = () => {
     };
 
     // Funksioni per te fshire nje produkt
-    const deleteProduct = async (id) => {
+    const deleteBrand = async (id) => {
         const confirmDialog = () => {
             confirmAlert({
                 title: 'Confirm Deletion',
-                message: 'Are you sure that you want to delete this product?',
+                message: 'Are you sure that you want to delete this brand?',
                 buttons: [
                     {
                         label: 'Cancel',
@@ -54,9 +52,9 @@ const ProductsTable = () => {
                         onClick: async () => {
                             try {
                                 // Dergojme kerkesen per fshirje ne server
-                                await axios.delete(`http://localhost:6001/api/product/remove/${id}`);
-                                toast.success("Produkti është fshirë me sukses!");
-                                setTimeout(() => loadProductsData(), 500);
+                                await axios.delete(`http://localhost:6001/api/brands/remove/${id}`);
+                                toast.success("Brand është fshirë me sukses!");
+                                setTimeout(() => loadBrandsData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting product: ${error.message}`);
                             }
@@ -71,83 +69,33 @@ const ProductsTable = () => {
     }
 
     useEffect(() => {
-        const fetchCategoryData = async () => {
+        const fetchCountryData = async () => {
             try {
-                const response = await axios.get('http://localhost:6001/api/categories/get');
-                console.log('Category Data:', response.data);
+                const response = await axios.get('http://localhost:6001/api/countries/get');
+
                 if (response && response.data) {
-                    setCategoryData(response.data);
+                    setCountryData([...response.data]);
                 } else {
-                    console.log('API endpoint did not return any category data');
+                    console.log('API endpoint did not return any data');
                 }
             } catch (error) {
-                console.log(error);
+                console.log('Error fetching country data:', error);
             }
         };
 
-        const fetchSupplierData = async () => {
-            try {
-                const response = await axios.get('http://localhost:6001/api/suppliers/get');
-                console.log('Category Data:', response.data);
-                if (response && response.data) {
-                    setSupplierData(response.data);
-                } else {
-                    console.log('API endpoint did not return any category data');
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        const fetchBrandData = async () => {
-            try {
-                const response = await axios.get('http://localhost:6001/api/brands/get');
-                console.log('Category Data:', response.data);
-                if (response && response.data) {
-                    setBrandData(response.data);
-                } else {
-                    console.log('API endpoint did not return any category data');
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchCategoryData();
-        fetchSupplierData();
-        fetchBrandData();
-    }, [])
+        fetchCountryData();
+    }, []);
 
     useEffect(() => {
-        loadProductsData();
-    }, [])
+        loadBrandsData();
+    }, []);
 
-    const getCategoryNameById = (categoryId) => {
+    const getCountryNameById = (countryId) => {
         try {
-            const category = categoryData.find((category) => category.idcategory === categoryId);
-            return category ? category.EmriKategorise : '';
+            const country = countryData.find((country) => country.CountryId === countryId);
+            return country ? country.Name : '';
         } catch (error) {
-            console.log('Error in getCategoryNameById:', error);
-            return '';
-        }
-    };
-
-    const getSupplierNameById = (supplierId) => {
-        try {
-            const supplier = supplierData.find((supplier) => supplier.SupplierId === supplierId);
-            return supplier ? supplier.Name : '';
-        } catch (error) {
-            console.log('Error in getCategoryNameById:', error);
-            return '';
-        }
-    };
-
-    const getBrandNameById = (brandId) => {
-        try {
-            const brand = brandData.find((brand) => brand.BrandId === brandId);
-            return brand ? brand.Name : '';
-        } catch (error) {
-            console.log('Error in getCategoryNameById:', error);
+            console.log('Error in getCountryNameById:', error);
             return '';
         }
     };
@@ -161,7 +109,7 @@ const ProductsTable = () => {
             navigate(`${location.pathname}?page=1`);
         }
 
-        document.title = `Products Table | Page ${pageParam || 1}`;
+        document.title = `Brands Table | Page ${pageParam || 1}`;
     }, [location.pathname, location.search, navigate]);
 
     const offset = currentPage * itemsPerPage;
@@ -176,19 +124,14 @@ const ProductsTable = () => {
             <AdminSidebar />
 
             <div className="table-container products-table">
-                <table className='styled-table products-table'>
+                <table className='styled-table'>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Emri</th>
-                            <th>Çmimi</th>
-                            <th>Valuta</th>
-                            <th>Kategoria</th>
-                            <th>Detajet</th>
-                            <th>Foto</th>
-                            <th>Supplier</th>
-                            <th>Brand</th>
-                            <Link to="/addProduct" className='clickable-header'>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Country</th>
+                            <Link to="/addBrand" className='clickable-header'>
                                 <th>Insert</th>
                             </Link>
                             <th>Edit</th>
@@ -196,36 +139,23 @@ const ProductsTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {productData.slice(offset, offset + itemsPerPage).map((product, indexproduct) => {
+                        {brandsData.slice(offset, offset + itemsPerPage).map((brand) => {
                             return (
-                                <Fragment key={product.id}>
+                                <Fragment key={brand.BrandId}>
                                     <tr>
-                                        <th scope="row">{indexproduct + 1}</th>
-                                        <td>{product.Emri}</td>
-                                        <td>{product.Cmimi}</td>
-                                        <td>{product.Valuta}</td>
-                                        <td>{getCategoryNameById(product.idcategory)}</td>
-                                        <td style={{ textAlign: 'justify' }}>{product.Detajet}</td>
+                                        <th scope="row">{brand.BrandId}</th>
+                                        <td>{brand.Name}</td>
+                                        <td>{brand.Description}</td>
+                                        <td>{getCountryNameById(brand.idcountry)}</td>
                                         <td>
-                                            {product.Foto && (
-                                                <img
-                                                    src={`data:image/jpeg;base64,${product.Foto}`}
-                                                    alt="Product"
-                                                    id="fotoSizeProduct"
-                                                />
-                                            )}
-                                        </td>
-                                        <td>{getSupplierNameById(product.idsupplier)}</td>
-                                        <td>{getBrandNameById(product.idbrand)}</td>
-                                        <td>
-                                            <Link to="/addProduct">
+                                            <Link to="/addBrand">
                                                 <button className="btn btn-User">
                                                     <BsCartPlus style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                                 </button>
                                             </Link>
                                         </td>
                                         <td>
-                                            <Link to={`/updateProduct/${product.id}`}>
+                                            <Link to={`/updateBrand/${brand.BrandId}`}>
                                                 <button className="btn btn-edit">
                                                     <BsPencil style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                                 </button>
@@ -233,17 +163,17 @@ const ProductsTable = () => {
                                         </td>
                                         <td>
                                             <Link>
-                                                <button className="btn btn-delete" onClick={() => deleteProduct(product.id)}>
+                                                <button className="btn btn-delete" onClick={() => deleteBrand(brand.BrandId)}>
                                                     <BsTrash3 style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                                 </button>
                                             </Link>
                                         </td>
-
                                     </tr>
                                 </Fragment>
                             );
                         })}
                     </tbody>
+
 
                     <tfoot>
                         <tr>
@@ -253,7 +183,7 @@ const ProductsTable = () => {
                                         previousLabel={'Previous'}
                                         nextLabel={'Next'}
                                         breakLabel={'...'}
-                                        pageCount={Math.ceil(productData.length / itemsPerPage)}
+                                        pageCount={Math.ceil(brandsData.length / itemsPerPage)}
                                         marginPagesDisplayed={2}
                                         pageRangeDisplayed={5}
                                         onPageChange={handlePageClick}
@@ -272,4 +202,4 @@ const ProductsTable = () => {
     );
 };
 
-export default ProductsTable;
+export default BrandsTable;

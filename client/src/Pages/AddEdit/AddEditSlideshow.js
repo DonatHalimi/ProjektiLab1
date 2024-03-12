@@ -161,7 +161,7 @@ const AddEditSlideshow = () => {
     // Renderimi i HTML formes per te shtuar ose perditesuar nje slideshow foto
     return (
         <div style={{ marginTop: "150px" }}>
-            <h2>{idslideshow ? "Edit" : "Add"}</h2>
+            <h2>{idslideshow ? "Edit" : "Add"} Slideshow</h2>
             <form action="/" encType="multipart/form-data" method="post"
                 style={{
                     margin: "auto",
@@ -177,7 +177,7 @@ const AddEditSlideshow = () => {
                 onSubmit={handleSubmit}
             >
                 <div className="product-box">
-                    <label htmlFor="emrifoto" className="input-label">EmriFoto</label>
+                    <label htmlFor="emrifoto" className="input-label">Emri</label>
                     <input value={state.EmriFoto || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emrifoto" name="EmriFoto"></input>
                 </div>
 

@@ -32,6 +32,12 @@ import Cancel from "./Pages/Cancel"
 import Success from "./Pages/Success"
 import Login from "./Pages/Login"
 import { Register } from "./Pages/Register"
+import AddEditSupplier from "./Pages/AddEdit/AddEditSupplier"
+import SuppliersTable from "./Pages/Tables/SuppliersTable"
+import AddEditBrands from "./Pages/AddEdit/AddEditBrands"
+import BrandsTable from "./Pages/Tables/BrandsTable"
+import CountryTable from "./Pages/Tables/CountryTable"
+import AddEditCountry from "./Pages/AddEdit/AddEditCountry"
 
 function App() {
   return (
@@ -64,14 +70,26 @@ function App() {
               <Route path="/addSlideshow" element={<AddEditSlideshow />} />
               <Route path="/updateSlideshow/:idslideshow" element={<AddEditSlideshow />} />
               <Route path="/addCategory" element={<AddEditCategory />} />
-              <Route path="/updateCategory/:idcategory" element={<AddEditCategory />} />
+              <Route path="/updateCategory/:CategoryId" element={<AddEditCategory />} />
               <Route path="/products/:categoryId" element={<ProductList />} />
+
+              <Route path="/addSupplier" element={<AddEditSupplier />} />
+              <Route path="/updateSupplier/:SupplierId" element={<AddEditSupplier />} />
+
+              <Route path="/addBrand" element={<AddEditBrands />} />
+              <Route path="/updateBrand/:BrandId" element={<AddEditBrands />} />
+
+              <Route path="/addCountry" element={<AddEditCountry />} />
+              <Route path="/updateCountry/:CountryId" element={<AddEditCountry />} />
 
               <Route path="/admin/users" element={<UsersTable />} />
               <Route path="/admin/products" element={<ProductsTable />} />
               <Route path="/admin/categories" element={<CategoryTable />} />
               <Route path="/admin/slideshow" element={<SlideshowTable />} />
               <Route path="/admin/aboutus" element={<AboutUsTable />} />
+              <Route path="/admin/suppliers" element={<SuppliersTable />} />
+              <Route path="/admin/brands" element={<BrandsTable />} />
+              <Route path="/admin/countries" element={<CountryTable />} />
             </Routes>
             <ToTop />
           </BrowserRouter>
