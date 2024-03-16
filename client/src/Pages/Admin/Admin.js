@@ -5,6 +5,7 @@ import ProductsTable from '../Tables/ProductsTable';
 import CategoryTable from '../Tables/CategoryTable';
 import SlideshowTable from '../Tables/SlideshowTable';
 import AboutUsTable from '../Tables/AboutUsTable';
+import PaymentsTable from '../Tables/PaymentsTable';
 import '../../styles/AdminStyle.css'
 
 const Admin = () => {

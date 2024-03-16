@@ -38,6 +38,7 @@ import AddEditBrands from "./Pages/AddEdit/AddEditBrands"
 import BrandsTable from "./Pages/Tables/BrandsTable"
 import CountryTable from "./Pages/Tables/CountryTable"
 import AddEditCountry from "./Pages/AddEdit/AddEditCountry"
+import PaymentsTable from "./Pages/Tables/PaymentsTable"
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
               <Route path="/admin/suppliers" element={<SuppliersTable />} />
               <Route path="/admin/brands" element={<BrandsTable />} />
               <Route path="/admin/countries" element={<CountryTable />} />
+              <Route path="/admin/payments" element={<PaymentsTable/>} />
             </Routes>
             <ToTop />
           </BrowserRouter>

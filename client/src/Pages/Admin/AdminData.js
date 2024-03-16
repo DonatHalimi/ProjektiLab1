@@ -48,4 +48,10 @@ export const AdminData = [
         label: 'About Us',
         url: '/admin/aboutus',
     },
+    {
+        slug: 'payments',
+        icon: 'fa-solid fa-credit-card',
+        label: 'Payment',
+        url: '/admin/payments',
+    },
 ]
