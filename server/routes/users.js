@@ -1,7 +1,7 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
 const router = express.Router()
-const pool = require('../db/db')
+const { pool, queryAsync } = require('../db/db');
 const saltRounds = 10
 
 // Get all users

@@ -91,6 +91,8 @@ app.get('/fetch-payments', async (req, res) => {
 async function fetchPayments() {
     try {
         const payments = await stripe.charges.list({ limit: 100 });
+        console.log(payments.data);
+
         return payments.data;
     } catch (error) {
         throw error;
@@ -115,7 +117,7 @@ async function insertPaymentsIntoDatabase(paymentsData) {
             } catch (error) {
                 // Handle duplicate entry error
                 if (error.code === 'ER_DUP_ENTRY') {
-                   // console.log(`Payment with id ${id} already exists in the database. Skipping insertion.`);
+                    console.log(`Payment with id ${id} already exists in the database. Skipping insertion.`);
                 } else {
                     throw error; // Rethrow other errors
                 }
