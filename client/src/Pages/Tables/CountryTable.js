@@ -4,7 +4,7 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
-import { BsPersonAdd, BsPersonDash, BsPersonX } from 'react-icons/bs';
+import { BsPlusLg, BsPencil, BsTrash3 } from 'react-icons/bs';
 import AdminSidebar from '../Admin/AdminSidebar';
 import ReactPaginate from 'react-paginate';
 import '../../styles/ProductsTableStyle.css';
@@ -114,21 +114,21 @@ const CountryTable = () => {
                                     <td>
                                         <Link to="/addCountry" className='clickable-header'>
                                             <button className="btn btn-User">
-                                                <BsPersonAdd style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                                <BsPlusLg style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
                                         </Link>
                                     </td>
                                     <td>
                                         <Link to={`/updateCountry/${country.CountryId}`}>
                                             <button className="btn btn-edit">
-                                                <BsPersonDash style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                                <BsPencil style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
                                         </Link>
                                     </td>
                                     <td>
                                         <Link>
                                             <button className="btn btn-delete" onClick={() => deleteCountry(country.CountryId)}>
-                                                <BsPersonX style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                                <BsTrash3 style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
                                         </Link>
                                     </td>
@@ -158,7 +158,6 @@ const CountryTable = () => {
                             </td>
                         </tr>
                     </tfoot>
-
                 </table>
             </div>
         </div>

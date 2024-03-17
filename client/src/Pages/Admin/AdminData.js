@@ -37,6 +37,12 @@ export const AdminData = [
         url: '/admin/countries',
     },
     {
+        slug: 'payments',
+        icon: 'fa-solid fa-credit-card',
+        label: 'Payments',
+        url: '/admin/payments',
+    },
+    {
         slug: 'slideshow',
         icon: 'fa-solid fa-image',
         label: 'Slideshow',
@@ -47,11 +53,5 @@ export const AdminData = [
         icon: 'fa-solid fa-circle-info',
         label: 'About Us',
         url: '/admin/aboutus',
-    },
-    {
-        slug: 'payments',
-        icon: 'fa-solid fa-credit-card',
-        label: 'Payment',
-        url: '/admin/payments',
     },
 ]

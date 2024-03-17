@@ -4,7 +4,7 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
-import { BsCartPlus, BsPencil, BsTrash3 } from 'react-icons/bs';
+import { BsPlusLg, BsPencil, BsTrash3 } from 'react-icons/bs';
 import AdminSidebar from '../Admin/AdminSidebar';
 import ReactPaginate from 'react-paginate';
 import '../../styles/ProductsTableStyle.css';
@@ -150,7 +150,7 @@ const BrandsTable = () => {
                                         <td>
                                             <Link to="/addBrand">
                                                 <button className="btn btn-User">
-                                                    <BsCartPlus style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
+                                                    <BsPlusLg style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                                 </button>
                                             </Link>
                                         </td>

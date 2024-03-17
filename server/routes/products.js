@@ -195,4 +195,42 @@ router.get("/get-by-category/:categoryId", cors(), (req, res) => {
     });
 });
 
+// Route to get a product's brand by product ID
+router.get('/brand/:productId', (req, res) => {
+    const productId = req.params.productId;
+    const sql = `
+        SELECT brands.*
+        FROM produktet
+        LEFT JOIN brands ON produktet.idbrand = brands.BrandId
+        WHERE produktet.id = ?`;
+
+    pool.query(sql, [productId], (err, result) => {
+        if (err) {
+            console.error('Error retrieving brand:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+// Route to get a product's supplier by product ID
+router.get('/supplier/:productId', (req, res) => {
+    const productId = req.params.productId;
+    const sql = `
+        SELECT suppliers.* 
+        FROM suppliers 
+        JOIN produktet ON suppliers.SupplierId = produktet.idsupplier 
+        WHERE produktet.id = ?`;
+
+    pool.query(sql, [productId], (err, result) => {
+        if (err) {
+            console.error('Error retrieving supplier:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            res.json(result);
+        }
+    });
+});
+
 module.exports = router

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { ShopContext } from '../context/shop-context';
 import { Link } from 'react-router-dom';
 import CartItem from './cart-items';
@@ -34,6 +34,11 @@ const Cart = () => {
       }
     })
   }
+
+  // Scroll to top on component render
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

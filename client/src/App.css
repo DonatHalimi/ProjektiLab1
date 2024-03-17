@@ -129,7 +129,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 25px;
 }
 
-.goBack{
+.goBack {
   position: relative;
   top: 50px;
   right: 630px;
@@ -139,6 +139,106 @@ body::-webkit-scrollbar-thumb:hover {
   border: #F6F4F4;
 }
 
-.goBack:hover{
+.goBack:hover {
   cursor: pointer;
+}
+
+tfoot {
+  border-bottom: 2px solid #e6e6e6;
+}
+
+.brand-supplier-container {
+  position: relative;
+  bottom: 400px;
+}
+
+.brand-info,
+.supplier-info {
+  width: 25%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.brand-info h3,
+.supplier-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.brand-info table,
+.supplier-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.brand-info th,
+.brand-info td,
+.supplier-info th,
+.supplier-info td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.brand-info th,
+.supplier-info th {
+  background-color: #f2f2f2;
+}
+
+.brand-info td:first-child,
+.supplier-info td:first-child {
+  font-weight: bold;
+}
+
+.brand-info tbody tr:nth-child(even),
+.supplier-info tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.brand-supplier-container {
+  position: relative;
+  bottom: 400px;
+}
+
+.brand-info,
+.supplier-info {
+  width: 25%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.brand-info h3,
+.supplier-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.brand-info table,
+.supplier-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.brand-info th,
+.brand-info td,
+.supplier-info th,
+.supplier-info td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.brand-info th,
+.supplier-info th {
+  background-color: #f2f2f2;
+}
+
+.brand-info td:first-child,
+.supplier-info td:first-child {
+  font-weight: bold;
+}
+
+.brand-info tbody tr:nth-child(even),
+.supplier-info tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
 }

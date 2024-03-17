@@ -8,6 +8,8 @@ import { WishlistContext } from "../context/wishlist-context";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import { BsArrowsAngleContract } from "react-icons/bs";
 import "../styles/ProductDetailsStyle.css";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function ProductDetails() {
     const { id } = useParams();
@@ -19,13 +21,19 @@ function ProductDetails() {
     const [Foto, setFoto] = useState("");
     const [isImageEnlarged, setIsImageEnlarged] = useState(false);
 
+    const [brand, setBrand] = useState(null);
+    const [supplier, setSupplier] = useState(null);
+
     const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
-
-    const [showAlertCart, setShowAlertCart] = useState(false);
-    const [showAlertWishlist, setShowAlertWishlist] = useState(false);
+    const navigate = useNavigate();
 
     document.title = Emri + " Details";
+
+    // Scroll to top on component render
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const toggleEnlargedPicture = () => {
         setIsImageEnlarged(!isImageEnlarged);
@@ -46,21 +54,36 @@ function ProductDetails() {
 
     const handleAddToCart = () => {
         cart.addOneToCart(id);
-        setShowAlertCart(true);
 
-        setTimeout(() => {
-            setShowAlertCart(false);
-        }, 5000);
+        toast.success('Produkti është shtuar në shportë!', {
+            position: 'top-right',
+            style: {
+                marginTop: '70px',
+                cursor: 'pointer',
+                transition: 'opacity 2s ease-in',
+            },
+            onClick: () => {
+                navigate('/Cart');
+            },
+        }, 50);
     };
 
     const handleAddToWishlist = () => {
         wishlist.addItemToWishlist(id);
 
-        setShowAlertWishlist(true);
-
         setTimeout(() => {
-            setShowAlertWishlist(false);
-        }, 5000);
+            toast.success('Produkti është shtuar në wishlist!', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+                onClick: () => {
+                    navigate('/Wishlist');
+                },
+            });
+        }, 50);
     };
 
     useEffect(() => {
@@ -84,6 +107,29 @@ function ProductDetails() {
             }
         };
         fetchProduct();
+    }, [id]);
+
+    useEffect(() => {
+        const fetchBrandAndSupplier = async () => {
+            try {
+                // Fetch brand data
+                const brandResponse = await fetch(`http://localhost:6001/api/product/brand/${id}`);
+                const brandData = await brandResponse.json();
+                console.log("Brand Data:", brandData);
+
+                // Fetch supplier data
+                const supplierResponse = await fetch(`http://localhost:6001/api/product/supplier/${id}`);
+                const supplierData = await supplierResponse.json();
+                console.log("Supplier Data:", supplierData);
+
+                setBrand(brandData);
+                setSupplier(supplierData);
+            } catch (error) {
+                console.error("Error fetching brand and supplier:", error);
+            }
+        };
+
+        fetchBrandAndSupplier();
     }, [id]);
 
     if (!product) {
@@ -157,36 +203,49 @@ function ProductDetails() {
                 )}
             </div>
 
-            {/* Thirrja e funksionit per me shfaq mesazhin e konfirmimit te shtimit te produktit ne Cart & Wishlist */}
-            {showAlertCart && (
-                <div className="alertCart">
-                    <Link to="/Cart" className="cartLink">
-                        <p>Produkti është shtuar në shportë me sukses!</p>
-                    </Link>
-                    <button className="cancelPopupButtonCart" onClick={() => setShowAlertCart(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+            <div className='brand-supplier-container'>
+                <div className="brand-info">
+                    <h3>Brand Information</h3>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{brand && brand.length > 0 ? brand[0].Name : '-'}</td>
+                            </tr>
+                            <tr>
+                                <td>Description:</td>
+                                <td>{brand && brand.length > 0 ? brand[0].Description : '-'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            )}
 
-            {showAlertWishlist && (
-                <div className="alertWishlist">
-                    <Link to="/Wishlist" className="wishlistLink">
-                        <p>Produkti është shtuar në wishlist me sukses!</p>
-                    </Link>
-                    <button className="cancelPopupButtonWishlist" onClick={() => setShowAlertWishlist(false)}>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                <div className="supplier-info">
+                    <h3>Supplier Information</h3>
+                    <table>
+
+                        <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{supplier && supplier.length > 0 ? supplier[0].Name : '-'}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>{supplier && supplier.length > 0 ? supplier[0].Phone : '-'}</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>{supplier && supplier.length > 0 ? supplier[0].Address : '-'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            )}
-
-            <div style={{ height: "100px" }}></div>
+            </div>
 
             {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqet footeri */}
             {!isImageEnlarged && (
                 <Footer />
             )}
-
         </>
     );
 }

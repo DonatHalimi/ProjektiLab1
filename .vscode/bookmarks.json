@@ -4,7 +4,7 @@
 			"path": "server/server.js",
 			"bookmarks": [
 				{
-					"line": 22,
+					"line": 20,
 					"column": 10,
 					"label": "USERS CRUD"
 				}
@@ -149,7 +149,7 @@
 			"path": "client/src/components/ProductItem.js",
 			"bookmarks": [
 				{
-					"line": 48,
+					"line": 47,
 					"column": 2,
 					"label": "handleAddToWishlist()"
 				}

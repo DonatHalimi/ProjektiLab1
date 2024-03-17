@@ -11,7 +11,7 @@ body {
 .details-container {
   background-color: #F5F5F5;
   margin: auto 450px 100px 350px;
-  max-width: 1200px;
+  width: 1000px;
   position: relative;
   top: 30px;
   left: 50px;
@@ -27,7 +27,7 @@ body {
 #product-photo {
   position: relative;
   top: 5rem;
-  right: 31%;
+  right: 33.5%;
   width: 35%;
   max-width: 100%;
   margin-bottom: 0px;
@@ -40,16 +40,16 @@ body {
 
 #product-name {
   position: relative;
-  right: 5%;
+  right: 2%;
   bottom: 540px;
   margin-left: 30px;
 }
 
 #product-details {
   position: relative;
-  left: 32%;
+  left: 38%;
   bottom: 600px;
-  margin: 50px 200px 0;
+  margin: 50px 100px 20px  100px;
   max-width: 100%;
   padding-right: 950px;
   text-align: justify;
@@ -57,16 +57,16 @@ body {
 
 #product-price {
   position: relative;
-  right: 6%;
-  bottom: 300px;
+  right: 4.8%;
+  bottom: 360px;
   font-size: 1.2em;
   font-weight: bold;
 }
 
 .product-buttons {
   position: relative;
-  bottom: 460px;
-  right: 1.4%;
+  bottom: 550px;
+  left: 1%;
   margin-bottom: 50px;
 }
 

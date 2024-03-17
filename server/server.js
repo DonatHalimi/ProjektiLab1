@@ -7,8 +7,6 @@ const session = require("express-session");
 const stripe = require('stripe')('sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax');
 const { pool, queryAsync } = require('./db/db');
 
-
-
 console.log('MySQL Connection Configuration:', {
     host: 'localhost',
     user: 'root',
@@ -99,7 +97,6 @@ async function fetchPayments() {
     }
 }
 
-
 async function insertPaymentsIntoDatabase(paymentsData) {
     try {
         for (const payment of paymentsData) {
@@ -119,7 +116,7 @@ async function insertPaymentsIntoDatabase(paymentsData) {
                 if (error.code === 'ER_DUP_ENTRY') {
                     console.log(`Payment with id ${id} already exists in the database. Skipping insertion.`);
                 } else {
-                    throw error; // Rethrow other errors
+                    throw error;
                 }
             }
         }
@@ -138,6 +135,7 @@ const categoryRoutes = require('./routes/category');
 const supplierRoutes = require('./routes/suppliers');
 const brandRoutes = require('./routes/brands');
 const countryRoutes = require('./routes/country');
+
 // Assigning specific route modules to corresponding API paths
 app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
@@ -147,6 +145,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api/brands', brandRoutes);
 app.use('/api/countries', countryRoutes);
+
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
 app.listen(PORT, () => {

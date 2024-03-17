@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
-import { getProductData } from './ProductData';
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import "../styles/ProductStyle.css";
 import { toast } from 'react-toastify';
