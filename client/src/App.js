@@ -39,6 +39,8 @@ import BrandsTable from "./Pages/Tables/BrandsTable"
 import CountryTable from "./Pages/Tables/CountryTable"
 import AddEditCountry from "./Pages/AddEdit/AddEditCountry"
 import PaymentsTable from "./Pages/Tables/PaymentsTable"
+import RolesTable from "./Pages/Tables/RolesTable"
+import AddEditRoles from "./Pages/AddEdit/AddEditRoles"
 
 function App() {
   return (
@@ -92,6 +94,10 @@ function App() {
               <Route path="/admin/brands" element={<BrandsTable />} />
               <Route path="/admin/countries" element={<CountryTable />} />
               <Route path="/admin/payments" element={<PaymentsTable/>} />
+
+              <Route path="/admin/roles" element={<RolesTable />} />
+              <Route path="/roles/addRole" element={<AddEditRoles />} />
+              <Route path="/roles/updateRoles/:id" element={<AddEditRoles />} />
             </Routes>
             <ToTop />
           </BrowserRouter>

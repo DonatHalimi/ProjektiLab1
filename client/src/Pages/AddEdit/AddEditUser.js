@@ -1,118 +1,150 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../styles/AddEditStyle.css";
 
-// Krijojme nje objekt qe permban te dhenat fillestare te perdoruesit
-const initialState = {
-    Name: "",
-    Surname: "",
-    Email: "",
-    Password: "",
-    Role: ""
-}
-
-// Krijimi i funksionit AddEditUser per te shtuar dhe perditesuar perdorues
 const AddEditUser = () => {
-    const [state, setState] = useState(initialState);
-    const { Name, Surname, Email, Password, Role } = state;
+    const [state, setState] = useState({
+        Name: "",
+        Surname: "",
+        Email: "",
+        Password: "",
+        Role: "",
+        roles: [],
+    });
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e perdoruesit nga databaza
     useEffect(() => {
-        axios.get(`http://localhost:6001/api/user/get/${id}`)
-            .then((resp) => setState({ ...resp.data[0] }))
-            .catch((err) => console.log(err));
+        const fetchData = async () => {
+            try {
+                const rolesResponse = await axios.get("http://localhost:6001/api/roles");
+                setState(prevState => ({
+                    ...prevState,
+                    roles: rolesResponse.data
+                }));
+
+                if (id) {
+                    const userResponse = await axios.get(`http://localhost:6001/api/user/get/${id}`);
+                    const userData = userResponse.data[0];
+                    setState(prevState => ({
+                        ...prevState,
+                        ...userData
+                    }));
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
     }, [id]);
 
-    // Funksioni qe thirret kur formulari dergohet (submit)
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("handleSubmit called");
 
-        // Validimi ne ane te klientit
-        if (!Name || !Surname || !Email || !Password || !Role) {
-            toast.error("Ju lutemi plotësoni të gjitha fushat");
+        if (!state.Name || !state.Surname || !state.Email || !state.Password || !state.Role) {
+            toast.error("Please fill in all fields");
         } else {
-            // Dergojme kerkesen duke u bazuar ne ekzistencen e id
-            const requestPromise = id
-                ? axios.put(`http://localhost:6001/api/user/update/${id}`, { id, Name, Surname, Email, Password, Role })
-                : axios.post(`http://localhost:6001/api/user/post`, { Name, Surname, Email, Password, Role });
+            try {
+                const userData = {
+                    Name: state.Name,
+                    Surname: state.Surname,
+                    Email: state.Email,
+                    Password: state.Password,
+                    Role: state.Role
+                };
 
-            // Ekzekutojme kerkesen
-            requestPromise
-                .then(() => {
-                    setState({ ...state, Name: "", Surname: "", Email: "", Password: "", Role: "" });
-                    if (id) {
-                        toast.success("Përdoruesi është perditësuar me sukses!");
-                    } else {
-                        toast.success("Përdoruesi është shtuar me sukses!");
-                    }
-                    navigate('/admin/users');
-                })
-                .catch((err) => toast.error(err.response.data));
+                const url = id
+                    ? `http://localhost:6001/api/user/update/${id}`
+                    : "http://localhost:6001/api/user/post";
+
+                const method = id ? "put" : "post";
+
+                const response = await axios[method](url, userData);
+
+                console.log("Response:", response.data);
+                toast.success(id ? "User updated successfully!" : "User added successfully!");
+
+                setState({
+                    Name: "",
+                    Surname: "",
+                    Email: "",
+                    Password: "",
+                    Role: ""
+                });
+                navigate('/admin/users');
+            } catch (error) {
+                console.error("Error:", error);
+                if (error.response && error.response.data) {
+                    toast.error(error.response.data);
+                } else {
+                    toast.error("An error occurred");
+                }
+            }
         }
     };
 
-    // Deklarimi i funksionit handleInputChange per te ruajtur ndryshimet ne input fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setState({ ...state, [name]: value });
-    }
+        setState(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
-    // Renderimi i HTML formes per te shtuar ose perditesuar nje user
     return (
         <div style={{ marginTop: "150px" }}>
-            <h2>{id ? "Edit" : "Add"}</h2>
-            <form style={{
-                margin: "auto",
-                padding: "25px",
-                paddingTop: "50px",
-                paddingRight: "40px",
-                maxWidth: "387px",
-                alignContent: "center",
-                backgroundColor: "#222",
-                color: "white",
-                borderRadius: "10px"
-            }}
+            <h2>{id ? "Edit" : "Add"} User</h2>
+            <form
+                style={{
+                    margin: "auto",
+                    padding: "25px",
+                    paddingTop: "50px",
+                    paddingRight: "40px",
+                    maxWidth: "387px",
+                    alignContent: "center",
+                    backgroundColor: "#222",
+                    color: "white",
+                    borderRadius: "10px"
+                }}
                 onSubmit={handleSubmit}
             >
-
                 <div className="user-box">
-                    <label htmlFor='Name' className="input-label">Emri</label>
-                    <input value={Name || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="name" name="Name"></input>
+                    <label htmlFor='Name' className="input-label">Name</label>
+                    <input value={state.Name || ""} onChange={handleInputChange} type="text" placeholder="Enter Name" id="Name" name="Name"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor='Surname' className="input-label">Mbiemri</label>
-                    <input value={Surname || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj mbiemrin" id="surname" name="Surname"></input>
+                    <label htmlFor='Surname' className="input-label">Surname</label>
+                    <input value={state.Surname || ""} onChange={handleInputChange} type="text" placeholder="Enter Surname" id="Surname" name="Surname"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor='Email' className="input-label">E-mail</label>
-                    <input value={Email || ""} onChange={handleInputChange} type="email" placeholder="Shkruaj e-mail" id="Email" name="Email"></input>
+                    <label htmlFor='Email' className="input-label">Email</label>
+                    <input value={state.Email || ""} onChange={handleInputChange} type="email" placeholder="Enter Email" id="Email" name="Email"></input>
                 </div>
 
                 <div className="user-box">
                     <label htmlFor="Password" className="input-label">Password</label>
-                    <input value={Password || ""} onChange={handleInputChange} type="password" placeholder="Shkruaj password" id="password" name="Password"></input>
+                    <input value={state.Password || ""} onChange={handleInputChange} type="password" placeholder="Enter Password" id="Password" name="Password"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor="Role" className="input-label">Roli</label>
-                    <select value={Role || ""} onChange={handleInputChange} id="role" name="Role">
-                        <option value="" disabled selected hidden>Zgjedh rolin</option>
-                        <option value="2">User</option>
-                        <option value="1">Admin</option>
+                    <label htmlFor="Role" className="input-label">Role</label>
+                    <select value={state.Role || ""} onChange={handleInputChange} id="Role" name="Role">
+                        <option value="" disabled>Select a Role</option>
+                        {state.roles.map(role => (
+                            <option key={role.id} value={role.id}>{role.role_name}</option>
+                        ))}
                     </select>
                 </div>
 
                 <input id="submit-button" type="submit" value={id ? "Update" : "Save"} />
                 <Link to="/admin/users">
-                    <input id="goback-button" type="button" value="Cancel"></input>
+                    <input id="goback-button" type="button" value="Cancel" />
                 </Link>
             </form>
 

@@ -135,6 +135,7 @@ const categoryRoutes = require('./routes/category');
 const supplierRoutes = require('./routes/suppliers');
 const brandRoutes = require('./routes/brands');
 const countryRoutes = require('./routes/country');
+const rolesRoutes = require('./routes/roles');
 
 // Assigning specific route modules to corresponding API paths
 app.use('/api/user', userRoutes);
@@ -145,6 +146,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api/brands', brandRoutes);
 app.use('/api/countries', countryRoutes);
+app.use('/api/roles', rolesRoutes);
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;
