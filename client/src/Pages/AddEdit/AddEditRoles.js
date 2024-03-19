@@ -20,7 +20,7 @@ const AddEditRoles = () => {
                 if (idroles) {
                     const response = await axios.get(`http://localhost:6001/api/roles/get/${idroles}`);
                     const roleData = response.data;
-                    setState(roleData);
+                    setState(roleData); // Set state with fetched role data
                 }
             } catch (error) {
                 console.error("Error fetching role data:", error);
@@ -75,40 +75,36 @@ const AddEditRoles = () => {
     return (
         <div style={{ marginTop: "150px", transform: 'scale(0.9)' }}>
             <h2>{idroles ? "Edit" : "Add"} Roles</h2>
-            {state && (
-                <form
-                    action="/"
-                    encType="multipart/form-data"
-                    method="post"
-                    style={{
-                        margin: "auto",
-                        padding: "25px",
-                        paddingRight: "30px",
-                        paddingTop: "30px",
-                        maxWidth: "387px",
-                        alignContent: "center",
-                        backgroundColor: "#1e1f1e",
-                        color: "white",
-                        borderRadius: "10px",
-                        height: "auto",
-                    }}
-                    onSubmit={handleSubmit}
-                >
-                    <div className="product-box">
-                        <label htmlFor="role_name" className="input-label">
-                            Role Name
-                        </label>
-                        <input value={state.role_name || ""} onChange={handleInputChange} type="text" placeholder="Enter Role name" id="role_name" name="role_name"></input>
-                    </div>
+            <form
+                action="/"
+                encType="multipart/form-data"
+                method="post"
+                style={{
+                    margin: "auto",
+                    padding: "25px",
+                    paddingRight: "30px",
+                    paddingTop: "30px",
+                    maxWidth: "387px",
+                    alignContent: "center",
+                    backgroundColor: "#1e1f1e",
+                    color: "white",
+                    borderRadius: "10px",
+                    height: "auto",
+                }}
+                onSubmit={handleSubmit}
+            >
+                <div className="product-box">
+                    <label htmlFor="role_name" className="input-label">
+                        Role Name
+                    </label>
+                    <input value={state.role_name || ""} onChange={handleInputChange} type="text" placeholder="Enter Role name" id="role_name" name="role_name"></input>
+                </div>
 
-                   
-
-                    <input id="submit-button" type="submit" value={idroles ? "Update" : "Save"} />
-                    <Link to="/admin/roles">
-                        <input id="goback-button" type="button" value="Cancel" />
-                    </Link>
-                </form>
-            )}
+                <input id="submit-button" type="submit" value={idroles ? "Update" : "Save"} />
+                <Link to="/admin/roles">
+                    <input id="goback-button" type="button" value="Cancel" />
+                </Link>
+            </form>
         </div>
     );
 };

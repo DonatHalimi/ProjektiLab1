@@ -30,10 +30,10 @@ const Login = () => {
 
       if (response.data.message) {
         setLoginStatus(response.data.message);
-      } else if (response.data[0].Role === 2) {
+      } else if (response.data[0].Role === 3) {
         navigate("/");
         setLoginStatus(response.data[0].Name);
-      } else if (response.data[0].Role === 1) {
+      } else if (response.data[0].Role === 2) {
         navigate("/admin/users");
         setLoginStatus(response.data[0].Name);
       } else {

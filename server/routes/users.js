@@ -85,22 +85,32 @@ router.delete('/remove/:id', (req, res) => {
 })
 
 // Insertimi i userave nga Register-formi
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
+    const { Name, Surname, Email, Password, Role } = req.body;
 
-    const { Name, Surname, Email, Password, Role } = req.body
-    const sqlInsert = "INSERT INTO users (Name, Surname, Email, Password, Role)VALUES (?,?,?,?,?)"
-    bcrypt.hash(Password, saltRounds, (err, hash) => {
-        pool.query(sqlInsert, [Name, Surname, Email, hash, Role], (error, result) => {
-            if (error) {
-                console.log(error)
-                res.status(500).send({ error: "Error inserting data into database" })
-            } else {
-                console.log(result)
-                res.sendStatus(200)
-            }
-        })
-    })
-})
+    try {
+        // Check if the user with the provided email already exists
+        const existingUser = await pool.query("SELECT * FROM users WHERE Email = ?", [Email]);
+
+        // If user already exists, return an error
+        if (existingUser.length > 0) {
+            return res.status(400).json({ message: "User with this email already exists" });
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(Password, saltRounds);
+
+        // Insert the new user into the database
+        await pool.query("INSERT INTO users (Name, Surname, Email, Password, Role) VALUES (?, ?, ?, ?, ?)", [Name, Surname, Email, hashedPassword, Role]);
+
+        // Send success response
+        res.sendStatus(200);
+    } catch (error) {
+        console.error("Error registering user:", error);
+        res.status(500).json({ error: "Error registering user" });
+    }
+});
+
 
 // Krijojme nje API POST per kerkesa te lidhura me autentifikimin e perdoruesit ne aplikacion
 router.post('/login', (req, res) => {

@@ -97,7 +97,7 @@ function App() {
 
               <Route path="/admin/roles" element={<RolesTable />} />
               <Route path="/roles/addRole" element={<AddEditRoles />} />
-              <Route path="/roles/updateRoles/:id" element={<AddEditRoles />} />
+              <Route path="/roles/updateRoles/:idroles" element={<AddEditRoles />} />
             </Routes>
             <ToTop />
           </BrowserRouter>

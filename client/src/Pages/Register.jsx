@@ -29,7 +29,7 @@ export const Register = () => {
         Surname: values.Surname,
         Email: values.Email,
         Password: values.Password,
-        Role: 2
+        Role: 3
       });
 
       if (response.data.message) {

@@ -19,7 +19,7 @@ router.get('/get', (req, res) => {
     });
 });
 
-router.get('/roles/:idroles', (req, res) => {
+router.get('/get/:idroles', (req, res) => {
     const roleId = req.params.idroles;
     const sqlGetRoleById = 'SELECT * FROM roles WHERE idroles = ?';
     pool.query(sqlGetRoleById, roleId, (error, result) => {
