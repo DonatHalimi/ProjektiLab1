@@ -56,7 +56,7 @@ export const AdminData = [
     },
     {
         slug: 'roles',
-        icon: 'fa-solid fa-user-crown',
+        icon: 'fa-solid fa-user-lock',
         label: 'Roles',
         url: '/admin/roles',
     }

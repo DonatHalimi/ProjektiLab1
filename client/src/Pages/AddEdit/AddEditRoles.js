@@ -28,7 +28,7 @@ const AddEditRoles = () => {
         };
     
         fetchRoleData();
-    }, [id]);
+    }, [idroles]);
     
 
     const handleSubmit = async (e) => {

@@ -5,42 +5,57 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/AddEditStyle.css";
 
+const initialState = {
+    id: "",
+    Name: "",
+    Surname: "",
+    Email: "",
+    Password: "",
+    Role: "",
+    idroles:"",
+    roles: [],
+};
 const AddEditUser = () => {
-    const [state, setState] = useState({
-        Name: "",
-        Surname: "",
-        Email: "",
-        Password: "",
-        Role: "",
-        roles: [],
-    });
+    const [state, setState] = useState(initialState);
     const navigate = useNavigate();
     const { id } = useParams();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const rolesResponse = await axios.get("http://localhost:6001/api/roles");
-                setState(prevState => ({
-                    ...prevState,
-                    roles: rolesResponse.data
-                }));
+  useEffect(() => {
 
-                if (id) {
-                    const userResponse = await axios.get(`http://localhost:6001/api/user/get/${id}`);
-                    const userData = userResponse.data[0];
-                    setState(prevState => ({
-                        ...prevState,
-                        ...userData
-                    }));
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
+    const fetchUserData = async () => {
+      try {
+        if (id) {
+          const response = await axios.get(`http://localhost:6001/api/user/get/${id}`);
+          const userData = response.data[0];
 
-        fetchData();
-    }, [id]);
+          setState((prevState) => ({
+            ...prevState,
+            ...userData,
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get("http://localhost:6001/api/roles/get");
+        setState((prevState) => ({
+          ...prevState,
+          roles: response.data,
+        }));
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -87,14 +102,11 @@ const AddEditUser = () => {
         }
     };
 
+    // Handle input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setState(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        setState((prevState) => ({ ...prevState, [name]: value }));
     };
-
     return (
         <div style={{ marginTop: "150px" }}>
             <h2>{id ? "Edit" : "Add"} User</h2>
@@ -137,7 +149,7 @@ const AddEditUser = () => {
                     <select value={state.Role || ""} onChange={handleInputChange} id="Role" name="Role">
                         <option value="" disabled>Select a Role</option>
                         {state.roles.map(role => (
-                            <option key={role.id} value={role.id}>{role.role_name}</option>
+                            <option key={role.idroles} value={role.idroles}>{role.role_name}</option>
                         ))}
                     </select>
                 </div>

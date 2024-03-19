@@ -84,3 +84,5 @@ router.delete('/remove/:idroles', (req, res) => {
     });
 });
 
+module.exports = router;
+
