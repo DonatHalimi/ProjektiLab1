@@ -41,6 +41,8 @@ import AddEditCountry from "./Pages/AddEdit/AddEditCountry"
 import PaymentsTable from "./Pages/Tables/PaymentsTable"
 import RolesTable from "./Pages/Tables/RolesTable"
 import AddEditRoles from "./Pages/AddEdit/AddEditRoles"
+import FAQs from "./components/FAQs"
+import { Contact } from "./components/Contact"
 
 function App() {
   return (
@@ -64,6 +66,9 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/Admin" element={<Navigate replace to="/admin/users" />} />
+              <Route path="/FAQs" element={<FAQs />} />
+              <Route path="/Contact" element={<Contact />} />
+
               <Route path="/user/addUser" element={<AddEditUser />} />
               <Route path="/user/update/:id" element={<AddEditUser />} />
               <Route path="/addProduct" element={<AddEditProduct />} />
@@ -93,7 +98,7 @@ function App() {
               <Route path="/admin/suppliers" element={<SuppliersTable />} />
               <Route path="/admin/brands" element={<BrandsTable />} />
               <Route path="/admin/countries" element={<CountryTable />} />
-              <Route path="/admin/payments" element={<PaymentsTable/>} />
+              <Route path="/admin/payments" element={<PaymentsTable />} />
 
               <Route path="/admin/roles" element={<RolesTable />} />
               <Route path="/roles/addRole" element={<AddEditRoles />} />

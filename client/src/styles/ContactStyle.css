@@ -1,0 +1,62 @@
+.emailContainer {
+    margin-top: 200px;
+    padding: 20px;
+    margin-bottom: 200px;
+}
+
+.contact-form {
+    padding: 34px;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 9px;
+    margin: 0 auto;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.title {
+    margin-bottom: 20px;
+    user-select: none;    
+}
+
+#user_name {
+    margin-right: 300px;
+    width: 100%;
+    padding: 8px;
+    position: relative;
+    right: 8px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#user_email,
+#message {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    background-color: #4b5563;
+    color: #ffffff;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 195px;
+    transition: background-color 0.3s ease-in-out;
+    user-select: none;
+}
+
+.button:hover {
+    background-color: #4a5568;
+}

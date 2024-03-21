@@ -24,6 +24,12 @@ export const MenuData = [
         component: <Cart />
     },
     {
+        title: "Contact",
+        url: "/Contact",
+        cName: "nav-links",
+        icon: "fa-solid fa-envelope",
+    },
+    {
         title: "About Us",
         url: "/AboutUs",
         cName: "nav-links",

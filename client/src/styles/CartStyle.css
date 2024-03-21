@@ -88,7 +88,6 @@ h1 {
     position: relative;
     top: 450px;
     text-align: center;
-    margin-top: 50px;
     font-size: 24px;
 }
 
@@ -111,11 +110,12 @@ h1 {
 .noItemsInCart img {
     position: relative;
     bottom: 320px;
-    left: 45%;
+    left: 45.5%;
     width: 460px;
     height: auto;
-    position: relative;
+    margin-top: 50px;
     transform: translateX(-165%);
+    user-select: none;
 }
 
 .noItemsInCart a:hover {

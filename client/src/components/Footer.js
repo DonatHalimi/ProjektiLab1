@@ -1,9 +1,9 @@
-import React from 'react';
-import LogoImage from '../img/Logo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import 'font-awesome/css/font-awesome.min.css';
-import "../styles/FooterStyle.css";
+import React from 'react'
+import LogoImage from '../img/Logo.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
+import 'font-awesome/css/font-awesome.min.css'
+import "../styles/FooterStyle.css"
 
 const Footer = () => {
     return (
@@ -13,12 +13,13 @@ const Footer = () => {
 
                 {/* Linkat e navbar-it */}
                 <p className="footer-links">
-                    <a href="/" className="link-1">Home</a>
-                    <a href="/Categories">Categories</a>
+                    <a href="/Home" className="link-1">Home</a>
                     <a href="/Wishlist">Wishlist</a>
                     <a href="/Cart">Cart</a>
+                    <a href="/Contact">Contact</a>
+                    <a href="/FAQs">FAQs</a>
                     <a href="/AboutUs">About</a>
-                    <a href="Log in">Log In</a>
+                    <a href="/LogIn">Log In</a>
                 </p>
                 <p className="footer-company-name">Ruby © 2023</p>
             </div>
@@ -61,7 +62,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
-    );
-};
+    )
+}
 
-export default Footer;
+export default Footer

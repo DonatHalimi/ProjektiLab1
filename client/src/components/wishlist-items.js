@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { WishlistContext } from '../context/wishlist-context';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/shop-context';
@@ -7,15 +7,11 @@ import { BsTrash3 } from "react-icons/bs";
 import '../styles/WishlistItemsStyle.css';
 import '../styles/ProductStyle.css'
 import { toast } from 'react-toastify';
-import { navigate } from 'react-router-dom';
 
 function WishlistItem(props) {
     const wishlist = useContext(WishlistContext);
     const cart = useContext(ShopContext);
     const { products } = props;
-
-    const [showAlertCart, setShowAlertCart] = useState(false);
-    const [showAlertWishlist, setShowAlertWishlist] = useState(false);
 
     const navigate = useNavigate();
 
@@ -55,11 +51,6 @@ function WishlistItem(props) {
             },
         }, 50);
     };
-
-    const Cmimi = parseFloat(product.Cmimi).toFixed(2);
-
-    console.log(products);
-    console.log(typeof product.Cmimi);
 
     // Renderimi i HTML formes per shfaqjen e Adminit dashboard
     return (

@@ -24,6 +24,7 @@
     cursor: pointer;
     position: relative;
     top: 8px;
+    user-select: none;
 }
 
 .fa-react {

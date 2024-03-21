@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 import "../styles/HomeStyle.css";
 import Categories from "./Categories";
+import Testimonials from "./Testimonials";
 
 function Home() {
     const [products, setProducts] = useState([]);
@@ -158,7 +159,7 @@ function Home() {
                 )}
             </div>
 
-            <div className="empty-div"></div>
+            <Testimonials />
 
             <Footer />
         </>

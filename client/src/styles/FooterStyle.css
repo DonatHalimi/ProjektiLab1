@@ -37,6 +37,10 @@ section {
   margin-top: auto;
 }
 
+.footer-left img {
+  user-select: none;
+}
+
 .footer-distributed h3 {
   color: #ffffff;
   font: normal 36px 'Open Sans', cursive;
@@ -71,6 +75,7 @@ section {
   font-size: 14px;
   font-weight: normal;
   margin: 0;
+  user-select: none;
 }
 
 .footer-distributed .footer-center {
@@ -163,6 +168,7 @@ section {
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 20px;
+  user-select: none;
 }
 
 .footer-distributed .footer-icons {

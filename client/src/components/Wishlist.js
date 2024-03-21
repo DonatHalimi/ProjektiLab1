@@ -13,7 +13,6 @@ const Wishlist = () => {
 
     // Merr kontekstin e dyqanit nga komponenti ShopContext
     const { items, removeItemFromWishlist } = useContext(WishlistContext);
-    const [showAlertRemove, setShowAlertRemove] = useState(false);
 
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();

@@ -21,7 +21,7 @@ const Navbar = (props) => {
   return (
     <nav className="NavbarItems">
       {/* Krijimi i logose */}
-      <Link to="/" className="logo" style={{ textDecoration: 'none' }} title="Home">
+      <Link to="/Home" className="logo" style={{ textDecoration: 'none' }} title="Home">
         <img src={LogoImage} alt="Logo" style={{ width: '150px', height: 'auto', marginBottom: '10px' }} />
       </Link>
 

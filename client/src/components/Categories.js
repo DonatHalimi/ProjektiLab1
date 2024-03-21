@@ -6,8 +6,6 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 6;
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -33,12 +31,8 @@ const Categories = () => {
         document.title = `Ruby | Categories | Page ${pageParam || 1}`;
     }, [location.pathname, location.search, navigate]);
 
-    const offset = currentPage * itemsPerPage;
-    const currentCategories = categories.slice(offset, offset + itemsPerPage);
-
     return (
         <div className="categories container mx-auto flex flex-col items-center">
-
             <Splide
                 options={{
                     fixedWidth: 200,
@@ -52,7 +46,8 @@ const Categories = () => {
                         },
                     },
                 }}>
-                {currentCategories.map((category) => (
+                    
+                {categories.map((category) => (
                     <SplideSlide key={category.idcategory} className="category-item" style={{ border: '1px solid #D8CACA', margin: '8px', borderRadius: '5px', padding: '8px', textDecoration: 'none' }}>
                         <Link
                             to={`/products/${category.idcategory}`}

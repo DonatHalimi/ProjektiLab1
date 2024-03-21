@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
@@ -178,7 +177,6 @@ function ProductDetails() {
                     )}
                 </div>
 
-
                 {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqen infot e produktit */}
                 {!isImageEnlarged && (
                     <div className="product-info">
@@ -203,49 +201,49 @@ function ProductDetails() {
                 )}
             </div>
 
-            <div className='brand-supplier-container'>
-                <div className="brand-info">
-                    <h3>Brand Information</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Name:</td>
-                                <td>{brand && brand.length > 0 ? brand[0].Name : '-'}</td>
-                            </tr>
-                            <tr>
-                                <td>Description:</td>
-                                <td>{brand && brand.length > 0 ? brand[0].Description : '-'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            {!isImageEnlarged && (
+                <div className='brand-supplier-container'>
+                    <div className="brand-info">
+                        <h3>Brand Information</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td>{brand && brand.length > 0 ? brand[0].Name : '-'}</td>
+                                </tr>
+                                <tr>
+                                    <td>Description:</td>
+                                    <td>{brand && brand.length > 0 ? brand[0].Description : '-'}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div className="supplier-info">
-                    <h3>Supplier Information</h3>
-                    <table>
+                    <div className="supplier-info">
+                        <h3>Supplier Information</h3>
+                        <table>
 
-                        <tbody>
-                            <tr>
-                                <td>Name:</td>
-                                <td>{supplier && supplier.length > 0 ? supplier[0].Name : '-'}</td>
-                            </tr>
-                            <tr>
-                                <td>Phone:</td>
-                                <td>{supplier && supplier.length > 0 ? supplier[0].Phone : '-'}</td>
-                            </tr>
-                            <tr>
-                                <td>Address:</td>
-                                <td>{supplier && supplier.length > 0 ? supplier[0].Address : '-'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td>{supplier && supplier.length > 0 ? supplier[0].Name : '-'}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td>{supplier && supplier.length > 0 ? supplier[0].Phone : '-'}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>{supplier && supplier.length > 0 ? supplier[0].Address : '-'}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqet footeri */}
-            {!isImageEnlarged && (
-                <Footer />
-            )}
+            {!isImageEnlarged && <Footer />}
         </>
     );
 }

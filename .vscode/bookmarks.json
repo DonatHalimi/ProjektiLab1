@@ -169,7 +169,7 @@
 			"path": "client/src/components/wishlist-items.js",
 			"bookmarks": [
 				{
-					"line": 29,
+					"line": 25,
 					"column": 4,
 					"label": "handleAddOneToCart()"
 				}
@@ -179,12 +179,12 @@
 			"path": "client/src/components/Wishlist.js",
 			"bookmarks": [
 				{
-					"line": 21,
+					"line": 20,
 					"column": 21,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 57,
+					"line": 56,
 					"column": 18,
 					"label": "HTML Render"
 				}
