@@ -43,6 +43,8 @@ import RolesTable from "./Pages/Tables/RolesTable"
 import AddEditRoles from "./Pages/AddEdit/AddEditRoles"
 import FAQs from "./components/FAQs"
 import { Contact } from "./components/Contact"
+import TransportTable from "./Pages/Tables/TransportTable"
+import AddEditTransport from "./Pages/AddEdit/AddEditTransport"
 
 function App() {
   return (
@@ -103,6 +105,10 @@ function App() {
               <Route path="/admin/roles" element={<RolesTable />} />
               <Route path="/roles/addRole" element={<AddEditRoles />} />
               <Route path="/roles/updateRoles/:idroles" element={<AddEditRoles />} />
+              <Route path="/admin/transport" element={<TransportTable/>} />
+              <Route path="/addTransport" element={<AddEditTransport />} />
+              <Route path="/transport/updateTransport/:transportId" element={<AddEditTransport />} />
+
             </Routes>
             <ToTop />
           </BrowserRouter>

@@ -20,7 +20,7 @@ export const AdminData = [
     },
     {
         slug: 'suppliers',
-        icon: 'fa-solid fa-truck-fast',
+        icon: 'fa-solid fa-train',
         label: 'Suppliers',
         url: '/admin/suppliers',
     },
@@ -59,5 +59,11 @@ export const AdminData = [
         icon: 'fa-solid fa-user-lock',
         label: 'Roles',
         url: '/admin/roles',
+    },
+    {
+        slug: 'transport',
+        icon: 'fa-solid fa-shipping-fast',
+        label: 'Transport',
+        url: '/admin/transport',
     }
 ]
