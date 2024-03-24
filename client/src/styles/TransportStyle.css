@@ -1,0 +1,22 @@
+.transport-container {
+    margin-top: 200px;
+  }
+  
+  .transport-label {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .transport-select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: fit-content;
+  }
+  
+  .transport-option {
+    font-size: 16px;
+  }
+  

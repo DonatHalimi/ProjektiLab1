@@ -57,8 +57,8 @@ h1 {
 }
 
 .cart-total {
-    position: relative;
-    top: 60px;
+    position: absolute;
+    right: 20px; /* Adjust this value as needed */
 }
 
 #addButton,
@@ -125,7 +125,6 @@ h1 {
 
 #purchaseButton {
     position: relative;
-    top: 90px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: rgb(98, 156, 170);
@@ -133,7 +132,7 @@ h1 {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-top: 130px;
+    margin-top: 50px;
 }
 
 #purchaseButton:hover {

@@ -120,7 +120,7 @@ const TransportTable = () => {
                                     <td>{transport.transportType}</td>
                                     <td>{transport.transportFee}</td>
                                     <td>
-                                        <Link to="/transport/addTransport" className='clickable-header'>
+                                        <Link to="/addTransport" className='clickable-header'>
                                             <button className="btn btn-User">
                                                 <BsPlusLg style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>

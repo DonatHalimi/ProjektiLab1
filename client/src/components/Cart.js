@@ -1,24 +1,23 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { ShopContext } from '../context/shop-context';
 import { Link } from 'react-router-dom';
 import CartItem from './cart-items';
 import Navbar from './Navbar';
 import Footer from '../components/Footer';
 import NoProductInCart from '../img/NoProductInCart.png';
-import "../styles/CartStyle.css"
+import "../styles/CartStyle.css";
+import Transport from './Transport';
 
-// Krijimi i funksionit per Cart
+
 const Cart = () => {
-
   document.title = "Ruby | Cart";
+  
 
-  // Merr kontekstin e dyqanit nga komponenti ShopContext
+
   const cart = useContext(ShopContext);
-
-  // Krijojme funksionin per me llogarit numrin total te produkteve ne shporte
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
 
-  // Krijimi i nje funksionit checkout per blerjen e produkteve
+ 
   const checkout = async () => {
     await fetch(`http://localhost:6001/checkout`, {
       method: "POST",
@@ -34,6 +33,7 @@ const Cart = () => {
       }
     })
   }
+  
 
   // Scroll to top on component render
   useEffect(() => {
@@ -52,11 +52,14 @@ const Cart = () => {
               {/* Per secilin produkt ne shporte, shfaqe komponentin CartItem */}
               {cart.items.map((currentProduct, idx) => (
                 <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
-              ))}
+                
+              ))
+              }
 
               {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes  */}
-              {/* <h1 className='cart-total'>Total: ${cart.getTotalCost().toFixed(2)}</h1> */}
 
+
+              <Transport/>
               <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>
             </>
             :

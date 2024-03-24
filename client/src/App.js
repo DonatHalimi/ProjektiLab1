@@ -70,7 +70,6 @@ function App() {
               <Route path="/Admin" element={<Navigate replace to="/admin/users" />} />
               <Route path="/FAQs" element={<FAQs />} />
               <Route path="/Contact" element={<Contact />} />
-
               <Route path="/user/addUser" element={<AddEditUser />} />
               <Route path="/user/update/:id" element={<AddEditUser />} />
               <Route path="/addProduct" element={<AddEditProduct />} />

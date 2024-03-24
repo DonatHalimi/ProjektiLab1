@@ -83,6 +83,15 @@ export function ShopContextProvider({ children }) {
     }
     return totalCost;
   }
+  function displayTotalCost() {
+    // Thirr funksionin per te marrur koston totale
+    const totalCost = getTotalCost();
+
+    // Kthe nje tekst qe permban koston totale dhe formatizoje si deshirohet
+    return `Total Cost: $${totalCost.toFixed(2)}`; // Format as desired
+  }
+
+
 
   // Krijimi i nje funksioni per largimin e produkteve nga shporta
   function deleteFromCart(id) {
@@ -104,6 +113,7 @@ export function ShopContextProvider({ children }) {
     removeOneFromCart,
     deleteFromCart,
     getTotalCost,
+    
   };
 
   // Kthen kontekstin e shportes te mbeshtjelle me <ShopContext.Provider> per te qene i perdorshem nga komponentet femije

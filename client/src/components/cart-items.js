@@ -14,7 +14,7 @@ function CartItem(props) {
   const quantity = props.quantity;
 
   const [products, setProducts] = useState([]);
-
+  const [transport,setTransport]=useState();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -33,6 +33,8 @@ function CartItem(props) {
 
     document.title = "Ruby | Cart";
   }, []);
+
+  
 
   const handleRemoveOneFromCart = () => {
     cart.removeOneFromCart(id);
@@ -72,6 +74,8 @@ if (!product) {
 
 const price = parseFloat(product.Cmimi);
 const totalCost = (quantity * price).toFixed(2);
+const totalCartPrice=(quantity * price).toFixed(2);
+
 
 return (
   <div className="cart-item">
@@ -88,6 +92,8 @@ return (
         <p className="total-cost">${totalCost}</p>
       </div>
 
+      
+      
       <div className='edit-buttons'>
         <button className='add-button' onClick={() => cart.addOneToCart(id)} title='Add'>
           <BsPlusLg />
@@ -101,7 +107,10 @@ return (
       </div>
     </div>
   </div>
+
+  
 );
+
 };
 
 export default CartItem;
