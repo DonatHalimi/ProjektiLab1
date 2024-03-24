@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
@@ -52,9 +52,6 @@ function Product(props) {
     // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
     return <div>Loading...</div>;
   }
-
-  // Numri i produkteve ne shporte
-  const itemsInCart = cart.items.length;
 
   return (
     <>

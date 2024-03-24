@@ -1,6 +1,7 @@
 import Cart from "./Cart"
 import Wishlist from "./Wishlist"
 import FAQs from "./FAQs"
+
 // Definimi i nje vargu te te dhenave te menyse per navbar
 export const MenuData = [
     {

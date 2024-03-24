@@ -1,10 +1,8 @@
 const express = require('express')
-const bcrypt = require('bcrypt')
 const router = express.Router()
-const { pool, queryAsync } = require('../db/db');
-const saltRounds = 10
+const { pool, queryAsync } = require('../db/db')
 
-// Get all users
+// Get all transport options
 router.get('/get', (req, res) => {
     const sqlGet = 'SELECT * FROM transport'
     pool.query(sqlGet, (error, result) => {
@@ -17,7 +15,7 @@ router.get('/get', (req, res) => {
     })
 })
 
-// Get user by ID
+// Get transport by ID
 router.get('/get/:transportId', (req, res) => {
     const { transportId } = req.params
     const sqlGet = 'SELECT * FROM transport WHERE transportId=?'
@@ -31,7 +29,7 @@ router.get('/get/:transportId', (req, res) => {
     })
 })
 
-// Add a new user
+// Add a new transport options
 router.post('/post', (req, res) => {
     const { companyName, phone, email, transportType, transportFee } = req.body
     const sqlInsert = 'INSERT INTO transport ( companyName, phone, email, transportType, transportFee) VALUES (?,?,?,?,?)'
@@ -46,9 +44,7 @@ router.post('/post', (req, res) => {
     })
 })
         
-
-
-// Update a user
+// Update a transport option
 router.put('/update/:transportId', (req, res) => {
     const { transportId } = req.params
     const {  companyName, phone, email, transportType, transportFee  } = req.body
@@ -64,7 +60,7 @@ router.put('/update/:transportId', (req, res) => {
     })
 })
 
-// Delete a user
+// Delete a transport option
 router.delete('/remove/:transportId', (req, res) => {
     const transportId = req.params.transportId
     const sqlRemove = 'DELETE FROM transport WHERE transportId=?'
@@ -78,7 +74,5 @@ router.delete('/remove/:transportId', (req, res) => {
         }
     })
 })
-
-
 
 module.exports = router

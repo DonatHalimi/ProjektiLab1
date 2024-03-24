@@ -8,18 +8,14 @@ import NoProductInCart from '../img/NoProductInCart.png';
 import "../styles/CartStyle.css";
 import Transport from './Transport';
 
-
 const Cart = () => {
   document.title = "Ruby | Cart";
-  
-
 
   const cart = useContext(ShopContext);
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
-
  
   const checkout = async () => {
-    await fetch(`http://localhost:6001/checkout`, {
+    await fetch(`http://localhost:6001/api/payments/checkout`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +29,6 @@ const Cart = () => {
       }
     })
   }
-  
 
   // Scroll to top on component render
   useEffect(() => {
@@ -55,9 +50,6 @@ const Cart = () => {
                 
               ))
               }
-
-              {/* Shfaqe vleren totale te shportes me 2 shifra pas presjes  */}
-
 
               <Transport/>
               <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>

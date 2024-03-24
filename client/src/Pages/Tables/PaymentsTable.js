@@ -12,7 +12,7 @@ const PaymentsTable = () => {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await fetch('http://localhost:6001/fetch-payments');
+                const response = await fetch('http://localhost:6001/api/payments/fetch-payments');
                 const paymentsData = await response.json();
                 setPayments(paymentsData);
             } catch (error) {

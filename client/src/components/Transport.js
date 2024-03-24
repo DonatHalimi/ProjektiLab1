@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/TransportStyle.css'; // Import CSS file for styling
+import '../styles/TransportStyle.css';
 
 function Transport() {
   const [transport, setTransport] = useState([]);

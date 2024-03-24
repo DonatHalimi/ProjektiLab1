@@ -4,8 +4,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const stripe = require('stripe')('sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax');
-const { pool, queryAsync } = require('./db/db');
 
 console.log('MySQL Connection Configuration:', {
     host: 'localhost',
@@ -41,91 +39,6 @@ app.use(
     },)
 )
 
-// Secret key: sk_test_51NDEMaHB8rLE0wX1MgGBJL3DRWoNhZDfuhUoEnopzmJWlJTekmQxFpADJPMTb8HXtF2QnevzC4OgUiqJlyNyOkqG00HsjmDZax
-// Maic:price_1NDESDHB8rLE0wX1TGxQmkVO
-// Pantolla:price_1NDETcHB8rLE0wX1hBgetkUb
-
-app.post('/checkout', async (req, res) => {
-    console.log(req.body);
-    const items = req.body.items;
-    let lineItems = [];
-    items.forEach((item) => {
-        lineItems.push(
-            {
-                price: item.id,
-                quantity: item.quantity
-            }
-        )
-    });
-
-    const session = await stripe.checkout.sessions.create({
-        line_items: lineItems,
-        mode: 'payment',
-        success_url: "http://localhost:3000/Success",
-        cancel_url: "http://localhost:3000/Cancel"
-    })
-
-    res.send(JSON.stringify({
-        url: session.url
-    }))
-
-
-});
-
-// Route to fetch payments
-app.get('/fetch-payments', async (req, res) => {
-    try {
-        const paymentsData = await fetchPayments();
-        res.json(paymentsData);
-        // Insert payments into the database
-        await insertPaymentsIntoDatabase(paymentsData);
-    } catch (error) {
-        console.error('Error fetching or inserting payments:', error);
-        res.status(500).json({ error: 'Error fetching or inserting payments' });
-    }
-});
-
-// Function to fetch payments from Stripe
-async function fetchPayments() {
-    try {
-        const payments = await stripe.charges.list({ limit: 100 });
-        console.log(payments.data);
-
-        return payments.data;
-    } catch (error) {
-        throw error;
-    }
-}
-
-async function insertPaymentsIntoDatabase(paymentsData) {
-    try {
-        for (const payment of paymentsData) {
-            const { id, amount, billing_details, payment_method_details, status } = payment;
-            const { email, name } = billing_details;
-            const { type } = payment_method_details;
-
-            const query = 'INSERT INTO payments (id, amount, email, name, payment_method_type, status) VALUES (?, ?, ?, ?, ?, ?)';
-            const values = [id, amount, email, name, type, status];
-
-            // Execute the query
-            try {
-                await queryAsync(query, values);
-                console.log(`Payment with id ${id} inserted successfully`);
-            } catch (error) {
-                // Handle duplicate entry error
-                if (error.code === 'ER_DUP_ENTRY') {
-                    console.log(`Payment with id ${id} already exists in the database. Skipping insertion.`);
-                } else {
-                    throw error;
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error inserting payment data into database:', error);
-        throw error;
-    }
-}
-
 // Importing route modules for the below entities
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
@@ -137,7 +50,7 @@ const brandRoutes = require('./routes/brands');
 const countryRoutes = require('./routes/country');
 const rolesRoutes = require('./routes/roles');
 const transportRoutes = require('./routes/transport');
-
+const paymentsRoute = require('./routes/payments');
 
 // Assigning specific route modules to corresponding API paths
 app.use('/api/user', userRoutes);
@@ -149,6 +62,8 @@ app.use('/api/suppliers', supplierRoutes);
 app.use('/api/brands', brandRoutes);
 app.use('/api/countries', countryRoutes);
 app.use('/api/transport', transportRoutes);
+app.use('/api/roles', rolesRoutes);
+app.use('/api/payments', paymentsRoute);
 
 // Fillimi i serverit ne portin 6001 dhe shfaqja e mesazhit ne terminal duke konfirmuar se serveri eshte aktivizuar
 const PORT = 6001;

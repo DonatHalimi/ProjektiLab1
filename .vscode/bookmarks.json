@@ -4,7 +4,7 @@
 			"path": "server/server.js",
 			"bookmarks": [
 				{
-					"line": 20,
+					"line": 18,
 					"column": 10,
 					"label": "USERS CRUD"
 				}
@@ -84,27 +84,27 @@
 			"path": "client/src/context/shop-context.js",
 			"bookmarks": [
 				{
-					"line": 18,
+					"line": 20,
 					"column": 2,
 					"label": "getProductQuantity();"
 				},
 				{
-					"line": 31,
+					"line": 33,
 					"column": 2,
 					"label": "addOneToCart();"
 				},
 				{
-					"line": 57,
+					"line": 59,
 					"column": 2,
 					"label": "removeOneFromCart();"
 				},
 				{
-					"line": 72,
+					"line": 74,
 					"column": 2,
 					"label": "getTotalCost();"
 				},
 				{
-					"line": 109,
+					"line": 111,
 					"column": 2,
 					"label": "HTML Render"
 				}

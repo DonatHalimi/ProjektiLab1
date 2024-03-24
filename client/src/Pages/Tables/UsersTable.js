@@ -94,7 +94,7 @@ const UsersTable = () => {
                                 <td>{user.Surname}</td>
                                 <td>{user.Email}</td>
                                 <td>●●●●●●</td>
-                                <td>{user.Role === 1 ? 'Admin' : 'User'}</td>
+                                <td>{user.Role === 2 ? 'Admin' : 'User'}</td>
                                 <td>
                                     <Link to='/user/addUser'>
                                         <button className="btn btn-User">
