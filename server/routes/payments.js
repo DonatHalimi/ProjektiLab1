@@ -10,30 +10,57 @@ const { pool, queryAsync } = require('../db/db');
 // Pantolla:price_1NDETcHB8rLE0wX1hBgetkUb
 
 // New Checkout Session with the specified line items and Stripe settings.
+// New Checkout Session with the specified line items and Stripe settings.
 router.post('/checkout', async (req, res) => {
-    console.log(req.body);
-    const items = req.body.items;
-    let lineItems = [];
-    items.forEach((item) => {
-        lineItems.push(
-            {
-                price: item.id,
-                quantity: item.quantity
-            }
-        )
-    });
+    try {
+        const items = req.body.items;
+        let lineItems = [];
+        items.forEach((item) => {
+            lineItems.push(
+                {
+                    price: item.id,
+                    quantity: item.quantity
+                }
+            )
+        });
+      
 
-    const session = await stripe.checkout.sessions.create({
-        line_items: lineItems,
-        mode: 'payment',
-        success_url: "http://localhost:3000/Success",
-        cancel_url: "http://localhost:3000/Cancel"
-    })
+        // Add shipping option to the line items
+        lineItems.push({
+            price_data: {
+                currency: 'usd', // Assuming your prices are in USD, adjust if necessary
+                product_data: {
+                    name: 'Shipping', // Provide a name for the shipping option
+                },
+                unit_amount: 500, // Shipping cost in cents
+            },
+            quantity: 1, // Assuming one unit of shipping
+        });
 
-    res.send(JSON.stringify({
-        url: session.url
-    }))
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: lineItems,
+            mode: 'payment',
+            success_url: "http://localhost:3000/Success",
+            cancel_url: "http://localhost:3000/Cancel",
+            // Add shipping information
+            shipping_address_collection: {
+                allowed_countries: ['US', 'CA', 'AL'], // Adjust as necessary
+            },
+            // No need to specify shipping options here since they are included in line_items
+        });
+
+        res.send(JSON.stringify({
+            url: session.url
+        }));
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+        res.status(500).send({ error: 'Unable to create checkout session' });
+    }
 });
+
+
+
 
 // Route to fetch payment data
 router.get('/fetch-payments', async (req, res) => {
