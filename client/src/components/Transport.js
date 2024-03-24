@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/TransportStyle.css';
 
-function Transport() {
+function Transport({ setSelectedTransportMode }) {
   const [transport, setTransport] = useState([]);
   const [selectedTransport, setSelectedTransport] = useState('');
   const [selectedTransportDetails, setSelectedTransportDetails] = useState(null);
@@ -26,7 +26,8 @@ function Transport() {
   useEffect(() => {
     const selectedTransportDetail = transport.find(option => option.transportId == selectedTransport);
     setSelectedTransportDetails(selectedTransportDetail);
-  }, [selectedTransport, transport]);
+    setSelectedTransportMode(selectedTransportDetail?.transportType);
+  }, [selectedTransport, transport, setSelectedTransportMode]);
 
   const handleChange = (event) => {
     const selectedId = event.target.value;
@@ -46,13 +47,34 @@ function Transport() {
       </select>
       {/* Conditional rendering to display details */}
       {selectedTransportDetails && (
-        <div className="transport-details">
-          <p>Company: {selectedTransportDetails.companyName}</p>
-          <p>Type: {selectedTransportDetails.transportType}</p>
-          <p>Fee: ${selectedTransportDetails.transportFee}</p>
-          <p>Phone: +383{selectedTransportDetails.phone}</p>
-          <p>Email: {selectedTransportDetails.email}</p>
-
+        <div className="transport-info-container">
+          <div className="transport-info">
+            <h3>Transport Information</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Company:</td>
+                  <td>{selectedTransportDetails?.companyName || '-'}</td>
+                </tr>
+                <tr>
+                  <td>Type:</td>
+                  <td>{selectedTransportDetails?.transportType || '-'}</td>
+                </tr>
+                <tr>
+                  <td>Fee:</td>
+                  <td>${selectedTransportDetails?.transportFee || '-'}</td>
+                </tr>
+                <tr>
+                  <td>Phone:</td>
+                  <td>+383{selectedTransportDetails?.phone || '-'}</td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td>{selectedTransportDetails?.email || '-'}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

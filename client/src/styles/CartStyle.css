@@ -58,7 +58,8 @@ h1 {
 
 .cart-total {
     position: absolute;
-    right: 20px; /* Adjust this value as needed */
+    right: 20px;
+    /* Adjust this value as needed */
 }
 
 #addButton,
@@ -125,6 +126,7 @@ h1 {
 
 #purchaseButton {
     position: relative;
+    bottom: 45px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: rgb(98, 156, 170);

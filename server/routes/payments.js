@@ -10,44 +10,47 @@ const { pool, queryAsync } = require('../db/db');
 // Pantolla:price_1NDETcHB8rLE0wX1hBgetkUb
 
 // New Checkout Session with the specified line items and Stripe settings.
-// New Checkout Session with the specified line items and Stripe settings.
 router.post('/checkout', async (req, res) => {
     try {
-        const items = req.body.items;
+        const { items, transportMode } = req.body;
+
+        // Fetch all transport options for the selected transport mode
+        const transportOptions = await getTransportOptions(transportMode);
+
         let lineItems = [];
+
+        // Add items to lineItems
         items.forEach((item) => {
-            lineItems.push(
-                {
-                    price: item.id,
-                    quantity: item.quantity
-                }
-            )
+            lineItems.push({
+                price: item.id,
+                quantity: item.quantity
+            });
         });
-      
 
-        // Add shipping option to the line items
-        lineItems.push({
-            price_data: {
-                currency: 'usd', // Assuming your prices are in USD, adjust if necessary
-                product_data: {
-                    name: 'Shipping', // Provide a name for the shipping option
+        // Add transport options to lineItems
+        transportOptions.forEach((transport) => {
+            lineItems.push({
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: transport.transportType,
+                    },
+                    unit_amount: transport.transportFee * 100,
                 },
-                unit_amount: 500, // Shipping cost in cents
-            },
-            quantity: 1, // Assuming one unit of shipping
+                quantity: 1,
+            });
         });
 
+        // Create a checkout session with lineItems
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
             success_url: "http://localhost:3000/Success",
             cancel_url: "http://localhost:3000/Cancel",
-            // Add shipping information
             shipping_address_collection: {
-                allowed_countries: ['US', 'CA', 'AL'], // Adjust as necessary
+                allowed_countries: ['US', 'CA', 'AL'],
             },
-            // No need to specify shipping options here since they are included in line_items
         });
 
         res.send(JSON.stringify({
@@ -59,8 +62,23 @@ router.post('/checkout', async (req, res) => {
     }
 });
 
+// Function to get transport options for a specific transport mode
+async function getTransportOptions(transportMode) {
+    try {
+        let sqlGet;
+        let params;
 
+        // Retrieve transport options based on the selected transport mode
+        sqlGet = 'SELECT * FROM transport WHERE transportType = ?';
+        params = [transportMode];
 
+        const results = await queryAsync(sqlGet, params);
+        return results;
+    } catch (error) {
+        console.error('Error retrieving transport options:', error);
+        return [];
+    }
+}
 
 // Route to fetch payment data
 router.get('/fetch-payments', async (req, res) => {

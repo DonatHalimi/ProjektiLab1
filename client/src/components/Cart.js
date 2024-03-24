@@ -13,22 +13,42 @@ const Cart = () => {
 
   const cart = useContext(ShopContext);
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
- 
+  const [selectedTransportMode, setSelectedTransportMode] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
+
   const checkout = async () => {
-    await fetch(`http://localhost:6001/api/payments/checkout`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ items: cart.items })
-    }).then((response) => {
-      return response.json();
-    }).then((response) => {
-      if (response.url) {
-        window.location.assign(response.url);
+    const requestBody = {
+      items: cart.items,
+      transportMode: selectedTransportMode
+    };
+
+    try {
+      const response = await fetch(`http://localhost:6001/api/payments/checkout`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    })
-  }
+
+      const responseData = await response.json();
+
+      if (responseData.url) {
+        window.location.assign(responseData.url);
+      }
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+    }
+  };
+
+  useEffect(() => {
+    // Update button disabled state based on selected transport mode
+    setIsDisabled(!selectedTransportMode);
+  }, [selectedTransportMode]);
 
   // Scroll to top on component render
   useEffect(() => {
@@ -40,31 +60,28 @@ const Cart = () => {
       <Navbar />
 
       <div>
-        {/* <h1 className='cart-name'></h1> */}
         <div className="cart-items">
           {productsCount > 0 ?
             <>
-              {/* Per secilin produkt ne shporte, shfaqe komponentin CartItem */}
               {cart.items.map((currentProduct, idx) => (
                 <CartItem key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartItem>
-                
               ))
               }
 
-              <Transport/>
-              <button id='purchaseButton' variant="success" onClick={checkout}>Purchase items</button>
+              <Transport setSelectedTransportMode={setSelectedTransportMode} />
+              <button id='purchaseButton' variant="success" onClick={checkout} disabled={isDisabled}>Purchase items</button>
             </>
             :
             <div className='noItemsInCart'>
               <img src={NoProductInCart} alt="NoProductInCart" />
-              <p>Ju nuk keni ndonjë produkt në shportë.</p>
-              <Link to="/">Kthehu në faqen kryesore</Link>
+              <p>You have no products in your cart.</p>
+              <Link to="/">Go back to the main page</Link>
             </div>
           }
         </div>
       </div>
 
-      <div style={{ height: '500px' }}></div>
+      <div style={{ height: '330px' }}></div>
 
       <Footer />
     </>

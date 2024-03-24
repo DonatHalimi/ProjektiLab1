@@ -1,22 +1,105 @@
 .transport-container {
-    margin-top: 200px;
-  }
-  
-  .transport-label {
-    font-size: 18px;
-    margin-right: 10px;
-  }
-  
-  .transport-select {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    width: fit-content;
-  }
-  
-  .transport-option {
-    font-size: 16px;
-  }
-  
+  margin-top: 200px;
+}
+
+.transport-label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.transport-select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: fit-content;
+}
+
+.transport-option {
+  font-size: 16px;
+}
+
+#purchaseButton[disabled] {
+  background-color: #cccccc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.transport-container {
+  position: fixed;
+}
+
+.transport-info {
+  width: 25%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.transport-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.transport-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transport-info th,
+.transport-info td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.transport-info th {
+  background-color: #f2f2f2;
+}
+
+.transport-info td:first-child {
+  font-weight: bold;
+}
+
+.transport-info tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.transport-container {
+  position: sticky;
+}
+
+.transport-info {
+  width: 25%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.transport-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.transport-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transport-info th,
+.transport-info td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.transport-info th {
+  background-color: #f2f2f2;
+}
+
+.transport-info td:first-child {
+  font-weight: bold;
+}
+
+.transport-info tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
