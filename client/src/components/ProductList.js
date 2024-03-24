@@ -95,35 +95,34 @@ function ProductList(props) {
         document.title = `Ruby | ${category}`;
     }, [category]);
 
+    useEffect(() => {
+        if (sortOrder !== null) {
+            sortProducts();
+        }
+    }, [sortOrder]);
+
     const handleSortOrderChange = (event) => {
         setSortOrder(event.target.value);
     };
 
-    useEffect(() => {
-        const sortProducts = () => {
-            let sortedProducts;
+    const sortProducts = () => {
+        let sortedProducts;
 
-            const productsArray = [...products];
+        const productsArray = [...products];
 
-            if (sortOrder === "titleAsc") {
-                sortedProducts = productsArray.sort((a, b) => a.Emri.localeCompare(b.Emri));
-            } else if (sortOrder === "titleDesc") {
-                sortedProducts = productsArray.sort((a, b) => b.Emri.localeCompare(a.Emri));
-            } else if (sortOrder === "priceAsc") {
-                sortedProducts = productsArray.sort((a, b) => a.Cmimi - b.Cmimi);
-            } else if (sortOrder === "priceDesc") {
-                sortedProducts = productsArray.sort((a, b) => b.Cmimi - a.Cmimi);
-            } else if (sortOrder === "relevance") {
-                sortedProducts = productsArray;
-            }
-
-            setProducts(sortedProducts);
-        };
-
-        if (sortOrder !== null) {
-            sortProducts();
+        if (sortOrder === "titleAsc") {
+            sortedProducts = productsArray.sort((a, b) => a.Emri.localeCompare(b.Emri));
+        } else if (sortOrder === "titleDesc") {
+            sortedProducts = productsArray.sort((a, b) => b.Emri.localeCompare(a.Emri));
+        } else if (sortOrder === "priceAsc") {
+            sortedProducts = productsArray.sort((a, b) => a.Cmimi - b.Cmimi);
+        } else if (sortOrder === "priceDesc") {
+            sortedProducts = productsArray.sort((a, b) => b.Cmimi - a.Cmimi);
+        } else if (sortOrder === "relevance") {
+            sortedProducts = productsArray;
         }
-    }, [sortOrder, products]);
+        setProducts(sortedProducts);
+    };
 
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
@@ -137,7 +136,7 @@ function ProductList(props) {
     const handleGoBack = () => {
         navigate(-1);
     };
-    
+
     return (
         <>
             <Slider />
