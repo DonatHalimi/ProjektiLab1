@@ -6,6 +6,7 @@ import RegisterStyle from '../styles/Register.module.css';
 import Navbar from "./Navbar";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './Footer';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -97,6 +98,8 @@ const Register = () => {
                     </form>
                 </div>
             </div>
+
+            <Footer />
         </>
     );
 };

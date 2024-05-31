@@ -6,6 +6,7 @@ import LoginStyle from '../styles/Login.module.css';
 import Navbar from './Navbar';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './Footer';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -83,6 +84,8 @@ const Login = () => {
                     <p id={LoginStyle['account-text']}>Nuk posedoni llogari? <Link to="/register" className={LoginStyle['a']}>Sign Up!</Link></p>
                 </div>
             </div>
+
+            <Footer />
         </>
     );
 };

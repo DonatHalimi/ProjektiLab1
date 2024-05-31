@@ -77,7 +77,7 @@ function Product(props) {
         transition: 'opacity 2s ease-in',
       },
       onClick: () => {
-        navigate('/Cart');
+        navigate('/Wishlist');
       },
     }, 50);
 

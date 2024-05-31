@@ -1,16 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
+import AuthService from '../services/auth.service';
 import '../styles/ContactStyle.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 export const Contact = () => {
+    const [user, setUser] = useState(null);
+    const form = useRef();
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        const currentUser = AuthService.getCurrentUser();
+        setUser(currentUser);
     }, []);
-
-    const form = useRef();
 
     const sendEmail = async (e) => {
         e.preventDefault();
@@ -81,20 +85,35 @@ export const Contact = () => {
                     <h2 className='title'>Contact Us</h2>
                     <div className="form-group">
                         <label className='label' htmlFor="user_name">Name</label>
-                        <input type="text" id="user_name" name="user_name" />
+                        <input
+                            type="text"
+                            id="user_name"
+                            name="user_name"
+                            defaultValue={user ? user.username : ''}
+                            placeholder="Enter your name"
+                        />
                     </div>
                     <div className="form-group">
                         <label className='label' htmlFor="user_email">Email</label>
-                        <input type="email" id="user_email" name="user_email" />
+                        <input
+                            type="email"
+                            id="user_email"
+                            name="user_email"
+                            defaultValue={user ? user.email : ''}
+                            placeholder="Enter your email"
+                        />
                     </div>
                     <div className="form-group">
                         <label className='label' htmlFor="message">Message</label>
-                        <textarea id="message" name="message" rows="4" />
+                        <textarea id="message" name="message" rows="4" placeholder="Enter your message" />
                     </div>
                     <button className='button' type="submit">Send Message</button>
                 </form>
             </div>
+            
             <Footer />
         </>
     );
 };
+
+export default Contact;
