@@ -16,7 +16,6 @@ router.get("/get", cors(), (req, res) => {
     })
 })
 
-
 // Selektimi i aboutus sipas ID
 router.get("/get/:idaboutus", cors(), (req, res) => {
     const { idaboutus } = req.params

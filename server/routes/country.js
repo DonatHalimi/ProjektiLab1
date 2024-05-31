@@ -32,7 +32,7 @@ router.get("/get/:CountryId", cors(), (req, res) => {
 
 // Insertimi i country
 router.post("/post", (req, res) => {
-    const { Name} = req.body
+    const { Name } = req.body
     const sqlInsert = "INSERT INTO country (Name) VALUES (?)"
     pool.query(sqlInsert, [Name], (error, result) => {
         if (error) {
@@ -47,7 +47,7 @@ router.post("/post", (req, res) => {
 
 // Update i country
 router.put("/update/:CountryId", cors(), (req, res) => {
-    const CountryId  = req.params.CountryId
+    const CountryId = req.params.CountryId
     const { Name } = req.body
     const sqlUpdate = "UPDATE country SET Name=? WHERE CountryId=?"
     pool.query(sqlUpdate, [Name, CountryId], (error, result) => {

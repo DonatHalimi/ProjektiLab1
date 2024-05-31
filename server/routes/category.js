@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { pool, queryAsync } = require('../db/db');
 const cors = require("cors");
-const multer = require("multer"); 
+const multer = require("multer");
 const path = require('path');
 const fs = require('fs');
 
@@ -24,7 +24,7 @@ router.get("/get", cors(), (req, res) => {
     });
 });
 
-// Selektimi i slideshow sipas ID
+// Selektimi i category sipas ID
 router.get("/get/:idcategory", cors(), (req, res) => {
     const { idcategory } = req.params;
     const sqlGet = "SELECT * FROM kategoria WHERE idcategory=?";

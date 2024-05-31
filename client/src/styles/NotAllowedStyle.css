@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+.not-allowed {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #F6F4F4;
+    margin-left: 30px;
+}
+
+.message-div {
+    margin: 40px 0 20px;
+    position: relative;
+    bottom: 20px;
+}
+
+.lock-image {
+    width: 130px;
+    height: 130px;
+}

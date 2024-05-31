@@ -6,55 +6,51 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../styles/AddEditProductStyle.css";
 
 const initialState = {
-    role_name: "",
+    name: "",
 };
 
 const AddEditRoles = () => {
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
-    const { idroles } = useParams();
+    const { id } = useParams(); // Ensure you are fetching the id correctly
 
     useEffect(() => {
         const fetchRoleData = async () => {
             try {
-                if (idroles) {
-                    const response = await axios.get(`http://localhost:6001/api/roles/get/${idroles}`);
+                if (id) {
+                    const response = await axios.get(`http://localhost:6001/api/roles/get/${id}`);
                     const roleData = response.data;
-                    setState(roleData); // Set state with fetched role data
+                    setState(roleData);
                 }
             } catch (error) {
                 console.error("Error fetching role data:", error);
             }
         };
-    
+
         fetchRoleData();
-    }, [idroles]);
-    
+    }, [id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!state.role_name) {
+        if (!state.name) {
             toast.error("Please fill in all fields");
             return;
         }
 
         try {
-            const url = idroles
-                ? `http://localhost:6001/api/roles/update/${state.idroles}`
+            const url = id
+                ? `http://localhost:6001/api/roles/update/${id}`
                 : "http://localhost:6001/api/roles/post";
 
-            const response = await axios({
-                method: idroles ? 'put' : 'post',
+            await axios({
+                method: id ? 'put' : 'post',
                 url,
                 data: state,
             });
 
-            console.log(response);
-
             setState(initialState);
-            toast.success(idroles ? "Role updated successfully!" : "Role added successfully!");
-
+            toast.success(id ? "Role updated successfully!" : "Role added successfully!");
             navigate("/admin/roles");
         } catch (error) {
             console.log("Error:", error);
@@ -70,11 +66,10 @@ const AddEditRoles = () => {
         const { name, value } = e.target;
         setState({ ...state, [name]: value });
     };
-    
 
     return (
         <div style={{ marginTop: "150px", transform: 'scale(0.9)' }}>
-            <h2>{idroles ? "Edit" : "Add"} Roles</h2>
+            <h2>{id ? "Edit" : "Add"} Roles</h2>
             <form
                 action="/"
                 encType="multipart/form-data"
@@ -94,13 +89,13 @@ const AddEditRoles = () => {
                 onSubmit={handleSubmit}
             >
                 <div className="product-box">
-                    <label htmlFor="role_name" className="input-label">
+                    <label htmlFor="name" className="input-label">
                         Role Name
                     </label>
-                    <input value={state.role_name || ""} onChange={handleInputChange} type="text" placeholder="Enter Role name" id="role_name" name="role_name"></input>
+                    <input value={state.name || ""} onChange={handleInputChange} type="text" placeholder="Enter Role Name" id="name" name="name"></input>
                 </div>
 
-                <input id="submit-button" type="submit" value={idroles ? "Update" : "Save"} />
+                <input id="submit-button" type="submit" value={id ? "Update" : "Save"} />
                 <Link to="/admin/roles">
                     <input id="goback-button" type="button" value="Cancel" />
                 </Link>

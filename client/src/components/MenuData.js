@@ -1,8 +1,7 @@
-import Cart from "./Cart"
-import Wishlist from "./Wishlist"
-import FAQs from "./FAQs"
+import Cart from "./Cart";
+import Wishlist from "./Wishlist";
+import FAQs from "./FAQs";
 
-// Definimi i nje vargu te te dhenave te menyse per navbar
 export const MenuData = [
     {
         title: "Home",
@@ -35,18 +34,12 @@ export const MenuData = [
         url: "/FAQs",
         cName: "nav-links",
         icon: "fas fa-question-circle",
-        component:<FAQs/>
+        component: <FAQs />
     },
     {
         title: "About Us",
         url: "/AboutUs",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
-    },
-    {
-        title: "Log In",
-        url: "/Login",
-        cName: "nav-links",
-        icon: "fas fa-user",
-    },
-]
+    }
+];

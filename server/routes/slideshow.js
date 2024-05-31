@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { pool, queryAsync } = require('../db/db');
 const cors = require("cors");
-const multer = require("multer"); 
+const multer = require("multer");
 const path = require('path');
 const fs = require('fs');
 

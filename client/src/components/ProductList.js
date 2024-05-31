@@ -12,6 +12,7 @@ import ReactPaginate from 'react-paginate';
 import '../styles/ProductListStyle.css';
 import { toast } from 'react-toastify';
 import { FaArrowLeft } from "react-icons/fa";
+import AuthService from '../services/auth.service';
 
 function ProductList(props) {
     const { categoryId } = useParams();
@@ -56,39 +57,71 @@ function ProductList(props) {
     }, [categoryId]);
 
     const handleAddToCart = (productId) => {
-        cart.addOneToCart(productId);
+        // Check if the user is logged in
+        const isLoggedIn = AuthService.getCurrentUser();
 
-        setTimeout(() => {
-            toast.success('Produkti është shtuar në shportë!', {
+        if (!isLoggedIn) {
+            // Inform the user and redirect to login page
+            toast.info('You need to be logged in to add items to cart!', {
                 position: 'top-right',
                 style: {
                     marginTop: '70px',
                     cursor: 'pointer',
                     transition: 'opacity 2s ease-in',
                 },
-                onClick: () => {
-                    navigate('/Cart');
-                },
             });
+            navigate('/login');
+            return;
+        }
+
+        // If user is logged in, add the product to the cart
+        cart.addOneToCart(productId);
+
+        toast.success('Produkti është shtuar në shportë!', {
+            position: 'top-right',
+            style: {
+                marginTop: '70px',
+                cursor: 'pointer',
+                transition: 'opacity 2s ease-in',
+            },
+            onClick: () => {
+                navigate('/Cart');
+            },
         }, 50);
     };
 
     const handleAddToWishlist = (productId) => {
-        wishlist.addItemToWishlist(productId);
+        // Check if the user is logged in
+        const isLoggedIn = AuthService.getCurrentUser();
 
-        setTimeout(() => {
-            toast.success('Produkti është shtuar në wishlist!', {
+        if (!isLoggedIn) {
+            // Inform the user and redirect to login page
+            toast.info('You need to be logged in to add items to wishlist!', {
                 position: 'top-right',
                 style: {
                     marginTop: '70px',
                     cursor: 'pointer',
                     transition: 'opacity 2s ease-in',
                 },
-                onClick: () => {
-                    navigate('/Wishlist');
-                },
             });
+            navigate('/login');
+            return;
+        }
+        // If user is logged in, add the product to the wishlist
+        wishlist.addItemToWishlist(productId);
+
+        toast.success('Produkti është shtuar në wishlist!', {
+            position: 'top-right',
+            style: {
+                marginTop: '70px',
+                cursor: 'pointer',
+                transition: 'opacity 2s ease-in',
+            },
+            onClick: () => {
+                navigate('/Cart');
+            },
         }, 50);
+
     };
 
     useEffect(() => {

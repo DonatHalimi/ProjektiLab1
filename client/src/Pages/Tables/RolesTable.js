@@ -84,9 +84,9 @@ const RolesTable = () => {
                     </thead>
                     <tbody>
                         {rolesData.map((role) => (
-                            <tr key={role.idroles}>
-                                <th>{role.idroles}</th>
-                                <td>{role.role_name}</td>
+                            <tr key={role.id}>
+                                <th>{role.id}</th>
+                                <td>{role.name}</td>
                                 <td>
                                     <Link to='/roles/addRole'>
                                         <button className="btn btn-User">

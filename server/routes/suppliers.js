@@ -47,7 +47,7 @@ router.post("/post", (req, res) => {
 
 // Update i suppliers
 router.put("/update/:SupplierId", cors(), (req, res) => {
-    const SupplierId  = req.params.SupplierId
+    const SupplierId = req.params.SupplierId
     const { Name, Phone, Address } = req.body
     const sqlUpdate = "UPDATE suppliers SET Name=?, Phone=?, Address=? WHERE SupplierId=?"
     pool.query(sqlUpdate, [Name, Phone, Address, SupplierId], (error, result) => {

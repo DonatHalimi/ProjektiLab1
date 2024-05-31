@@ -5,83 +5,78 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { BsPersonAdd, BsPersonDash, BsPersonX } from 'react-icons/bs';
-import "../../styles/AdminStyle.css"
+import "../../styles/AdminStyle.css";
 import AdminSidebar from '../Admin/AdminSidebar';
 
 const UsersTable = () => {
     const [usersData, setUsersData] = useState([]);
 
-    // Funksioni per mi marr te dhenat e user-ave nga API
     const loadUsersData = async () => {
         try {
-            const response = await axios.get('http://localhost:6001/api/user/get');
-            if (response && response.data) {
+            const response = await axios.get('http://localhost:6001/api/user/get', {
+                headers: { 'x-access-token': localStorage.getItem('token') } // Ensure token is sent with the request
+            });
+            if (response.data) {
                 setUsersData(response.data);
             } else {
                 console.log('API endpoint did not return any data');
             }
         } catch (error) {
-            console.log(error);
+            console.error('Error fetching user data:', error);
         }
     };
 
-    // Funksioni per te fshire nje user
     const deleteUser = async (id) => {
-        const confirmDialog = () => {
-            confirmAlert({
-                title: 'Confirm Deletion',
-                message: 'Are you sure that you want to delete this user?',
-                buttons: [
-                    {
-                        label: 'Cancel',
-                        onClick: () => { },
-                        className: 'cancel-btn',
+        confirmAlert({
+            title: 'Confirm Deletion',
+            message: 'Are you sure that you want to delete this user?',
+            buttons: [
+                {
+                    label: 'Cancel',
+                    onClick: () => { },
+                    className: 'cancel-btn',
+                },
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        try {
+                            await axios.delete(`http://localhost:6001/api/user/remove/${id}`, {
+                                headers: { 'x-access-token': localStorage.getItem('token') }
+                            });
+                            toast.success('Përdoruesi është fshirë me sukses!');
+                            setTimeout(() => loadUsersData(), 500);
+                        } catch (error) {
+                            toast.error(`Error deleting user: ${error.message}`);
+                        }
                     },
-                    {
-                        label: 'Yes',
-                        onClick: async () => {
-                            try {
-                                // Send delete request to the server
-                                await axios.delete(`http://localhost:6001/api/user/remove/${id}`);
-                                toast.success('Përdoruesi është fshirë me sukses!');
-                                setTimeout(() => loadUsersData(), 500);
-                            } catch (error) {
-                                toast.error(`Error deleting user: ${error.message}`);
-                            }
-                        },
-                        className: 'yes-btn',
-                    },
-                ],
-            });
-        };
-
-        confirmDialog();
+                    className: 'yes-btn',
+                },
+            ],
+        });
     };
 
     useEffect(() => {
         loadUsersData();
-
-        document.title = `Users Table`;
+        document.title = 'Users Table';
     }, []);
 
     return (
         <div className="admin-page">
-
             <AdminSidebar />
-
             <div className="table-container">
                 <table className="styled-table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Surname</th>
                             <th>Email</th>
                             <th>Password</th>
                             <th>Role</th>
-                            <Link to='/user/addUser' className='clickable-header-user'>
-                                Insert
-                            </Link>
+                            <th>
+                                <Link to='/user/addUser' className='clickable-header-user'>
+                                    Insert
+                                </Link>
+                            </th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -90,11 +85,10 @@ const UsersTable = () => {
                         {usersData.map((user) => (
                             <tr key={user.id}>
                                 <th>{user.id}</th>
-                                <td>{user.Name}</td>
-                                <td>{user.Surname}</td>
-                                <td>{user.Email}</td>
+                                <td>{user.username}</td>
+                                <td>{user.email}</td>
                                 <td>●●●●●●</td>
-                                <td>{user.Role === 2 ? 'Admin' : 'User'}</td>
+                                <td>{user.role_id === 2 ? 'Admin' : 'User'}</td>
                                 <td>
                                     <Link to='/user/addUser'>
                                         <button className="btn btn-User">

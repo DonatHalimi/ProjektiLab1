@@ -9,6 +9,7 @@ import { BsArrowsAngleContract } from "react-icons/bs";
 import "../styles/ProductDetailsStyle.css";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
 function ProductDetails() {
     const { id } = useParams();
@@ -52,6 +53,23 @@ function ProductDetails() {
     }, [isImageEnlarged, toggleEnlargedPicture]);
 
     const handleAddToCart = () => {
+        // Check if the user is logged in
+        const isLoggedIn = AuthService.getCurrentUser();
+
+        if (!isLoggedIn) {
+            // Inform the user and redirect to login page
+            toast.info('You need to be logged in to add items to cart!', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+            });
+            navigate('/login');
+            return;
+        }
+        // If user is logged in, add the product to the cart
         cart.addOneToCart(id);
 
         toast.success('Produkti është shtuar në shportë!', {
@@ -68,6 +86,24 @@ function ProductDetails() {
     };
 
     const handleAddToWishlist = () => {
+        // Check if the user is logged in
+        const isLoggedIn = AuthService.getCurrentUser();
+
+        if (!isLoggedIn) {
+            // Inform the user and redirect to login page
+            toast.info('You need to be logged in to add items to wishlist!', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+            });
+            navigate('/login');
+            return;
+        }
+
+        // If user is logged in, add the product to the wishlist
         wishlist.addItemToWishlist(id);
 
         setTimeout(() => {

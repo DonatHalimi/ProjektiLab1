@@ -66,25 +66,10 @@
   font-size: 12px;
 }
 
-.login-box form a {
-  position: relative;
-  display: inline-block;
-  padding: 10px 20px;
+.login-box a {
+  color: white;
   font-weight: bold;
-  color: #fff;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  transition: .5s;
-  margin-top: 40px;
-  letter-spacing: 3px
-}
-
-.login-box a:hover {
-  background: #fff;
-  color: #272727;
-  border-radius: 5px;
+  text-decoration: underline;
 }
 
 .login-box a span {

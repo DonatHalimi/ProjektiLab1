@@ -7,12 +7,10 @@ import "../../styles/AddEditStyle.css";
 
 const initialState = {
     id: "",
-    Name: "",
-    Surname: "",
-    Email: "",
-    Password: "",
-    Role: "",
-    idroles:"",
+    username: "",
+    email: "",
+    password: "",
+    role_id: "",
     roles: [],
 };
 const AddEditUser = () => {
@@ -20,56 +18,55 @@ const AddEditUser = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-  useEffect(() => {
+    useEffect(() => {
 
-    const fetchUserData = async () => {
-      try {
-        if (id) {
-          const response = await axios.get(`http://localhost:6001/api/user/get/${id}`);
-          const userData = response.data[0];
+        const fetchUserData = async () => {
+            try {
+                if (id) {
+                    const response = await axios.get(`http://localhost:6001/api/user/get/${id}`);
+                    const userData = response.data[0];
 
-          setState((prevState) => ({
-            ...prevState,
-            ...userData,
-          }));
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+                    setState((prevState) => ({
+                        ...prevState,
+                        ...userData,
+                    }));
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
 
-    fetchUserData();
-  }, [id]);
+        fetchUserData();
+    }, [id]);
 
-  useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const response = await axios.get("http://localhost:6001/api/roles/get");
-        setState((prevState) => ({
-          ...prevState,
-          roles: response.data,
-        }));
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const response = await axios.get("http://localhost:6001/api/roles/get");
+                setState((prevState) => ({
+                    ...prevState,
+                    roles: response.data,
+                }));
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        };
 
-    fetchRoles();
-  }, []);
+        fetchRoles();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!state.Name || !state.Surname || !state.Email || !state.Password || !state.Role) {
+        if (!state.username || !state.email || !state.password || !state.role_id) {
             toast.error("Please fill in all fields");
         } else {
             try {
                 const userData = {
-                    Name: state.Name,
-                    Surname: state.Surname,
-                    Email: state.Email,
-                    Password: state.Password,
-                    Role: state.Role
+                    username: state.username,
+                    email: state.email,
+                    password: state.password,
+                    role_id: state.role_id
                 };
 
                 const url = id
@@ -84,11 +81,10 @@ const AddEditUser = () => {
                 toast.success(id ? "User updated successfully!" : "User added successfully!");
 
                 setState({
-                    Name: "",
-                    Surname: "",
-                    Email: "",
-                    Password: "",
-                    Role: ""
+                    username: "",
+                    email: "",
+                    password: "",
+                    role_id: ""
                 });
                 navigate('/admin/users');
             } catch (error) {
@@ -125,31 +121,26 @@ const AddEditUser = () => {
                 onSubmit={handleSubmit}
             >
                 <div className="user-box">
-                    <label htmlFor='Name' className="input-label">Name</label>
-                    <input value={state.Name || ""} onChange={handleInputChange} type="text" placeholder="Enter Name" id="Name" name="Name"></input>
+                    <label htmlFor='username' className="input-label">Username</label>
+                    <input value={state.username || ""} onChange={handleInputChange} type="text" placeholder="Enter Username" id="username" name="username"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor='Surname' className="input-label">Surname</label>
-                    <input value={state.Surname || ""} onChange={handleInputChange} type="text" placeholder="Enter Surname" id="Surname" name="Surname"></input>
+                    <label htmlFor='email' className="input-label">Email</label>
+                    <input value={state.email|| ""} onChange={handleInputChange} type="email" placeholder="Enter Email" id="email" name="email"></input>
                 </div>
 
                 <div className="user-box">
-                    <label htmlFor='Email' className="input-label">Email</label>
-                    <input value={state.Email || ""} onChange={handleInputChange} type="email" placeholder="Enter Email" id="Email" name="Email"></input>
-                </div>
-
-                <div className="user-box">
-                    <label htmlFor="Password" className="input-label">Password</label>
-                    <input value={state.Password || ""} onChange={handleInputChange} type="password" placeholder="Enter Password" id="Password" name="Password"></input>
+                    <label htmlFor="password" className="input-label">Password</label>
+                    <input value={state.password || ""} onChange={handleInputChange} type="password" placeholder="Enter Password" id="password" name="password"></input>
                 </div>
 
                 <div className="user-box">
                     <label htmlFor="Role" className="input-label">Role</label>
-                    <select value={state.Role || ""} onChange={handleInputChange} id="Role" name="Role">
+                    <select value={state.role_id || ""} onChange={handleInputChange} id="role_id" name="role_id">
                         <option value="" disabled>Select a Role</option>
                         {state.roles.map(role => (
-                            <option key={role.idroles} value={role.idroles}>{role.role_name}</option>
+                            <option key={role.id} value={role.id}>{role.name}</option>
                         ))}
                     </select>
                 </div>

@@ -149,7 +149,7 @@
 			"path": "client/src/components/ProductItem.js",
 			"bookmarks": [
 				{
-					"line": 47,
+					"line": 83,
 					"column": 2,
 					"label": "handleAddToWishlist()"
 				}

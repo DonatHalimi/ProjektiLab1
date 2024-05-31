@@ -33,7 +33,7 @@ router.get('/get/:transportId', (req, res) => {
 router.post('/post', (req, res) => {
     const { companyName, phone, email, transportType, transportFee } = req.body
     const sqlInsert = 'INSERT INTO transport ( companyName, phone, email, transportType, transportFee) VALUES (?,?,?,?,?)'
-    pool.query(sqlInsert, [ companyName, phone, email, transportType, transportFee ], (error, result) => {
+    pool.query(sqlInsert, [companyName, phone, email, transportType, transportFee], (error, result) => {
         if (error) {
             console.log(error)
             res.status(500).send({ error: "Error inserting data into database" })
@@ -43,14 +43,14 @@ router.post('/post', (req, res) => {
         }
     })
 })
-        
+
 // Update a transport option
 router.put('/update/:transportId', (req, res) => {
     const { transportId } = req.params
-    const {  companyName, phone, email, transportType, transportFee  } = req.body
+    const { companyName, phone, email, transportType, transportFee } = req.body
     const sqlUpdate = 'UPDATE transport SET companyName=?, phone=?, email=?, transportType=?, transportFee=? WHERE transportId=?'
-    
-    pool.query(sqlUpdate, [companyName, phone, email, transportType, transportFee,transportId], (error, result) => {
+
+    pool.query(sqlUpdate, [companyName, phone, email, transportType, transportFee, transportId], (error, result) => {
         if (error) {
             console.log(error)
             res.status(500).send({ error: 'Error updating data in the database' })
@@ -64,7 +64,7 @@ router.put('/update/:transportId', (req, res) => {
 router.delete('/remove/:transportId', (req, res) => {
     const transportId = req.params.transportId
     const sqlRemove = 'DELETE FROM transport WHERE transportId=?'
-    
+
     pool.query(sqlRemove, transportId, (error, result) => {
         if (error) {
             console.log(error)

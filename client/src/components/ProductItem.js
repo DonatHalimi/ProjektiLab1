@@ -6,15 +6,33 @@ import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import "../styles/ProductStyle.css";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
 function Product(props) {
   const product = props.product;
   const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
-
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
+    // Check if the user is logged in
+    const isLoggedIn = AuthService.getCurrentUser();
+
+    if (!isLoggedIn) {
+      // Inform the user and redirect to login page
+      toast.info('You need to be logged in to add items to cart!', {
+        position: 'top-right',
+        style: {
+          marginTop: '70px',
+          cursor: 'pointer',
+          transition: 'opacity 2s ease-in',
+        },
+      });
+      navigate('/login');
+      return;
+    }
+
+    // If user is logged in, add the product to the cart
     cart.addOneToCart(product.id);
 
     toast.success('Produkti është shtuar në shportë!', {
@@ -31,31 +49,48 @@ function Product(props) {
   };
 
   const handleAddToWishlist = () => {
-    wishlist.addItemToWishlist(product.id);
+    // Check if the user is logged in
+    const isLoggedIn = AuthService.getCurrentUser();
 
-    setTimeout(() => {
-      toast.success('Produkti është shtuar në wishlist!', {
+    if (!isLoggedIn) {
+      // Inform the user and redirect to login page
+      toast.info('You need to be logged in to add items to wishlist!', {
         position: 'top-right',
         style: {
           marginTop: '70px',
           cursor: 'pointer',
           transition: 'opacity 2s ease-in',
         },
-        onClick: () => {
-          navigate('/Wishlist');
-        },
       });
+      navigate('/login');
+      return;
+    }
+
+    // If user is logged in, add the product to the wishlist
+    wishlist.addItemToWishlist(product.id);
+
+    toast.success('Produkti është shtuar në wishlist!', {
+      position: 'top-right',
+      style: {
+        marginTop: '70px',
+        cursor: 'pointer',
+        transition: 'opacity 2s ease-in',
+      },
+      onClick: () => {
+        navigate('/Cart');
+      },
     }, 50);
+
   };
 
   if (!product) {
-    // Rendero gjendjen e ngarkimit ose nje mesazh gabimi
+    // Render loading state or an error message
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      {/* Karta e produkteve */}
+      {/* Product card */}
       <div className="container mx-auto p-4">
         <div className="bg-white shadow-md rounded-md overflow-hidden mb-10 gap-5">
           <div className="product" key={product.id}>
@@ -70,7 +105,7 @@ function Product(props) {
                 </div>
               </Link>
 
-              {/* Butonat per me shtu produktin ne Cart & Wishlist */}
+              {/* Buttons to add product to Cart & Wishlist */}
               <button className="cartButton" onClick={handleAddToCart} title="Add To Cart">
                 <AiOutlineShoppingCart style={{ color: "black", fontSize: "18px" }} />
               </button>

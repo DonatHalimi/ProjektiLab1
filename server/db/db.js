@@ -6,7 +6,7 @@ const pool = mysql.createPool({
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'projektilab1',
-port: process.env.DB_PORT || 3307 
+    port: process.env.DB_PORT || 3306
 })
 
 const queryAsync = util.promisify(pool.query).bind(pool)

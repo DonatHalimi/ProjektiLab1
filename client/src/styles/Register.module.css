@@ -66,26 +66,9 @@
   font-size: 12px;
 }
 
-.register-box form a {
-  position: relative;
-  display: inline-block;
-  padding: 10px 20px;
+.register-box a {
+  color: white;
   font-weight: bold;
-  color: #fff;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  transition: .5s;
-  margin-top: 40px;
-  letter-spacing: 3px
-}
-
-.register-box a:hover {
-  background: #fff;
-  color: #272727;
-  border-radius: 5px;
-  transition: all 0.5s ease-in-out;
 }
 
 .register-box a span {
