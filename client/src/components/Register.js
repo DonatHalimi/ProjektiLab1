@@ -24,12 +24,25 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+
+        if (!username || !email || !password) {
+            toast.error('Please fill in all fields.', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+            });
+            return;
+        }
+
         try {
             await AuthService.register(username, email, password, 'User');
             navigate('/login');
         } catch (error) {
             console.error(error);
-            toast.error('Login failed. Check your credentials.', {
+            toast.error('Registration failed. Please try again.', {
                 position: 'top-right',
                 style: {
                     marginTop: '70px',

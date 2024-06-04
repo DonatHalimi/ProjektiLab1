@@ -122,7 +122,7 @@ const AddEditUser = () => {
             >
                 <div className="user-box">
                     <label htmlFor='username' className="input-label">Username</label>
-                    <input value={state.username || ""} onChange={handleInputChange} type="text" placeholder="Enter Username" id="username" name="username"></input>
+                    <input value={state.username || ""} onChange={handleInputChange} type="text" placeholder="Enter Username" name="username"></input>
                 </div>
 
                 <div className="user-box">

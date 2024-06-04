@@ -12,7 +12,7 @@ const initialState = {
 const AddEditRoles = () => {
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
-    const { id } = useParams(); // Ensure you are fetching the id correctly
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchRoleData = async () => {
@@ -71,9 +71,6 @@ const AddEditRoles = () => {
         <div style={{ marginTop: "150px", transform: 'scale(0.9)' }}>
             <h2>{id ? "Edit" : "Add"} Roles</h2>
             <form
-                action="/"
-                encType="multipart/form-data"
-                method="post"
                 style={{
                     margin: "auto",
                     padding: "25px",

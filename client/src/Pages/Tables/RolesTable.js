@@ -26,7 +26,7 @@ const RolesTable = () => {
     };
 
     // Funksioni per te fshire nje user
-    const deleteRole = async (idroles) => {
+    const deleteRole = async (id) => {
         const confirmDialog = () => {
             confirmAlert({
                 title: 'Confirm Deletion',
@@ -42,8 +42,8 @@ const RolesTable = () => {
                         onClick: async () => {
                             try {
                                 // Send delete request to the server
-                                await axios.delete(`http://localhost:6001/api/roles/remove/${idroles}`);
-                                toast.success('Përdoruesi është fshirë me sukses!');
+                                await axios.delete(`http://localhost:6001/api/roles/remove/${id}`);
+                                toast.success('Roli është fshirë me sukses!');
                                 setTimeout(() => loadRolesData(), 500);
                             } catch (error) {
                                 toast.error(`Error deleting user: ${error.message}`);
@@ -95,14 +95,14 @@ const RolesTable = () => {
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to={`/roles/updateRoles/${role.idroles}`}>
+                                    <Link to={`/roles/updateRoles/${role.id}`}>
                                         <button className="btn btn-edit">
                                             <BsPersonDash style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                         </button>
                                     </Link>
                                 </td>
                                 <td>
-                                    <button className="btn btn-delete" onClick={() => deleteRole(role.idroles)}>
+                                    <button className="btn btn-delete" onClick={() => deleteRole(role.id)}>
                                         <BsPersonX style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                     </button>
                                 </td>

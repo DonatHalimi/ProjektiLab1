@@ -7,16 +7,18 @@
 
 .profile-inner-container {
     padding: 34px;
-    max-width: 400px;
+    max-width: 430px;
     background-color: #ffffff;
     border-radius: 9px;
-    height: 63vh;
+    height: auto;
     margin: 0 auto;
+    user-select: none;
 }
 
 .profile-group {
     text-align: left;
     margin-bottom: 20px;
+    user-select: none;
 }
 
 .profile-title {
@@ -28,21 +30,15 @@
 #username,
 #profile-email,
 #token {
-    margin-right: 300px;
     width: 100%;
     padding: 10px;
-    position: relative;
-    right: 8px;
     font-size: 16px;
     cursor: not-allowed;
+    user-select: none;
 }
 
 #token {
     user-select: none;
-}
-
-.inputGroup {
-    margin-Bottom: 20px;
 }
 
 .profile-label {
@@ -51,27 +47,14 @@
     margin-bottom: 5px;
 }
 
-.log-out {
-    position: relative;
-    bottom: 10px;
-    margin-top: 20px;
-    margin-right: 220px;
-    padding: 10px 20px;
-    background-color: rgba(122, 178, 191, 1);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    color: #fff;
-    width: 40%;
+.button-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 
-.admin-dashboard {
-    position: relative;
-    bottom: 51.5px;
-    margin-left: 200px;
+.btn {
     padding: 10px 20px;
     background-color: rgba(122, 178, 191, 1);
     border: none;
@@ -79,7 +62,12 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
     color: #fff;
-    width: 40%;
+    width: 100%;
+    max-width: 200px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: rgba(102, 158, 171, 1);
 }
