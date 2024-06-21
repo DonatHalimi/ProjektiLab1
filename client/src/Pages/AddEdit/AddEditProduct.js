@@ -141,16 +141,7 @@ const AddEditProduct = () => {
     console.log("Form submitted:", state);
 
     if (
-      !state.id ||
-      !state.Emri ||
-      !state.Cmimi ||
-      !state.Valuta ||
-      !state.Detajet ||
-      (!state.Foto && !state.existingFoto) ||
-      !state.idcategory ||
-      !state.idsupplier ||
-      !state.idbrand
-    ) {
+      !state.id || !state.Emri || !state.Cmimi || !state.Valuta || !state.Detajet || (!state.Foto && !state.existingFoto) || !state.idcategory || !state.idsupplier || !state.idbrand) {
       toast.error("Ju lutemi plotësoni të gjitha fushat");
       console.log("Form validation failed");
       return;
@@ -164,7 +155,7 @@ const AddEditProduct = () => {
       formData.append("Valuta", state.Valuta);
       formData.append("Detajet", state.Detajet);
       if (state.Foto) formData.append("Foto", state.Foto);
-      formData.append("idcategory", state.idcategory); // Append idcategory with its ID
+      formData.append("idcategory", state.idcategory);
       formData.append("idsupplier", state.idsupplier);
       formData.append("idbrand", state.idbrand);
 
@@ -321,19 +312,12 @@ const AddEditProduct = () => {
               name="Valuta"
             />
           </div>
+
           <div className="product-box">
-            <label htmlFor="detajet" className="input-label">
-              Detajet
-            </label>
-            <input
-              value={state.Detajet || ""}
-              onChange={handleInputChange}
-              type="text"
-              placeholder="Shkruaj detajet"
-              id="detajet"
-              name="Detajet"
-            />
+            <label htmlFor="detajet" className="input-label detajet-label">Detajet</label>
+            <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
           </div>
+
           <div className="product-box">
             <label htmlFor="foto" className="input-label">
               Foto
@@ -375,18 +359,10 @@ const AddEditProduct = () => {
                 ))}
             </select>
           </div>
-          <div className="product-box">
-            <label htmlFor="supplierDropdown" className="input-label">
-              Supplier
-            </label>
-            <select
-              value={state.idsupplier}
-              onChange={handleInputChange}
-              name="idsupplier"
-            >
-              <option value="" disabled hidden>
-                Select a supplier
-              </option>
+          <div className="product-box" style={{ marginTop: '15px' }}>
+            <label htmlFor="supplierDropdown" className="input-label">Supplier</label>
+            <select value={state.idsupplier} onChange={handleInputChange} name="idsupplier">
+              <option value="" disabled hidden>Select a supplier</option>
               {state.suppliers &&
                 state.suppliers.length > 0 &&
                 state.suppliers.map((supplier) => (
@@ -399,7 +375,7 @@ const AddEditProduct = () => {
                 ))}
             </select>
           </div>
-          <div className="product-box">
+          <div className="product-box" style={{ marginTop: '15px' }}>
             <label htmlFor="brandDropdown" className="input-label">
               Brand
             </label>
@@ -420,13 +396,10 @@ const AddEditProduct = () => {
                 ))}
             </select>
           </div>
-          <input
-            type="submit"
-            value={idproduct ? "Update" : "Save"}
-            className="btn btn-product"
-          />
+          <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
+
           <Link to="/admin/products">
-            <input type="button" value="Kthehu" className="btn btn-product" />
+            <input id="goback-button" type="button" value="Cancel" />
           </Link>
         </form>
       )}

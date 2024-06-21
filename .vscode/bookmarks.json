@@ -39,12 +39,7 @@
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 150,
-					"column": 2,
-					"label": "useEffect() per kategori nga databaza"
-				},
-				{
-					"line": 170,
+					"line": 161,
 					"column": 2,
 					"label": "handleSubmit() kur dergohet formulari"
 				}
@@ -134,12 +129,12 @@
 			"path": "client/src/Pages/AddEdit/AddEditCategory.js",
 			"bookmarks": [
 				{
-					"line": 77,
+					"line": 68,
 					"column": 4,
 					"label": "handleSubmit() kur formulari dergohet"
 				},
 				{
-					"line": 159,
+					"line": 152,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime ne input fields"
 				}

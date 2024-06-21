@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,35 +23,26 @@ const AddEditCategory = () => {
                 const categoryData = response.data[0];
                 console.log("Category data:", categoryData);
 
+                let base64String = null;
                 if (categoryData.FotoKategori) {
-                    // Log the structure of FotoKategori
-                    console.log("FotoKategori structure:", categoryData.FotoKategori);
-
-                    // Assuming categoryData.FotoKategori is an object that contains the image data
-                    let base64String;
                     if (typeof categoryData.FotoKategori === 'string') {
                         base64String = categoryData.FotoKategori;
                     } else if (categoryData.FotoKategori.data) {
-                        // Convert object data to base64 string
-                        base64String = btoa(
-                            String.fromCharCode(...new Uint8Array(categoryData.FotoKategori.data))
-                        );
+                        const uint8Array = new Uint8Array(categoryData.FotoKategori.data);
+                        base64String = uint8Array.reduce((data, byte) => data + String.fromCharCode(byte), '');
+                        base64String = btoa(base64String);
                     } else {
                         console.error("Unexpected FotoKategori structure:", categoryData.FotoKategori);
                     }
-
-                    setState({
-                        EmriKategorise: categoryData.EmriKategorise,
-                        existingFoto: `data:image/jpeg;base64,${base64String}`,
-                        FotoKategori: null
-                    });
-                } else {
-                    setState({
-                        EmriKategorise: categoryData.EmriKategorise,
-                        existingFoto: null,
-                        FotoKategori: null
-                    });
                 }
+
+                setState(prevState => ({
+                    ...prevState,
+                    EmriKategorise: categoryData.EmriKategorise,
+                    existingFoto: base64String ? `data:image/jpeg;base64,${base64String}` : null,
+                    FotoKategori: null
+                }));
+
             } catch (error) {
                 console.error("Error fetching category data:", error);
             }
@@ -160,6 +151,7 @@ const AddEditCategory = () => {
                         placeholder="Shkruaj emrin e kategorisë"
                         id="emrikategorise"
                         name="EmriKategorise"
+                        onInput={(e) => console.log('Input value:', e.target.value)}
                     />
                 </div>
 
@@ -188,9 +180,9 @@ const AddEditCategory = () => {
                 </div>
 
                 <input id="submit-button" type="submit" value={categoryId ? "Update" : "Save"} />
-                <button type="button" onClick={() => navigate("/admin/categories")}>
-                    Cancel
-                </button>
+                <Link to="/admin/categories">
+                    <input id="goback-button" type="button" value="Cancel" />
+                </Link>
             </form>
 
             <div style={{ height: "465px" }}></div>
