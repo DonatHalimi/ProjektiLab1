@@ -5,14 +5,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/AddEditProductStyle.css";
 
-// Krijojme nje objekt qe permban te dhenat fillestare te produktit
 const initialState = {
   id: "",
   Emri: "",
   Cmimi: "",
   Valuta: "",
   Detajet: "",
-  Foto: undefined,
+  Foto: null,
+  existingFoto: "",
   idcategory: "",
   categories: [],
   idsupplier: "",
@@ -21,7 +21,6 @@ const initialState = {
   brands: [],
 };
 
-// Krijimi i funksionit AddEditProduct per te shtuar dhe perditesuar produkte
 const AddEditProduct = () => {
   const [state, setState] = useState(initialState);
   const navigate = useNavigate();
@@ -29,16 +28,18 @@ const AddEditProduct = () => {
 
   useEffect(() => {
     const fetchProductData = async () => {
-      let fileReader;
       try {
         if (idproduct) {
-          const response = await axios.get(`http://localhost:6001/api/product/get/${idproduct}`);
+          console.log(`Fetching data for product ID: ${idproduct}`);
+          const response = await axios.get(
+            `http://localhost:6001/api/product/get/${idproduct}`
+          );
           const productData = response.data[0];
+          console.log("Product data fetched:", productData);
 
-          // Check if the product has a photo
           if (productData.Foto) {
             console.log("productData.Foto:", productData.Foto);
-            fileReader = new FileReader();
+            const fileReader = new FileReader();
 
             fileReader.onloadend = () => {
               console.log("fileReader.onloadend called");
@@ -50,24 +51,8 @@ const AddEditProduct = () => {
                 setState((prevState) => ({
                   ...prevState,
                   ...productData,
-                  fotoName: productData.Foto.name,
-                  existingFoto: base64String,
+                  existingFoto: `data:image/jpeg;base64,${base64String}`,
                 }));
-
-                // Append to formData
-                let formData = new FormData();
-                formData.append("id", productData.id);
-                formData.append("Emri", productData.Emri);
-                formData.append("Cmimi", productData.Cmimi);
-                formData.append("Valuta", productData.Valuta);
-                formData.append("Detajet", productData.Detajet);
-                formData.append("Foto", productData.Foto);
-                formData.append("idcategory", productData.idcategory);
-                formData.append("idsupplier", productData.idsupplier);
-                formData.append("idbrand", productData.idbrand);
-
-                // Log formData after append inside the callback
-                console.log("FormData:", formData);
               } else {
                 console.error("Invalid file type. Expected base64 string.");
               }
@@ -75,11 +60,10 @@ const AddEditProduct = () => {
 
             fileReader.readAsDataURL(new Blob([new Uint8Array(productData.Foto.data)]));
           } else {
-            // If not, set the state without fotoName and existingFoto
+            // If not, set the state without existingFoto
             setState((prevState) => ({
               ...prevState,
               ...productData,
-              fotoName: '',
               existingFoto: '',
             }));
           }
@@ -92,11 +76,14 @@ const AddEditProduct = () => {
     fetchProductData();
   }, [idproduct]);
 
-  // Krijojme nje useEffect per te marrur dhe shfaqur te dhenat e kategorive
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:6001/api/category/get");
+        console.log("Fetching categories");
+        const response = await axios.get(
+          "http://localhost:6001/api/category/get"
+        );
+        console.log("Categories fetched:", response.data);
         setState((prevState) => ({
           ...prevState,
           categories: response.data,
@@ -112,13 +99,17 @@ const AddEditProduct = () => {
   useEffect(() => {
     const fetchSuppliers = async () => {
       try {
-        const response = await axios.get("http://localhost:6001/api/suppliers/get");
+        console.log("Fetching suppliers");
+        const response = await axios.get(
+          "http://localhost:6001/api/suppliers/get"
+        );
+        console.log("Suppliers fetched:", response.data);
         setState((prevState) => ({
           ...prevState,
           suppliers: response.data,
         }));
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching suppliers:", error);
       }
     };
 
@@ -128,70 +119,89 @@ const AddEditProduct = () => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const response = await axios.get("http://localhost:6001/api/brands/get");
+        console.log("Fetching brands");
+        const response = await axios.get(
+          "http://localhost:6001/api/brands/get"
+        );
+        console.log("Brands fetched:", response.data);
         setState((prevState) => ({
           ...prevState,
           brands: response.data,
         }));
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching brands:", error);
       }
     };
 
     fetchBrands();
   }, []);
 
-  // Funksioni qe thirret kur formulari dergohet (submit)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("handleSubmit called");
+    console.log("Form submitted:", state);
 
-    // Validimi ne ane te klientit
-    if (!state.id || !state.Emri || !state.Cmimi || !state.Valuta || !state.Detajet || !state.Foto || !state.idcategory || !state.idsupplier || !state.idbrand) {
+    if (
+      !state.id ||
+      !state.Emri ||
+      !state.Cmimi ||
+      !state.Valuta ||
+      !state.Detajet ||
+      (!state.Foto && !state.existingFoto) ||
+      !state.idcategory ||
+      !state.idsupplier ||
+      !state.idbrand
+    ) {
       toast.error("Ju lutemi plotësoni të gjitha fushat");
+      console.log("Form validation failed");
       return;
     }
 
     try {
-      // Krijimi i nje objekti FormData per te derguar te dhenat e produktit dhe foton (nese ka) si form-data
-      console.log("State Before FormData Append:", state);
       let formData = new FormData();
-
-      // Append to formData
       formData.append("id", state.id);
       formData.append("Emri", state.Emri);
       formData.append("Cmimi", state.Cmimi);
       formData.append("Valuta", state.Valuta);
       formData.append("Detajet", state.Detajet);
-      formData.append("Foto", state.Foto);
-      formData.append("idcategory", state.idcategory);
+      if (state.Foto) formData.append("Foto", state.Foto);
+      formData.append("idcategory", state.idcategory); // Append idcategory with its ID
       formData.append("idsupplier", state.idsupplier);
       formData.append("idbrand", state.idbrand);
 
-      // Log formData after append inside the callback
-      console.log("FormData:", formData);
+      console.log("Submitting form data:", {
+        id: state.id,
+        Emri: state.Emri,
+        Cmimi: state.Cmimi,
+        Valuta: state.Valuta,
+        Detajet: state.Detajet,
+        idcategory: state.idcategory,
+        idsupplier: state.idsupplier,
+        idbrand: state.idbrand,
+      });
 
-      // Krijimi i URL-se se kerkeses bazuar ne ekzistencen e id-se (Nese ekziston behet update, nese jo shtohet nje produkt)
-      const url = state.idproduct
-        ? `http://localhost:6001/api/product/update/${state.id}`
+      const url = idproduct
+        ? `http://localhost:6001/api/product/update/${idproduct}`
         : "http://localhost:6001/api/product/post";
 
-      console.log("Request URL:", url);
+      console.log("Submitting form data to URL:", url);
 
-      // Dergimi i te dhenave per ruajtjen e produktit ne server
-      const response = await axios.post(url, formData, {
+      const response = await axios({
+        method: idproduct ? "put" : "post",
+        url: url,
+        data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log("Response:", response.data);
+      console.log("Response from server:", response.data);
 
-      // Pastrojme formen dhe shfaqim njoftimin per sukses
       setState(initialState);
-      toast.success(idproduct ? "Produkti është perditësuar me sukses!" : "Produkti është shtuar me sukses!");
-
-      // Navigimi prapa ne faqen e Admin-it pasi perditesimi/shtimi perfundon
+      toast.success(
+        idproduct
+          ? "Produkti është përditësuar me sukses!"
+          : "Produkti është shtuar me sukses!"
+      );
       navigate("/admin/products");
     } catch (error) {
       console.log("Error:", error);
@@ -203,9 +213,9 @@ const AddEditProduct = () => {
     }
   };
 
-  // Funksioni qe thirret kur ndodh ndryshimi ne input fields
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
+    console.log("Input changed:", name, value, files);
 
     if (name === "Foto") {
       if (files.length > 0) {
@@ -213,11 +223,11 @@ const AddEditProduct = () => {
         const reader = new FileReader();
 
         reader.onloadend = () => {
-          const base64String = reader.result.split(',')[1];
+          console.log("File read successfully:", reader.result);
           setState((prevState) => ({
             ...prevState,
             Foto: file,
-            existingFoto: base64String,
+            existingFoto: reader.result,
           }));
         };
 
@@ -225,25 +235,25 @@ const AddEditProduct = () => {
       } else {
         setState((prevState) => ({
           ...prevState,
-          Foto: undefined,
-          existingFoto: '',
+          Foto: null,
+          existingFoto: "",
         }));
       }
+    } else if (name === "idcategory") {
+      setState((prevState) => ({
+        ...prevState,
+        idcategory: value, // Directly set the value as it should be the ID
+      }));
     } else {
       setState((prevState) => ({ ...prevState, [name]: value }));
     }
   };
 
-  console.log("Base64 String:", state.Foto);
-
-  const imageUrl = `data:image/jpeg;base64,${state.Foto}`;
-
-  // Renderimi i HTML formes per te shtuar ose perditesuar nje produkt
   return (
-    <div style={{ marginTop: "10px", transform: 'scale(0.9)' }}>
+    <div style={{ marginTop: "10px", transform: "scale(0.9)" }}>
       <h2>{idproduct ? "Edit" : "Add"} Product</h2>
       {state && (
-        <form action="/" encType="multipart/form-data" method="post"
+        <form
           style={{
             margin: "auto",
             marginTop: "20px",
@@ -260,29 +270,104 @@ const AddEditProduct = () => {
           onSubmit={handleSubmit}
         >
           <div className="product-box">
-            <label htmlFor="id" className="input-label">ID</label>
-            <input value={state.id || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj id" id="id" name="id"></input>
+            <label htmlFor="id" className="input-label">
+              ID
+            </label>
+            <input
+              value={state.id || ""}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Shkruaj id"
+              id="id"
+              name="id"
+            />
           </div>
           <div className="product-box">
-            <label htmlFor="emri" className="input-label">Emri</label>
-            <input value={state.Emri || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj emrin" id="emri" name="Emri"></input>
+            <label htmlFor="emri" className="input-label">
+              Emri
+            </label>
+            <input
+              value={state.Emri || ""}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Shkruaj emrin"
+              id="emri"
+              name="Emri"
+            />
           </div>
-
           <div className="product-box">
-            <label htmlFor='cmimi' className="input-label">Çmimi</label>
-            <input value={state.Cmimi || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj çmimin" id="cmimi" name="Cmimi"></input>
+            <label htmlFor="cmimi" className="input-label">
+              Çmimi
+            </label>
+            <input
+              value={state.Cmimi || ""}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Shkruaj çmimin"
+              id="cmimi"
+              name="Cmimi"
+            />
           </div>
-
           <div className="product-box">
-            <label htmlFor='valuta' className="input-label">Valuta</label>
-            <input value={state.Valuta || ""} onChange={handleInputChange} type="text" placeholder="Shkruaj valutën" id="valuta" name="Valuta"></input>
+            <label htmlFor="valuta" className="input-label">
+              Valuta
+            </label>
+            <input
+              value={state.Valuta || ""}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Shkruaj valuten"
+              id="valuta"
+              name="Valuta"
+            />
           </div>
-
           <div className="product-box">
-            <label htmlFor="categoryDropdown" className="input-label">Kategoria</label>
-            <select value={state.idcategory} onChange={handleInputChange} name="idcategory">
-              <option value="" disabled hidden>Select a category</option>
-              {state.categories && state.categories.length > 0 &&
+            <label htmlFor="detajet" className="input-label">
+              Detajet
+            </label>
+            <input
+              value={state.Detajet || ""}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Shkruaj detajet"
+              id="detajet"
+              name="Detajet"
+            />
+          </div>
+          <div className="product-box">
+            <label htmlFor="foto" className="input-label">
+              Foto
+            </label>
+            <input
+              type="file"
+              placeholder="Zgjidh foton"
+              id="foto"
+              name="Foto"
+              accept="image/*"
+              onChange={handleInputChange}
+            />
+          </div>
+          {state.existingFoto && (
+            <img
+              src={state.existingFoto}
+              alt="Existing Product"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          )}
+          <div className="product-box">
+            <label htmlFor="categoryDropdown" className="input-label">
+              Category
+            </label>
+            <select
+              value={state.idcategory}
+              onChange={handleInputChange}
+              name="idcategory"
+            >
+              <option value="" disabled hidden>
+                Select a category
+              </option>
+              {state.categories &&
+                state.categories.length > 0 &&
                 state.categories.map((category) => (
                   <option key={category.idcategory} value={category.idcategory}>
                     {category.EmriKategorise}
@@ -290,42 +375,44 @@ const AddEditProduct = () => {
                 ))}
             </select>
           </div>
-
           <div className="product-box">
-            <label htmlFor="detajet" className="input-label detajet-label">Detajet</label>
-            <textarea value={state.Detajet || ""} onChange={handleInputChange} placeholder="Shkruaj detajet" id="detajet" name="Detajet" rows={10} cols={45} style={{ marginLeft: "8px", textAlign: "justify", width: "345px" }}></textarea>
-          </div>
-
-          <div className="product-box">
-            <label htmlFor="foto" className="input-label">Foto</label>
-            <input onChange={handleInputChange} type="file" id="foto" name="Foto" accept="image/*" />
-            {state.Foto && (
-              <span className="file-name">{state.Foto.name}</span>
-            )}
-
-            {state.existingFoto && (
-              <img src={`data:image/jpeg;base64,${state.existingFoto}`} alt="Existing Product" style={{ maxWidth: '100%', height: 'auto' }} />
-            )}
-          </div>
-
-          <div className="product-box">
-            <label htmlFor="supplierDropdown" className="input-label">Supplier</label>
-            <select value={state.idsupplier} onChange={handleInputChange} name="idsupplier">
-              <option value="" disabled hidden>Select a supplier</option>
-              {state.suppliers && state.suppliers.length > 0 &&
+            <label htmlFor="supplierDropdown" className="input-label">
+              Supplier
+            </label>
+            <select
+              value={state.idsupplier}
+              onChange={handleInputChange}
+              name="idsupplier"
+            >
+              <option value="" disabled hidden>
+                Select a supplier
+              </option>
+              {state.suppliers &&
+                state.suppliers.length > 0 &&
                 state.suppliers.map((supplier) => (
-                  <option key={supplier.SupplierId} value={supplier.SupplierId}>
+                  <option
+                    key={supplier.SupplierId}
+                    value={supplier.SupplierId}
+                  >
                     {supplier.Name}
                   </option>
                 ))}
             </select>
           </div>
-
           <div className="product-box">
-            <label htmlFor="brandDropdown" className="input-label">Brand</label>
-            <select value={state.idbrand} onChange={handleInputChange} name="idbrand">
-              <option value="" disabled hidden>Select a brand</option>
-              {state.brands && state.brands.length > 0 &&
+            <label htmlFor="brandDropdown" className="input-label">
+              Brand
+            </label>
+            <select
+              value={state.idbrand}
+              onChange={handleInputChange}
+              name="idbrand"
+            >
+              <option value="" disabled hidden>
+                Select a brand
+              </option>
+              {state.brands &&
+                state.brands.length > 0 &&
                 state.brands.map((brand) => (
                   <option key={brand.BrandId} value={brand.BrandId}>
                     {brand.Name}
@@ -333,10 +420,13 @@ const AddEditProduct = () => {
                 ))}
             </select>
           </div>
-
-          <input id="submit-button" type="submit" value={idproduct ? "Update" : "Save"} />
+          <input
+            type="submit"
+            value={idproduct ? "Update" : "Save"}
+            className="btn btn-product"
+          />
           <Link to="/admin/products">
-            <input id="goback-button" type="button" value="Cancel" />
+            <input type="button" value="Kthehu" className="btn btn-product" />
           </Link>
         </form>
       )}

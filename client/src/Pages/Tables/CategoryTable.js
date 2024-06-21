@@ -85,6 +85,8 @@ const CategoryTable = () => {
         setCurrentPage(selectedPage.selected);
         navigate(`?page=${selectedPage.selected + 1}`);
     };
+    console.log(categoryData);
+
 
     return (
         <div className="admin-page">
@@ -108,9 +110,10 @@ const CategoryTable = () => {
                     </thead>
                     <tbody>
                         {categoryData.slice(offset, offset + itemsPerPage).map((category) => (
-                            <Fragment key={category.CategoryId}>
+                            
+                            <Fragment key={category.idcategory}>
                                 <tr>
-                                    <th scope='row'>{category.CategoryId}</th>
+                                    <th scope='row'>{category.idcategory}</th>
                                     <td>{category.EmriKategorise}</td>
                                     <td>
                                         {category.FotoKategori && (
@@ -125,14 +128,14 @@ const CategoryTable = () => {
                                         </Link>
                                     </td>
                                     <td>
-                                        <Link to={`/updateCategory/${category.CategoryId}`}>
+                                    <Link to={`/update/${category.idcategory}`}>
                                             <button className='btn btn-edit'>
                                                 <BsPencil style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                             </button>
                                         </Link>
                                     </td>
                                     <td>
-                                        <button className='btn btn-delete' onClick={() => deleteCategory(category.CategoryId)}>
+                                        <button className='btn btn-delete' onClick={() => deleteCategory(category.idcategory)}>
                                             <BsTrash3 style={{ color: 'black', fontSize: '20px', fontWeight: '600' }} />
                                         </button>
                                     </td>

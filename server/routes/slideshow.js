@@ -89,20 +89,49 @@ router.post("/post", upload.single('Foto'), (req, res) => {
         });
     });
 });
-
-// Update i slideshow
-router.put("/update/:idslideshow", cors(), (req, res) => {
+router.put("/update/:idslideshow", upload.single('Foto'), (req, res) => {
     const { idslideshow } = req.params;
-    const { EmriFoto, Foto } = req.body;
-    const sqlUpdate = "UPDATE slideshow SET EmriFoto=?, Foto=? WHERE idslideshow=?";
-    pool.query(sqlUpdate, [EmriFoto, Foto, idslideshow], (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: "Error retrieving data from database" });
-        } else {
-            res.status(200).send(result);
-        }
-    });
+    const { EmriFoto } = req.body;
+    let sqlUpdate;
+    let values;
+
+    if (!EmriFoto) {
+        return res.status(400).json({ error: "EmriFoto field is required" });
+    }
+
+    if (req.file) {
+        const filePath = req.file.path;
+        fs.readFile(filePath, (error, fileData) => {
+            if (error) {
+                console.error("Error reading file:", error);
+                return res.status(500).json({ error: "Error reading file" });
+            }
+
+            sqlUpdate = "UPDATE slideshow SET EmriFoto=?, Foto=? WHERE idslideshow=?";
+            values = [EmriFoto, fileData, idslideshow];
+
+            pool.query(sqlUpdate, values, (error, result) => {
+                if (error) {
+                    console.error("Error updating slideshow:", error);
+                    res.status(500).json({ error: "Error updating slideshow" });
+                } else {
+                    res.status(200).json({ message: "Slideshow updated successfully", result });
+                }
+            });
+        });
+    } else {
+        sqlUpdate = "UPDATE slideshow SET EmriFoto=? WHERE idslideshow=?";
+        values = [EmriFoto, idslideshow];
+
+        pool.query(sqlUpdate, values, (error, result) => {
+            if (error) {
+                console.error("Error updating slideshow:", error);
+                res.status(500).json({ error: "Error updating slideshow" });
+            } else {
+                res.status(200).json({ message: "Slideshow updated successfully", result });
+            }
+        });
+    }
 });
 
 // Fshirja e slideshow

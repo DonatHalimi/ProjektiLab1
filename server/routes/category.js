@@ -91,19 +91,50 @@ router.post("/post", upload.single('FotoKategori'), (req, res) => {
 });
 
 // Update i kategorise
-router.put("/update/:idcategory", cors(), (req, res) => {
+router.put("/update/:idcategory", upload.single('FotoKategori'), (req, res) => {
     const { idcategory } = req.params;
-    const { EmriKategorise, FotoKategori } = req.body;
-    const sqlUpdate = "UPDATE kategoria SET EmriKategorise=?, FotoKategori=? WHERE idcategory=?";
-    pool.query(sqlUpdate, [EmriKategorise, FotoKategori, idcategory], (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: "Error retrieving data from database" });
-        } else {
-            res.status(200).send(result);
-        }
-    });
+    const { EmriKategorise } = req.body;
+    let sqlUpdate;
+    let values;
+
+    if (req.file) {
+        // If there's a new photo
+        const filePath = req.file.path;
+        fs.readFile(filePath, (error, fileData) => {
+            if (error) {
+                console.log("Error reading file:", error);
+                return res.status(500).json({ error: "Error reading file" });
+            }
+
+            sqlUpdate = "UPDATE kategoria SET EmriKategorise=?, FotoKategori=? WHERE idcategory=?";
+            values = [EmriKategorise, fileData, idcategory];
+
+            pool.query(sqlUpdate, values, (error, result) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).send({ error: "Error updating data in database" });
+                } else {
+                    res.status(200).send(result);
+                }
+            });
+        });
+    } else {
+        // If there's no new photo
+        sqlUpdate = "UPDATE kategoria SET EmriKategorise=? WHERE idcategory=?";
+        values = [EmriKategorise, idcategory];
+
+        pool.query(sqlUpdate, values, (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send({ error: "Error updating data in database" });
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    }
 });
+
+
 
 // Fshirja e kategorise
 router.delete("/remove/:idcategory", (req, res) => {

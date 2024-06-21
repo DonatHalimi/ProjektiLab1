@@ -118,29 +118,50 @@ router.put("/update/:id", updateProductUpload.single('Foto'), (req, res) => {
     if (req.file) {
         const filePath = req.file.path;
 
-        // Update product with the new file path
-        sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=?, idsupplier=?, idbrand=? WHERE id=?";
-        values = [Emri, Cmimi, Valuta, Detajet, filePath, idcategory, idsupplier, idbrand, id];
+        // Read file from path
+        fs.readFile(filePath, (error, fileData) => {
+            if (error) {
+                console.log("Error reading file:", error);
+                return res.status(500).json({ error: "Error reading file" });
+            }
+
+            // Update product with the new file as blob
+            sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, Foto=?, idcategory=?, idsupplier=?, idbrand=? WHERE id=?";
+            values = [Emri, Cmimi, Valuta, Detajet, fileData, idcategory, idsupplier, idbrand, id];
+
+            pool.query(sqlUpdate, values, (error, result) => {
+                if (error) {
+                    console.log(error);
+                    return res.status(500).json({ error: "Error updating data in the database" });
+                }
+
+                if (result.affectedRows === 0) {
+                    return res.status(404).json({ error: "Product not found" });
+                }
+
+                const successMessage = "Product updated with a new photo";
+                res.status(200).json({ message: successMessage, updatedProduct: { id, Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand } });
+            });
+        });
     } else {
         // Update product without changing the photo
         sqlUpdate = "UPDATE produktet SET Emri=?, Cmimi=?, Valuta=?, Detajet=?, idcategory=?, idsupplier=?, idbrand=? WHERE id=?";
         values = [Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand, id];
+
+        pool.query(sqlUpdate, values, (error, result) => {
+            if (error) {
+                console.log(error);
+                return res.status(500).json({ error: "Error updating data in the database" });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: "Product not found" });
+            }
+
+            const successMessage = "Product updated without changing the photo";
+            res.status(200).json({ message: successMessage, updatedProduct: { id, Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand } });
+        });
     }
-
-    // Execute the query with error handling
-    pool.query(sqlUpdate, values, (error, result) => {
-        if (error) {
-            console.log(error);
-            return res.status(500).json({ error: "Error updating data in the database" });
-        }
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ error: "Product not found" });
-        }
-
-        const successMessage = req.file ? "Product updated with a new photo" : "Product updated without changing the photo";
-        res.status(200).json({ message: successMessage, updatedProduct: { id, Emri, Cmimi, Valuta, Detajet, idcategory, idsupplier, idbrand } });
-    });
 });
 
 

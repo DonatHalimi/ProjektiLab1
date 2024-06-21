@@ -154,7 +154,7 @@ function App() {
                 </ProtectedRoute>
               } />
 
-              <Route path="/updateCategory/:CategoryId" element={
+              <Route path="/update/:categoryId" element={
                 <ProtectedRoute adminOnly>
                   <AddEditCategory />
                 </ProtectedRoute>
