@@ -72,20 +72,33 @@ function Product(props) {
       return;
     }
 
-    wishlist.addItemToWishlist(product.id);
-
-    toast.success('Product added to wishlist!', {
-      position: 'top-right',
-      style: {
-        marginTop: '70px',
-        cursor: 'pointer',
-        transition: 'opacity 2s ease-in',
-      },
-      onClick: () => {
-        navigate('/Wishlist');
-      },
-    });
+    wishlist.addItemToWishlist(product.id, isLoggedIn.id)
+      .then(() => {
+        toast.success('Product added to wishlist!', {
+          position: 'top-right',
+          style: {
+            marginTop: '70px',
+            cursor: 'pointer',
+            transition: 'opacity 2s ease-in',
+          },
+          onClick: () => {
+            navigate('/Wishlist');
+          },
+        });
+      })
+      .catch(error => {
+        console.error('Error adding product to wishlist:', error);
+        toast.error('Failed to add product to wishlist.', {
+          position: 'top-right',
+          style: {
+            marginTop: '70px',
+            cursor: 'pointer',
+            transition: 'opacity 2s ease-in',
+          },
+        });
+      });
   };
+
 
   if (!product) {
     return <div>Loading...</div>;

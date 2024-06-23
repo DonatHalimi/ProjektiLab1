@@ -90,10 +90,10 @@ function ProductList(props) {
         }, 50);
     };
 
-    const handleAddToWishlist = (productId) => {
+    const handleAddToWishlist = async (productId) => {
         // Check if the user is logged in
         const isLoggedIn = AuthService.getCurrentUser();
-
+    
         if (!isLoggedIn) {
             // Inform the user and redirect to login page
             toast.info('You need to be logged in to add items to wishlist!', {
@@ -107,22 +107,32 @@ function ProductList(props) {
             navigate('/login');
             return;
         }
+    
         // If user is logged in, add the product to the wishlist
-        wishlist.addItemToWishlist(productId);
+        try {
+            const userId = AuthService.getCurrentUser().id;
+        await wishlist.addItemToWishlist(productId, userId);
 
-        toast.success('Produkti është shtuar në wishlist!', {
-            position: 'top-right',
-            style: {
-                marginTop: '70px',
-                cursor: 'pointer',
-                transition: 'opacity 2s ease-in',
-            },
-            onClick: () => {
-                navigate('/Cart');
-            },
-        }, 50);
-
+    
+            toast.success('Produkti është shtuar në wishlist!', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+                onClick: () => {
+                    navigate('/Wishlist'); // Navigate to wishlist page or any desired route
+                },
+            }, 50);
+        } catch (error) {
+            console.error('Error adding product to wishlist:', error);
+        }
     };
+    
+    
+    
+
 
     useEffect(() => {
         document.title = `Ruby | ${category}`;

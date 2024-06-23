@@ -52,6 +52,7 @@ const transportRoutes = require('./routes/transport');
 const paymentsRoute = require('./routes/payments');
 const authRoutes = require('./routes/auth.routes');
 const cartRoutes = require('./routes/cart');
+const wishlistRoutes= require('./routes/wishlist');
 
 app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
@@ -66,6 +67,7 @@ app.use('/api/roles', rolesRoutes);
 app.use('/api/payments', paymentsRoute);
 app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/wishlist', wishlistRoutes)
 
 // Server start
 const PORT = 6001;
