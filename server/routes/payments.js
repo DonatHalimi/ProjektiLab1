@@ -72,4 +72,58 @@ async function getTransportOptions(transportMode) {
     }
 }
 
+// Route to fetch payment data
+router.get('/fetch-payments', async (req, res) => {
+    try {
+        const paymentsData = await fetchPayments();
+        res.json(paymentsData);
+        // Insert payments into the database
+        await insertPaymentsIntoDatabase(paymentsData);
+    } catch (error) {
+        console.error('Error fetching or inserting payments:', error);
+        res.status(500).json({ error: 'Error fetching or inserting payments' });
+    }
+});
+
+// Function to fetch payments from Stripe
+async function fetchPayments() {
+    try {
+        const payments = await stripe.charges.list({ limit: 100 });
+        console.log(payments.data);
+
+        return payments.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function insertPaymentsIntoDatabase(paymentsData) {
+    try {
+        for (const payment of paymentsData) {
+            const { id, amount, billing_details, payment_method_details, status } = payment;
+            const { email, name } = billing_details;
+            const { type } = payment_method_details;
+
+            const query = 'INSERT INTO payments (id, amount, email, name, payment_method_type, status) VALUES (?, ?, ?, ?, ?, ?)';
+            const values = [id, amount, email, name, type, status];
+
+            // Execute the query
+            try {
+                await queryAsync(query, values);
+                console.log(`Payment with id ${id} inserted successfully`);
+            } catch (error) {
+                // Handle duplicate entry error
+                if (error.code === 'ER_DUP_ENTRY') {
+                    console.log(`Payment with id ${id} already exists in the database. Skipping insertion.`);
+                } else {
+                    throw error;
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error inserting payment data into database:', error);
+        throw error;
+    }
+}
+
 module.exports = router;
