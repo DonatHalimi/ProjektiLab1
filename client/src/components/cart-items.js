@@ -1,116 +1,73 @@
 import React from 'react';
-import { ShopContext } from '../context/shop-context';
-import { useContext, useEffect, useState } from 'react';
-import { BsPlusLg, BsTrash3 } from "react-icons/bs";
-import { AiOutlineMinus } from "react-icons/ai";
-import { Link } from 'react-router-dom';
-import '../styles/CartItemsStyle.css';
 import { toast } from 'react-toastify';
+import { BsTrash3 } from 'react-icons/bs';
+import CartService from '../services/cart.service';
+import '../styles/CartStyle.css';
 
-function CartItem(props) {
-  const cart = useContext(ShopContext);
+const CartItem = ({ item, handleRemoveItem, handleUpdateItemQuantity }) => {
+  const { product_id, Emri, Valuta, Cmimi, quantity, Foto } = item;
 
-  const id = props.id;
-  const quantity = props.quantity;
+  const handleRemove = async () => {
+    try {
+      await CartService.removeItem(product_id);
+      toast.success('Product removed from cart!');
+      handleRemoveItem(product_id);
+    } catch (error) {
+      console.error('Error removing item from cart:', error);
+      toast.error('Failed to remove item from cart.');
+    }
+  };
 
-  const [products, setProducts] = useState([]);
-  const [transport,setTransport]=useState();
-  useEffect(() => {
-    const fetchProducts = async () => {
+  const handleIncreaseQuantity = async () => {
+    try {
+      await CartService.addItem(product_id, 1);
+      handleUpdateItemQuantity(product_id, quantity + 1);
+    } catch (error) {
+      console.error('Error increasing item quantity:', error);
+      toast.error('Failed to increase item quantity.');
+    }
+  };
+
+  const handleDecreaseQuantity = async () => {
+    if (quantity > 1) {
       try {
-        const response = await fetch("http://localhost:6001/api/product/get");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setProducts(data);
+        await CartService.addItem(product_id, -1);
+        handleUpdateItemQuantity(product_id, quantity - 1);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error('Error decreasing item quantity:', error);
+        toast.error('Failed to decrease item quantity.');
       }
-    };
-
-    fetchProducts();
-
-    document.title = "Ruby | Cart";
-  }, []);
-
-  
-
-  const handleRemoveOneFromCart = () => {
-    cart.removeOneFromCart(id);
-
-    setTimeout(() => {
-      toast.success('Produkti është larguar nga shporta!', {
-        position: 'top-right',
-        style: {
-          marginTop: '70px',
-          cursor: 'pointer',
-          transition: 'opacity 2s ease-in',
-        },
-      });
-    }, 50);
+    } else {
+      handleRemove();
+    }
   };
 
-  const handleRemoveFromCart = () => {
-    cart.deleteFromCart(id);
-
-    setTimeout(() => {
-      toast.success('Produkti është larguar nga shporta!', {
-        position: 'top-right',
-        style: {
-          marginTop: '70px',
-          cursor: 'pointer',
-          transition: 'opacity 2s ease-in',
-        },
-      });
-    }, 50);
-  };
-
-const product = products.find((product) => product.id === id);
-
-if (!product) {
-  return <div>Loading...</div>;
-}
-
-const price = parseFloat(product.Cmimi);
-const totalCost = (quantity * price).toFixed(2);
-const totalCartPrice=(quantity * price).toFixed(2);
-
-
-return (
-  <div className="cart-item">
-    <div className="cart-card">
-      <Link to={`/product/${product.id}`} className="product-details-link">
-        <div className="cart-card-image">
-          <img src={`data:image/jpeg;base64,${product.Foto.toString('base64')}`} alt="Item" />
-        </div>
-      </Link>
-
-      <div className="cart-card-details">
-        <h3 className="product-name">{product.Emri}</h3>
-        <p className="quantity">{quantity} Total</p>
-        <p className="total-cost">${totalCost}</p>
-      </div>
-
-      
-      
-      <div className='edit-buttons'>
-        <button className='add-button' onClick={() => cart.addOneToCart(id)} title='Add'>
-          <BsPlusLg />
-        </button>
-        <button className='remove-button' onClick={() => handleRemoveOneFromCart()} title='Remove'>
-          <AiOutlineMinus />
-        </button>
-        <button className='delete-button' onClick={() => handleRemoveFromCart()} title='Delete'>
+  return (
+    <tr key={product_id}>
+      <td className="border-b px-4 py-2">
+        <img
+          src={`data:image/jpeg;base64,${Foto}`}
+          alt="Product"
+          className="table-auto img"
+        />
+      </td>
+      <td className="border-b px-4 py-2">{Emri}</td>
+      <td className="border-b px-4 py-2">{Valuta}{Cmimi}</td>
+      <td className="border-b px-4 py-2">
+        <button onClick={handleDecreaseQuantity} className="quantity-btn">-</button>
+        {quantity}
+        <button onClick={handleIncreaseQuantity} className="quantity-btn">+</button>
+      </td>
+      <td className="border-b px-4 py-2">
+        <button
+          className="button-remove"
+          onClick={handleRemove}
+        >
           <BsTrash3 />
         </button>
-      </div>
-    </div>
-  </div>
-
-  
-);
-
+      </td>
+    </tr>
+  );
 };
 
 export default CartItem;

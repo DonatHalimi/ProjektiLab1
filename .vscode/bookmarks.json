@@ -4,7 +4,7 @@
 			"path": "server/server.js",
 			"bookmarks": [
 				{
-					"line": 18,
+					"line": 17,
 					"column": 10,
 					"label": "USERS CRUD"
 				}
@@ -56,21 +56,6 @@
 				{
 					"line": 193,
 					"column": 4,
-					"label": "HTML Render"
-				}
-			]
-		},
-		{
-			"path": "client/src/components/cart-items.js",
-			"bookmarks": [
-				{
-					"line": 2,
-					"column": 2,
-					"label": "useEffect() per produkte nga databaza"
-				},
-				{
-					"line": 30,
-					"column": 2,
 					"label": "HTML Render"
 				}
 			]
@@ -137,16 +122,6 @@
 					"line": 152,
 					"column": 4,
 					"label": "handleInputChange() per ndryshime ne input fields"
-				}
-			]
-		},
-		{
-			"path": "client/src/components/ProductItem.js",
-			"bookmarks": [
-				{
-					"line": 83,
-					"column": 2,
-					"label": "handleAddToWishlist()"
 				}
 			]
 		},

@@ -59,7 +59,6 @@ h1 {
 .cart-total {
     position: absolute;
     right: 20px;
-    /* Adjust this value as needed */
 }
 
 #addButton,
@@ -74,7 +73,6 @@ h1 {
     background-color: #e2e2e2;
     border: 1px solid black;
     color: black;
-    border: none;
     cursor: pointer;
 }
 
@@ -104,7 +102,6 @@ h1 {
     position: relative;
     bottom: 350px;
     color: #007bff;
-    text-decoration: none;
     transition: all 0.6s ease-in-out;
 }
 
@@ -116,11 +113,9 @@ h1 {
     height: auto;
     margin-top: 50px;
     transform: translateX(-165%);
-    user-select: none;
 }
 
 .noItemsInCart a:hover {
-    text-decoration: none;
     color: #015bba;
 }
 
@@ -131,7 +126,6 @@ h1 {
     font-size: 16px;
     background-color: rgb(98, 156, 170);
     color: #fff;
-    border: none;
     border-radius: 10px;
     cursor: pointer;
     margin-top: 50px;
@@ -139,6 +133,115 @@ h1 {
 
 #purchaseButton:hover {
     background-color: rgb(74, 127, 139);
+    transition: all 0.6s ease-in-out;
+}
+
+.shoppingCart-container {
+    margin: auto;
+    margin-top: 100px;
+    padding: 140px;
+    margin-bottom: 100px;
+}
+
+.table-auto {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.table-auto th,
+.table-auto td {
+    border-bottom: 1px solid #ddd;
+    padding: 9px;
+}
+
+.table-auto th {
+    background-color: #f4f4f4;
+}
+
+.table-auto img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+}
+
+.shoppingCart-header {
+    position: relative;
+    right: 660px;
+    margin-bottom: 20px;
+}
+
+.button-purchase {
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+    width: 11.1%;
+}
+
+.noItemsInCart {
+    text-align: center;
+}
+
+.noItemsInCart img {
+    position: relative;
+    bottom: 540px;
+    left: 780px;
+    max-width: 100%;
+    height: auto;
+}
+
+.noItemsInCart p {
+    position: relative;
+    bottom: 550px;
+}
+
+.noItemsInCart a {
+    position: relative;
+    bottom: 550px;
+}
+
+.button-remove {
+    position: relative;
+    left: 20px;
+    background-color: #eaeaea;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin: 0 4px;
+    font-size: 14px;
+}
+
+.button-remove:hover {
+    background-color: #dfdddd;
+    transition: all 0.6s ease-in-out;
+}
+
+.button-purchase {
+    position: relative;
+    left: 715px;
+    margin-top: 10px;
+    border: 1px solid rgb(219, 219, 219);
+}
+
+.quantity-btn {
+    background-color: #eaeaea;
+    color: black;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin: 0 4px;
+}
+
+.quantity-btn:hover {
+    background-color: #dfdddd;
     transition: all 0.6s ease-in-out;
 }
 
