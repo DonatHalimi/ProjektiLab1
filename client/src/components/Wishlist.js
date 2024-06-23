@@ -1,50 +1,51 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { WishlistContext } from "../context/wishlist-context";
 import Navbar from "./Navbar";
-import WishlistItem from "./wishlist-items"; // Adjusted import path
+import WishlistItem from "./wishlist-items";
 import Footer from "../components/Footer";
 import EmptyWishlist from "../img/empty-wishlist.png";
 import "../styles/WishlistItemsStyle.css";
-import { toast } from "react-toastify";
-import AuthService from "../services/auth.service"; // Import your AuthService here
+import AuthService from "../services/auth.service";
 
 const Wishlist = () => {
   const { items, removeItemFromWishlist } = useContext(WishlistContext);
   const [productIds, setProductIds] = useState([]);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  const userId = AuthService.getCurrentUser().id; // Get the logged-in user's ID
+  const userId = AuthService.getCurrentUser()?.id;
 
   useEffect(() => {
-    const fetchWishlistItems = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:6001/api/wishlist/get?user_id=${userId}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    if (userId) {
+      const fetchWishlistItems = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:6001/api/wishlist/get?user_id=${userId}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          console.log("Fetched wishlist items:", data);
+          const fetchedProductIds = data.map((item) => item.product_id);
+          setProductIds(fetchedProductIds);
+        } catch (error) {
+          console.error("Error fetching wishlist items:", error);
         }
-        const data = await response.json();
-        console.log("Fetched wishlist items:", data);
-        const fetchedProductIds = data.map((item) => item.product_id);
-        setProductIds(fetchedProductIds); // Set productIds state to array of product_id values
-      } catch (error) {
-        console.error("Error fetching wishlist items:", error);
-      }
-    };
-
-    fetchWishlistItems();
+      };
+      fetchWishlistItems();
+    } else {
+      navigate('/login');
+    }
 
     document.title = "Ruby | Wishlist";
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [userId]);
 
   useEffect(() => {
-    // Fetch additional details for products based on productIds
     const fetchProducts = async () => {
       try {
-        // Assuming there's an API endpoint to fetch product details by ID
         const productDetails = await Promise.all(
           productIds.map((productId) =>
             fetch(`http://localhost:6001/api/product/get/${productId}`).then(
@@ -53,7 +54,7 @@ const Wishlist = () => {
           )
         );
         console.log("Fetched product details:", productDetails);
-        setProducts(productDetails); // Set products state with fetched product details
+        setProducts(productDetails);
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
@@ -67,7 +68,7 @@ const Wishlist = () => {
   // Handle removal from wishlist
   const handleRemoveFromWishlist = async (productId) => {
     try {
-      await removeItemFromWishlist(productId); // Assuming this function handles removal
+      await removeItemFromWishlist(productId);
       toast.success("Produkti është larguar nga Wishlist!", {
         position: "top-right",
         style: {
@@ -76,7 +77,7 @@ const Wishlist = () => {
           transition: "opacity 2s ease-in",
         },
         onClick: () => {
-          navigate("/wishlist"); // Redirect to wishlist page after removal (optional)
+          navigate("/wishlist");
         },
       });
     } catch (error) {
@@ -88,9 +89,7 @@ const Wishlist = () => {
     <>
       <Navbar />
       <div className="main-content-wishlist">
-        <h1 style={{ position: "relative", top: "50px", opacity: "0" }}>
-          Wishlist
-        </h1>
+        <h1 className='wishlist-header' style={{ position: 'relative', top: '200px' }}>Your Wishlist</h1>
         {products.length > 0 ? (
           <div
             className="wishlist-items"
@@ -105,11 +104,11 @@ const Wishlist = () => {
             {products.map((product, index) => (
               <div key={index} className="wishlist-item">
                 <WishlistItem
-                  id={product.id} // Assuming product.id is the correct identifier
+                  id={product.id}
                   product={product}
                   onRemoveFromWishlist={() =>
                     handleRemoveFromWishlist(product.id)
-                  } // Pass the correct product identifier
+                  }
                 />
               </div>
             ))}

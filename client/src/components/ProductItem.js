@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShopContext } from "../context/shop-context";
 import { WishlistContext } from "../context/wishlist-context";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import "../styles/ProductStyle.css";
@@ -10,7 +9,6 @@ import CartService from '../services/cart.service';
 
 function Product(props) {
   const product = props.product;
-  const cart = useContext(ShopContext);
   const wishlist = useContext(WishlistContext);
   const navigate = useNavigate();
 

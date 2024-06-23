@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import Navbar from "./Navbar";
-import Slider from "./Slider";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
-import Footer from "./Footer";
-import { ShopContext } from "../context/shop-context";
-import { WishlistContext } from "../context/wishlist-context";
-import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import '../styles/ProductListStyle.css';
 import { toast } from 'react-toastify';
 import { FaArrowLeft } from "react-icons/fa";
+import Navbar from "./Navbar";
+import Slider from "./Slider";
+import Footer from "./Footer";
+import { WishlistContext } from "../context/wishlist-context";
+import '../styles/ProductListStyle.css';
 import AuthService from '../services/auth.service';
+import CartService from '../services/cart.service';
 
 function ProductList(props) {
     const { categoryId } = useParams();
@@ -22,9 +21,7 @@ function ProductList(props) {
     const [category, setCategory] = useState("Unknown Category");
     const itemsPerPage = 5;
 
-    const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -56,12 +53,10 @@ function ProductList(props) {
         fetchProducts();
     }, [categoryId]);
 
-    const handleAddToCart = (productId) => {
-        // Check if the user is logged in
+    const handleAddToCart = async (productId) => {
         const isLoggedIn = AuthService.getCurrentUser();
 
         if (!isLoggedIn) {
-            // Inform the user and redirect to login page
             toast.info('You need to be logged in to add items to cart!', {
                 position: 'top-right',
                 style: {
@@ -74,28 +69,36 @@ function ProductList(props) {
             return;
         }
 
-        // If user is logged in, add the product to the cart
-        cart.addOneToCart(productId);
-
-        toast.success('Produkti është shtuar në shportë!', {
-            position: 'top-right',
-            style: {
-                marginTop: '70px',
-                cursor: 'pointer',
-                transition: 'opacity 2s ease-in',
-            },
-            onClick: () => {
-                navigate('/Cart');
-            },
-        }, 50);
+        try {
+            await CartService.addItem(isLoggedIn.id, productId, 1);
+            toast.success('Product added to cart!', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+                onClick: () => {
+                    navigate('/Cart');
+                },
+            });
+        } catch (error) {
+            console.error('Error adding product to cart:', error);
+            toast.error('Failed to add product to cart.', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+            });
+        }
     };
 
     const handleAddToWishlist = async (productId) => {
-        // Check if the user is logged in
         const isLoggedIn = AuthService.getCurrentUser();
-    
+
         if (!isLoggedIn) {
-            // Inform the user and redirect to login page
             toast.info('You need to be logged in to add items to wishlist!', {
                 position: 'top-right',
                 style: {
@@ -107,14 +110,12 @@ function ProductList(props) {
             navigate('/login');
             return;
         }
-    
-        // If user is logged in, add the product to the wishlist
+
         try {
             const userId = AuthService.getCurrentUser().id;
-        await wishlist.addItemToWishlist(productId, userId);
+            await wishlist.addItemToWishlist(productId, userId);
 
-    
-            toast.success('Produkti është shtuar në wishlist!', {
+            toast.success('Product added to wishlist!', {
                 position: 'top-right',
                 style: {
                     marginTop: '70px',
@@ -122,17 +123,21 @@ function ProductList(props) {
                     transition: 'opacity 2s ease-in',
                 },
                 onClick: () => {
-                    navigate('/Wishlist'); // Navigate to wishlist page or any desired route
+                    navigate('/Wishlist');
                 },
-            }, 50);
+            });
         } catch (error) {
             console.error('Error adding product to wishlist:', error);
+            toast.error('Failed to add product to wishlist.', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+            });
         }
     };
-    
-    
-    
-
 
     useEffect(() => {
         document.title = `Ruby | ${category}`;
@@ -233,8 +238,8 @@ function ProductList(props) {
                         ))
                     ) : (
                         <div className='noItemsInCategory'>
-                            <p>Nuk ka produkte të disponueshme për këtë kategori.</p>
-                            <Link to="/">Kthehu në faqen kryesore</Link>
+                            <p>No products available for this category.</p>
+                            <Link to="/">Go back to the main page</Link>
                         </div>
                     )}
                 </div>

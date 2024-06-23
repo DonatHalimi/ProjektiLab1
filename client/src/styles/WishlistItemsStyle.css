@@ -4,12 +4,12 @@
 }
 
 .main-content-wishlist {
-        display: flex;
-        flex-direction: row;
-        justify-content: first baseline;
-        flex-wrap: wrap;
-        padding-left: 100px;
-        margin-right: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: first baseline;
+    flex-wrap: wrap;
+    padding-left: 100px;
+    margin-right: 100px;
 }
 
 .wishlist-items {
@@ -173,4 +173,11 @@
 .cancelPopupButtonRemove:hover {
     text-decoration: underline;
     color: #dfdede;
+}
+
+.wishlist-header {
+    position: relative;
+    bottom: 20px;
+    right: 660px;
+    margin-bottom: 20px;
 }

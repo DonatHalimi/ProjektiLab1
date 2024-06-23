@@ -4,8 +4,8 @@ import AuthService from "../services/auth.service";
 
 export const WishlistContext = createContext({
   items: [],
-  addItemToWishlist: () => {},
-  removeItemFromWishlist: () => {},
+  addItemToWishlist: () => { },
+  removeItemFromWishlist: () => { },
 });
 
 export function WishlistContextProvider({ children }) {
@@ -46,6 +46,13 @@ export function WishlistContextProvider({ children }) {
         return;
       }
 
+      // Check if the product is already in the wishlist
+      const itemExists = wishlistItems.some(item => item.product_id === productId);
+      if (itemExists) {
+        console.warn("Product is already in the wishlist");
+        return;
+      }
+
       const response = await axios.post(
         "http://localhost:6001/api/wishlist/add",
         { productId, user_id: userId }
@@ -58,7 +65,6 @@ export function WishlistContextProvider({ children }) {
     }
   };
 
- 
   const removeItemFromWishlist = async (userId, productId) => {
     try {
       console.log("Current wishlistItems before deletion:", wishlistItems);

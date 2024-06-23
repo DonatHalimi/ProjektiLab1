@@ -15,7 +15,7 @@ import ProductDetails from './components/ProductDetails'
 import CookiePopup from "./components/CookiePopup"
 import ProductList from './components/ProductList'
 
-import { ShopContextProvider } from "./context/shop-context"
+// import { ShopContextProvider } from "./context/shop-context"
 import { WishlistContextProvider } from "./context/wishlist-context"
 
 import AddEditAboutUs from "./Pages/AddEdit/AddEditAboutUs"
@@ -55,250 +55,248 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <div className="App">
-      <ShopContextProvider>
-        <WishlistContextProvider>
-          <BrowserRouter>
-            <CookiePopup />
-            <ToastContainer />
-            <Routes>
+      <WishlistContextProvider>
+        <BrowserRouter>
+          <CookiePopup />
+          <ToastContainer />
+          <Routes>
 
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
 
-              <Route path="/" element={<Home />} />
-              <Route path="/Home" element={<Home />} />
-              <Route path="/" element={<ProductItem />} />
-              <Route path="/Categories" element={<Categories />} />
-              <Route path="/Cart" element={<Cart />} />
-              <Route path="/Wishlist" element={<Wishlist />} />
-              <Route path="/Success" element={<Success />} />
-              <Route path="/Cancel" element={<Cancel />} />
-              <Route path="/AboutUs" element={<AboutUs />} />
-              <Route path="/FAQs" element={<FAQs />} />
-              <Route path="/Contact" element={<Contact />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/" element={<ProductItem />} />
+            <Route path="/Categories" element={<Categories />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/Wishlist" element={<Wishlist />} />
+            <Route path="/Success" element={<Success />} />
+            <Route path="/Cancel" element={<Cancel />} />
+            <Route path="/AboutUs" element={<AboutUs />} />
+            <Route path="/FAQs" element={<FAQs />} />
+            <Route path="/Contact" element={<Contact />} />
 
-              <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/products/:categoryId" element={<ProductList />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/products/:categoryId" element={<ProductList />} />
 
-              <Route path="/not-allowed" element={<NotAllowed />} />
+            <Route path="/not-allowed" element={<NotAllowed />} />
 
-              <Route path="/Admin" element={<Navigate replace to="/admin/users" />} />
+            <Route path="/Admin" element={<Navigate replace to="/admin/users" />} />
 
-              {/* Protected routes */}
+            {/* Protected routes */}
 
-              {/* User related */}
-              <Route path="/user/addUser" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditUser />
-                </ProtectedRoute>
-              } />
+            {/* User related */}
+            <Route path="/user/addUser" element={
+              <ProtectedRoute adminOnly>
+                <AddEditUser />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/user/update/:id" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditUser />
-                </ProtectedRoute>
-              } />
+            <Route path="/user/update/:id" element={
+              <ProtectedRoute adminOnly>
+                <AddEditUser />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/users" element={
-                <ProtectedRoute adminOnly>
-                  <UsersTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/users" element={
+              <ProtectedRoute adminOnly>
+                <UsersTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Roles related */}
+            {/* Roles related */}
 
-              <Route path="/roles/addRole" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditRoles />
-                </ProtectedRoute>
-              } />
+            <Route path="/roles/addRole" element={
+              <ProtectedRoute adminOnly>
+                <AddEditRoles />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/roles/updateRoles/:id" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditRoles />
-                </ProtectedRoute>
-              } />
+            <Route path="/roles/updateRoles/:id" element={
+              <ProtectedRoute adminOnly>
+                <AddEditRoles />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/roles" element={
-                <ProtectedRoute adminOnly>
-                  <RolesTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/roles" element={
+              <ProtectedRoute adminOnly>
+                <RolesTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Product related */}
+            {/* Product related */}
 
-              <Route path="/addProduct" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditProduct />
-                </ProtectedRoute>
-              } />
+            <Route path="/addProduct" element={
+              <ProtectedRoute adminOnly>
+                <AddEditProduct />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/updateProduct/:idproduct" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditProduct />
-                </ProtectedRoute>
-              } />
+            <Route path="/updateProduct/:idproduct" element={
+              <ProtectedRoute adminOnly>
+                <AddEditProduct />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/products" element={
-                <ProtectedRoute adminOnly>
-                  <ProductsTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/products" element={
+              <ProtectedRoute adminOnly>
+                <ProductsTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Categories related */}
+            {/* Categories related */}
 
-              <Route path="/addCategory" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditCategory />
-                </ProtectedRoute>
-              } />
+            <Route path="/addCategory" element={
+              <ProtectedRoute adminOnly>
+                <AddEditCategory />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/update/:categoryId" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditCategory />
-                </ProtectedRoute>
-              } />
+            <Route path="/update/:categoryId" element={
+              <ProtectedRoute adminOnly>
+                <AddEditCategory />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/categories" element={
-                <ProtectedRoute adminOnly>
-                  <CategoryTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/categories" element={
+              <ProtectedRoute adminOnly>
+                <CategoryTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Supplier related */}
+            {/* Supplier related */}
 
-              <Route path="/addSupplier" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditSupplier />
-                </ProtectedRoute>
-              } />
+            <Route path="/addSupplier" element={
+              <ProtectedRoute adminOnly>
+                <AddEditSupplier />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/updateSupplier/:SupplierId" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditSupplier />
-                </ProtectedRoute>
-              } />
+            <Route path="/updateSupplier/:SupplierId" element={
+              <ProtectedRoute adminOnly>
+                <AddEditSupplier />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/suppliers" element={
-                <ProtectedRoute adminOnly>
-                  <SuppliersTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/suppliers" element={
+              <ProtectedRoute adminOnly>
+                <SuppliersTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Brand related */}
+            {/* Brand related */}
 
-              <Route path="/addBrand" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditBrands />
-                </ProtectedRoute>
-              } />
+            <Route path="/addBrand" element={
+              <ProtectedRoute adminOnly>
+                <AddEditBrands />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/updateBrand/:BrandId" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditBrands />
-                </ProtectedRoute>
-              } />
+            <Route path="/updateBrand/:BrandId" element={
+              <ProtectedRoute adminOnly>
+                <AddEditBrands />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/brands" element={
-                <ProtectedRoute adminOnly>
-                  <BrandsTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/brands" element={
+              <ProtectedRoute adminOnly>
+                <BrandsTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Country related */}
+            {/* Country related */}
 
-              <Route path="/addCountry" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditCountry />
-                </ProtectedRoute>
-              } />
+            <Route path="/addCountry" element={
+              <ProtectedRoute adminOnly>
+                <AddEditCountry />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/updateCountry/:CountryId" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditCountry />
-                </ProtectedRoute>
-              } />
+            <Route path="/updateCountry/:CountryId" element={
+              <ProtectedRoute adminOnly>
+                <AddEditCountry />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/countries" element={
-                <ProtectedRoute adminOnly>
-                  <CountryTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/countries" element={
+              <ProtectedRoute adminOnly>
+                <CountryTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Transport related */}
+            {/* Transport related */}
 
-              <Route path="/addTransport" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditTransport />
-                </ProtectedRoute>
-              } />
+            <Route path="/addTransport" element={
+              <ProtectedRoute adminOnly>
+                <AddEditTransport />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/transport/updateTransport/:transportId" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditTransport />
-                </ProtectedRoute>
-              } />
+            <Route path="/transport/updateTransport/:transportId" element={
+              <ProtectedRoute adminOnly>
+                <AddEditTransport />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/transport" element={
-                <ProtectedRoute adminOnly>
-                  <TransportTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/transport" element={
+              <ProtectedRoute adminOnly>
+                <TransportTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Payment related */}
+            {/* Payment related */}
 
-              <Route path="/admin/payments" element={
-                <ProtectedRoute adminOnly>
-                  <PaymentsTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/payments" element={
+              <ProtectedRoute adminOnly>
+                <PaymentsTable />
+              </ProtectedRoute>
+            } />
 
-              {/* Slideshow related */}
+            {/* Slideshow related */}
 
-              <Route path="/addSlideshow" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditSlideshow />
-                </ProtectedRoute>
-              } />
+            <Route path="/addSlideshow" element={
+              <ProtectedRoute adminOnly>
+                <AddEditSlideshow />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/updateSlideshow/:idslideshow" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditSlideshow />
-                </ProtectedRoute>
-              } />
+            <Route path="/updateSlideshow/:idslideshow" element={
+              <ProtectedRoute adminOnly>
+                <AddEditSlideshow />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/slideshow" element={
-                <ProtectedRoute adminOnly>
-                  <SlideshowTable />
-                </ProtectedRoute>
-              } />
+            <Route path="/admin/slideshow" element={
+              <ProtectedRoute adminOnly>
+                <SlideshowTable />
+              </ProtectedRoute>
+            } />
 
-              {/* About us related */}
+            {/* About us related */}
 
-              <Route path="/aboutus/addAboutUs" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditAboutUs />
-                </ProtectedRoute>
-              } />
+            <Route path="/aboutus/addAboutUs" element={
+              <ProtectedRoute adminOnly>
+                <AddEditAboutUs />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/aboutus/update/:idaboutus" element={
-                <ProtectedRoute adminOnly>
-                  <AddEditAboutUs />
-                </ProtectedRoute>
-              } />
+            <Route path="/aboutus/update/:idaboutus" element={
+              <ProtectedRoute adminOnly>
+                <AddEditAboutUs />
+              </ProtectedRoute>
+            } />
 
-              <Route path="/admin/aboutus" element={
-                <ProtectedRoute adminOnly>
-                  <AboutUsTable />
-                </ProtectedRoute>
-              } />
-              
-            </Routes>
-            <ToTop />
-          </BrowserRouter>
-        </WishlistContextProvider>
-      </ShopContextProvider>
+            <Route path="/admin/aboutus" element={
+              <ProtectedRoute adminOnly>
+                <AboutUsTable />
+              </ProtectedRoute>
+            } />
+
+          </Routes>
+          <ToTop />
+        </BrowserRouter>
+      </WishlistContextProvider>
     </div>
   )
 }

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import AuthService from '../services/auth.service';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import Navbar from './Navbar';
-import { Link, useNavigate } from 'react-router-dom';
-import Footer from './Footer';
-import '../styles/ProfileStyle.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import '../styles/ProfileStyle.css';
 
 const Profile = () => {
     const [currentUser, setCurrentUser] = useState(null);

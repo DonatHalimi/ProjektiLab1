@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AuthService from '../services/auth.service';
 import RegisterStyle from '../styles/Register.module.css';
 import Navbar from "./Navbar";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer';
 
 const Register = () => {

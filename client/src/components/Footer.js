@@ -1,7 +1,7 @@
 import React from 'react'
-import LogoImage from '../img/Logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
+import LogoImage from '../img/Logo.png'
 import 'font-awesome/css/font-awesome.min.css'
 import "../styles/FooterStyle.css"
 
@@ -56,7 +56,7 @@ const Footer = () => {
                     <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faLinkedin} />
                     </a>
-                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/DonatHalimi/ProjektiLab1" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faGithub} />
                     </a>
                 </div>

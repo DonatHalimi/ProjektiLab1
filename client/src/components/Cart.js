@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { BsTrash3 } from 'react-icons/bs';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { toast } from 'react-toastify';
 import AuthService from '../services/auth.service';
 import CartService from '../services/cart.service';
-import { toast } from 'react-toastify';
 import Navbar from './Navbar';
 import Footer from '../components/Footer';
 import Transport from './Transport';
 import CartItem from './cart-items';
 import '../styles/CartStyle.css';
 import NoProductInCart from '../img/NoProductInCart.png';
-import { BsTrash3 } from 'react-icons/bs';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
@@ -35,6 +35,8 @@ const Cart = () => {
     } else {
       navigate('/login');
     }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [userId, navigate]);
 
   const handleRemoveItem = async (productId) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { MenuData } from "./MenuData";
 import { Link, useLocation } from 'react-router-dom';
+import { MenuData } from "./MenuData";
 import "./Cart";
 import LogoImage from '../img/Logo.png';
 import "../styles/NavbarStyle.css";
@@ -20,11 +20,6 @@ const Navbar = (props) => {
 
   const handleClick = () => {
     setClicked(!clicked);
-  };
-
-  const logOut = () => {
-    AuthService.logout();
-    setCurrentUser(null); // Update state to reflect that the user has logged out
   };
 
   // Renderimi i HTML per Navbar

@@ -94,17 +94,17 @@
 			"path": "client/src/context/wishlist-context.js",
 			"bookmarks": [
 				{
-					"line": 12,
+					"line": 18,
 					"column": 2,
 					"label": "addItemToWishlist();"
 				},
 				{
-					"line": 24,
+					"line": 30,
 					"column": 2,
 					"label": "removeItemFromWishlist();"
 				},
 				{
-					"line": 36,
+					"line": 42,
 					"column": 2,
 					"label": "HTML Render"
 				}
@@ -139,7 +139,7 @@
 			"path": "client/src/components/wishlist-items.js",
 			"bookmarks": [
 				{
-					"line": 25,
+					"line": 33,
 					"column": 4,
 					"label": "handleAddOneToCart()"
 				}
@@ -149,12 +149,12 @@
 			"path": "client/src/components/Wishlist.js",
 			"bookmarks": [
 				{
-					"line": 20,
+					"line": 21,
 					"column": 21,
 					"label": "useEffect() per produkte nga databaza"
 				},
 				{
-					"line": 56,
+					"line": 57,
 					"column": 18,
 					"label": "HTML Render"
 				}

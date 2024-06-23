@@ -1,34 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { useParams } from 'react-router-dom';
-import { ShopContext } from "../context/shop-context";
+import { useParams, useNavigate } from 'react-router-dom';
 import { WishlistContext } from "../context/wishlist-context";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import { BsArrowsAngleContract } from "react-icons/bs";
 import "../styles/ProductDetailsStyle.css";
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
+import CartService from '../services/cart.service';
 
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
-    const [Emri, setEmri] = useState("");
-    const [Cmimi, setCmimi] = useState(null);
-    const [Valuta, setValuta] = useState("");
-    const [Detajet, setDetajet] = useState("");
-    const [Foto, setFoto] = useState("");
     const [isImageEnlarged, setIsImageEnlarged] = useState(false);
 
-    const [brand, setBrand] = useState(null);
-    const [supplier, setSupplier] = useState(null);
-
-    const cart = useContext(ShopContext);
     const wishlist = useContext(WishlistContext);
     const navigate = useNavigate();
 
-    document.title = Emri + " Details";
+    document.title = product ? `${product.Emri} Details` : "Loading...";
 
     // Scroll to top on component render
     useEffect(() => {
@@ -52,12 +42,10 @@ function ProductDetails() {
         };
     }, [isImageEnlarged, toggleEnlargedPicture]);
 
-    const handleAddToCart = () => {
-        // Check if the user is logged in
+    const handleAddToCart = async () => {
         const isLoggedIn = AuthService.getCurrentUser();
 
         if (!isLoggedIn) {
-            // Inform the user and redirect to login page
             toast.info('You need to be logged in to add items to cart!', {
                 position: 'top-right',
                 style: {
@@ -69,28 +57,37 @@ function ProductDetails() {
             navigate('/login');
             return;
         }
-        // If user is logged in, add the product to the cart
-        cart.addOneToCart(id);
 
-        toast.success('Produkti është shtuar në shportë!', {
-            position: 'top-right',
-            style: {
-                marginTop: '70px',
-                cursor: 'pointer',
-                transition: 'opacity 2s ease-in',
-            },
-            onClick: () => {
-                navigate('/Cart');
-            },
-        }, 50);
+        try {
+            await CartService.addItem(isLoggedIn.id, id, 1);
+            toast.success('Product added to cart!', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+                onClick: () => {
+                    navigate('/Cart');
+                },
+            });
+        } catch (error) {
+            console.error('Error adding product to cart:', error);
+            toast.error('Failed to add product to cart.', {
+                position: 'top-right',
+                style: {
+                    marginTop: '70px',
+                    cursor: 'pointer',
+                    transition: 'opacity 2s ease-in',
+                },
+            });
+        }
     };
 
     const handleAddToWishlist = () => {
-        // Check if the user is logged in
         const isLoggedIn = AuthService.getCurrentUser();
 
         if (!isLoggedIn) {
-            // Inform the user and redirect to login page
             toast.info('You need to be logged in to add items to wishlist!', {
                 position: 'top-right',
                 style: {
@@ -103,22 +100,31 @@ function ProductDetails() {
             return;
         }
 
-        // If user is logged in, add the product to the wishlist
-        wishlist.addItemToWishlist(id);
-
-        setTimeout(() => {
-            toast.success('Produkti është shtuar në wishlist!', {
-                position: 'top-right',
-                style: {
-                    marginTop: '70px',
-                    cursor: 'pointer',
-                    transition: 'opacity 2s ease-in',
-                },
-                onClick: () => {
-                    navigate('/Wishlist');
-                },
+        wishlist.addItemToWishlist(id, isLoggedIn.id)
+            .then(() => {
+                toast.success('Product added to wishlist!', {
+                    position: 'top-right',
+                    style: {
+                        marginTop: '70px',
+                        cursor: 'pointer',
+                        transition: 'opacity 2s ease-in',
+                    },
+                    onClick: () => {
+                        navigate('/Wishlist');
+                    },
+                });
+            })
+            .catch(error => {
+                console.error('Error adding product to wishlist:', error);
+                toast.error('Failed to add product to wishlist.', {
+                    position: 'top-right',
+                    style: {
+                        marginTop: '70px',
+                        cursor: 'pointer',
+                        transition: 'opacity 2s ease-in',
+                    },
+                });
             });
-        }, 50);
     };
 
     useEffect(() => {
@@ -131,12 +137,7 @@ function ProductDetails() {
                 const data = await response.json();
                 const product = data[0];
                 console.log("Fetched product data:", data);
-                setProduct(data);
-                setEmri(product.Emri)
-                setCmimi(product.Cmimi);
-                setValuta(product.Valuta);
-                setDetajet(product.Detajet);
-                setFoto(product.Foto)
+                setProduct(product);
             } catch (error) {
                 console.error("Error fetching product:", error);
             }
@@ -157,8 +158,11 @@ function ProductDetails() {
                 const supplierData = await supplierResponse.json();
                 console.log("Supplier Data:", supplierData);
 
-                setBrand(brandData);
-                setSupplier(supplierData);
+                setProduct(prevProduct => ({
+                    ...prevProduct,
+                    brand: brandData,
+                    supplier: supplierData,
+                }));
             } catch (error) {
                 console.error("Error fetching brand and supplier:", error);
             }
@@ -171,7 +175,7 @@ function ProductDetails() {
         return <div>Loading...</div>;
     }
 
-    const byteArray = new Uint8Array(Foto.data);
+    const byteArray = new Uint8Array(product.Foto.data);
     const binaryString = byteArray.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
     const base64String = btoa(binaryString);
 
@@ -216,11 +220,11 @@ function ProductDetails() {
                 {/* isImageEnlarged kontrollon nese fotoja eshte e rritur, nese po nuk shfaqen infot e produktit */}
                 {!isImageEnlarged && (
                     <div className="product-info">
-                        <h2 id='product-name'>{Emri}</h2>
+                        <h2 id='product-name'>{product.Emri}</h2>
                         <p id="product-price">
-                            {Valuta}{Cmimi}
+                            {product.Valuta}{product.Cmimi}
                         </p>
-                        <p id='product-details'>{Detajet}</p>
+                        <p id='product-details'>{product.Detajet}</p>
                     </div>
                 )}
 
@@ -245,11 +249,11 @@ function ProductDetails() {
                             <tbody>
                                 <tr>
                                     <td>Name:</td>
-                                    <td>{brand && brand.length > 0 ? brand[0].Name : '-'}</td>
+                                    <td>{product.brand && product.brand.length > 0 ? product.brand[0].Name : '-'}</td>
                                 </tr>
                                 <tr>
                                     <td>Description:</td>
-                                    <td>{brand && brand.length > 0 ? brand[0].Description : '-'}</td>
+                                    <td>{product.brand && product.brand.length > 0 ? product.brand[0].Description : '-'}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -258,19 +262,18 @@ function ProductDetails() {
                     <div className="supplier-info">
                         <h3>Supplier Information</h3>
                         <table>
-
                             <tbody>
                                 <tr>
                                     <td>Name:</td>
-                                    <td>{supplier && supplier.length > 0 ? supplier[0].Name : '-'}</td>
+                                    <td>{product.supplier && product.supplier.length > 0 ? product.supplier[0].Name : '-'}</td>
                                 </tr>
                                 <tr>
                                     <td>Phone:</td>
-                                    <td>{supplier && supplier.length > 0 ? supplier[0].Phone : '-'}</td>
+                                    <td>{product.supplier && product.supplier.length > 0 ? product.supplier[0].Phone : '-'}</td>
                                 </tr>
                                 <tr>
                                     <td>Address:</td>
-                                    <td>{supplier && supplier.length > 0 ? supplier[0].Address : '-'}</td>
+                                    <td>{product.supplier && product.supplier.length > 0 ? product.supplier[0].Address : '-'}</td>
                                 </tr>
                             </tbody>
                         </table>

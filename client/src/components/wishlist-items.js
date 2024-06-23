@@ -1,16 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShopContext } from "../context/shop-context";
-import { WishlistContext } from "../context/wishlist-context";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsTrash3 } from "react-icons/bs";
 import { toast } from "react-toastify";
+import { WishlistContext } from "../context/wishlist-context";
 import "../styles/WishlistItemsStyle.css";
 import "../styles/ProductStyle.css";
 import AuthService from "../services/auth.service";
+import CartService from "../services/cart.service";
 
 function WishlistItem({ product }) {
-  const cart = useContext(ShopContext);
   const { removeItemFromWishlist, fetchWishlistItems } = useContext(WishlistContext);
   const navigate = useNavigate();
   const [userId, setUserId] = useState(null);
@@ -41,26 +40,38 @@ function WishlistItem({ product }) {
     fetchData();
   }, [userId, fetchWishlistItems]);
 
-  const handleAddOneToCart = () => {
+  const handleAddOneToCart = async () => {
     if (!userId) {
       console.error("User ID is not set");
       return;
     }
 
     if (product && product.length > 0 && product[0].id) {
-      cart.addOneToCart(product[0].id);
+      try {
+        await CartService.addItem(userId, product[0].id, 1);
 
-      toast.success("Product added to cart!", {
-        position: "top-right",
-        style: {
-          marginTop: "70px",
-          cursor: "pointer",
-          transition: "opacity 2s ease-in",
-        },
-        onClick() {
-          navigate("/Cart");
-        },
-      });
+        toast.success("Product added to cart!", {
+          position: "top-right",
+          style: {
+            marginTop: "70px",
+            cursor: "pointer",
+            transition: "opacity 2s ease-in",
+          },
+          onClick() {
+            navigate("/Cart");
+          },
+        });
+      } catch (error) {
+        console.error('Error adding product to cart:', error);
+        toast.error('Failed to add product to cart.', {
+          position: 'top-right',
+          style: {
+            marginTop: '70px',
+            cursor: 'pointer',
+            transition: 'opacity 2s ease-in',
+          },
+        });
+      }
     }
   };
 
@@ -83,7 +94,6 @@ function WishlistItem({ product }) {
           },
         });
 
-        // Reload the window to reflect changes immediately
         window.location.reload();
       } else {
         throw new Error("Product ID is undefined or not found");
@@ -115,10 +125,7 @@ function WishlistItem({ product }) {
       {detailedProduct && (
         <div className="product" key={detailedProduct.id}>
           <div className="card">
-            <Link
-              to={`/product/${detailedProduct.id}`}
-              className="product-details-link"
-            >
+            <Link to={`/product/${detailedProduct.id}`} className="product-details-link">
               <div className="cardImg">
                 {imageBase64 && (
                   <img

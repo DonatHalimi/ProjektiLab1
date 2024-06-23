@@ -14,6 +14,17 @@ const getWishlist = async (userId) => {
 
 const addItemToWishlist = async (userId, productId) => {
     try {
+        // Fetch current wishlist items
+        const wishlist = await getWishlist(userId);
+
+        // Check if the product is already in the wishlist
+        const itemExists = wishlist.some(item => item.product_id === productId);
+        if (itemExists) {
+            console.warn("Product is already in the wishlist");
+            return { message: "Product is already in the wishlist" };
+        }
+
+        // If not, add the product to the wishlist
         const response = await axios.post(`${API_URL}${userId}/add`, { productId });
         return response.data;
     } catch (error) {

@@ -1,54 +1,68 @@
-# ProjektiLab1 - E-Commerce Clothing Store - Ruby
+# ProjektiLab1 - E-Commerce Clothing Store
 
 ## Table of Contents
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
-4. [Getting Started](#getting-started)
-5. [Conclusion](#conclusion)
+- [ProjektiLab1 - E-Commerce Clothing Store](#projektilab1---e-commerce-clothing-store)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+  - [Getting Started](#getting-started)
+  - [Usage](#usage)
 
 ## Overview
 
-Welcome to the **E-Commerce Clothing Store** project! This web application is your go-to platform for purchasing stylish clothes. With a blend of **ReactJS** on the frontend and **NodeJS** on the backend, it aims to provide a seamless and enjoyable shopping experience.
+Welcome to the E-Commerce Clothing Store project! This project is part of the course `Lënda Laboratorike 1 (Programim)` at UBT Faculty of Computer Science, and it aims to provide a seamless and enjoyable shopping experience through our E-Commerce Clothing Store
+
+The E-Commerce Clothing Store is a web application developed using ReactJS on the frontend and NodeJS on the backend. It features a user-friendly interface, a shopping cart, a wishlist, and categories for browsing products.
+
+The project is developed by:
+
+- [Donat Halimi](https://github.com/DonatHalimi)
+- [Mal Mikullovci](https://github.com/MalMikullovci)
 
 ## Features
 
-Our system offers a variety of features to enhance your online shopping:
-
-- **User-friendly Interface**: Navigate effortlessly through the catalog and find the latest fashion trends.
-
-- **Shopping Cart**: Add your favorite items to the cart and proceed with a secure checkout process.
-
-- **Wishlist**: Save your desired items to a personalized wishlist for future reference and easy access.
-
-- **Categories**: Explore a well-organized selection of clothing items through different categories, making it convenient to find what you're looking for.
-
-- **Responsive Design**: Experience a visually appealing and responsive design on all devices.
+- User-friendly Interface
+- Shopping Cart
+- Wishlist
+- Categories
 
 ## Technologies Used
 
-This project leverages the following technologies:
-
-- **Frontend**: Developed using **ReactJS**, providing a dynamic and responsive user interface.
-
-- **Backend**: Powered by **NodeJS**, ensuring fast and reliable server-side operations.
+- Frontend: ReactJS
+- Backend: NodeJS
 
 ## Getting Started
 
-To start shopping, follow these steps:
+To use this project, follow these steps:
 
-1. **Clone the Repository**: Clone this repository to your local machine.
+1. Clone the repository to your local machine.
 
-2. **Setup the Frontend**: Navigate to the `frontend` directory and install the required dependencies by running `npm install`.
+   ```bash
+   git clone https://github.com/your-username/your-repository.git
+    ```
+**Replace `your-username` with your GitHub username and `your-repository` with the name of your repository.**
 
-3. **Setup the Backend**: Navigate to the `backend` directory and install the required dependencies by running `npm install`.
+1. Navigate to the client directory and install the required dependencies by running:
+   ```bash
+    cd client
+    npm install
+    ```
 
-4. **Database Configuration**: Set up a database for storing product information and update the connection details in the backend.
+2. Navigate to the `server` directory and install the required dependencies by running:
+    ```bash
+    cd ../server
+    npm install
+    ```
 
-5. **Run the Application**: Start up the servers by running `npm start` in the root of the project, and now you're ready to explore our E-Commerce Clothing Store!
+3. Set up a database for storing product information and update the connection details in the server directory.
 
-## Conclusion
+4. Start up the servers by running the following command in the root of the project:
 
-The **E-Commerce Clothing Store** project combines the elegance of fashion with the power of technology. Whether you're a fashion enthusiast or just looking to update your wardrobe, this platform is designed to make your online shopping experience enjoyable and efficient.
+    ```bash
+    npm start
+    ```
+    
+## Usage
 
-Feel free to explore the latest trends and make your fashion statement with our E-Commerce Clothing Store. We welcome any feedback or contributions from the community to enhance this shopping platform further.
+To use the application, simply navigate to the homepage and start browsing our selection of clothing items. You can create an account, and then add items to your cart, save them to your wishlist, and choose from different transport modes for delivery.
