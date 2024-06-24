@@ -1,28 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from 'react-router-dom';
 import { MenuData } from "./MenuData";
-import "./Cart";
 import LogoImage from '../img/Logo.png';
 import "../styles/NavbarStyle.css";
 import AuthService from '../services/auth.service';
+import CartService from '../services/cart.service'; // Import the cart service
 
-// Krijimi i komponentit Navbar
 const Navbar = (props) => {
-  // Krijimi i state 'clicked' dhe funksioni 'setClicked' duke perdorur useState
   const [clicked, setClicked] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [totalItems, setTotalItems] = useState(0); // State to hold total items count
   const location = useLocation();
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     setCurrentUser(user);
+
+    if (user) {
+      fetchTotalItems(user.id); // Fetch total items initially
+    }
+
+    // Setup interval to periodically fetch total items count (every 30 seconds for example)
+    const interval = setInterval(() => {
+      if (user) {
+        fetchTotalItems(user.id);
+      }
+    }, 20); // Adjust interval as needed
+
+    return () => clearInterval(interval); // Clean up interval on component unmount
   }, []);
+
+  // Function to fetch total items count from CartService
+  const fetchTotalItems = async (userId) => {
+    try {
+      const response = await CartService.getTotalItems(userId);
+      setTotalItems(response.totalItems);
+    } catch (error) {
+      console.error('Error fetching total items:', error);
+    }
+  };
 
   const handleClick = () => {
     setClicked(!clicked);
   };
 
-  // Renderimi i HTML per Navbar
   return (
     <nav className="NavbarItems">
       <Link to="/Home" className="logo" style={{ textDecoration: 'none' }} title="Home">
@@ -42,7 +63,7 @@ const Navbar = (props) => {
             <li key={index}>
               <Link to={item.url} className={linkClass}>
                 <i className={item.icon}></i>
-                {item.title}
+                {item.title} {item.showTotalItems && `(${totalItems})`}
               </Link>
             </li>
           );

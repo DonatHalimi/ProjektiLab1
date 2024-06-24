@@ -42,9 +42,21 @@ const clearCart = async (userId) => {
     }
 };
 
+
+const getTotalItems = async (userId) => {
+    try {
+        const response = await axios.get(`${API_URL}${userId}/total-items`);
+        return response.data;
+    } catch (error) {
+        console.error('Error in getTotalItems:', error.response || error.message);
+        throw error;
+    }
+};
+  
 export default {
     getCart,
     addItem,
     removeItem,
+    getTotalItems,
     clearCart,
 };

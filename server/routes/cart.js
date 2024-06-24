@@ -61,6 +61,18 @@ const clearCart = async (userId) => {
     }
 };
 
+const getTotalItems = async (userId) => {
+    try {
+        const cart = await getCart(userId);
+        const totalItems = await queryAsync('SELECT SUM(quantity) as totalItems FROM cart_items WHERE cart_id = ?', [cart.id]);
+        return totalItems[0].totalItems || 0;
+    } catch (error) {
+        console.error('Error in getTotalItems:', error);
+        throw error;
+    }
+};
+
+
 router.get('/:userId', async (req, res) => {
     try {
         const cart = await getCart(req.params.userId);
@@ -99,6 +111,16 @@ router.post('/:userId/clear', async (req, res) => {
         res.json({ message: 'Cart cleared' });
     } catch (error) {
         console.error('Error in POST /:userId/clear route:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/:userId/total-items', async (req, res) => {
+    try {
+        const totalItems = await getTotalItems(req.params.userId);
+        res.json({ totalItems });
+    } catch (error) {
+        console.error('Error in GET /:userId/total-items route:', error);
         res.status(500).json({ message: error.message });
     }
 });
