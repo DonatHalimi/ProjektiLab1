@@ -24,7 +24,7 @@ const addItem = async (userId, productId, quantity = 1) => {
 
 const removeItem = async (userId, productId) => {
     try {
-        const response = await axios.post(`${API_URL}${userId}/remove`, { productId });
+        const response = await axios.delete(`${API_URL}${userId}/remove/${productId}`);
         return response.data;
     } catch (error) {
         console.error('Error in removeItem:', error.response || error.message);
@@ -42,7 +42,6 @@ const clearCart = async (userId) => {
     }
 };
 
-
 const getTotalItems = async (userId) => {
     try {
         const response = await axios.get(`${API_URL}${userId}/total-items`);
@@ -52,11 +51,33 @@ const getTotalItems = async (userId) => {
         throw error;
     }
 };
-  
+
+const increaseQuantity = async (userId, productId) => {
+    try {
+        const response = await axios.put(`${API_URL}${userId}/increase/${productId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error in increaseQuantity:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
+const decreaseQuantity = async (userId, productId) => {
+    try {
+        const response = await axios.put(`${API_URL}${userId}/decrease/${productId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error in decreaseQuantity:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
 export default {
     getCart,
     addItem,
     removeItem,
     getTotalItems,
     clearCart,
+    increaseQuantity,
+    decreaseQuantity
 };

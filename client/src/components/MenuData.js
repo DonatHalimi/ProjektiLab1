@@ -22,7 +22,7 @@ export const MenuData = [
         cName: "nav-links",
         icon: "fa-solid fa-shopping-cart",
         component: <Cart />,
-        showTotalItems: true // Add this line to indicate that this item should show total items
+        showTotalItems: true
     },
     {
         title: "Contact",

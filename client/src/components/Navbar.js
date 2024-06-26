@@ -4,12 +4,12 @@ import { MenuData } from "./MenuData";
 import LogoImage from '../img/Logo.png';
 import "../styles/NavbarStyle.css";
 import AuthService from '../services/auth.service';
-import CartService from '../services/cart.service'; // Import the cart service
+import CartService from '../services/cart.service'; 
 
 const Navbar = (props) => {
   const [clicked, setClicked] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [totalItems, setTotalItems] = useState(0); // State to hold total items count
+  const [totalItems, setTotalItems] = useState(0); 
   const location = useLocation();
 
   useEffect(() => {
@@ -17,17 +17,17 @@ const Navbar = (props) => {
     setCurrentUser(user);
 
     if (user) {
-      fetchTotalItems(user.id); // Fetch total items initially
+      fetchTotalItems(user.id); 
     }
 
-    // Setup interval to periodically fetch total items count (every 30 seconds for example)
+    // Setup interval to periodically fetch total items count
     const interval = setInterval(() => {
       if (user) {
         fetchTotalItems(user.id);
       }
-    }, 20); // Adjust interval as needed
+    }, 20);
 
-    return () => clearInterval(interval); // Clean up interval on component unmount
+    return () => clearInterval(interval); 
   }, []);
 
   // Function to fetch total items count from CartService
@@ -63,7 +63,7 @@ const Navbar = (props) => {
             <li key={index}>
               <Link to={item.url} className={linkClass}>
                 <i className={item.icon}></i>
-                {item.title} {item.showTotalItems && `(${totalItems})`}
+                {item.title === "Cart" && currentUser ? `Cart (${totalItems})` : item.title}
               </Link>
             </li>
           );

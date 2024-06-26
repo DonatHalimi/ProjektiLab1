@@ -42,38 +42,38 @@ const Cart = () => {
   const handleRemoveItem = async (productId) => {
     try {
       await CartService.removeItem(userId, productId);
-      const cartData = await CartService.getCart(userId);
-      setCart(cartData);
+      const updatedItems = cart.items.filter(item => item.product_id !== productId);
+      setCart({ ...cart, items: updatedItems });
+      toast.success('Product removed from cart!');
     } catch (error) {
       console.error('Error removing item from cart:', error);
       toast.error('Failed to remove item from cart.');
     }
   };
 
-  const handleUpdateItemQuantity = (productId, newQuantity) => {
-    setCart(prevCart => {
-      const updatedItems = prevCart.items.map(item => {
-        if (item.product_id === productId) {
-          return { ...item, quantity: newQuantity };
-        }
-        return item;
-      });
-      return { ...prevCart, items: updatedItems };
-    });
+  const handleUpdateItemQuantity = async (productId, quantityChange) => {
+    try {
+      if (quantityChange > 0) {
+        await CartService.increaseQuantity(userId, productId);
+      } else {
+        await CartService.decreaseQuantity(userId, productId);
+      }
+      const updatedItems = cart.items.map(item =>
+        item.product_id === productId ? { ...item, quantity: item.quantity + quantityChange } : item
+      );
+      setCart({ ...cart, items: updatedItems });
+      toast.success('Item quantity updated!');
+    } catch (error) {
+      console.error('Error updating item quantity:', error);
+      toast.error('Failed to update item quantity.');
+    }
   };
 
   const handleClearCart = async () => {
     try {
       await CartService.clearCart(userId);
       setCart({ id: cart.id, userId: cart.userId, items: [] });
-      toast.success('Products removed from cart!', {
-        position: 'top-right',
-        style: {
-          marginTop: '70px',
-          cursor: 'pointer',
-          transition: 'opacity 2s ease-in',
-        }
-      });
+      toast.success('Products removed from cart!');
     } catch (error) {
       console.error('Error clearing cart:', error);
       toast.error('Failed to clear cart.');
@@ -173,6 +173,7 @@ const Cart = () => {
                     item={item}
                     handleRemoveItem={handleRemoveItem}
                     handleUpdateItemQuantity={handleUpdateItemQuantity}
+                    userId={userId}
                   />
                 ))}
               </tbody>
