@@ -54,7 +54,7 @@ function Product(props) {
     }
   };
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = async () => {
     const isLoggedIn = AuthService.getCurrentUser();
 
     if (!isLoggedIn) {
@@ -70,23 +70,10 @@ function Product(props) {
       return;
     }
 
-    wishlist.addItemToWishlist(product.id, isLoggedIn.id)
-      .then(() => {
-        toast.success('Product added to wishlist!', {
-          position: 'top-right',
-          style: {
-            marginTop: '70px',
-            cursor: 'pointer',
-            transition: 'opacity 2s ease-in',
-          },
-          onClick: () => {
-            navigate('/Wishlist');
-          },
-        });
-      })
-      .catch(error => {
-        console.error('Error adding product to wishlist:', error);
-        toast.error('Failed to add product to wishlist.', {
+    try {
+      const itemExists = wishlist.items.some(item => item.product_id === product.id);
+      if (itemExists) {
+        toast.warn('Product is already in the wishlist.', {
           position: 'top-right',
           style: {
             marginTop: '70px',
@@ -94,9 +81,33 @@ function Product(props) {
             transition: 'opacity 2s ease-in',
           },
         });
-      });
-  };
+        return;
+      }
 
+      await wishlist.addItemToWishlist(product.id, isLoggedIn.id);
+      toast.success('Product added to wishlist!', {
+        position: 'top-right',
+        style: {
+          marginTop: '70px',
+          cursor: 'pointer',
+          transition: 'opacity 2s ease-in',
+        },
+        onClick: () => {
+          navigate('/Wishlist');
+        },
+      });
+    } catch (error) {
+      console.error('Error adding product to wishlist:', error);
+      toast.error('Failed to add product to wishlist.', {
+        position: 'top-right',
+        style: {
+          marginTop: '70px',
+          cursor: 'pointer',
+          transition: 'opacity 2s ease-in',
+        },
+      });
+    }
+  };
 
   if (!product) {
     return <div>Loading...</div>;
