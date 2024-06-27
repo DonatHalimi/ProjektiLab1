@@ -282,7 +282,8 @@ const getTotalItems = async (req, res) => {
                 return;
             }
 
-            const cartId = cartResult[0].id;
+            const cartId = cartResult[0]? cartResult[0].id : null;
+
             const sqlTotalItems = 'SELECT SUM(quantity) as totalItems FROM cart_items WHERE cart_id = ?';
             pool.query(sqlTotalItems, [cartId], (error, result) => {
                 if (error) {
