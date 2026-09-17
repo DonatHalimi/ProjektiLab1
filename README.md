@@ -32,7 +32,7 @@ The frontend is built with **ReactJS**, while the backend is powered by **Node.j
 
 The project follows a client-server architecture:
 
-<img width="5459" height="5861" alt="diagram (4)" src="https://github.com/user-attachments/assets/b805d2f1-a457-455c-80d1-529de9738c60" />
+<img width="5459" height="5861" alt="diagram" src="https://github.com/user-attachments/assets/a6fb830b-0cca-49af-84c7-9d82686b88b9" />
 
 ---
 
