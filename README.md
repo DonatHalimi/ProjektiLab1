@@ -10,13 +10,11 @@ The application provides a complete online shopping experience where users can b
 
 * [Overview](#overview)
 * [Features](#features)
-
   * [Customer Features](#customer-features)
   * [Administration](#administration)
 * [Technologies Used](#technologies-used)
 * [Project Structure](#project-structure)
 * [Getting Started](#getting-started)
-
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Database Configuration](#database-configuration)
@@ -146,7 +144,7 @@ The admin panel provides separate tables and add/edit interfaces for managing th
 
 ### Database
 
-* **MongoDB**
+* **MySQL**
 
 ### Development Tools
 
@@ -201,7 +199,7 @@ Before running the project, make sure the following are installed:
 
 * **Node.js**
 * **npm**
-* **MongoDB**
+* **MySQL**
 * **Git**
 
 You can verify your Node.js and npm installations with:
@@ -218,13 +216,13 @@ npm --version
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/DonatHalimi/donathalimi-projektilab1.git
+git clone https://github.com/DonatHalimi/ProjektiLab1.git
 ```
 
 Navigate into the project:
 
 ```bash
-cd donathalimi-projektilab1
+cd ProjektiLab1
 ```
 
 #### 2. Install client dependencies
@@ -247,17 +245,11 @@ npm install
 
 ### Database Configuration
 
-The application requires a running **MongoDB** instance.
-
-Make sure MongoDB is installed and running on your machine.
+The application uses MySQL as its relational database. The database can be managed through phpMyAdmin or another MySQL database management tool.
 
 The database connection is configured in:
 
-```text
 server/db/db.js
-```
-
-Update the connection configuration if your MongoDB instance uses a different host, port, or database name.
 
 ---
 
@@ -283,7 +275,7 @@ http://localhost:3000
 
 The backend API will run on the port configured in the server application.
 
-> Make sure MongoDB is running before starting the backend.
+> Make sure the database is running before starting the backend.
 
 ---
 
