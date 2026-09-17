@@ -1,5 +1,7 @@
 # ProjektiLab1 - E-Commerce Clothing Store
 
+<img width="5459" height="5861" alt="diagram (4)" src="https://github.com/user-attachments/assets/b805d2f1-a457-455c-80d1-529de9738c60" />
+
 ## Table of Contents
 - [ProjektiLab1 - E-Commerce Clothing Store](#projektilab1---e-commerce-clothing-store)
   - [Table of Contents](#table-of-contents)
